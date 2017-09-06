@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.showMain()
         return true
     }
 
@@ -23,31 +24,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         //首页
         let homeVc :HomeViewController = HomeViewController()
         let homeNv :UINavigationController = UINavigationController(rootViewController: homeVc)
-        let item1:UITabBarItem = UITabBarItem(title:"首页", image:UIImage.init(named: "tab_irecure_normal")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "tab_irecure_selected")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        let item1:UITabBarItem = UITabBarItem(title:"首页", image:UIImage.init(named: "button_sy_s")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
 
         homeNv.tabBarItem = item1
         //课程
         let RecordVC : RecordViewController = RecordViewController()
         let RecordNV :UINavigationController = UINavigationController(rootViewController: RecordVC)
-        let item2:UITabBarItem = UITabBarItem(title:"记录", image:UIImage.init(named: "tab_course_normal")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "tab_course_selected")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        let item2:UITabBarItem = UITabBarItem(title:"记录", image:UIImage.init(named: "button_jl_n")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         RecordNV.tabBarItem = item2
 
 
         //个人
         let PersonalVC : MineViewController = MineViewController()
         let PersonaNv :UINavigationController = UINavigationController(rootViewController: PersonalVC)
-        let item3:UITabBarItem = UITabBarItem(title:"我的", image:UIImage.init(named: "tab_person_normal")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "tab_person_selected")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        let item3:UITabBarItem = UITabBarItem(title:"我的", image:UIImage.init(named: "button_wd_n")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         PersonaNv.tabBarItem = item3
 
         //大底部导航栏
         let vcArr = [homeNv,RecordNV,PersonaNv]
         let tab : UITabBarController = UITabBarController()
         //        tab.tabBar.tintColor = .black
-        tab.tabBar.backgroundColor = .white
+//        tab.tabBar.backgroundColor = UIColor.green
         tab.delegate = self
-//        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object: .white, forKey:NSForegroundColorAttributeName as NSCopying) as? [String : AnyObject], for:UIControlState.normal)
+        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object: UIColor.white, forKey:NSForegroundColorAttributeName as NSCopying) as? [String : AnyObject], for:UIControlState.normal)
 //        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object:.white, forKey:NSForegroundColorAttributeName as NSCopying) as? [String : AnyObject], for:UIControlState.selected)
         tab.viewControllers = vcArr
+        UITabBar.appearance().backgroundColor = UIColor.green
         self.window?.rootViewController = tab
         
     }

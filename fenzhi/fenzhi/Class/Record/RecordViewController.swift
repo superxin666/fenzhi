@@ -14,6 +14,8 @@ class RecordViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.title = "记录"
+        self.view.backgroundColor = .white
     }
 
     override func didReceiveMemoryWarning() {

@@ -1,1546 +1,768 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>02F05821611725A4DC542849</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>3BF53C885381150890BD1D77</string>
-				<string>E9CCA6F48CECF090FA2861D1</string>
-				<string>B66B0EDEAA84DBD298790190</string>
-				<string>08B3CAB5669AA980CD9161B0</string>
-				<string>8415B6E6AFB63FC374129952</string>
-				<string>AA764A39D6226F0CDDE2E802</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0813A6D9E60663CFD7CF8EF2</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>08B3CAB5669AA980CD9161B0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-fenzhiTests.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-fenzhiTests/Pods-fenzhiTests.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>21062AD51F6038CD0003C7C4</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>21062AD81F6039130003C7C4</string>
-				<string>21062AD71F6038F10003C7C4</string>
-				<string>21062AD61F6038DA0003C7C4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Class</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>21062AD61F6038DA0003C7C4</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>21062AD91F6039570003C7C4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Home</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>21062AD71F6038F10003C7C4</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>21062ADB1F6039640003C7C4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Mine</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>21062AD81F6039130003C7C4</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>21062ADD1F60396F0003C7C4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Record</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>21062AD91F6039570003C7C4</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>HomeViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>21062ADA1F6039570003C7C4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>21062AD91F6039570003C7C4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>21062ADB1F6039640003C7C4</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>MineViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>21062ADC1F6039640003C7C4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>21062ADB1F6039640003C7C4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>21062ADD1F60396F0003C7C4</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>RecordViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>21062ADE1F60396F0003C7C4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>21062ADD1F60396F0003C7C4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>213BF8411F60317300D60AE5</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>213BF84C1F60317300D60AE5</string>
-				<string>213BF8611F60317300D60AE5</string>
-				<string>213BF86C1F60317300D60AE5</string>
-				<string>213BF84B1F60317300D60AE5</string>
-				<string>02F05821611725A4DC542849</string>
-				<string>9B75051DA946A50A99B29F58</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8421F60317300D60AE5</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastSwiftUpdateCheck</key>
-				<string>0830</string>
-				<key>LastUpgradeCheck</key>
-				<string>0830</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>Xunqiu</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>213BF8491F60317300D60AE5</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.3.3</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-					</dict>
-					<key>213BF85D1F60317300D60AE5</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.3.3</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-						<key>TestTargetID</key>
-						<string>213BF8491F60317300D60AE5</string>
-					</dict>
-					<key>213BF8681F60317300D60AE5</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.3.3</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-						<key>TestTargetID</key>
-						<string>213BF8491F60317300D60AE5</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>213BF8451F60317300D60AE5</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-				<string>Base</string>
-			</array>
-			<key>mainGroup</key>
-			<string>213BF8411F60317300D60AE5</string>
-			<key>productRefGroup</key>
-			<string>213BF84B1F60317300D60AE5</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>213BF8491F60317300D60AE5</string>
-				<string>213BF85D1F60317300D60AE5</string>
-				<string>213BF8681F60317300D60AE5</string>
-			</array>
-		</dict>
-		<key>213BF8451F60317300D60AE5</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>213BF8701F60317300D60AE5</string>
-				<string>213BF8711F60317300D60AE5</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>213BF8461F60317300D60AE5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>213BF8501F60317300D60AE5</string>
-				<string>213BF84E1F60317300D60AE5</string>
-				<string>21062ADE1F60396F0003C7C4</string>
-				<string>21062ADA1F6039570003C7C4</string>
-				<string>21062ADC1F6039640003C7C4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>213BF8471F60317300D60AE5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>85AC0AA241E550BCCE81BA92</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>213BF8481F60317300D60AE5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>213BF8581F60317300D60AE5</string>
-				<string>213BF8551F60317300D60AE5</string>
-				<string>213BF8531F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>213BF8491F60317300D60AE5</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>213BF8721F60317300D60AE5</string>
-			<key>buildPhases</key>
-			<array>
-				<string>4E1C81F8F3A230BC9EA0A1ED</string>
-				<string>213BF8461F60317300D60AE5</string>
-				<string>213BF8471F60317300D60AE5</string>
-				<string>213BF8481F60317300D60AE5</string>
-				<string>31FC56B27C4CD7748D1FA91E</string>
-				<string>96002AC21A497C3AA0CEFAF9</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>fenzhi</string>
-			<key>productName</key>
-			<string>fenzhi</string>
-			<key>productReference</key>
-			<string>213BF84A1F60317300D60AE5</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>213BF84A1F60317300D60AE5</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>fenzhi.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>213BF84B1F60317300D60AE5</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>213BF84A1F60317300D60AE5</string>
-				<string>213BF85E1F60317300D60AE5</string>
-				<string>213BF8691F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF84C1F60317300D60AE5</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>21062AD51F6038CD0003C7C4</string>
-				<string>213BF84D1F60317300D60AE5</string>
-				<string>213BF84F1F60317300D60AE5</string>
-				<string>213BF8511F60317300D60AE5</string>
-				<string>213BF8541F60317300D60AE5</string>
-				<string>213BF8561F60317300D60AE5</string>
-				<string>213BF8591F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>fenzhi</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF84D1F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>AppDelegate.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF84E1F60317300D60AE5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>213BF84D1F60317300D60AE5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>213BF84F1F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8501F60317300D60AE5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>213BF84F1F60317300D60AE5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>213BF8511F60317300D60AE5</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>213BF8521F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8521F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8531F60317300D60AE5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>213BF8511F60317300D60AE5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>213BF8541F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Assets.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8551F60317300D60AE5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>213BF8541F60317300D60AE5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>213BF8561F60317300D60AE5</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>213BF8571F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>LaunchScreen.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8571F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/LaunchScreen.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8581F60317300D60AE5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>213BF8561F60317300D60AE5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>213BF8591F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF85A1F60317300D60AE5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>213BF8631F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>213BF85B1F60317300D60AE5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>C076668C8B97F4A97FB14A24</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>213BF85C1F60317300D60AE5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>213BF85D1F60317300D60AE5</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>213BF8751F60317300D60AE5</string>
-			<key>buildPhases</key>
-			<array>
-				<string>E57FF4424B8FB6AD1728AC24</string>
-				<string>213BF85A1F60317300D60AE5</string>
-				<string>213BF85B1F60317300D60AE5</string>
-				<string>213BF85C1F60317300D60AE5</string>
-				<string>74037BB13C1F13BDBB8B17A1</string>
-				<string>D7E307624C3E87F77FEF9F4A</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>213BF8601F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>fenzhiTests</string>
-			<key>productName</key>
-			<string>fenzhiTests</string>
-			<key>productReference</key>
-			<string>213BF85E1F60317300D60AE5</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.unit-test</string>
-		</dict>
-		<key>213BF85E1F60317300D60AE5</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>fenzhiTests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>213BF85F1F60317300D60AE5</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>213BF8421F60317300D60AE5</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>213BF8491F60317300D60AE5</string>
-			<key>remoteInfo</key>
-			<string>fenzhi</string>
-		</dict>
-		<key>213BF8601F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>213BF8491F60317300D60AE5</string>
-			<key>targetProxy</key>
-			<string>213BF85F1F60317300D60AE5</string>
-		</dict>
-		<key>213BF8611F60317300D60AE5</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>213BF8621F60317300D60AE5</string>
-				<string>213BF8641F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>fenzhiTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8621F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>fenzhiTests.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8631F60317300D60AE5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>213BF8621F60317300D60AE5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>213BF8641F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8651F60317300D60AE5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>213BF86E1F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>213BF8661F60317300D60AE5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>9F1B36B82E4579C0E1ED8A93</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>213BF8671F60317300D60AE5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>213BF8681F60317300D60AE5</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>213BF8781F60317300D60AE5</string>
-			<key>buildPhases</key>
-			<array>
-				<string>0813A6D9E60663CFD7CF8EF2</string>
-				<string>213BF8651F60317300D60AE5</string>
-				<string>213BF8661F60317300D60AE5</string>
-				<string>213BF8671F60317300D60AE5</string>
-				<string>5DAB19FE450E186D52D110B6</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>213BF86B1F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>fenzhiUITests</string>
-			<key>productName</key>
-			<string>fenzhiUITests</string>
-			<key>productReference</key>
-			<string>213BF8691F60317300D60AE5</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.ui-testing</string>
-		</dict>
-		<key>213BF8691F60317300D60AE5</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>fenzhiUITests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>213BF86A1F60317300D60AE5</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>213BF8421F60317300D60AE5</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>213BF8491F60317300D60AE5</string>
-			<key>remoteInfo</key>
-			<string>fenzhi</string>
-		</dict>
-		<key>213BF86B1F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>213BF8491F60317300D60AE5</string>
-			<key>targetProxy</key>
-			<string>213BF86A1F60317300D60AE5</string>
-		</dict>
-		<key>213BF86C1F60317300D60AE5</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>213BF86D1F60317300D60AE5</string>
-				<string>213BF86F1F60317300D60AE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>fenzhiUITests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF86D1F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>fenzhiUITests.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF86E1F60317300D60AE5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>213BF86D1F60317300D60AE5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>213BF86F1F60317300D60AE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>213BF8701F60317300D60AE5</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ANALYZER_NONNULL</key>
-				<string>YES</string>
-				<key>CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_DOCUMENTATION_COMMENTS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INFINITE_RECURSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>ENABLE_TESTABILITY</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>10.3</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SWIFT_ACTIVE_COMPILATION_CONDITIONS</key>
-				<string>DEBUG</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>213BF8711F60317300D60AE5</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ANALYZER_NONNULL</key>
-				<string>YES</string>
-				<key>CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_DOCUMENTATION_COMMENTS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INFINITE_RECURSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf-with-dsym</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>10.3</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Owholemodule</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>213BF8721F60317300D60AE5</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>213BF8731F60317300D60AE5</string>
-				<string>213BF8741F60317300D60AE5</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>213BF8731F60317300D60AE5</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>3BF53C885381150890BD1D77</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>INFOPLIST_FILE</key>
-				<string>fenzhi/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.superxin.com.fenzhi</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>213BF8741F60317300D60AE5</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>E9CCA6F48CECF090FA2861D1</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>INFOPLIST_FILE</key>
-				<string>fenzhi/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.superxin.com.fenzhi</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>213BF8751F60317300D60AE5</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>213BF8761F60317300D60AE5</string>
-				<string>213BF8771F60317300D60AE5</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>213BF8761F60317300D60AE5</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>B66B0EDEAA84DBD298790190</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>BUNDLE_LOADER</key>
-				<string>$(TEST_HOST)</string>
-				<key>INFOPLIST_FILE</key>
-				<string>fenzhiTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.superxin.com.fenzhiTests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TEST_HOST</key>
-				<string>$(BUILT_PRODUCTS_DIR)/fenzhi.app/fenzhi</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>213BF8771F60317300D60AE5</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>08B3CAB5669AA980CD9161B0</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>BUNDLE_LOADER</key>
-				<string>$(TEST_HOST)</string>
-				<key>INFOPLIST_FILE</key>
-				<string>fenzhiTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.superxin.com.fenzhiTests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TEST_HOST</key>
-				<string>$(BUILT_PRODUCTS_DIR)/fenzhi.app/fenzhi</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>213BF8781F60317300D60AE5</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>213BF8791F60317300D60AE5</string>
-				<string>213BF87A1F60317300D60AE5</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>213BF8791F60317300D60AE5</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>8415B6E6AFB63FC374129952</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>INFOPLIST_FILE</key>
-				<string>fenzhiUITests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.superxin.com.fenzhiUITests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TEST_TARGET_NAME</key>
-				<string>fenzhi</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>213BF87A1F60317300D60AE5</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>AA764A39D6226F0CDDE2E802</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>INFOPLIST_FILE</key>
-				<string>fenzhiUITests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.superxin.com.fenzhiUITests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TEST_TARGET_NAME</key>
-				<string>fenzhi</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>31FC56B27C4CD7748D1FA91E</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>3BF53C885381150890BD1D77</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-fenzhi.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4E1C81F8F3A230BC9EA0A1ED</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>5CDF4B2D362E84A0445C1765</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_fenzhi.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>5DAB19FE450E186D52D110B6</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-fenzhiUITests/Pods-fenzhiUITests-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>74037BB13C1F13BDBB8B17A1</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-fenzhiTests/Pods-fenzhiTests-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>7DCA162FC084537701A39EDF</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_fenzhiTests.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>8415B6E6AFB63FC374129952</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-fenzhiUITests.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-fenzhiUITests/Pods-fenzhiUITests.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>85AC0AA241E550BCCE81BA92</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5CDF4B2D362E84A0445C1765</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>96002AC21A497C3AA0CEFAF9</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>9B75051DA946A50A99B29F58</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5CDF4B2D362E84A0445C1765</string>
-				<string>7DCA162FC084537701A39EDF</string>
-				<string>A415FB4CE0E9595F86C656D9</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9F1B36B82E4579C0E1ED8A93</key>
-		<dict>
-			<key>fileRef</key>
-			<string>A415FB4CE0E9595F86C656D9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>A415FB4CE0E9595F86C656D9</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_fenzhiUITests.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>AA764A39D6226F0CDDE2E802</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-fenzhiUITests.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-fenzhiUITests/Pods-fenzhiUITests.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B66B0EDEAA84DBD298790190</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-fenzhiTests.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-fenzhiTests/Pods-fenzhiTests.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C076668C8B97F4A97FB14A24</key>
-		<dict>
-			<key>fileRef</key>
-			<string>7DCA162FC084537701A39EDF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>D7E307624C3E87F77FEF9F4A</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-fenzhiTests/Pods-fenzhiTests-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>E57FF4424B8FB6AD1728AC24</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>E9CCA6F48CECF090FA2861D1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-fenzhi.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>213BF8421F60317300D60AE5</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062AD91F6039570003C7C4 /* HomeViewController.swift */; };
+		21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062ADB1F6039640003C7C4 /* MineViewController.swift */; };
+		21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062ADD1F60396F0003C7C4 /* RecordViewController.swift */; };
+		21062AE11F603EA90003C7C4 /* pch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062AE01F603EA90003C7C4 /* pch.swift */; };
+		213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF84D1F60317300D60AE5 /* AppDelegate.swift */; };
+		213BF8501F60317300D60AE5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF84F1F60317300D60AE5 /* ViewController.swift */; };
+		213BF8531F60317300D60AE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213BF8511F60317300D60AE5 /* Main.storyboard */; };
+		213BF8551F60317300D60AE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 213BF8541F60317300D60AE5 /* Assets.xcassets */; };
+		213BF8581F60317300D60AE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213BF8561F60317300D60AE5 /* LaunchScreen.storyboard */; };
+		213BF8631F60317300D60AE5 /* fenzhiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF8621F60317300D60AE5 /* fenzhiTests.swift */; };
+		213BF86E1F60317300D60AE5 /* fenzhiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */; };
+		85AC0AA241E550BCCE81BA92 /* Pods_fenzhi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */; };
+		9F1B36B82E4579C0E1ED8A93 /* Pods_fenzhiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A415FB4CE0E9595F86C656D9 /* Pods_fenzhiUITests.framework */; };
+		C076668C8B97F4A97FB14A24 /* Pods_fenzhiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCA162FC084537701A39EDF /* Pods_fenzhiTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		213BF85F1F60317300D60AE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 213BF8421F60317300D60AE5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 213BF8491F60317300D60AE5;
+			remoteInfo = fenzhi;
+		};
+		213BF86A1F60317300D60AE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 213BF8421F60317300D60AE5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 213BF8491F60317300D60AE5;
+			remoteInfo = fenzhi;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08B3CAB5669AA980CD9161B0 /* Pods-fenzhiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhiTests/Pods-fenzhiTests.release.xcconfig"; sourceTree = "<group>"; };
+		21062AD91F6039570003C7C4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		21062ADB1F6039640003C7C4 /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
+		21062ADD1F60396F0003C7C4 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		21062AE01F603EA90003C7C4 /* pch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pch.swift; sourceTree = "<group>"; };
+		213BF84A1F60317300D60AE5 /* fenzhi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fenzhi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		213BF84D1F60317300D60AE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		213BF84F1F60317300D60AE5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		213BF8521F60317300D60AE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		213BF8541F60317300D60AE5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		213BF8571F60317300D60AE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		213BF8591F60317300D60AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		213BF85E1F60317300D60AE5 /* fenzhiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fenzhiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		213BF8621F60317300D60AE5 /* fenzhiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fenzhiTests.swift; sourceTree = "<group>"; };
+		213BF8641F60317300D60AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		213BF8691F60317300D60AE5 /* fenzhiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fenzhiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fenzhiUITests.swift; sourceTree = "<group>"; };
+		213BF86F1F60317300D60AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BF53C885381150890BD1D77 /* Pods-fenzhi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi.debug.xcconfig"; sourceTree = "<group>"; };
+		5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fenzhi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DCA162FC084537701A39EDF /* Pods_fenzhiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fenzhiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8415B6E6AFB63FC374129952 /* Pods-fenzhiUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhiUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhiUITests/Pods-fenzhiUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A415FB4CE0E9595F86C656D9 /* Pods_fenzhiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fenzhiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA764A39D6226F0CDDE2E802 /* Pods-fenzhiUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhiUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhiUITests/Pods-fenzhiUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B66B0EDEAA84DBD298790190 /* Pods-fenzhiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhiTests/Pods-fenzhiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E9CCA6F48CECF090FA2861D1 /* Pods-fenzhi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhi.release.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		213BF8471F60317300D60AE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85AC0AA241E550BCCE81BA92 /* Pods_fenzhi.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		213BF85B1F60317300D60AE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C076668C8B97F4A97FB14A24 /* Pods_fenzhiTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		213BF8661F60317300D60AE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F1B36B82E4579C0E1ED8A93 /* Pods_fenzhiUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02F05821611725A4DC542849 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3BF53C885381150890BD1D77 /* Pods-fenzhi.debug.xcconfig */,
+				E9CCA6F48CECF090FA2861D1 /* Pods-fenzhi.release.xcconfig */,
+				B66B0EDEAA84DBD298790190 /* Pods-fenzhiTests.debug.xcconfig */,
+				08B3CAB5669AA980CD9161B0 /* Pods-fenzhiTests.release.xcconfig */,
+				8415B6E6AFB63FC374129952 /* Pods-fenzhiUITests.debug.xcconfig */,
+				AA764A39D6226F0CDDE2E802 /* Pods-fenzhiUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		21062AD51F6038CD0003C7C4 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				21062AD81F6039130003C7C4 /* Record */,
+				21062AD71F6038F10003C7C4 /* Mine */,
+				21062AD61F6038DA0003C7C4 /* Home */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		21062AD61F6038DA0003C7C4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				21062AD91F6039570003C7C4 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		21062AD71F6038F10003C7C4 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				21062ADB1F6039640003C7C4 /* MineViewController.swift */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		21062AD81F6039130003C7C4 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				21062ADD1F60396F0003C7C4 /* RecordViewController.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		21062ADF1F603E9E0003C7C4 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				21062AE01F603EA90003C7C4 /* pch.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		213BF8411F60317300D60AE5 = {
+			isa = PBXGroup;
+			children = (
+				213BF84C1F60317300D60AE5 /* fenzhi */,
+				213BF8611F60317300D60AE5 /* fenzhiTests */,
+				213BF86C1F60317300D60AE5 /* fenzhiUITests */,
+				213BF84B1F60317300D60AE5 /* Products */,
+				02F05821611725A4DC542849 /* Pods */,
+				9B75051DA946A50A99B29F58 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		213BF84B1F60317300D60AE5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				213BF84A1F60317300D60AE5 /* fenzhi.app */,
+				213BF85E1F60317300D60AE5 /* fenzhiTests.xctest */,
+				213BF8691F60317300D60AE5 /* fenzhiUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		213BF84C1F60317300D60AE5 /* fenzhi */ = {
+			isa = PBXGroup;
+			children = (
+				21062ADF1F603E9E0003C7C4 /* Tool */,
+				21062AD51F6038CD0003C7C4 /* Class */,
+				213BF84D1F60317300D60AE5 /* AppDelegate.swift */,
+				213BF84F1F60317300D60AE5 /* ViewController.swift */,
+				213BF8511F60317300D60AE5 /* Main.storyboard */,
+				213BF8541F60317300D60AE5 /* Assets.xcassets */,
+				213BF8561F60317300D60AE5 /* LaunchScreen.storyboard */,
+				213BF8591F60317300D60AE5 /* Info.plist */,
+			);
+			path = fenzhi;
+			sourceTree = "<group>";
+		};
+		213BF8611F60317300D60AE5 /* fenzhiTests */ = {
+			isa = PBXGroup;
+			children = (
+				213BF8621F60317300D60AE5 /* fenzhiTests.swift */,
+				213BF8641F60317300D60AE5 /* Info.plist */,
+			);
+			path = fenzhiTests;
+			sourceTree = "<group>";
+		};
+		213BF86C1F60317300D60AE5 /* fenzhiUITests */ = {
+			isa = PBXGroup;
+			children = (
+				213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */,
+				213BF86F1F60317300D60AE5 /* Info.plist */,
+			);
+			path = fenzhiUITests;
+			sourceTree = "<group>";
+		};
+		9B75051DA946A50A99B29F58 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */,
+				7DCA162FC084537701A39EDF /* Pods_fenzhiTests.framework */,
+				A415FB4CE0E9595F86C656D9 /* Pods_fenzhiUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		213BF8491F60317300D60AE5 /* fenzhi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 213BF8721F60317300D60AE5 /* Build configuration list for PBXNativeTarget "fenzhi" */;
+			buildPhases = (
+				4E1C81F8F3A230BC9EA0A1ED /* [CP] Check Pods Manifest.lock */,
+				213BF8461F60317300D60AE5 /* Sources */,
+				213BF8471F60317300D60AE5 /* Frameworks */,
+				213BF8481F60317300D60AE5 /* Resources */,
+				31FC56B27C4CD7748D1FA91E /* [CP] Embed Pods Frameworks */,
+				96002AC21A497C3AA0CEFAF9 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = fenzhi;
+			productName = fenzhi;
+			productReference = 213BF84A1F60317300D60AE5 /* fenzhi.app */;
+			productType = "com.apple.product-type.application";
+		};
+		213BF85D1F60317300D60AE5 /* fenzhiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 213BF8751F60317300D60AE5 /* Build configuration list for PBXNativeTarget "fenzhiTests" */;
+			buildPhases = (
+				E57FF4424B8FB6AD1728AC24 /* [CP] Check Pods Manifest.lock */,
+				213BF85A1F60317300D60AE5 /* Sources */,
+				213BF85B1F60317300D60AE5 /* Frameworks */,
+				213BF85C1F60317300D60AE5 /* Resources */,
+				74037BB13C1F13BDBB8B17A1 /* [CP] Embed Pods Frameworks */,
+				D7E307624C3E87F77FEF9F4A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				213BF8601F60317300D60AE5 /* PBXTargetDependency */,
+			);
+			name = fenzhiTests;
+			productName = fenzhiTests;
+			productReference = 213BF85E1F60317300D60AE5 /* fenzhiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		213BF8681F60317300D60AE5 /* fenzhiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 213BF8781F60317300D60AE5 /* Build configuration list for PBXNativeTarget "fenzhiUITests" */;
+			buildPhases = (
+				0813A6D9E60663CFD7CF8EF2 /* [CP] Check Pods Manifest.lock */,
+				213BF8651F60317300D60AE5 /* Sources */,
+				213BF8661F60317300D60AE5 /* Frameworks */,
+				213BF8671F60317300D60AE5 /* Resources */,
+				5DAB19FE450E186D52D110B6 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				213BF86B1F60317300D60AE5 /* PBXTargetDependency */,
+			);
+			name = fenzhiUITests;
+			productName = fenzhiUITests;
+			productReference = 213BF8691F60317300D60AE5 /* fenzhiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		213BF8421F60317300D60AE5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Xunqiu;
+				TargetAttributes = {
+					213BF8491F60317300D60AE5 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
+					213BF85D1F60317300D60AE5 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 213BF8491F60317300D60AE5;
+					};
+					213BF8681F60317300D60AE5 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 213BF8491F60317300D60AE5;
+					};
+				};
+			};
+			buildConfigurationList = 213BF8451F60317300D60AE5 /* Build configuration list for PBXProject "fenzhi" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 213BF8411F60317300D60AE5;
+			productRefGroup = 213BF84B1F60317300D60AE5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				213BF8491F60317300D60AE5 /* fenzhi */,
+				213BF85D1F60317300D60AE5 /* fenzhiTests */,
+				213BF8681F60317300D60AE5 /* fenzhiUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		213BF8481F60317300D60AE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				213BF8581F60317300D60AE5 /* LaunchScreen.storyboard in Resources */,
+				213BF8551F60317300D60AE5 /* Assets.xcassets in Resources */,
+				213BF8531F60317300D60AE5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		213BF85C1F60317300D60AE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		213BF8671F60317300D60AE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0813A6D9E60663CFD7CF8EF2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		31FC56B27C4CD7748D1FA91E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4E1C81F8F3A230BC9EA0A1ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5DAB19FE450E186D52D110B6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fenzhiUITests/Pods-fenzhiUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		74037BB13C1F13BDBB8B17A1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fenzhiTests/Pods-fenzhiTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		96002AC21A497C3AA0CEFAF9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7E307624C3E87F77FEF9F4A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fenzhiTests/Pods-fenzhiTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E57FF4424B8FB6AD1728AC24 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		213BF8461F60317300D60AE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
+				213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */,
+				21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */,
+				21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */,
+				21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */,
+				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		213BF85A1F60317300D60AE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				213BF8631F60317300D60AE5 /* fenzhiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		213BF8651F60317300D60AE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				213BF86E1F60317300D60AE5 /* fenzhiUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		213BF8601F60317300D60AE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 213BF8491F60317300D60AE5 /* fenzhi */;
+			targetProxy = 213BF85F1F60317300D60AE5 /* PBXContainerItemProxy */;
+		};
+		213BF86B1F60317300D60AE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 213BF8491F60317300D60AE5 /* fenzhi */;
+			targetProxy = 213BF86A1F60317300D60AE5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		213BF8511F60317300D60AE5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				213BF8521F60317300D60AE5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		213BF8561F60317300D60AE5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				213BF8571F60317300D60AE5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		213BF8701F60317300D60AE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = "";
+			};
+			name = Debug;
+		};
+		213BF8711F60317300D60AE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = "";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		213BF8731F60317300D60AE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BF53C885381150890BD1D77 /* Pods-fenzhi.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = fenzhi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.superxin.com.fenzhi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		213BF8741F60317300D60AE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9CCA6F48CECF090FA2861D1 /* Pods-fenzhi.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = fenzhi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.superxin.com.fenzhi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		213BF8761F60317300D60AE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B66B0EDEAA84DBD298790190 /* Pods-fenzhiTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = fenzhiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.superxin.com.fenzhiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fenzhi.app/fenzhi";
+			};
+			name = Debug;
+		};
+		213BF8771F60317300D60AE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B3CAB5669AA980CD9161B0 /* Pods-fenzhiTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = fenzhiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.superxin.com.fenzhiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fenzhi.app/fenzhi";
+			};
+			name = Release;
+		};
+		213BF8791F60317300D60AE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8415B6E6AFB63FC374129952 /* Pods-fenzhiUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = fenzhiUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.superxin.com.fenzhiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = fenzhi;
+			};
+			name = Debug;
+		};
+		213BF87A1F60317300D60AE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA764A39D6226F0CDDE2E802 /* Pods-fenzhiUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = fenzhiUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.superxin.com.fenzhiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = fenzhi;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		213BF8451F60317300D60AE5 /* Build configuration list for PBXProject "fenzhi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				213BF8701F60317300D60AE5 /* Debug */,
+				213BF8711F60317300D60AE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		213BF8721F60317300D60AE5 /* Build configuration list for PBXNativeTarget "fenzhi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				213BF8731F60317300D60AE5 /* Debug */,
+				213BF8741F60317300D60AE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		213BF8751F60317300D60AE5 /* Build configuration list for PBXNativeTarget "fenzhiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				213BF8761F60317300D60AE5 /* Debug */,
+				213BF8771F60317300D60AE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		213BF8781F60317300D60AE5 /* Build configuration list for PBXNativeTarget "fenzhiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				213BF8791F60317300D60AE5 /* Debug */,
+				213BF87A1F60317300D60AE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 213BF8421F60317300D60AE5 /* Project object */;
+}

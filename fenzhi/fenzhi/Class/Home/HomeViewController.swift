@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: ViewController,UITableViewDelegate,UITableViewDataSource {
+class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let topBackView : UIView = UIView()//头部view背景图
     let mainTabelView : UITableView = UITableView()
 
@@ -39,9 +39,11 @@ class HomeViewController: ViewController,UITableViewDelegate,UITableViewDataSour
         let btnY = (viewHeight - height)/2
         let stBtn : UIButton = UIButton(frame: CGRect(x: 0, y: btnY, width: KSCREEN_WIDTH/2, height: height))
         stBtn.setTitle("教学分享", for: .normal)
+        stBtn.setImage(#imageLiteral(resourceName: "icon_jxfx"), for: .normal)
         stBtn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
         stBtn.titleLabel?.font = UIFont.systemFont(ofSize: ip7(21))
         stBtn.backgroundColor = .clear
+        stBtn.addTarget(self, action:#selector(HomeViewController.teachBtnClik), for: .touchUpInside)
         topBackView.addSubview(stBtn)
 
         let lineView = UIView()
@@ -55,9 +57,11 @@ class HomeViewController: ViewController,UITableViewDelegate,UITableViewDataSour
         //心得分享
         let hertBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH/2, y: btnY, width: KSCREEN_WIDTH/2, height: height))
         hertBtn.setTitle("心得分享", for: .normal)
+        hertBtn.setImage(#imageLiteral(resourceName: "icon_xdfx"), for: .normal)
         hertBtn.backgroundColor = .clear
         hertBtn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
         hertBtn.titleLabel?.font = UIFont.systemFont(ofSize: ip7(21))
+        hertBtn.addTarget(self, action:#selector(HomeViewController.heartBtnClick), for: .touchUpInside)
         topBackView.addSubview(hertBtn)
 
         //
@@ -67,10 +71,25 @@ class HomeViewController: ViewController,UITableViewDelegate,UITableViewDataSour
         topBackView.addSubview(lineView2)
 
     }
+    //MARK:topView clik
+    func teachBtnClik() {
+        let vc : TeachReleaseViewController = TeachReleaseViewController()
+        let nv :UINavigationController = UINavigationController(rootViewController: vc)
+        self.present(nv, animated: true) {
+
+        }
+    }
+
+    func heartBtnClick() {
+        let vc : HeartReleaseViewController = HeartReleaseViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+
     //MARK:tableView
     func creatTableView() {
         mainTabelView.frame = CGRect(x: 0, y: topBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY)
-        mainTabelView.backgroundColor = UIColor.green
+        mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
         mainTabelView.tableFooterView = UIView()

@@ -8,8 +8,14 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: ViewController,UITableViewDelegate,UITableViewDataSource {
     let topBackView : UIView = UIView()//头部view背景图
+    let mainTabelView : UITableView = UITableView()
+
+    var contentOffsetY:CGFloat = 0.0
+    var oldContentOffsetY:CGFloat = 0.0
+    var newContentOffsetY:CGFloat = 0.0
+
 
 
     override func viewDidLoad() {
@@ -19,8 +25,9 @@ class HomeViewController: UIViewController {
         self.title = "首页"
         self.view.backgroundColor = .white
         self.creatTopView()
+        self.creatTableView()
     }
-
+    //MARK:头部view
     func creatTopView() {
         let viewHeight  = ip7(66)
         topBackView.frame = CGRect(x: 0, y: LNAVIGATION_HEIGHT, width: KSCREEN_WIDTH, height: viewHeight + ip7(20))
@@ -59,6 +66,76 @@ class HomeViewController: UIViewController {
         lineView2.backgroundColor = FZColorFromRGB(rgbValue: 0xf4f8f9)
         topBackView.addSubview(lineView2)
 
+    }
+    //MARK:tableView
+    func creatTableView() {
+        mainTabelView.frame = CGRect(x: 0, y: topBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY)
+        mainTabelView.backgroundColor = UIColor.green
+        mainTabelView.delegate = self;
+        mainTabelView.dataSource = self;
+        mainTabelView.tableFooterView = UIView()
+//        mainTabelView.separatorStyle = .none
+        mainTabelView.showsVerticalScrollIndicator = false
+        mainTabelView.showsHorizontalScrollIndicator = false
+        self.view.addSubview(mainTabelView)
+
+    }
+    // MARK: tableView 代理
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: 44))
+        cell.backgroundColor = .red
+        return cell;
+
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
+        return 44;
+    }
+    // MARK: scrollView 代理
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        newContentOffsetY = scrollView.contentOffset.y
+        if (newContentOffsetY > oldContentOffsetY && oldContentOffsetY>contentOffsetY) {
+            //up
+
+        } else if (newContentOffsetY < oldContentOffsetY && oldContentOffsetY < contentOffsetY){
+            //down
+
+        } else {
+            //拖拽
+            if scrollView.contentOffset.y - contentOffsetY > 5.0 {
+                //上
+                self.hidTop()
+            } else if contentOffsetY - scrollView.contentOffset.y > 5.0 {
+                //下
+                self.showTop()
+            }
+
+        }
+    }
+
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        contentOffsetY = scrollView.contentOffset.y
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        oldContentOffsetY = scrollView.contentOffset.y
+    }
+
+    func showTop() {
+        topBackView.alpha = 1.0
+        mainTabelView.frame.origin.y = topBackView.frame.maxY
+    }
+    func hidTop() {
+        topBackView.alpha = 0.0
+        mainTabelView.frame.origin.y = LNAVIGATION_HEIGHT
     }
 
     override func didReceiveMemoryWarning() {

@@ -12,6 +12,7 @@ target 'fenzhi' do
 	pod 'Kingfisher'
 	pod 'MJRefresh'
 	pod 'AFNetworking', '~> 3.0' 
+	pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
   target 'fenzhiTests' do
     inherit! :search_paths
     # Pods for testing

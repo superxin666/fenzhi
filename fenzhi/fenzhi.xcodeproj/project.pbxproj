@@ -113,6 +113,7 @@
 		21062AD51F6038CD0003C7C4 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				214AF58A1F61791C00CA786A /* Base */,
 				21062AD81F6039130003C7C4 /* Record */,
 				21062AD71F6038F10003C7C4 /* Mine */,
 				21062AD61F6038DA0003C7C4 /* Home */,
@@ -123,6 +124,8 @@
 		21062AD61F6038DA0003C7C4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				214AF58C1F617B5800CA786A /* Model */,
+				214AF58B1F617B4A00CA786A /* Cell */,
 				21062AD91F6039570003C7C4 /* HomeViewController.swift */,
 			);
 			path = Home;
@@ -205,6 +208,27 @@
 				213BF86F1F60317300D60AE5 /* Info.plist */,
 			);
 			path = fenzhiUITests;
+			sourceTree = "<group>";
+		};
+		214AF58A1F61791C00CA786A /* Base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		214AF58B1F617B4A00CA786A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		214AF58C1F617B5800CA786A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9B75051DA946A50A99B29F58 /* Frameworks */ = {

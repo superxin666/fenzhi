@@ -11,9 +11,9 @@ let KSCREEN_WIDTH = UIScreen.main.bounds.size.width
 let KSCREEN_HEIGHT = UIScreen.main.bounds.size.height
 let LNAVIGATION_HEIGHT = CGFloat(44+20)
 
-//var ip6 = { (num : Int) ->  CGFloat in
-//    return CGFloat(num)/375 * CGFloat(KSCREEN_WIDTH)
-//}
+var kfbFont = { (num : Int) ->  UIFont in
+    return  UIFont.init(name: "Heiti SC", size: CGFloat(num))!
+}
 var ip7 = { (num : Int) ->  CGFloat in
     return CGFloat(num)/540 * CGFloat(KSCREEN_WIDTH)
 }

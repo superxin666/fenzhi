@@ -11,10 +11,12 @@ let KSCREEN_WIDTH = UIScreen.main.bounds.size.width
 let KSCREEN_HEIGHT = UIScreen.main.bounds.size.height
 let LNAVIGATION_HEIGHT = CGFloat(44+20)
 
-var ip6 = { (num : Int) ->  CGFloat in
-    return CGFloat(num)/375 * CGFloat(KSCREEN_WIDTH)
+//var ip6 = { (num : Int) ->  CGFloat in
+//    return CGFloat(num)/375 * CGFloat(KSCREEN_WIDTH)
+//}
+var ip7 = { (num : Int) ->  CGFloat in
+    return CGFloat(num)/540 * CGFloat(KSCREEN_WIDTH)
 }
-
 /// 输入三色值返回颜色
 ///
 /// - parameter red:   红的
@@ -41,7 +43,7 @@ func FZColorFromRGB(rgbValue: UInt) -> UIColor {
     )
 }
 
-let blue_COLOUR = FZColor(red: 88, green: 166, blue: 255, alpha: 1)
+let blue_COLOUR = FZColor(red: 21, green: 165, blue: 234, alpha: 1)
 
 
 

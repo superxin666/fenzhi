@@ -12,7 +12,6 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     //左边返回键
@@ -38,6 +37,13 @@ class BaseViewController: UIViewController {
         btn.titleLabel?.adjustsFontSizeToFitWidth = true
         let item:UIBarButtonItem = UIBarButtonItem(customView:btn)
         self.navigationItem.rightBarButtonItem = item
+    }
+    
+    func navigation_title_fontsize(name:String, fontsize:Int) {
+        self.title = name
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: fzFont_Thin(ip7(fontsize))]
+        
+    
     }
 
     func navigationLeftBtnClick() {

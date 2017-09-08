@@ -22,8 +22,9 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.title = "首页"
+//        self.title = "首页"
         self.view.backgroundColor = .white
+        self.navigation_title_fontsize(name: "首页", fontsize: 27)
         self.creatTopView()
         self.creatTableView()
     }
@@ -41,7 +42,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         stBtn.setTitle("教学分享", for: .normal)
         stBtn.setImage(#imageLiteral(resourceName: "icon_jxfx"), for: .normal)
         stBtn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
-        stBtn.titleLabel?.font = UIFont.systemFont(ofSize: ip7(21))
+        stBtn.titleLabel?.font = fzFont_Thin(ip7(21))
         stBtn.backgroundColor = .clear
         stBtn.addTarget(self, action:#selector(HomeViewController.teachBtnClik), for: .touchUpInside)
         topBackView.addSubview(stBtn)
@@ -60,7 +61,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         hertBtn.setImage(#imageLiteral(resourceName: "icon_xdfx"), for: .normal)
         hertBtn.backgroundColor = .clear
         hertBtn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
-        hertBtn.titleLabel?.font = UIFont.systemFont(ofSize: ip7(21))
+        hertBtn.titleLabel?.font = fzFont_Thin(ip7(21))
         hertBtn.addTarget(self, action:#selector(HomeViewController.heartBtnClick), for: .touchUpInside)
         topBackView.addSubview(hertBtn)
 

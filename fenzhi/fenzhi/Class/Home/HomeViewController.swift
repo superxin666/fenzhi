@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+let HEARTCELLID = "HEARTCELL_ID"//本周训练
 class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let topBackView : UIView = UIView()//头部view背景图
     let mainTabelView : UITableView = UITableView()
@@ -23,7 +23,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 
         // Do any additional setup after loading the view.
 //        self.title = "首页"
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = FZColorFromRGB(rgbValue: 0xf4f8f9)
         self.navigation_title_fontsize(name: "首页", fontsize: 27)
         self.creatTopView()
         self.creatTableView()
@@ -42,7 +42,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         stBtn.setTitle("教学分享", for: .normal)
         stBtn.setImage(#imageLiteral(resourceName: "icon_jxfx"), for: .normal)
         stBtn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
-        stBtn.titleLabel?.font = fzFont_Thin(ip7(21))
+        stBtn.titleLabel?.font = fzFont_Medium(ip7(21))
         stBtn.backgroundColor = .clear
         stBtn.addTarget(self, action:#selector(HomeViewController.teachBtnClik), for: .touchUpInside)
         topBackView.addSubview(stBtn)
@@ -61,7 +61,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         hertBtn.setImage(#imageLiteral(resourceName: "icon_xdfx"), for: .normal)
         hertBtn.backgroundColor = .clear
         hertBtn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
-        hertBtn.titleLabel?.font = fzFont_Thin(ip7(21))
+        hertBtn.titleLabel?.font = fzFont_Medium(ip7(21))
         hertBtn.addTarget(self, action:#selector(HomeViewController.heartBtnClick), for: .touchUpInside)
         topBackView.addSubview(hertBtn)
 
@@ -94,9 +94,11 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
         mainTabelView.tableFooterView = UIView()
-//        mainTabelView.separatorStyle = .none
+        mainTabelView.separatorStyle = .none
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
+        
+        mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         self.view.addSubview(mainTabelView)
 
     }
@@ -110,13 +112,20 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: 44))
-        cell.backgroundColor = .red
+//        let cell = UITableViewCell()
+//        return cell;
+        
+        var cell : HeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID, for: indexPath) as! HeartTableViewCell
+        cell.backgroundColor = .clear
+        if (cell == nil)  {
+            cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
+        }
+        cell.setUpUIWithModel()
         return cell;
 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return 44;
+        return ip7(300);
     }
     // MARK: scrollView 代理
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -151,11 +160,11 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 
     func showTop() {
         topBackView.alpha = 1.0
-        mainTabelView.frame.origin.y = topBackView.frame.maxY
+        mainTabelView.frame = CGRect(x: 0, y: topBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY)
     }
     func hidTop() {
         topBackView.alpha = 0.0
-        mainTabelView.frame.origin.y = LNAVIGATION_HEIGHT
+        mainTabelView.frame = CGRect(x: 0, y: LNAVIGATION_HEIGHT, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY + ip7(20))
     }
 
     override func didReceiveMemoryWarning() {

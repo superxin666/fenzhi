@@ -13,9 +13,14 @@ let LNAVIGATION_HEIGHT = CGFloat(44+20)
 
 
 var fzFont_Thin = { (num : CGFloat) ->  UIFont in
-    return UIFont.systemFont(ofSize: 12)
- 
+    return  UIFont.init(name: "HelveticaNeue-Thin", size: num)!
 }
+
+var fzFont_Medium = { (num : CGFloat) ->  UIFont in
+    return  UIFont.init(name: "HelveticaNeue-Medium", size: num)!
+}
+
+
 var ip7 = { (num : Int) ->  CGFloat in
     return CGFloat(num)/540 * CGFloat(KSCREEN_WIDTH)
 }

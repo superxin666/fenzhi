@@ -21,6 +21,7 @@
 		214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */; };
 		214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */; };
 		21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD78761F618C1600539E8D /* BaseViewController.swift */; };
+		21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */; };
 		85AC0AA241E550BCCE81BA92 /* Pods_fenzhi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */; };
 		9F1B36B82E4579C0E1ED8A93 /* Pods_fenzhiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A415FB4CE0E9595F86C656D9 /* Pods_fenzhiUITests.framework */; };
 		C076668C8B97F4A97FB14A24 /* Pods_fenzhiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCA162FC084537701A39EDF /* Pods_fenzhiTests.framework */; };
@@ -65,6 +66,7 @@
 		214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachReleaseViewController.swift; sourceTree = "<group>"; };
 		214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartReleaseViewController.swift; sourceTree = "<group>"; };
 		21BD78761F618C1600539E8D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartTableViewCell.swift; sourceTree = "<group>"; };
 		3BF53C885381150890BD1D77 /* Pods-fenzhi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi.debug.xcconfig"; sourceTree = "<group>"; };
 		5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fenzhi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DCA162FC084537701A39EDF /* Pods_fenzhiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fenzhiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,8 +132,7 @@
 		21062AD61F6038DA0003C7C4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				214AF58C1F617B5800CA786A /* Model */,
-				214AF58B1F617B4A00CA786A /* Cell */,
+				21F8421F1F6267DC00A54D68 /* Cells */,
 				21062AD91F6039570003C7C4 /* HomeViewController.swift */,
 				214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */,
 				214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */,
@@ -226,18 +227,12 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		214AF58B1F617B4A00CA786A /* Cell */ = {
+		21F8421F1F6267DC00A54D68 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */,
 			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		214AF58C1F617B5800CA786A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		9B75051DA946A50A99B29F58 /* Frameworks */ = {
@@ -518,6 +513,7 @@
 			files = (
 				214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */,
 				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
+				21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */,
 				213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */,
 				21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */,
 				21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */,

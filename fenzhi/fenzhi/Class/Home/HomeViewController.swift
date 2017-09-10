@@ -97,7 +97,6 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         mainTabelView.separatorStyle = .none
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
-        
         mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         self.view.addSubview(mainTabelView)
 
@@ -112,11 +111,9 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell()
-//        return cell;
-        
         var cell : HeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID, for: indexPath) as! HeartTableViewCell
         cell.backgroundColor = .clear
+        cell.selectionStyle = .none
         if (cell == nil)  {
             cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
         }
@@ -125,7 +122,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return ip7(300);
+        return ip7(700);
     }
     // MARK: scrollView 代理
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

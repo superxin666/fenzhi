@@ -18,7 +18,7 @@ class HeartTableViewCell: UITableViewCell {
     func setUpUIWithModel() {
         
         let viewW = KSCREEN_WIDTH - ip7(20)
-        let viewH = ip7(300)
+        let viewH = ip7(700)
         
         
         let backView : UIView = UIView(frame: CGRect(x: ip7(10), y: 0, width: viewW, height: viewH - ip7(10)))
@@ -73,12 +73,61 @@ class HeartTableViewCell: UITableViewCell {
         txtLabel.numberOfLines = 0
         backView.addSubview(txtLabel)
 
-
-
-
         //图片
+        let imageX = ip7(30)
+        let imageY = ip7(32) + txtLabel.frame.maxY
+        let appad = ip7(20)
+        let imageWidth = (viewW - ip7(60) - ip7(20))/2
+        let imageHeight = imageWidth * 355/428
+        var lastImageFream = txtLabel.frame;
 
-        
+        for i in 0...3 {
+            let imageView = UIImageView(image: #imageLiteral(resourceName: "icon_tu_01"))
+            imageView.tag = i
+            let Y = CGFloat((i/2)) * (imageHeight + ip7(20))
+            let X = ((appad + imageWidth) * CGFloat(i%2))
+            imageView.frame =  CGRect(x: imageX + X, y: imageY + Y, width: imageWidth, height: imageHeight)
+            lastImageFream = imageView.frame;
+            backView.addSubview(imageView)
+        }
+
+        //课时定位
+        let dingweiImageView : UIImageView = UIImageView(image: #imageLiteral(resourceName: "icon_dingwei"))
+        dingweiImageView.frame = CGRect(x: imageX, y: lastImageFream.maxY + ip7(35), width: ip7(20), height: ip7(20))
+        backView.addSubview(dingweiImageView)
+
+        let lessonLabel : UILabel = UILabel(frame: CGRect(x: dingweiImageView.frame.maxX + ip7(10), y: lastImageFream.maxY + ip7(35), width: viewW - dingweiImageView.frame.maxX - ip7(10) , height: ip7(21)))
+        lessonLabel.text = "第二单元 第三课时 《鹅鹅鹅》"
+        lessonLabel.font = fzFont_Thin(ip7(21))
+        lessonLabel.textColor  = FZColor(red: 88, green: 165, blue: 255, alpha: 1.0)
+        lessonLabel.textAlignment = .left
+        lessonLabel.adjustsFontSizeToFitWidth = true
+        backView.addSubview(lessonLabel)
+
+        //三个按钮
+        let lineView : UIView = UIView(frame: CGRect(x: imageX, y: lessonLabel.frame.maxY + ip7(27), width: viewW - imageX * 2, height: 0.5))
+        lineView.backgroundColor = FZColor(red: 102, green: 102, blue: 102, alpha: 1.0)
+        backView.addSubview(lineView)
+
+        let btnW = (viewW - imageX * 2)/3
+        let nameArray : Array = ["123点赞","68评论","12赞赏"]
+        let imageArr : Array = [#imageLiteral(resourceName: "icon_dz1"),#imageLiteral(resourceName: "icon_pl1"),#imageLiteral(resourceName: "icon_zs")]
+
+        for i in 0...2 {
+            let btn : UIButton = UIButton(type: .custom)
+            btn.tag = i
+            btn.frame = CGRect(x: imageX + CGFloat(i) * btnW , y: lineView.frame.maxY, width: btnW, height: ip7(60))
+            btn.titleLabel?.font = fzFont_Thin(18)
+            btn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
+            btn.titleLabel?.adjustsFontSizeToFitWidth = true
+//            btn.backgroundColor = .red
+            btn.setTitle(nameArray[i], for: .normal)
+            btn.setImage(imageArr[i], for: .normal)
+            backView.addSubview(btn)
+            print(btn.frame.maxY)
+        }
+
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

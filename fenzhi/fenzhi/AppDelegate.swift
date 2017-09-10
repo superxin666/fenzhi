@@ -25,20 +25,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         //首页
         let homeVc :HomeViewController = HomeViewController()
         let homeNv :UINavigationController = UINavigationController(rootViewController: homeVc)
-        let item1:UITabBarItem = UITabBarItem(title:"首页", image:UIImage.init(named: "button_sy_s")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        let item1:UITabBarItem = UITabBarItem(title:"首页", image:UIImage.init(named: "button_sy_n")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "button_sy_s")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
 
         homeNv.tabBarItem = item1
-        //课程
+        //记录
         let RecordVC : RecordViewController = RecordViewController()
         let RecordNV :UINavigationController = UINavigationController(rootViewController: RecordVC)
-        let item2:UITabBarItem = UITabBarItem(title:"记录", image:UIImage.init(named: "button_jl_n")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        let item2:UITabBarItem = UITabBarItem(title:"记录", image:UIImage.init(named: "button_jl_n")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "button_jl_s")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         RecordNV.tabBarItem = item2
 
 
         //个人
         let PersonalVC : MineViewController = MineViewController()
         let PersonaNv :UINavigationController = UINavigationController(rootViewController: PersonalVC)
-        let item3:UITabBarItem = UITabBarItem(title:"我的", image:UIImage.init(named: "button_wd_n")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        let item3:UITabBarItem = UITabBarItem(title:"我的", image:UIImage.init(named: "button_wd_n")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "button_wd_s")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         PersonaNv.tabBarItem = item3
 
         //大底部导航栏

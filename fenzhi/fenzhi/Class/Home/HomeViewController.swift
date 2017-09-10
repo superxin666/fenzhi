@@ -7,7 +7,7 @@
 //
 
 import UIKit
-let HEARTCELLID = "HEARTCELL_ID"//本周训练
+let HEARTCELLID = "HEARTCELL_ID"//
 class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let topBackView : UIView = UIView()//头部view背景图
     let mainTabelView : UITableView = UITableView()

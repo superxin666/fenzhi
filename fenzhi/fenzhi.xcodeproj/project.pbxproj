@@ -20,6 +20,8 @@
 		213BF86E1F60317300D60AE5 /* fenzhiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */; };
 		214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */; };
 		214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */; };
+		21570C8D1F653572003C7D38 /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C8C1F653572003C7D38 /* api.swift */; };
+		21570C8F1F653CB2003C7D38 /* fzStr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C8E1F653CB2003C7D38 /* fzStr.swift */; };
 		21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD78761F618C1600539E8D /* BaseViewController.swift */; };
 		21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */; };
 		85AC0AA241E550BCCE81BA92 /* Pods_fenzhi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */; };
@@ -65,6 +67,8 @@
 		213BF86F1F60317300D60AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachReleaseViewController.swift; sourceTree = "<group>"; };
 		214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartReleaseViewController.swift; sourceTree = "<group>"; };
+		21570C8C1F653572003C7D38 /* api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = api.swift; sourceTree = "<group>"; };
+		21570C8E1F653CB2003C7D38 /* fzStr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fzStr.swift; sourceTree = "<group>"; };
 		21BD78761F618C1600539E8D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartTableViewCell.swift; sourceTree = "<group>"; };
 		3BF53C885381150890BD1D77 /* Pods-fenzhi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 		21062AD61F6038DA0003C7C4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				21570C901F653EAA003C7D38 /* Model */,
 				21F8421F1F6267DC00A54D68 /* Cells */,
 				21062AD91F6039570003C7C4 /* HomeViewController.swift */,
 				214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */,
@@ -160,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				21062AE01F603EA90003C7C4 /* pch.swift */,
+				21570C8C1F653572003C7D38 /* api.swift */,
+				21570C8E1F653CB2003C7D38 /* fzStr.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -225,6 +232,13 @@
 				21BD78761F618C1600539E8D /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		21570C901F653EAA003C7D38 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		21F8421F1F6267DC00A54D68 /* Cells */ = {
@@ -518,8 +532,10 @@
 				21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */,
 				21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */,
 				21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */,
+				21570C8F1F653CB2003C7D38 /* fzStr.swift in Sources */,
 				21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */,
 				214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */,
+				21570C8D1F653572003C7D38 /* api.swift in Sources */,
 				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

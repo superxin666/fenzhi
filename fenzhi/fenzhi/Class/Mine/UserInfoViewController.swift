@@ -1,30 +1,27 @@
 //
-//  TeachReleaseViewController.swift
+//  UserInfoViewController.swift
 //  fenzhi
 //
-//  Created by lvxin on 2017/9/7.
+//  Created by lvxin on 2017/9/10.
 //  Copyright © 2017年 Xunqiu. All rights reserved.
 //
 
 import UIKit
 
-class TeachReleaseViewController: BaseViewController {
+class UserInfoViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "教学分享"
         self.view.backgroundColor = .white
+        self.navigation_title_fontsize(name: "用户详情", fontsize: 27)
         self.navigationBar_leftBtn()
-//        self.navigationBar_rightBtn_title(name: "发布")
+    
         // Do any additional setup after loading the view.
     }
 
     override func navigationLeftBtnClick() {
-        self.dismiss(animated: true) { 
-            
-        }
+        self.navigationController?.popViewController(animated: true)
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

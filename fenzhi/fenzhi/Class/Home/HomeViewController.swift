@@ -45,6 +45,8 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         stBtn.titleLabel?.font = fzFont_Medium(ip7(21))
         stBtn.backgroundColor = .clear
         stBtn.addTarget(self, action:#selector(HomeViewController.teachBtnClik), for: .touchUpInside)
+        stBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: ip7(20))
+
         topBackView.addSubview(stBtn)
 
         let lineView = UIView()
@@ -63,6 +65,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         hertBtn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
         hertBtn.titleLabel?.font = fzFont_Medium(ip7(21))
         hertBtn.addTarget(self, action:#selector(HomeViewController.heartBtnClick), for: .touchUpInside)
+        hertBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: ip7(20))
         topBackView.addSubview(hertBtn)
 
         //
@@ -118,6 +121,13 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
             cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
         }
         cell.setUpUIWithModel()
+        weak var weakself = self
+        cell.IconImageViewBlock = { () in
+            print("头像点击")
+            let vc = UserInfoViewController()
+            vc.hidesBottomBarWhenPushed = true
+            weakself?.navigationController?.pushViewController(vc, animated: true)
+        }
         return cell;
 
     }

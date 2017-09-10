@@ -7,9 +7,10 @@
 //  心得分享 cell
 
 import UIKit
-
+//typealias InjuryHeadViewBlock = (_ model : commonInjuriesModel) ->()
+typealias HeartCellViewBlock = ()->()
 class HeartTableViewCell: UITableViewCell {
-
+    var IconImageViewBlock : HeartCellViewBlock!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,12 +24,16 @@ class HeartTableViewCell: UITableViewCell {
         
         let backView : UIView = UIView(frame: CGRect(x: ip7(10), y: 0, width: viewW, height: viewH - ip7(10)))
         backView.backgroundColor = .white
+        backView.isUserInteractionEnabled = true
         self.addSubview(backView)
         //头像
         let iconImageView:UIImageView = UIImageView(frame: CGRect(x: ip7(25), y: ip7(25), width: ip7(60), height: ip7(60)))
         iconImageView.image = #imageLiteral(resourceName: "touxiang")
+        iconImageView.isUserInteractionEnabled = true
         backView.addSubview(iconImageView)
-        
+
+        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
+        iconImageView.addGestureRecognizer(iconImageViewTap)
         //时间
         let timeLabel : UILabel = UILabel(frame: CGRect(x: viewW - ip7(31) - ip7(90), y: ip7(25), width: ip7(90), height: ip7(20)))
         timeLabel.text = "24:00"
@@ -43,10 +48,14 @@ class HeartTableViewCell: UITableViewCell {
         let nameWidth = viewW - ip7(19) - iconImageView.frame.maxX - ip7(31) - ip7(90)
         let nameLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(19), y:  ip7(25), width: nameWidth, height: ip7(24)))
         nameLabel.text = "尼古拉斯赵四"
+        nameLabel.isUserInteractionEnabled = true
         nameLabel.textColor = FZColorFromRGB(rgbValue: 0x333333)
         nameLabel.font = fzFont_Medium(ip7(24))
         nameLabel.adjustsFontSizeToFitWidth = true
         backView.addSubview(nameLabel)
+
+        let nameLabelTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
+        nameLabel.addGestureRecognizer(nameLabelTap)
 
         //用户信息
         let infoLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(19), y: nameLabel.frame.maxY + ip7(14), width: viewW - ip7(19) - iconImageView.frame.maxX, height: ip7(21)))
@@ -119,15 +128,20 @@ class HeartTableViewCell: UITableViewCell {
             btn.frame = CGRect(x: imageX + CGFloat(i) * btnW , y: lineView.frame.maxY, width: btnW, height: ip7(60))
             btn.titleLabel?.font = fzFont_Thin(18)
             btn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
+            btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: ip7(20))
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
-//            btn.backgroundColor = .red
             btn.setTitle(nameArray[i], for: .normal)
             btn.setImage(imageArr[i], for: .normal)
             backView.addSubview(btn)
-            print(btn.frame.maxY)
         }
 
 
+    }
+
+    func iconImageClick()  {
+        if let _ =  IconImageViewBlock {
+            IconImageViewBlock()
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -7,14 +7,17 @@
 //
 
 import UIKit
-
+enum TeachCellType {
+    case home_Teach
+    case record_Teach
+}
 class TeachTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    func setUpUIWithModel() {
+    func setUpUIWithModelAndType(cellType:TeachCellType) {
         
         let viewW = KSCREEN_WIDTH - ip7(20)
         let viewH = ip7(700)
@@ -33,13 +36,23 @@ class TeachTableViewCell: UITableViewCell {
         let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
         iconImageView.addGestureRecognizer(iconImageViewTap)
         //时间
-        let timeLabel : UILabel = UILabel(frame: CGRect(x: viewW - ip7(31) - ip7(90), y: ip7(25), width: ip7(90), height: ip7(20)))
-        timeLabel.text = "24:00"
-        timeLabel.font = fzFont_Thin(ip7(15))
-        timeLabel.textColor  = FZColor(red: 197, green: 198, blue: 203, alpha: 1.0)
-        timeLabel.textAlignment = .right
-        timeLabel.adjustsFontSizeToFitWidth = true
-        backView.addSubview(timeLabel)
+        if cellType == .home_Teach {
+            //首页
+            let timeLabel : UILabel = UILabel(frame: CGRect(x: viewW - ip7(31) - ip7(90), y: ip7(25), width: ip7(90), height: ip7(20)))
+            timeLabel.text = "24:00"
+            timeLabel.font = fzFont_Thin(ip7(15))
+            timeLabel.textColor  = FZColor(red: 197, green: 198, blue: 203, alpha: 1.0)
+            timeLabel.textAlignment = .right
+            timeLabel.adjustsFontSizeToFitWidth = true
+            backView.addSubview(timeLabel)
+        } else {
+            //记录 更多
+            let moreImageView:UIImageView = UIImageView(frame: CGRect(x: viewW - ip7(5) - ip7(37), y: ip7(25), width: ip7(5), height: ip7(20)))
+            moreImageView.image = #imageLiteral(resourceName: "button_more")
+            moreImageView.isUserInteractionEnabled = true
+            backView.addSubview(moreImageView)
+
+        }
         
         //105105105
         //名字
@@ -63,7 +76,18 @@ class TeachTableViewCell: UITableViewCell {
         infoLabel.textAlignment = .left
         infoLabel.adjustsFontSizeToFitWidth = true
         backView.addSubview(infoLabel)
-        
+        if cellType == .record_Teach{
+            infoLabel.frame.size.width = viewW - ip7(19) - iconImageView.frame.maxX - ip7(150)
+            //信息旁边是 时间
+            let timeLabel : UILabel = UILabel(frame: CGRect(x: viewW - ip7(31) - ip7(150), y: infoLabel.frame.origin.y, width: ip7(150), height: ip7(20)))
+            timeLabel.text = "01.12 24:00"
+            timeLabel.font = fzFont_Thin(ip7(15))
+            timeLabel.textColor  = FZColor(red: 197, green: 198, blue: 203, alpha: 1.0)
+            timeLabel.textAlignment = .right
+            timeLabel.adjustsFontSizeToFitWidth = true
+            backView.addSubview(timeLabel)
+        }
+
         
         //文字
         let str = "你好赵四我是你刘能你好赵四我是你刘"

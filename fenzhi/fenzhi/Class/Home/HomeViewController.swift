@@ -140,7 +140,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
             if (cell == nil)  {
                 cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
             }
-            cell.setUpUIWithModel()
+            cell.setUpUIWithModelAndType(cellType: .home_Teach)
             return cell;
     
         }

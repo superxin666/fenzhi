@@ -68,7 +68,7 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             if (cell == nil)  {
                 cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
             }
-            cell.setUpUIWithModel()
+            cell.setUpUIWithModelAndType(cellType: .record_Teach)
             return cell;
             
         }

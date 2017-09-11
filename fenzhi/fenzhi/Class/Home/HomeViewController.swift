@@ -124,7 +124,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
             if (cell == nil)  {
                 cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
             }
-            cell.setUpUIWithModel()
+            cell.setUpUIWithModel_cellType(celltype: .home)
             weak var weakself = self
             cell.IconImageViewBlock = { () in
                 print("头像点击")

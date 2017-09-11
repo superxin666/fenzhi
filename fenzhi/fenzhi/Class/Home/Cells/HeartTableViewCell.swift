@@ -9,6 +9,10 @@
 import UIKit
 //typealias InjuryHeadViewBlock = (_ model : commonInjuriesModel) ->()
 typealias HeartCellViewBlock = ()->()
+enum CellType {
+    case home
+    case record
+}
 class HeartTableViewCell: UITableViewCell {
     var IconImageViewBlock : HeartCellViewBlock!
     override func awakeFromNib() {
@@ -16,7 +20,7 @@ class HeartTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func setUpUIWithModel() {
+    func setUpUIWithModel_cellType(celltype : CellType) {
         
         let viewW = KSCREEN_WIDTH - ip7(20)
         let viewH = ip7(700)
@@ -35,13 +39,24 @@ class HeartTableViewCell: UITableViewCell {
         let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
         iconImageView.addGestureRecognizer(iconImageViewTap)
         //时间
-        let timeLabel : UILabel = UILabel(frame: CGRect(x: viewW - ip7(31) - ip7(90), y: ip7(25), width: ip7(90), height: ip7(20)))
-        timeLabel.text = "24:00"
-        timeLabel.font = fzFont_Thin(ip7(15))
-        timeLabel.textColor  = FZColor(red: 197, green: 198, blue: 203, alpha: 1.0)
-        timeLabel.textAlignment = .right
-        timeLabel.adjustsFontSizeToFitWidth = true
-        backView.addSubview(timeLabel)
+        if celltype == .home {
+            //首页
+            let timeLabel : UILabel = UILabel(frame: CGRect(x: viewW - ip7(31) - ip7(90), y: ip7(25), width: ip7(90), height: ip7(20)))
+            timeLabel.text = "24:00"
+            timeLabel.font = fzFont_Thin(ip7(15))
+            timeLabel.textColor  = FZColor(red: 197, green: 198, blue: 203, alpha: 1.0)
+            timeLabel.textAlignment = .right
+            timeLabel.adjustsFontSizeToFitWidth = true
+            backView.addSubview(timeLabel)
+        } else {
+            //记录 更多
+            let moreImageView:UIImageView = UIImageView(frame: CGRect(x: viewW - ip7(5) - ip7(37), y: ip7(25), width: ip7(5), height: ip7(20)))
+            moreImageView.image = #imageLiteral(resourceName: "button_more")
+            moreImageView.isUserInteractionEnabled = true
+            backView.addSubview(moreImageView)
+        
+        }
+
         
         //105105105
         //名字
@@ -65,6 +80,17 @@ class HeartTableViewCell: UITableViewCell {
         infoLabel.textAlignment = .left
         infoLabel.adjustsFontSizeToFitWidth = true
         backView.addSubview(infoLabel)
+        if celltype == .record {
+            infoLabel.frame.size.width = viewW - ip7(19) - iconImageView.frame.maxX - ip7(150)
+            //信息旁边是 时间
+            let timeLabel : UILabel = UILabel(frame: CGRect(x: viewW - ip7(31) - ip7(150), y: infoLabel.frame.origin.y, width: ip7(150), height: ip7(20)))
+            timeLabel.text = "01.12 24:00"
+            timeLabel.font = fzFont_Thin(ip7(15))
+            timeLabel.textColor  = FZColor(red: 197, green: 198, blue: 203, alpha: 1.0)
+            timeLabel.textAlignment = .right
+            timeLabel.adjustsFontSizeToFitWidth = true
+            backView.addSubview(timeLabel)
+        }
 
 
         //文字

@@ -8,6 +8,7 @@
 
 import UIKit
 let HEARTCELLID = "HEARTCELL_ID"//
+let TEACHCELLID = "TEACHCELL_ID"//
 class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let topBackView : UIView = UIView()//头部view背景图
     let mainTabelView : UITableView = UITableView()
@@ -23,7 +24,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 
         // Do any additional setup after loading the view.
 //        self.title = "首页"
-        self.view.backgroundColor = FZColorFromRGB(rgbValue: 0xf4f8f9)
+        self.view.backgroundColor = backView_COLOUR
         self.navigation_title_fontsize(name: "首页", fontsize: 27)
         self.creatTopView()
         self.creatTableView()
@@ -71,7 +72,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         //
         let lineView2 = UIView()
         lineView2.frame = CGRect(x: 0, y: ip7(66), width: KSCREEN_WIDTH, height: ip7(20))
-        lineView2.backgroundColor = FZColorFromRGB(rgbValue: 0xf4f8f9)
+        lineView2.backgroundColor = backView_COLOUR
         topBackView.addSubview(lineView2)
 
     }
@@ -101,6 +102,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
+        mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
         self.view.addSubview(mainTabelView)
 
     }
@@ -114,21 +116,34 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : HeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID, for: indexPath) as! HeartTableViewCell
-        cell.backgroundColor = .clear
-        cell.selectionStyle = .none
-        if (cell == nil)  {
-            cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
+        
+        if indexPath.row%2 == 0 {
+            var cell : HeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID, for: indexPath) as! HeartTableViewCell
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            if (cell == nil)  {
+                cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
+            }
+            cell.setUpUIWithModel()
+            weak var weakself = self
+            cell.IconImageViewBlock = { () in
+                print("头像点击")
+                let vc = UserInfoViewController()
+                vc.hidesBottomBarWhenPushed = true
+                weakself?.navigationController?.pushViewController(vc, animated: true)
+            }
+            return cell;
+        } else {
+            var cell : TeachTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID, for: indexPath) as! TeachTableViewCell
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            if (cell == nil)  {
+                cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
+            }
+            cell.setUpUIWithModel()
+            return cell;
+    
         }
-        cell.setUpUIWithModel()
-        weak var weakself = self
-        cell.IconImageViewBlock = { () in
-            print("头像点击")
-            let vc = UserInfoViewController()
-            vc.hidesBottomBarWhenPushed = true
-            weakself?.navigationController?.pushViewController(vc, animated: true)
-        }
-        return cell;
 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{

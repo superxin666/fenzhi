@@ -23,7 +23,7 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = FZColorFromRGB(rgbValue: 0xf4f8f9)
+        self.view.backgroundColor = backView_COLOUR
         self.creatHeadView()
         self.creatTableView()
     }
@@ -123,13 +123,37 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         if (cell == nil)  {
             cell = MainTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
         }
-        cell.setUpUIWith(name: cellNameArr[indexPath.row], image: cellIconNameArr[indexPath.row])
+        cell.setUpUIWith(name: cellNameArr[indexPath.row], image: cellIconNameArr[indexPath.row], index : indexPath.row)
         return cell;
 
 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return ip7(80);
+        if indexPath.row == 3 {
+            return ip7(95);
+        } else {
+            return ip7(80);
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            
+        } else if indexPath.row == 1 {
+            
+        } else if indexPath.row == 2{
+        
+        
+        } else if indexPath.row == 3{
+        
+        
+        } else {
+            let vc : SettingViewController = SettingViewController()
+    
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
 

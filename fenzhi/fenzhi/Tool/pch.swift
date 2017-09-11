@@ -50,8 +50,15 @@ func FZColorFromRGB(rgbValue: UInt) -> UIColor {
     )
 }
 
+
+/// 主题蓝
 let blue_COLOUR = FZColor(red: 21, green: 165, blue: 234, alpha: 1)
 
+///主背景颜色
+let backView_COLOUR = FZColorFromRGB(rgbValue: 0xf4f8f9)
+
+/// 0.5细线颜色
+let lineView_thin_COLOUR = FZColorFromRGB(rgbValue: 0xaaaaaa)
 
 
 

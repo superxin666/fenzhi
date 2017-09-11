@@ -16,9 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        self.showMain()
-    
+//        self.showMain()
+
+        self.showLogin()
         return true
+    }
+
+    func showLogin()  {
+        let loginVC = LoginViewController()
+        self.window?.rootViewController = loginVC
+
     }
 
     func showMain(){

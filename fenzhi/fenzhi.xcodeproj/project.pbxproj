@@ -20,6 +20,7 @@
 		213BF86E1F60317300D60AE5 /* fenzhiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */; };
 		214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */; };
 		214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */; };
+		215592311F66D2800091A822 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215592301F66D2800091A822 /* LoginViewController.swift */; };
 		21570C8D1F653572003C7D38 /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C8C1F653572003C7D38 /* api.swift */; };
 		21570C8F1F653CB2003C7D38 /* fzStr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C8E1F653CB2003C7D38 /* fzStr.swift */; };
 		21570C921F6579ED003C7D38 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C911F6579ED003C7D38 /* UserInfoViewController.swift */; };
@@ -71,6 +72,7 @@
 		213BF86F1F60317300D60AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachReleaseViewController.swift; sourceTree = "<group>"; };
 		214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartReleaseViewController.swift; sourceTree = "<group>"; };
+		215592301F66D2800091A822 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		21570C8C1F653572003C7D38 /* api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = api.swift; sourceTree = "<group>"; };
 		21570C8E1F653CB2003C7D38 /* fzStr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fzStr.swift; sourceTree = "<group>"; };
 		21570C911F6579ED003C7D38 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		21062AD51F6038CD0003C7C4 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				2155922F1F66D0E00091A822 /* Log */,
 				214AF58A1F61791C00CA786A /* Base */,
 				21062AD81F6039130003C7C4 /* Record */,
 				21062AD71F6038F10003C7C4 /* Mine */,
@@ -243,6 +246,14 @@
 				21BD78761F618C1600539E8D /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		2155922F1F66D0E00091A822 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				215592301F66D2800091A822 /* LoginViewController.swift */,
+			);
+			path = Log;
 			sourceTree = "<group>";
 		};
 		21570C901F653EAA003C7D38 /* Model */ = {
@@ -558,6 +569,7 @@
 				21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */,
 				21FB3EAE1F66392200656B74 /* TeachTableViewCell.swift in Sources */,
 				21570C951F659002003C7D38 /* MainTableViewCell.swift in Sources */,
+				215592311F66D2800091A822 /* LoginViewController.swift in Sources */,
 				214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */,
 				21570C8D1F653572003C7D38 /* api.swift in Sources */,
 				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,

@@ -11,7 +11,8 @@ target 'fenzhi' do
 	pod 'SwiftyJSON'
 	pod 'Kingfisher'
 	pod 'MJRefresh'
-	pod 'Alamofire', '~> 4.5' 
+	pod 'Alamofire', '~> 4.5'
+	pod 'ObjectMapper', '~> 2.1' 
 	pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
   target 'fenzhiTests' do
     inherit! :search_paths

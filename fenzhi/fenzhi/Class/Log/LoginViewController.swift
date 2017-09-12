@@ -11,6 +11,8 @@ import UIKit
 class LoginViewController: BaseViewController,UITextFieldDelegate {
     let _phoneTextField : UITextField = UITextField()//手机号
     let _keyTextField : UITextField = UITextField()//密码
+    let dataVC :LogDataMangerViewController = LogDataMangerViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -127,7 +129,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         logBtn.backgroundColor = blue_COLOUR
         logBtn.setTitleColor( .white, for: .normal)
         logBtn.titleLabel?.font = fzFont_Thin(ip7(21))
-//        logBtn.addTarget(self, action:#selector(HomeViewController.heartBtnClick), for: .touchUpInside)
+        logBtn.addTarget(self, action:#selector(LoginViewController.login_click), for: .touchUpInside)
         self.view.addSubview(logBtn)
 
         //注册
@@ -150,7 +152,21 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
 
 
     }
-
+    
+    func login_click()  {
+        dataVC.login(phoneNum: "15910901725", paseWord: "X%2FT5%2FeCwmOI%2Bk9PUAJuHuetyH1N26or%2FNudMvHTY0hTysLE5CAgDAAdhMRgSsgmzcwwTP9ECUSf9kYtH2zGHDsEuddHre5A9xs3emr899gEOH4cRBgekb35rAMAtOyJevxB%2FAX%2BwoZnFj2k0ve4tgcWnRVxMaKQmxPlnWfSviKY%3D", completion: { (data) in
+            print("ok")
+        }) { (error) in
+            
+        }
+        
+//        dataVC.register(phoneNum: "18514618956", paseWord: "123456", verification: "123456", completion: { (data) in
+//            
+//        }) { (error) in
+//            
+//        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

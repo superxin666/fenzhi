@@ -3,6 +3,7 @@ PODS:
   - Kingfisher (3.12.2)
   - MBProgressHUD (0.9.2)
   - MJRefresh (3.1.12)
+  - ObjectMapper (2.2.8)
   - SnapKit (3.0.2)
   - Spring (1.0.3)
   - SwiftyJSON (3.1.4)
@@ -12,6 +13,7 @@ DEPENDENCIES:
   - Kingfisher
   - MBProgressHUD (~> 0.9.2)
   - MJRefresh
+  - ObjectMapper (~> 2.1)
   - SnapKit (~> 3.0.2)
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - SwiftyJSON
@@ -31,10 +33,11 @@ SPEC CHECKSUMS:
   Kingfisher: 320626678acadfcf47008b3c6841cd882050737b
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  ObjectMapper: 3d571bb5af471c779e1160828cd9ad5c4ef90958
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 537aaa3d0a589443eb1b78783935f840c59ebb88
+PODFILE CHECKSUM: 64c056a7ee5d5d9444a6ecbd3c8e24860678a422
 
 COCOAPODS: 1.2.1

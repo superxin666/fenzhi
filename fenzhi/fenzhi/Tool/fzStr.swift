@@ -48,5 +48,9 @@ extension String {
         let strSize = statusLabelText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [String : AnyObject], context: nil).size
         return strSize.width
     }
+    
+    func qwe()  {
+        
+    }
 
 }

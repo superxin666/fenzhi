@@ -20,6 +20,7 @@
 		213BF86E1F60317300D60AE5 /* fenzhiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */; };
 		214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */; };
 		214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */; };
+		2154EBAD1F68205900C992D1 /* RSAUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2154EBAC1F68205900C992D1 /* RSAUtils.swift */; };
 		215592311F66D2800091A822 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215592301F66D2800091A822 /* LoginViewController.swift */; };
 		21570C8D1F653572003C7D38 /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C8C1F653572003C7D38 /* api.swift */; };
 		21570C8F1F653CB2003C7D38 /* fzStr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C8E1F653CB2003C7D38 /* fzStr.swift */; };
@@ -75,6 +76,7 @@
 		213BF86F1F60317300D60AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachReleaseViewController.swift; sourceTree = "<group>"; };
 		214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartReleaseViewController.swift; sourceTree = "<group>"; };
+		2154EBAC1F68205900C992D1 /* RSAUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSAUtils.swift; sourceTree = "<group>"; };
 		215592301F66D2800091A822 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		21570C8C1F653572003C7D38 /* api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = api.swift; sourceTree = "<group>"; };
 		21570C8E1F653CB2003C7D38 /* fzStr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fzStr.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		21062ADF1F603E9E0003C7C4 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				2154EBAC1F68205900C992D1 /* RSAUtils.swift */,
 				217882391F67E43D00365735 /* RSA.h */,
 				2178823A1F67E43D00365735 /* RSA.m */,
 				21062AE01F603EA90003C7C4 /* pch.swift */,
@@ -612,6 +615,7 @@
 				215592311F66D2800091A822 /* LoginViewController.swift in Sources */,
 				214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */,
 				21570C8D1F653572003C7D38 /* api.swift in Sources */,
+				2154EBAD1F68205900C992D1 /* RSAUtils.swift in Sources */,
 				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

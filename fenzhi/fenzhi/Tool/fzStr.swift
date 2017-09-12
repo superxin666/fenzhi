@@ -49,8 +49,22 @@ extension String {
         return strSize.width
     }
     
-    func qwe()  {
-        
+    // MARK: 公共部分
+    /// 获取版本号
+    ///
+    /// - returns: 版本号
+    func getAppVersion() -> String  {
+        let infoDict = Bundle.main.infoDictionary
+        if let info = infoDict {
+            let appVersion = info["CFBundleShortVersionString"] as! String!
+            return ("ios_" + appVersion!)
+        } else {
+            return ""
+        }
+    }
+
+    func rsa(str : String) -> String {
+        return ""
     }
 
 }

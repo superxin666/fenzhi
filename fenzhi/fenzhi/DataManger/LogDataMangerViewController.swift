@@ -34,12 +34,16 @@ class LogDataMangerViewController: FZRequestViewController {
         var urlBase : String = encWithPubKey.addingPercentEncoding(withAllowedCharacters: customAllowedSet as CharacterSet)!
         urlBase = urlBase.replacingOccurrences(of: "+", with: "2B%")
         let url = "http://fenzhi.wchao.org/api/user/login?phone=15910901725&password="+paseWord
-
         print("编码"+url)
-
+        var model:LoginModelMapper = LoginModelMapper()
         Alamofire.request(url, method: .post).responseJSON { (returnResult) in
             print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
+//            model = Mapper<LoginModelMapper>().map(JSON: returnResult as! [String : Any])!
+              model = Mapper<LoginModelMapper>().map(JSON: returnResult.result.value as! [String : Any])!
+            completion(model)
         }
+        
+        
 //
     }
     

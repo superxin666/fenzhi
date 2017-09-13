@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         // Override point for customization after application launch.
 //        self.showMain()
 
-        self.mainMenu()
+//        self.mainMenu()
+        self.showLogin()
         return true
     }
     
@@ -38,7 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
 
     func showLogin()  {
         let loginVC = LoginViewController()
-        self.window?.rootViewController = loginVC
+        let nv :UINavigationController = UINavigationController(rootViewController: loginVC)
+        self.window?.rootViewController = nv
 
     }
 

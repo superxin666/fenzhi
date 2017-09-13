@@ -16,6 +16,12 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     var keyStr : String = ""
     let dataVC :LogDataMangerViewController = LogDataMangerViewController()
     
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -136,12 +142,14 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         self.view.addSubview(logBtn)
 
         //注册
-        let regNameLabel : UILabel = UILabel(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(72), width: KSCREEN_WIDTH, height: ip7(18)))
-        regNameLabel.font = fzFont_Thin(ip7(18))
-        regNameLabel.textColor  = FZColor(red: 105, green: 105, blue: 105, alpha: 1.0)
-        regNameLabel.textAlignment = .center
-        regNameLabel.adjustsFontSizeToFitWidth = true
+        let regNameLabel : UIButton = UIButton(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(72), width: KSCREEN_WIDTH, height: ip7(18)))
+
+        regNameLabel.backgroundColor = .clear
+        regNameLabel.setTitleColor(  FZColor(red: 105, green: 105, blue: 105, alpha: 1.0), for: .normal)
+        regNameLabel.titleLabel?.font = fzFont_Thin(ip7(18))
+        regNameLabel.addTarget(self, action:#selector(LoginViewController.registerBtnClick), for: .touchUpInside)
         self.view.addSubview(regNameLabel)
+        
 
         let str : String  = "还没有账号?"
         let attributeStr = NSMutableAttributedString(string: str)
@@ -150,9 +158,19 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         let range : NSRange = NSRange.init(location: 0, length: str2.characters.count)
         attributeStr2.addAttribute(NSForegroundColorAttributeName, value: FZColor(red: 253, green: 122, blue: 207, alpha: 1.0), range: range)
         attributeStr.append(attributeStr2)
-        regNameLabel.attributedText = attributeStr
+        regNameLabel.setAttributedTitle(attributeStr, for: .normal)
+        
+        
 
 
+
+    }
+    
+    func registerBtnClick()  {
+        print("注册")
+        let vc = RegisterViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+        
 
     }
     

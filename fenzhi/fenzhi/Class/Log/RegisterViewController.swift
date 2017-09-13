@@ -235,47 +235,51 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
     
     //MARK:下一步
     func nest_click()  {
-        if _phoneTextField.isFirstResponder {
-            _phoneTextField.resignFirstResponder()
-        } else if codeTextField.isFirstResponder {
-            codeTextField.resignFirstResponder()
-        } else {
-            _keyTextField.resignFirstResponder()
-        }
+//        if _phoneTextField.isFirstResponder {
+//            _phoneTextField.resignFirstResponder()
+//        } else if codeTextField.isFirstResponder {
+//            codeTextField.resignFirstResponder()
+//        } else {
+//            _keyTextField.resignFirstResponder()
+//        }
+//        
+//        if !(String.isStr(str: phoneStr)) {
+//            KFBLog(message: "请填写手机号")
+//            self.KfbShowWithInfo(titleString: "请填写手机号")
+//            return
+//        }
+//        if !(String.isMobileNumber(phoneNum: phoneStr)) {
+//            KFBLog(message: "请填写正确手机号")
+//            self.KfbShowWithInfo(titleString: "请填写正确手机号")
+//            return
+//        }
+//        if !(String.isStr(str: codeStr)) {
+//            KFBLog(message: "请填写验证码")
+//            self.KfbShowWithInfo(titleString: "请填写验证码")
+//            return
+//        }
+//        if !(String.isStr(str: keyStr)) {
+//            KFBLog(message: "请填写密码")
+//            self.KfbShowWithInfo(titleString: "请填写密码")
+//            return
+//        }
+//        if keyStr.characters.count < 6 {
+//            KFBLog(message: "密码至少六位")
+//            self.KfbShowWithInfo(titleString: "密码至少六位")
+//            return
+//            
+//        }
+//        
+//        if keyStr.characters.count > 20 {
+//            KFBLog(message: "密码不能超过20位")
+//            self.KfbShowWithInfo(titleString: "密码不能超过20位")
+//            return
+//            
+//        }
         
-        if !(String.isStr(str: phoneStr)) {
-            KFBLog(message: "请填写手机号")
-            self.KfbShowWithInfo(titleString: "请填写手机号")
-            return
-        }
-        if !(String.isMobileNumber(phoneNum: phoneStr)) {
-            KFBLog(message: "请填写正确手机号")
-            self.KfbShowWithInfo(titleString: "请填写正确手机号")
-            return
-        }
-        if !(String.isStr(str: codeStr)) {
-            KFBLog(message: "请填写验证码")
-            self.KfbShowWithInfo(titleString: "请填写验证码")
-            return
-        }
-        if !(String.isStr(str: keyStr)) {
-            KFBLog(message: "请填写密码")
-            self.KfbShowWithInfo(titleString: "请填写密码")
-            return
-        }
-        if keyStr.characters.count < 6 {
-            KFBLog(message: "密码至少六位")
-            self.KfbShowWithInfo(titleString: "密码至少六位")
-            return
-            
-        }
+        let vc : InfoViewController = InfoViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
         
-        if keyStr.characters.count > 20 {
-            KFBLog(message: "密码不能超过20位")
-            self.KfbShowWithInfo(titleString: "密码不能超过20位")
-            return
-            
-        }
 
         
     }

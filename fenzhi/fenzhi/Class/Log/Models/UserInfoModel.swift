@@ -25,6 +25,9 @@ class UserInfoModel: Mappable {
     var status: Int = 0
     var subject: Int = 0
     var updateTime: String = ""
+    var token: String = ""
+    
+    
     
     init() {}
     required init?(map: Map){
@@ -45,6 +48,7 @@ class UserInfoModel: Mappable {
         sex <- map["sex"]
         subject <- map["subject"]
         updateTime <- map["updateTime"]
+        token <- map["token"]
 
     }
 

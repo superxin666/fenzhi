@@ -207,7 +207,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
 
             if weakSelf?.dataModel.errno == 0 {
                 
-                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.dataModel.data.id), token: "", complate: { (data) in
+                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.dataModel.data.id), token: String(describing: weakSelf?.dataModel.data.token), complate: { (data) in
                     let str:String = data as! String
                     if str == "1" {
                         //登陆成功

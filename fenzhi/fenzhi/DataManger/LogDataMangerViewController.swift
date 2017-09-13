@@ -38,7 +38,6 @@ class LogDataMangerViewController: FZRequestViewController {
         var model:LoginModelMapper = LoginModelMapper()
         Alamofire.request(url, method: .post).responseJSON { (returnResult) in
             print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
-//            model = Mapper<LoginModelMapper>().map(JSON: returnResult as! [String : Any])!
               model = Mapper<LoginModelMapper>().map(JSON: returnResult.result.value as! [String : Any])!
             completion(model)
         }
@@ -55,7 +54,9 @@ class LogDataMangerViewController: FZRequestViewController {
 
         var model:SmsModel = SmsModel()
         Alamofire.request(url, method: .get).responseJSON { (returnResult) in
+            
             print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
+        
             model = Mapper<SmsModel>().map(JSON: returnResult.result.value as! [String : Any])!
             completion(model)
         }

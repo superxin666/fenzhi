@@ -32,6 +32,7 @@
 		21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C5991F68E103002FC28A /* LoginModelMapper.swift */; };
 		21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */; };
 		21F1C59E1F691CAF002FC28A /* SmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C59D1F691CAF002FC28A /* SmsModel.swift */; };
+		21F1C5A01F6924EB002FC28A /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C59F1F6924EB002FC28A /* InfoViewController.swift */; };
 		21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */; };
 		21FA059F1F6783A20083EFD4 /* LogDataMangerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA059E1F6783A20083EFD4 /* LogDataMangerViewController.swift */; };
 		21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA05A01F6784DF0083EFD4 /* FZRequestViewController.swift */; };
@@ -94,6 +95,7 @@
 		21F1C5991F68E103002FC28A /* LoginModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModelMapper.swift; sourceTree = "<group>"; };
 		21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		21F1C59D1F691CAF002FC28A /* SmsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmsModel.swift; sourceTree = "<group>"; };
+		21F1C59F1F6924EB002FC28A /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartTableViewCell.swift; sourceTree = "<group>"; };
 		21FA059E1F6783A20083EFD4 /* LogDataMangerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogDataMangerViewController.swift; sourceTree = "<group>"; };
 		21FA05A01F6784DF0083EFD4 /* FZRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZRequestViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				21F1C5961F68DFF0002FC28A /* Models */,
 				215592301F66D2800091A822 /* LoginViewController.swift */,
 				21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */,
+				21F1C59F1F6924EB002FC28A /* InfoViewController.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */,
 				215592311F66D2800091A822 /* LoginViewController.swift in Sources */,
 				214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */,
+				21F1C5A01F6924EB002FC28A /* InfoViewController.swift in Sources */,
 				21570C8D1F653572003C7D38 /* api.swift in Sources */,
 				2154EBAD1F68205900C992D1 /* RSAUtils.swift in Sources */,
 				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,

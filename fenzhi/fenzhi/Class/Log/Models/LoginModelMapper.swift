@@ -30,7 +30,7 @@ class LoginModelMapper: Mappable {
     
     class func setLoginIdAndTokenInUD(loginUserId : String , token : String, complate:(_ data : Any) ->() ){
         UserDefaults.standard.set("1", forKey: ISLOGINSTR)
-//        UserDefaults.standard.set(token, forKey: TOKENUDSTR)
+        UserDefaults.standard.set(token, forKey: TOKENUDSTR)
         UserDefaults.standard.set(loginUserId, forKey: LOGINUDSTR)
         let ok = UserDefaults.standard.synchronize()
         if ok {
@@ -47,7 +47,7 @@ class LoginModelMapper: Mappable {
     /// 返回当前登录用户的 loginid tokenid
     ///
     /// - returns: 返回元组loginid
-    class func getLoginIdAndTokenInUD() -> (loginId : String, isHaveLogin : String) {
+    class func getLoginIdAndTokenInUD() -> (loginId : String, tokenStr:String,isHaveLogin : String) {
         var isloginStr :String? = UserDefaults.standard.value(forKey: ISLOGINSTR) as! String?
         if isloginStr == nil {
             isloginStr = "0"
@@ -56,10 +56,10 @@ class LoginModelMapper: Mappable {
         if loginStr == nil {
             loginStr = ""
         }
-//        var tokenStr :String? = UserDefaults.standard.value(forKey: TOKENUDSTR) as! String?
-//        if tokenStr == nil {
-//            tokenStr = ""
-//        }
-        return (loginStr!,isloginStr!)
+        var tokenStr :String? = UserDefaults.standard.value(forKey: TOKENUDSTR) as! String?
+        if tokenStr == nil {
+            tokenStr = ""
+        }
+        return (loginStr!,tokenStr!,isloginStr!)
     }
 }

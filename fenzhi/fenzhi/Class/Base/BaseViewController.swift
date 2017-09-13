@@ -53,6 +53,40 @@ class BaseViewController: UIViewController {
     func navigationRightBtnClick() {
 
     }
+    
+    func KfbShowWithInfo(titleString:String) {
+        
+//        if self.isShowing {
+//            return
+//        }
+//        
+//        self.isShowing = true
+//        
+//        activityView.backgroundColor = green_COLOUR
+//        activityView.alpha = 0.9
+//        self.view.addSubview(activityView)
+//        
+//        activityLabel.text = titleString
+//        activityLabel.textColor = UIColor.white
+//        activityLabel.font = UIFont.systemFont(ofSize: 15)
+//        activityLabel.textAlignment = NSTextAlignment.center
+//        let activityStrWidth = getLabWidth(labelStr: titleString as String, font: activityLabel.font, height: activityView.frame.size.height)
+//        
+//        
+//        activityLabel.frame = CGRect(x:KSCREEN_WIDTH/2 - activityStrWidth/2,y:0,width:activityStrWidth,height:activityView.frame.size.height)
+//        
+//        activityView.addSubview(activityLabel)
+//        
+//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+//            self.activityView.frame.origin.y = 0
+//        }) { (finished) in
+//            
+//            self.perform(#selector(self.KfbShowStop), with: self, afterDelay: 1.5)
+//        }
+        
+        
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

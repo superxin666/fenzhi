@@ -14,7 +14,7 @@ let ISLOGINSTR = "ISHAVELOGIN"
 class LoginModelMapper: Mappable {
     var errno: Int = 0
     var errmsg : String = ""
-    var data :  UserInfoModel = UserInfoModel()//本周课程
+    var data :  UserInfoModel = UserInfoModel()//
     
     init() {}
     required init?(map: Map){

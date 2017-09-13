@@ -47,6 +47,22 @@ class LogDataMangerViewController: FZRequestViewController {
 //
     }
     
+    func get_sms_code(phoneNum : String, type : String, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        
+   
+        let url = BASER_API + sms_api + "phone="+phoneNum+"&type="+type+last_pra
+        KFBLog(message: url)
+
+        var model:SmsModel = SmsModel()
+        Alamofire.request(url, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
+            model = Mapper<SmsModel>().map(JSON: returnResult.result.value as! [String : Any])!
+            completion(model)
+        }
+        
+        
+    }
+    
     func register(phoneNum : String, paseWord : String, verification: String,completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
 
         

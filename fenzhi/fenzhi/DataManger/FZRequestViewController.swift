@@ -9,7 +9,7 @@
 import UIKit
 
 class FZRequestViewController: UIViewController {
-
+     let last_pra = "&client=iphone&version="+"".getAppVersion()
 
 
 

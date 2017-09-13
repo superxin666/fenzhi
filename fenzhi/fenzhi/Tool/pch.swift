@@ -61,6 +61,15 @@ let backView_COLOUR = FZColorFromRGB(rgbValue: 0xf4f8f9)
 let lineView_thin_COLOUR = FZColorFromRGB(rgbValue: 0xaaaaaa)
 
 
-
-
+let dark_105_COLOUR = FZColor(red: 105, green: 105, blue: 105, alpha: 1.0)
+//自定义调试信息打印
+func KFBLog<T>(message : T, file : String = #file, lineNumber : Int = #line) {
+    
+    //#if DEBUG
+    
+    let fileName = (file as NSString).lastPathComponent
+    print("[\(fileName):line:\(lineNumber)]- \(message)")
+    
+    //#endif
+}
 

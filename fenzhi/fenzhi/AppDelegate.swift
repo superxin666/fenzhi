@@ -18,9 +18,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         // Override point for customization after application launch.
 //        self.showMain()
 
-        self.showLogin()
+        self.mainMenu()
         return true
     }
+    
+    func mainMenu() {
+        
+        let login = LoginModelMapper.getLoginIdAndTokenInUD().isHaveLogin
+        print("login\(login)")
+        if login == "1" {
+            //显示主页
+            self.showMain()
+        } else {
+            //显示登录注册页面
+            self.showLogin()
+        }
+    }
+    
 
     func showLogin()  {
         let loginVC = LoginViewController()

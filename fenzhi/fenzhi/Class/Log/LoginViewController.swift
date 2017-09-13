@@ -9,6 +9,7 @@
 import UIKit
 
 class LoginViewController: BaseViewController,UITextFieldDelegate {
+    var dataModel : LoginModelMapper = LoginModelMapper()//
     let _phoneTextField : UITextField = UITextField()//手机号
     let _keyTextField : UITextField = UITextField()//密码
     var phoneStr : String = ""
@@ -180,8 +181,28 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
             return
         }
         print("登录")
+        weak var weakSelf = self
         dataVC.login(phoneNum: "15910901725", paseWord: "YuYDThdAlCw%2FAVszVVdT4HEld43gusD%2F6JtR1kBW6vyxu8gfkptQDUtiRAeA0lAF0Jy3Ull5eWQ2JcKa5wKHWtVR8RiBauqiedkUeyznS9ByLeGZSUtTq41mSAMd51%2Fljc8dFbmAajKHgaFrqukCko1PSr03YPdvoCv3pFYzHFw%3D", completion: { (data) in
-            print("ok")
+            weakSelf?.dataModel = data as! LoginModelMapper
+            print(String(describing: weakSelf?.dataModel.errno))
+            print(String(describing: weakSelf?.dataModel.data.id))
+
+            if weakSelf?.dataModel.errno == 0 {
+                
+                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.dataModel.data.id), token: "", complate: { (data) in
+                    let str:String = data as! String
+                    if str == "1" {
+                        //登陆成功
+                        let dele: AppDelegate =  UIApplication.shared.delegate as! AppDelegate
+                        dele.showMain()
+                    } else {
+                        //存储信息失败
+                    }
+                })
+   
+
+            }
+            
         }) { (error) in
             
         }

@@ -11,6 +11,8 @@ import UIKit
 class LoginViewController: BaseViewController,UITextFieldDelegate {
     let _phoneTextField : UITextField = UITextField()//手机号
     let _keyTextField : UITextField = UITextField()//密码
+    var phoneStr : String = ""
+    var keyStr : String = ""
     let dataVC :LogDataMangerViewController = LogDataMangerViewController()
     
     override func viewDidLoad() {
@@ -154,18 +156,77 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     }
     
     func login_click()  {
-        dataVC.login(phoneNum: "15910901725", paseWord: "X%2FT5%2FeCwmOI%2Bk9PUAJuHuetyH1N26or%2FNudMvHTY0hTysLE5CAgDAAdhMRgSsgmzcwwTP9ECUSf9kYtH2zGHDsEuddHre5A9xs3emr899gEOH4cRBgekb35rAMAtOyJevxB%2FAX%2BwoZnFj2k0ve4tgcWnRVxMaKQmxPlnWfSviKY%3D", completion: { (data) in
+        if _phoneTextField.isFirstResponder {
+            _phoneTextField.resignFirstResponder()
+        }
+        if _keyTextField.isFirstResponder {
+            _keyTextField.resignFirstResponder()
+        }
+        if !(String.isStr(str: phoneStr)) {
+            print("请填写手机号")
+
+            return
+        }
+        if !(String.isMobileNumber(phoneNum: phoneStr)) {
+             print("请填写正确手机号")
+
+            return
+        }
+        if keyStr.characters.count < 6 {
+
+            print("密码至少六位")
+
+            
+            return
+        }
+        print("登录")
+        dataVC.login(phoneNum: "15910901725", paseWord: "YuYDThdAlCw%2FAVszVVdT4HEld43gusD%2F6JtR1kBW6vyxu8gfkptQDUtiRAeA0lAF0Jy3Ull5eWQ2JcKa5wKHWtVR8RiBauqiedkUeyznS9ByLeGZSUtTq41mSAMd51%2Fljc8dFbmAajKHgaFrqukCko1PSr03YPdvoCv3pFYzHFw%3D", completion: { (data) in
             print("ok")
         }) { (error) in
             
         }
+    }
+    
+    
+    // MARK: textFieldDelegate
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let tag = textField.tag
+        switch tag {
+        case 100:
+            print("手机号：\(String(describing: textField.text))")
+            phoneStr = textField.text!
+        case 101:
+            print("密码:\(String(describing: textField.text))")
+            keyStr = textField.text!
+        default:
+            print("既不是手机号也不是密码")
+        }
         
-//        dataVC.register(phoneNum: "18514618956", paseWord: "123456", verification: "123456", completion: { (data) in
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == _keyTextField {
+            self.login_click()
+        }
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        if needUp {
+//            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: .transitionFlipFromBottom, animations: {
+//                self.topConstraint?.update(offset: ip6(10))
+//                self.midConstraint?.update(offset: ip6(50))
+//                self.view.layoutIfNeeded()
+//            }) { (ture) in
+//                self.needUp = false
+//            }
 //            
-//        }) { (error) in
+//        } else {
 //            
 //        }
+        
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

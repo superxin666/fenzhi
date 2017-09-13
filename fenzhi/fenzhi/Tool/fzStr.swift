@@ -63,8 +63,31 @@ extension String {
         }
     }
 
-    func rsa(str : String) -> String {
-        return ""
+    /// 判断是否为空字符串
+    ///
+    /// - parameter str: 字符串
+    ///
+    /// - returns: 是否
+    
+    static func isStr(str : String) -> Bool {
+        if str.characters.count > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
+    /// 判断是否是手机号
+    ///
+    /// - parameter phoneNum: 手机号
+    ///
+    /// - returns: 是或者不是
+    static func isMobileNumber(phoneNum : String) -> Bool {
+        let predicateStr = "^((13[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\d{8}$"
+        let currObject = phoneNum
+        let predicate =  NSPredicate(format: "SELF MATCHES %@" ,predicateStr)
+        return predicate.evaluate(with: currObject)
     }
 
 }

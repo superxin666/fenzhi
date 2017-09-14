@@ -201,10 +201,10 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         print("登录")
         //"YuYDThdAlCw%2FAVszVVdT4HEld43gusD%2F6JtR1kBW6vyxu8gfkptQDUtiRAeA0lAF0Jy3Ull5eWQ2JcKa5wKHWtVR8RiBauqiedkUeyznS9ByLeGZSUtTq41mSAMd51%2Fljc8dFbmAajKHgaFrqukCko1PSr03YPdvoCv3pFYzHFw%3D"
         weak var weakSelf = self
-        dataVC.login(phoneNum: "15910901725", paseWord: keyStr, completion: { (data) in
+        dataVC.login(phoneNum: phoneStr, paseWord: keyStr, completion: { (data) in
             weakSelf?.dataModel = data as! LoginModelMapper
             print(String(describing: weakSelf?.dataModel.errno))
-            print(String(describing: weakSelf?.dataModel.data.id))
+            print("名字"+String(describing: weakSelf?.dataModel.data.name))
 
             if weakSelf?.dataModel.errno == 0 {
                 var ishaveInfo = "0"
@@ -217,7 +217,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
                     if str == "1" {
                         //登陆成功
                         let dele: AppDelegate =  UIApplication.shared.delegate as! AppDelegate
-                        dele.showMain()
+                        dele.mainMenu()
                     } else {
                         //存储信息失败
                     }

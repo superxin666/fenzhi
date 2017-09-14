@@ -282,7 +282,7 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
         //注册请求
          weak var weakSelf = self
 
-        dataVC.register(phoneNum: phoneStr, paseWord: "YuYDThdAlCw%2FAVszVVdT4HEld43gusD%2F6JtR1kBW6vyxu8gfkptQDUtiRAeA0lAF0Jy3Ull5eWQ2JcKa5wKHWtVR8RiBauqiedkUeyznS9ByLeGZSUtTq41mSAMd51%2Fljc8dFbmAajKHgaFrqukCko1PSr03YPdvoCv3pFYzHFw%3D", verification: codeStr, completion: { (data) in
+        dataVC.register(phoneNum: phoneStr, paseWord: keyStr, verification: codeStr, completion: { (data) in
               weakSelf?.resdataModel = data as! ResModelMaper
             
             if weakSelf?.resdataModel.errno == 0 {

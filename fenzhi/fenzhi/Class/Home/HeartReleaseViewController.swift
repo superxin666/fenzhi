@@ -8,13 +8,126 @@
 
 import UIKit
 
-class HeartReleaseViewController: BaseViewController {
+class HeartReleaseViewController: BaseViewController,UITextViewDelegate  {
+    let textField: UITextView = UITextView()
+    let btnBackView :UIView = UIView()
+    let nsetBtn : UIButton = UIButton()
+    var keybodHeight : CGFloat = 0.0
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "心得分享"
-        self.view.backgroundColor = .white
+
         // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+
+        self.navigation_title_fontsize(name: "心得分享", fontsize: 27)
+        self.view.backgroundColor = .white
+        self.navigationBar_leftBtn()
+        self.creatUI()
+
+    }
+
+    func keyboardWillShow(notification: NSNotification) {
+        let userinfo: NSDictionary = notification.userInfo! as NSDictionary
+
+        let nsValue = userinfo.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+
+        let keyboardRec = nsValue.cgRectValue
+
+        let height = keyboardRec.size.height
+        keybodHeight = height
+        self.creatBtnView()
+        self.view.addSubview(btnBackView)
+        print("keybordShow:\(height)")
+    }
+
+
+    func creatUI()  {
+
+        let lineView = UIView(frame: CGRect(x: 0, y: LNAVIGATION_HEIGHT, width: KSCREEN_WIDTH, height: ip7(11)))
+        lineView.backgroundColor = backView_COLOUR
+        self.view.addSubview(lineView)
+
+        //
+        textField.frame = CGRect(x: ip7(15), y: lineView.frame.maxY + ip7(25), width: KSCREEN_WIDTH - ip7(30), height: ip7(200))
+        textField.textAlignment = .left
+        textField.returnKeyType = .done
+        textField.delegate = self
+        textField.tag = 101
+        textField.becomeFirstResponder()
+        textField.backgroundColor = .clear
+        textField.font =  fzFont_Thin(ip7(18))
+        self.view.addSubview(textField)
+
+
+
+    }
+
+
+    func creatBtnView() {
+        btnBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - keybodHeight - LNAVIGATION_HEIGHT , width: KSCREEN_WIDTH, height: ip7(55))
+        btnBackView.backgroundColor = blue_COLOUR
+        //
+        nsetBtn.frame = CGRect(x: ip7(25), y: (ip7(55) - ip7(14))/2, width: ip7(25), height: ip7(14))
+        nsetBtn.setImage(#imageLiteral(resourceName: "button_jt_x"), for: .normal)
+        nsetBtn.setImage(#imageLiteral(resourceName: "button_jt_s"), for: .selected)
+        nsetBtn.isSelected = false
+        nsetBtn.backgroundColor = .clear
+        nsetBtn.addTarget(self, action:#selector(HeartReleaseViewController.nestBtnClik), for: .touchUpInside)
+        btnBackView.addSubview(nsetBtn)
+
+
+        let picBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55)))
+        picBtn.setImage(#imageLiteral(resourceName: "icon_tp"), for: .normal)
+        picBtn.backgroundColor = .clear
+        picBtn.addTarget(self, action:#selector(HeartReleaseViewController.pic_click), for: .touchUpInside)
+        btnBackView.addSubview(picBtn)
+
+        let tdBtn : UIButton = UIButton(frame: CGRect(x: picBtn.frame.origin.x - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35)))
+        tdBtn.setImage(#imageLiteral(resourceName: "icon_dw2"), for: .normal)
+        tdBtn.backgroundColor = .clear
+        tdBtn.addTarget(self, action:#selector(HeartReleaseViewController.dingwei_click), for: .touchUpInside)
+        btnBackView.addSubview(tdBtn)
+
+        let lineView = UIView(frame: CGRect(x: tdBtn.frame.maxX + ip7(12), y: (ip7(55) - ip7(35))/2, width: 0.5, height: ip7(35)))
+        lineView.backgroundColor = .white
+        btnBackView.addSubview(lineView)
+
+    }
+
+    func nestBtnClik()  {
+        nsetBtn.isSelected = !nsetBtn.isSelected
+        if  nsetBtn.isSelected {
+            if textField.isFirstResponder {
+                textField.resignFirstResponder()
+            }
+            btnBackView.frame.origin.y =  KSCREEN_HEIGHT  - btnBackView.frame.size.height
+        } else {
+
+            textField.becomeFirstResponder()
+            btnBackView.frame.origin.y =  KSCREEN_HEIGHT - keybodHeight - LNAVIGATION_HEIGHT
+        }
+    }
+
+    func dingwei_click() {
+        KfbShowWithInfo(titleString: "定位")
+    }
+
+    func pic_click() {
+        KfbShowWithInfo(titleString: "图片")
+
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+    }
+    
+    
+    override func navigationLeftBtnClick() {
+        self.dismiss(animated: true) { 
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {

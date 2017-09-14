@@ -21,6 +21,9 @@
 		214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */; };
 		214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */; };
 		215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043601F6AADBD009546D2 /* ForgetViewController.swift */; };
+		215043631F6AC16B009546D2 /* DingweiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043621F6AC16B009546D2 /* DingweiViewController.swift */; };
+		215043651F6AD179009546D2 /* pdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043641F6AD179009546D2 /* pdfViewController.swift */; };
+		215043671F6AD550009546D2 /* ActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043661F6AD550009546D2 /* ActionCollectionViewCell.swift */; };
 		2154EBAD1F68205900C992D1 /* RSAUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2154EBAC1F68205900C992D1 /* RSAUtils.swift */; };
 		215592311F66D2800091A822 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215592301F66D2800091A822 /* LoginViewController.swift */; };
 		21570C8D1F653572003C7D38 /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C8C1F653572003C7D38 /* api.swift */; };
@@ -87,6 +90,9 @@
 		214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachReleaseViewController.swift; sourceTree = "<group>"; };
 		214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartReleaseViewController.swift; sourceTree = "<group>"; };
 		215043601F6AADBD009546D2 /* ForgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetViewController.swift; sourceTree = "<group>"; };
+		215043621F6AC16B009546D2 /* DingweiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DingweiViewController.swift; sourceTree = "<group>"; };
+		215043641F6AD179009546D2 /* pdfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pdfViewController.swift; sourceTree = "<group>"; };
+		215043661F6AD550009546D2 /* ActionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2154EBAC1F68205900C992D1 /* RSAUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSAUtils.swift; sourceTree = "<group>"; };
 		215592301F66D2800091A822 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		21570C8C1F653572003C7D38 /* api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = api.swift; sourceTree = "<group>"; };
@@ -182,6 +188,8 @@
 				21062AD91F6039570003C7C4 /* HomeViewController.swift */,
 				214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */,
 				214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */,
+				215043621F6AC16B009546D2 /* DingweiViewController.swift */,
+				215043641F6AD179009546D2 /* pdfViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -335,6 +343,7 @@
 		21F8421F1F6267DC00A54D68 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				215043661F6AD550009546D2 /* ActionCollectionViewCell.swift */,
 				21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */,
 				21FB3EAD1F66392200656B74 /* TeachTableViewCell.swift */,
 			);
@@ -646,6 +655,7 @@
 				21F1C5981F68E002002FC28A /* UserInfoModel.swift in Sources */,
 				2178823B1F67E43D00365735 /* RSA.m in Sources */,
 				214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */,
+				215043671F6AD550009546D2 /* ActionCollectionViewCell.swift in Sources */,
 				21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */,
 				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
 				21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */,
@@ -670,6 +680,8 @@
 				214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */,
 				21F1C5A01F6924EB002FC28A /* InfoViewController.swift in Sources */,
 				21570C8D1F653572003C7D38 /* api.swift in Sources */,
+				215043651F6AD179009546D2 /* pdfViewController.swift in Sources */,
+				215043631F6AC16B009546D2 /* DingweiViewController.swift in Sources */,
 				2154EBAD1F68205900C992D1 /* RSAUtils.swift in Sources */,
 				21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */,
 				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,

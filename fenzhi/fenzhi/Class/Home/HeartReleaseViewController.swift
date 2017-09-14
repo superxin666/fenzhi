@@ -8,9 +8,17 @@
 
 import UIKit
 
-class HeartReleaseViewController: BaseViewController,UITextViewDelegate  {
+let itemWidth :CGFloat = ip7(240)
+let itemHeight :CGFloat = ip7(180)
+
+class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource  {
     let textField: UITextView = UITextView()
     let btnBackView :UIView = UIView()
+    let imageBackView :UIView = UIView()
+    var imageArr :[UIImage]  = Array()
+
+
+
     let nsetBtn : UIButton = UIButton()
     var keybodHeight : CGFloat = 0.0
 
@@ -96,6 +104,49 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate  {
 
     }
 
+
+    func creatImageView() {
+        imageBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - keybodHeight , width: KSCREEN_WIDTH, height: keybodHeight)
+        imageBackView.backgroundColor = .red
+        self.view.addSubview(imageBackView)
+
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = ip7(6)
+        layout.sectionInset = UIEdgeInsetsMake(0, ip7(3), 0, ip7(3))
+
+        let colletionView = UICollectionView(frame: CGRect(x: 15, y: 0, width: KSCREEN_WIDTH-30, height: itemHeight), collectionViewLayout: layout)
+        colletionView.register(ActionCollectionViewCell.self, forCellWithReuseIdentifier: "actioncollectioncell_id")
+        colletionView.backgroundColor = .clear
+        colletionView.delegate = self
+        colletionView.dataSource = self
+        colletionView.contentSize = CGSize(width: itemWidth * 10, height: itemHeight)
+        imageBackView.addSubview(colletionView)
+
+    }
+
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageArr.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.row < imageArr.count {
+            let cell :ActionCollectionViewCell  = collectionView.dequeueReusableCell(withReuseIdentifier: "actioncollectioncell_id", for: indexPath) as! ActionCollectionViewCell
+//            var nameStr : String = ""
+//            var picStr :String = ""
+
+            cell.setUI(image: imageArr[indexPath.row], name: "")
+            return cell
+        } else {
+            return UIView() as! UICollectionViewCell
+        }
+    }
+
     func nestBtnClik()  {
         nsetBtn.isSelected = !nsetBtn.isSelected
         if  nsetBtn.isSelected {
@@ -112,12 +163,67 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate  {
 
     func dingwei_click() {
         KfbShowWithInfo(titleString: "定位")
+        let vc = DingweiViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+
     }
 
     func pic_click() {
         KfbShowWithInfo(titleString: "图片")
+        let alertController = UIAlertController(title: "提示", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
+        let AlbumAction = UIAlertAction(title: "从相册选择", style: .default, handler: {
+            (action: UIAlertAction) -> Void in
+
+            self.openAlbum()
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(AlbumAction)
+        self.present(alertController, animated: true, completion: nil)
 
     }
+
+
+    func openAlbum() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            //初始化图片控制器
+            let picker = UIImagePickerController()
+            //设置代理
+            picker.delegate = self
+            //指定图片控制器类型
+            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            //设置是否允许编辑
+            picker.allowsEditing = true
+
+            //弹出控制器，显示界面
+            self.present(picker, animated: true, completion: {
+                () -> Void in
+            })
+        }else{
+            KFBLog(message: "读取相册错误")
+        }
+
+    }
+
+    //选择图片成功后代理
+    func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : Any]) {
+        //查看info对象
+        KFBLog(message: info)
+
+        //获取选择的编辑后的
+        let  image = info[UIImagePickerControllerEditedImage] as! UIImage
+        imageArr.append(image)
+        //图片控制器退出
+        picker.dismiss(animated: true, completion: {
+            () -> Void in
+
+            //显示图片
+            self.creatImageView()
+        })
+    }
+
+
 
     func textViewDidEndEditing(_ textView: UITextView) {
         

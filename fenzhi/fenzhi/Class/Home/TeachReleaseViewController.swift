@@ -11,7 +11,9 @@ import UIKit
 class TeachReleaseViewController: BaseViewController,UITextViewDelegate {
     let textField: UITextView = UITextView()
     let btnBackView :UIView = UIView()
+    let pdfBackView :UIView = UIView()
     let nsetBtn : UIButton = UIButton()
+    var keybodHeight : CGFloat = 0.0
     override func viewDidLoad() {
 
 //        self.navigationBar_rightBtn_title(name: "发布")
@@ -25,6 +27,21 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate {
 
 
     }
+
+    func keyboardWillShow(notification: NSNotification) {
+        let userinfo: NSDictionary = notification.userInfo! as NSDictionary
+
+        let nsValue = userinfo.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+
+        let keyboardRec = nsValue.cgRectValue
+
+        let height = keyboardRec.size.height
+        keybodHeight = height
+        self.creatBtnView()
+        self.view.addSubview(btnBackView)
+        print("keybordShow:\(height)")
+    }
+
 
     func creatUI()  {
 
@@ -43,37 +60,34 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate {
         textField.font =  fzFont_Thin(ip7(18))
         self.view.addSubview(textField)
 
-        self.creatBtnView()
-        textField.inputAccessoryView = btnBackView
+
+
     }
 
 
     func creatBtnView() {
-        btnBackView.frame =  CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(55))
+        btnBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - keybodHeight - LNAVIGATION_HEIGHT , width: KSCREEN_WIDTH, height: ip7(55))
         btnBackView.backgroundColor = blue_COLOUR
         //
         nsetBtn.frame = CGRect(x: ip7(25), y: (ip7(55) - ip7(14))/2, width: ip7(25), height: ip7(14))
         nsetBtn.setImage(#imageLiteral(resourceName: "button_jt_x"), for: .normal)
+        nsetBtn.setImage(#imageLiteral(resourceName: "button_jt_s"), for: .selected)
+        nsetBtn.isSelected = false
         nsetBtn.backgroundColor = .clear
         nsetBtn.addTarget(self, action:#selector(TeachReleaseViewController.nestBtnClik), for: .touchUpInside)
         btnBackView.addSubview(nsetBtn)
 
-//        let tdBtn : UIButton = UIButton(frame: CGRect(x: ip7(25), y: (ip7(55) - ip7(14))/2, width: ip7(25), height: ip7(14)))
-//        tdBtn.setImage(#imageLiteral(resourceName: "icon_dw2"), for: .normal)
-//        tdBtn.backgroundColor = .clear
-//        //        nsetBtn.addTarget(self, action:#selector(HomeViewController.heartBtnClick), for: .touchUpInside)
-//        btnBackView.addSubview(tdBtn)
 
-        let picBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55)))
-        picBtn.setImage(#imageLiteral(resourceName: "icon_tp"), for: .normal)
-        picBtn.backgroundColor = .clear
-//            nsetBtn.addTarget(self, action:#selector(HomeViewController.heartBtnClick), for: .touchUpInside)
-        btnBackView.addSubview(picBtn)
+        let pdfBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55)))
+        pdfBtn.setImage(#imageLiteral(resourceName: "icon_tp"), for: .normal)
+        pdfBtn.backgroundColor = .clear
+        pdfBtn.addTarget(self, action:#selector(TeachReleaseViewController.pdf_click), for: .touchUpInside)
+        btnBackView.addSubview(pdfBtn)
 
-        let tdBtn : UIButton = UIButton(frame: CGRect(x: picBtn.frame.origin.x - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35)))
+        let tdBtn : UIButton = UIButton(frame: CGRect(x: pdfBtn.frame.origin.x - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35)))
         tdBtn.setImage(#imageLiteral(resourceName: "icon_dw2"), for: .normal)
         tdBtn.backgroundColor = .clear
-        //        nsetBtn.addTarget(self, action:#selector(HomeViewController.heartBtnClick), for: .touchUpInside)
+        tdBtn.addTarget(self, action:#selector(TeachReleaseViewController.dingwei_click), for: .touchUpInside)
         btnBackView.addSubview(tdBtn)
 
         let lineView = UIView(frame: CGRect(x: tdBtn.frame.maxX + ip7(12), y: (ip7(55) - ip7(35))/2, width: 0.5, height: ip7(35)))
@@ -82,11 +96,39 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate {
 
     }
 
-    func nestBtnClik()  {
+
+    func creatImageView() {
+        pdfBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - keybodHeight , width: KSCREEN_WIDTH, height: keybodHeight)
+        pdfBackView.backgroundColor = .red
+        self.view.addSubview(pdfBackView)
 
     }
 
-    func textViewDidEndEditing(_ textView: UITextView) {
+    func nestBtnClik()  {
+        nsetBtn.isSelected = !nsetBtn.isSelected
+        if  nsetBtn.isSelected {
+            if textField.isFirstResponder {
+                textField.resignFirstResponder()
+            }
+            btnBackView.frame.origin.y =  KSCREEN_HEIGHT  - btnBackView.frame.size.height
+        } else {
+
+            textField.becomeFirstResponder()
+            btnBackView.frame.origin.y =  KSCREEN_HEIGHT - keybodHeight - LNAVIGATION_HEIGHT
+        }
+    }
+
+    func pdf_click() {
+        KfbShowWithInfo(titleString: "pdf")
+        let vc = pdfViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+
+    func dingwei_click() {
+        KfbShowWithInfo(titleString: "定位")
+        let vc = DingweiViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
 
     }
 

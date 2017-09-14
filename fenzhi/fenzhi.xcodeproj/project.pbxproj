@@ -20,6 +20,7 @@
 		213BF86E1F60317300D60AE5 /* fenzhiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */; };
 		214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */; };
 		214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */; };
+		215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043601F6AADBD009546D2 /* ForgetViewController.swift */; };
 		2154EBAD1F68205900C992D1 /* RSAUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2154EBAC1F68205900C992D1 /* RSAUtils.swift */; };
 		215592311F66D2800091A822 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215592301F66D2800091A822 /* LoginViewController.swift */; };
 		21570C8D1F653572003C7D38 /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C8C1F653572003C7D38 /* api.swift */; };
@@ -85,6 +86,7 @@
 		213BF86F1F60317300D60AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachReleaseViewController.swift; sourceTree = "<group>"; };
 		214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartReleaseViewController.swift; sourceTree = "<group>"; };
+		215043601F6AADBD009546D2 /* ForgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetViewController.swift; sourceTree = "<group>"; };
 		2154EBAC1F68205900C992D1 /* RSAUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSAUtils.swift; sourceTree = "<group>"; };
 		215592301F66D2800091A822 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		21570C8C1F653572003C7D38 /* api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = api.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				215592301F66D2800091A822 /* LoginViewController.swift */,
 				21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */,
 				21F1C59F1F6924EB002FC28A /* InfoViewController.swift */,
+				215043601F6AADBD009546D2 /* ForgetViewController.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */,
 				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
 				21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */,
+				215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */,
 				21FA059F1F6783A20083EFD4 /* LogDataMangerViewController.swift in Sources */,
 				21EE65B31F6A7C1900806B62 /* UpIconTableViewCell.swift in Sources */,
 				213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */,

@@ -120,7 +120,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         forgetBtn.backgroundColor = .clear
         forgetBtn.setTitleColor( blue_COLOUR, for: .normal)
         forgetBtn.titleLabel?.font = fzFont_Thin(ip7(18))
-        //        logBtn.addTarget(self, action:#selector(HomeViewController.heartBtnClick), for: .touchUpInside)
+        forgetBtn.addTarget(self, action:#selector(LoginViewController.forget_clik), for: .touchUpInside)
         scrBackView.addSubview(forgetBtn)
 
         let lineView2 = UIView()
@@ -163,6 +163,12 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         
 
 
+
+    }
+
+    func forget_clik()   {
+        let vc = ForgetViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
 
     }
     

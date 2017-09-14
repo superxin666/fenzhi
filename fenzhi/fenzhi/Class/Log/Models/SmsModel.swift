@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 class SmsModel: Mappable {
-    var errno: Int = 0
+    var errno: Int = 1
     var errmsg : String = ""
     var logId : String = ""
      

@@ -28,6 +28,24 @@ class LogDataMangerViewController: FZRequestViewController {
         }
         
     }
+
+
+    func findpwd(phoneNum : String, paseWord : String, verification: String,completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+
+        let encWithPubKey = RSA.encryptString(paseWord, publicKey: pubkey)
+        let urlBase : String =  RSA.encodeParameter(encWithPubKey)
+        //15910901725
+        let url = BASER_API + findpwd_api + "phone="+phoneNum+"&password="+urlBase+"&verification="+verification+last_pra
+        print("编码"+url)
+        var model:SmsModel = SmsModel()
+        Alamofire.request(url, method: .post).responseJSON { (returnResult) in
+            print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
+            model = Mapper<SmsModel>().map(JSON: returnResult.result.value as! [String : Any])!
+            completion(model)
+        }
+
+    }
+
     
     func get_sms_code(phoneNum : String, type : String, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         

@@ -87,7 +87,10 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 
     func heartBtnClick() {
         let vc : HeartReleaseViewController = HeartReleaseViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let nv :UINavigationController = UINavigationController(rootViewController: vc)
+        self.present(nv, animated: true) {
+
+        }
 
     }
 

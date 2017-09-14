@@ -57,7 +57,7 @@ extension String {
         let infoDict = Bundle.main.infoDictionary
         if let info = infoDict {
             let appVersion = info["CFBundleShortVersionString"] as! String!
-            return ("ios_" + appVersion!)
+            return ("ios" + appVersion!)
         } else {
             return ""
         }

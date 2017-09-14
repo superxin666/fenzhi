@@ -26,14 +26,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func mainMenu() {
         
         let login = LoginModelMapper.getLoginIdAndTokenInUD().isHaveLogin
+        let info = LoginModelMapper.getLoginIdAndTokenInUD().isHaveInfo
         print("login\(login)")
+        print("login\(info)")
         if login == "1" {
-            //显示主页
-            self.showMain()
+            if info == "1" {
+                //显示主页
+                self.showMain()
+            } else {
+                
+                //显示提交信息页面
+                self.showInfo()
+            }
+            
         } else {
             //显示登录注册页面
             self.showLogin()
         }
+    }
+    
+    func showInfo() {
+        let vc = InfoViewController()
+        let nv :UINavigationController = UINavigationController(rootViewController: vc)
+        self.window?.rootViewController = nv
     }
     
 

@@ -413,6 +413,13 @@ static NSData *base64_decode(NSString *str){
 	return [RSA decryptData:data withKeyRef:keyRef];
 }
 
++ (NSString *)encodeParameter:(NSString *)originalPara {
+    CFStringRef encodeParaCf = CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)originalPara, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), kCFStringEncodingUTF8);
+    NSString *encodePara = (__bridge NSString *)(encodeParaCf);
+    CFRelease(encodeParaCf);
+    return encodePara;
+}
+
 /* END: Encryption & Decryption with RSA public key */
 
 @end

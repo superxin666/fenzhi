@@ -28,6 +28,8 @@
 		21570C951F659002003C7D38 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C941F659002003C7D38 /* MainTableViewCell.swift */; };
 		2178823B1F67E43D00365735 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2178823A1F67E43D00365735 /* RSA.m */; };
 		21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD78761F618C1600539E8D /* BaseViewController.swift */; };
+		21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AD1F6A54DE00806B62 /* ResModel.swift */; };
+		21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */; };
 		21F1C5981F68E002002FC28A /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C5971F68E002002FC28A /* UserInfoModel.swift */; };
 		21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C5991F68E103002FC28A /* LoginModelMapper.swift */; };
 		21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */; };
@@ -91,6 +93,8 @@
 		217882391F67E43D00365735 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
 		2178823A1F67E43D00365735 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
 		21BD78761F618C1600539E8D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		21EE65AD1F6A54DE00806B62 /* ResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModel.swift; sourceTree = "<group>"; };
+		21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModelMaper.swift; sourceTree = "<group>"; };
 		21F1C5971F68E002002FC28A /* UserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		21F1C5991F68E103002FC28A /* LoginModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModelMapper.swift; sourceTree = "<group>"; };
 		21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 				21F1C5971F68E002002FC28A /* UserInfoModel.swift */,
 				21F1C5991F68E103002FC28A /* LoginModelMapper.swift */,
 				21F1C59D1F691CAF002FC28A /* SmsModel.swift */,
+				21EE65AD1F6A54DE00806B62 /* ResModel.swift */,
+				21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -631,6 +637,7 @@
 				21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */,
 				21FB3EAC1F66367500656B74 /* SettingViewController.swift in Sources */,
 				21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */,
+				21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */,
 				21570C921F6579ED003C7D38 /* UserInfoViewController.swift in Sources */,
 				21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */,
 				21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */,
@@ -644,6 +651,7 @@
 				21F1C5A01F6924EB002FC28A /* InfoViewController.swift in Sources */,
 				21570C8D1F653572003C7D38 /* api.swift in Sources */,
 				2154EBAD1F68205900C992D1 /* RSAUtils.swift in Sources */,
+				21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */,
 				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

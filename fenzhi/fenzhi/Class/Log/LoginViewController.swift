@@ -199,15 +199,20 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
             return
         }
         print("登录")
+        //"YuYDThdAlCw%2FAVszVVdT4HEld43gusD%2F6JtR1kBW6vyxu8gfkptQDUtiRAeA0lAF0Jy3Ull5eWQ2JcKa5wKHWtVR8RiBauqiedkUeyznS9ByLeGZSUtTq41mSAMd51%2Fljc8dFbmAajKHgaFrqukCko1PSr03YPdvoCv3pFYzHFw%3D"
         weak var weakSelf = self
-        dataVC.login(phoneNum: "15910901725", paseWord: "YuYDThdAlCw%2FAVszVVdT4HEld43gusD%2F6JtR1kBW6vyxu8gfkptQDUtiRAeA0lAF0Jy3Ull5eWQ2JcKa5wKHWtVR8RiBauqiedkUeyznS9ByLeGZSUtTq41mSAMd51%2Fljc8dFbmAajKHgaFrqukCko1PSr03YPdvoCv3pFYzHFw%3D", completion: { (data) in
+        dataVC.login(phoneNum: "15910901725", paseWord: keyStr, completion: { (data) in
             weakSelf?.dataModel = data as! LoginModelMapper
             print(String(describing: weakSelf?.dataModel.errno))
             print(String(describing: weakSelf?.dataModel.data.id))
 
             if weakSelf?.dataModel.errno == 0 {
+                var ishaveInfo = "0"
+                if (weakSelf?.dataModel.data.name.characters.count)! > 0{
+                    ishaveInfo = "1"
+                }
                 
-                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.dataModel.data.id), token: String(describing: weakSelf?.dataModel.data.token), complate: { (data) in
+                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.dataModel.data.id), token: String(describing: weakSelf?.dataModel.data.token), ishaveinfo: ishaveInfo, complate: { (data) in
                     let str:String = data as! String
                     if str == "1" {
                         //登陆成功

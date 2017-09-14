@@ -16,6 +16,7 @@ let BASER_API = "http://fenzhi.wchao.org"//线上域名
 
 let login_api = "/api/user/login?"
 let sms_api = "/api/sendsms?"
+let register_api = "/api/user/register?"
 
 
 

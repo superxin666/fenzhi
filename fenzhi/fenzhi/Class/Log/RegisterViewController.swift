@@ -12,14 +12,16 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
     
     let dataVC :LogDataMangerViewController = LogDataMangerViewController()
     var dataModel : SmsModel = SmsModel()//
+    var resdataModel : ResModelMaper = ResModelMaper()//
     let _phoneTextField : UITextField = UITextField()//手机号
     let _keyTextField : UITextField = UITextField()//密码
     let codeTextField : UITextField = UITextField()//密码
     var phoneStr : String = ""
     var keyStr : String = ""
     var codeStr : String = ""//验证码
-    
     let getCodeBtn : UIButton = UIButton()
+
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -235,51 +237,79 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
     
     //MARK:下一步
     func nest_click()  {
-//        if _phoneTextField.isFirstResponder {
-//            _phoneTextField.resignFirstResponder()
-//        } else if codeTextField.isFirstResponder {
-//            codeTextField.resignFirstResponder()
-//        } else {
-//            _keyTextField.resignFirstResponder()
-//        }
-//        
-//        if !(String.isStr(str: phoneStr)) {
-//            KFBLog(message: "请填写手机号")
-//            self.KfbShowWithInfo(titleString: "请填写手机号")
-//            return
-//        }
-//        if !(String.isMobileNumber(phoneNum: phoneStr)) {
-//            KFBLog(message: "请填写正确手机号")
-//            self.KfbShowWithInfo(titleString: "请填写正确手机号")
-//            return
-//        }
-//        if !(String.isStr(str: codeStr)) {
-//            KFBLog(message: "请填写验证码")
-//            self.KfbShowWithInfo(titleString: "请填写验证码")
-//            return
-//        }
-//        if !(String.isStr(str: keyStr)) {
-//            KFBLog(message: "请填写密码")
-//            self.KfbShowWithInfo(titleString: "请填写密码")
-//            return
-//        }
-//        if keyStr.characters.count < 6 {
-//            KFBLog(message: "密码至少六位")
-//            self.KfbShowWithInfo(titleString: "密码至少六位")
-//            return
-//            
-//        }
-//        
-//        if keyStr.characters.count > 20 {
-//            KFBLog(message: "密码不能超过20位")
-//            self.KfbShowWithInfo(titleString: "密码不能超过20位")
-//            return
-//            
-//        }
+        if _phoneTextField.isFirstResponder {
+            _phoneTextField.resignFirstResponder()
+        } else if codeTextField.isFirstResponder {
+            codeTextField.resignFirstResponder()
+        } else {
+            _keyTextField.resignFirstResponder()
+        }
         
-        let vc : InfoViewController = InfoViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        if !(String.isStr(str: phoneStr)) {
+            KFBLog(message: "请填写手机号")
+            self.KfbShowWithInfo(titleString: "请填写手机号")
+            return
+        }
+        if !(String.isMobileNumber(phoneNum: phoneStr)) {
+            KFBLog(message: "请填写正确手机号")
+            self.KfbShowWithInfo(titleString: "请填写正确手机号")
+            return
+        }
+        if !(String.isStr(str: codeStr)) {
+            KFBLog(message: "请填写验证码")
+            self.KfbShowWithInfo(titleString: "请填写验证码")
+            return
+        }
+        if !(String.isStr(str: keyStr)) {
+            KFBLog(message: "请填写密码")
+            self.KfbShowWithInfo(titleString: "请填写密码")
+            return
+        }
+        if keyStr.characters.count < 6 {
+            KFBLog(message: "密码至少六位")
+            self.KfbShowWithInfo(titleString: "密码至少六位")
+            return
+            
+        }
         
+        if keyStr.characters.count > 20 {
+            KFBLog(message: "密码不能超过20位")
+            self.KfbShowWithInfo(titleString: "密码不能超过20位")
+            return
+            
+        }
+        
+        //注册请求
+         weak var weakSelf = self
+
+        dataVC.register(phoneNum: phoneStr, paseWord: "YuYDThdAlCw%2FAVszVVdT4HEld43gusD%2F6JtR1kBW6vyxu8gfkptQDUtiRAeA0lAF0Jy3Ull5eWQ2JcKa5wKHWtVR8RiBauqiedkUeyznS9ByLeGZSUtTq41mSAMd51%2Fljc8dFbmAajKHgaFrqukCko1PSr03YPdvoCv3pFYzHFw%3D", verification: codeStr, completion: { (data) in
+              weakSelf?.resdataModel = data as! ResModelMaper
+            
+            if weakSelf?.resdataModel.errno == 0 {
+                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.resdataModel.data.id), token: String(describing: weakSelf?.resdataModel.data.token), ishaveinfo: "0", complate: { (data) in
+                    let str:String = data as! String
+                    if str == "1" {
+                        //成功
+                        let vc : InfoViewController = InfoViewController()
+                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                    } else {
+                        //存储信息失败
+                        weakSelf?.KfbShowWithInfo(titleString: (weakSelf?.resdataModel.errmsg)!)
+                    }
+        
+                })
+            
+            
+            } else {
+                weakSelf?.KfbShowWithInfo(titleString: "注册失败")
+            }
+                
+                
+  
+            
+        }) { (erro) in
+            
+        }
 
         
     }

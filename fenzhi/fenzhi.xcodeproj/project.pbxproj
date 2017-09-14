@@ -30,6 +30,8 @@
 		21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD78761F618C1600539E8D /* BaseViewController.swift */; };
 		21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AD1F6A54DE00806B62 /* ResModel.swift */; };
 		21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */; };
+		21EE65B31F6A7C1900806B62 /* UpIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65B21F6A7C1900806B62 /* UpIconTableViewCell.swift */; };
+		21EE65B51F6A7C2600806B62 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65B41F6A7C2600806B62 /* InfoTableViewCell.swift */; };
 		21F1C5981F68E002002FC28A /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C5971F68E002002FC28A /* UserInfoModel.swift */; };
 		21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C5991F68E103002FC28A /* LoginModelMapper.swift */; };
 		21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */; };
@@ -95,6 +97,8 @@
 		21BD78761F618C1600539E8D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		21EE65AD1F6A54DE00806B62 /* ResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModel.swift; sourceTree = "<group>"; };
 		21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModelMaper.swift; sourceTree = "<group>"; };
+		21EE65B21F6A7C1900806B62 /* UpIconTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpIconTableViewCell.swift; sourceTree = "<group>"; };
+		21EE65B41F6A7C2600806B62 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		21F1C5971F68E002002FC28A /* UserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		21F1C5991F68E103002FC28A /* LoginModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModelMapper.swift; sourceTree = "<group>"; };
 		21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 		2155922F1F66D0E00091A822 /* Log */ = {
 			isa = PBXGroup;
 			children = (
+				21EE65B11F6A7BEE00806B62 /* Cell */,
 				21F1C5961F68DFF0002FC28A /* Models */,
 				215592301F66D2800091A822 /* LoginViewController.swift */,
 				21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */,
@@ -299,6 +304,15 @@
 			isa = PBXGroup;
 			children = (
 				21570C941F659002003C7D38 /* MainTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		21EE65B11F6A7BEE00806B62 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				21EE65B21F6A7C1900806B62 /* UpIconTableViewCell.swift */,
+				21EE65B41F6A7C2600806B62 /* InfoTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -633,6 +647,7 @@
 				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
 				21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */,
 				21FA059F1F6783A20083EFD4 /* LogDataMangerViewController.swift in Sources */,
+				21EE65B31F6A7C1900806B62 /* UpIconTableViewCell.swift in Sources */,
 				213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */,
 				21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */,
 				21FB3EAC1F66367500656B74 /* SettingViewController.swift in Sources */,
@@ -645,6 +660,7 @@
 				21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */,
 				21FB3EAE1F66392200656B74 /* TeachTableViewCell.swift in Sources */,
 				21570C951F659002003C7D38 /* MainTableViewCell.swift in Sources */,
+				21EE65B51F6A7C2600806B62 /* InfoTableViewCell.swift in Sources */,
 				21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */,
 				215592311F66D2800091A822 /* LoginViewController.swift in Sources */,
 				214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */,

@@ -33,6 +33,7 @@ class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         self.navigation_title_fontsize(name: "关注", fontsize: 27)
         self.view.backgroundColor = backView_COLOUR
         self.navigationBar_leftBtn()
+        self.creatTableView()
         self.getData()
 
 
@@ -45,16 +46,19 @@ class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             //            weakSelf?.SVdismiss()
             weakSelf?.dataModel = data as! FollowModel
             if weakSelf?.dataModel.errno == 0 {
-                if !(weakSelf?.isShow)! {
-                    self.creatTableView()
-                }
                 //修改成功
                 if (weakSelf?.dataModel.data.followList.count)! > 0{
                     KFBLog(message: "数组")
                     weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.followList)!
                     weakSelf?.mainTabelView.reloadData()
                 } else {
-                    weakSelf?.SVshowErro(infoStr: "没有数据了")
+                    if weakSelf?.dataArr.count == 0 {
+                        weakSelf?.mainTabelView.removeFromSuperview()
+                        weakSelf?.view.addSubview(self.showNoData())
+                    } else {
+                        weakSelf?.SVshowErro(infoStr: "没有数据了")
+                    }
+
                 }
 
 
@@ -63,7 +67,7 @@ class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewD
 
             }
             weakSelf?.mainTabelView.mj_footer.endRefreshing()
-            
+
         }) { (erro) in
                  weakSelf?.SVshowErro(infoStr: "请求失败")
 

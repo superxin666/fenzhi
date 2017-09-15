@@ -16,6 +16,9 @@ class BaseViewController: UIViewController {
     var activityLabel:UILabel = UILabel()
     var isShowing :Bool = false
 
+    let noDataView : NoWifiView = NoWifiView()
+
+
     let header = MJRefreshNormalHeader() //头部刷新
     let footer = MJRefreshAutoNormalFooter() // 底部刷新
 
@@ -63,6 +66,16 @@ class BaseViewController: UIViewController {
 
     }
     
+    func showNoData() -> NoWifiView {
+        noDataView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(15))
+        noDataView.setUpNoDta()
+        return noDataView;
+    }
+    func showNoWifi() -> NoWifiView {
+        noDataView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(15))
+        noDataView.setUpNoWifiView()
+        return noDataView;
+    }
 
     func SVshowErro(infoStr:String) {
         SVProgressHUD.setDefaultStyle(.dark)
@@ -89,8 +102,7 @@ class BaseViewController: UIViewController {
     
     
     func SVdismiss() {
-        
-       
+        SVProgressHUD.dismiss()
     }
     
     func KfbShowWithInfo(titleString:String) {

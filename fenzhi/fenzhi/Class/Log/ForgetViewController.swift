@@ -193,34 +193,34 @@ class ForgetViewController: BaseViewController,UITextFieldDelegate {
 
         if !(String.isStr(str: phoneStr)) {
             KFBLog(message: "请填写手机号")
-            self.KfbShowWithInfo(titleString: "请填写手机号")
+            self.SVshowErro(infoStr: "请填写手机号")
             return
         }
         if !(String.isMobileNumber(phoneNum: phoneStr)) {
             KFBLog(message: "请填写正确手机号")
-            self.KfbShowWithInfo(titleString: "请填写正确手机号")
+            self.SVshowErro(infoStr: "请填写正确手机号")
             return
         }
         if !(String.isStr(str: codeStr)) {
             KFBLog(message: "请填写验证码")
-            self.KfbShowWithInfo(titleString: "请填写验证码")
+            self.SVshowErro(infoStr: "请填写验证码")
             return
         }
         if !(String.isStr(str: keyStr)) {
             KFBLog(message: "请填写密码")
-            self.KfbShowWithInfo(titleString: "请填写密码")
+             self.SVshowErro(infoStr: "请填写密码")
             return
         }
         if keyStr.characters.count < 6 {
             KFBLog(message: "密码至少六位")
-            self.KfbShowWithInfo(titleString: "密码至少六位")
+            self.SVshowErro(infoStr: "密码至少六位")
             return
 
         }
 
         if keyStr.characters.count > 20 {
             KFBLog(message: "密码不能超过20位")
-            self.KfbShowWithInfo(titleString: "密码不能超过20位")
+            self.SVshowErro(infoStr: "密码不能超过20位")
             return
 
         }
@@ -255,14 +255,15 @@ class ForgetViewController: BaseViewController,UITextFieldDelegate {
         KFBLog(message: phoneStr)
         if !(String.isStr(str: phoneStr)) {
             KFBLog(message: "请填写手机号")
-            self.KfbShowWithInfo(titleString: "请填写手机号")
+             self.SVshowErro(infoStr: "请填写手机号")
+
             return
         } else {
             KFBLog(message: "手机号已经填写")
         }
         if !(String.isMobileNumber(phoneNum: phoneStr)) {
             KFBLog(message: "请填写正确手机号")
-            self.KfbShowWithInfo(titleString: "请填写正确手机号")
+            self.SVshowErro(infoStr: "请填写正确手机号")
             return
         } else {
             KFBLog(message: "手机号正确")

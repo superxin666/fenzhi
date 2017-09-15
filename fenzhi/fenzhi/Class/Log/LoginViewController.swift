@@ -188,26 +188,27 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
             _keyTextField.resignFirstResponder()
         }
         if !(String.isStr(str: phoneStr)) {
+            self.SVshowErro(infoStr: "请填写手机号")
             print("请填写手机号")
-
             return
         }
         if !(String.isMobileNumber(phoneNum: phoneStr)) {
+            self.SVshowErro(infoStr: "请填写正确手机号")
              print("请填写正确手机号")
 
             return
         }
         if keyStr.characters.count < 6 {
-
+            self.SVshowErro(infoStr: "密码至少六位")
             print("密码至少六位")
-
-            
             return
         }
         print("登录")
         //"YuYDThdAlCw%2FAVszVVdT4HEld43gusD%2F6JtR1kBW6vyxu8gfkptQDUtiRAeA0lAF0Jy3Ull5eWQ2JcKa5wKHWtVR8RiBauqiedkUeyznS9ByLeGZSUtTq41mSAMd51%2Fljc8dFbmAajKHgaFrqukCko1PSr03YPdvoCv3pFYzHFw%3D"
+//        self.SVshowLoad()
         weak var weakSelf = self
         dataVC.login(phoneNum: phoneStr, paseWord: keyStr, completion: { (data) in
+//            self.SVdismiss()
             weakSelf?.dataModel = data as! LoginModelMapper
             print(String(describing: weakSelf?.dataModel.errno))
             print("名字"+String(describing: weakSelf?.dataModel.data.name))

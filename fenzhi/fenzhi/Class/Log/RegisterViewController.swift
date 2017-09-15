@@ -192,14 +192,15 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
         KFBLog(message: phoneStr)
         if !(String.isStr(str: phoneStr)) {
             KFBLog(message: "请填写手机号")
-            self.KfbShowWithInfo(titleString: "请填写手机号")
+            self.SVshowErro(infoStr: "请填写手机号")
+
             return
         } else {
             KFBLog(message: "手机号已经填写")
         }
         if !(String.isMobileNumber(phoneNum: phoneStr)) {
             KFBLog(message: "请填写正确手机号")
-            self.KfbShowWithInfo(titleString: "请填写正确手机号")
+            self.SVshowErro(infoStr: "请填写正确手机号")
             return
         } else {
             KFBLog(message: "手机号正确")
@@ -220,12 +221,14 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
                 weakself?.getCodeBtn.setTitle("发送成功", for: .normal)
                 weakself?.getCodeBtn.setTitleColor(blue_COLOUR, for: .normal)
             } else {
+                weakself?.SVshowErro(infoStr: (weakself?.dataModel.errmsg)!)
                 weakself?.getCodeBtn.setTitle("重新发送", for: .normal)
                 weakself?.getCodeBtn.setTitleColor(blue_COLOUR, for: .normal)
 
             }
             
         }) { (erro) in
+            weakself?.SVshowErro(infoStr: "请求失败")
             weakself?.getCodeBtn.setTitle("重新发送", for: .normal)
             weakself?.getCodeBtn.setTitleColor(blue_COLOUR, for: .normal)
             
@@ -246,34 +249,34 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
         
         if !(String.isStr(str: phoneStr)) {
             KFBLog(message: "请填写手机号")
-            self.KfbShowWithInfo(titleString: "请填写手机号")
+            self.SVshowErro(infoStr: "请填写手机号")
             return
         }
         if !(String.isMobileNumber(phoneNum: phoneStr)) {
             KFBLog(message: "请填写正确手机号")
-            self.KfbShowWithInfo(titleString: "请填写正确手机号")
+            self.SVshowErro(infoStr: "请填写正确手机号")
             return
         }
         if !(String.isStr(str: codeStr)) {
             KFBLog(message: "请填写验证码")
-            self.KfbShowWithInfo(titleString: "请填写验证码")
+            self.SVshowErro(infoStr: "请填写验证码")
             return
         }
         if !(String.isStr(str: keyStr)) {
             KFBLog(message: "请填写密码")
-            self.KfbShowWithInfo(titleString: "请填写密码")
+            self.SVshowErro(infoStr: "请填写密码")
             return
         }
         if keyStr.characters.count < 6 {
             KFBLog(message: "密码至少六位")
-            self.KfbShowWithInfo(titleString: "密码至少六位")
+            self.SVshowErro(infoStr: "密码至少六位")
             return
             
         }
         
         if keyStr.characters.count > 20 {
             KFBLog(message: "密码不能超过20位")
-            self.KfbShowWithInfo(titleString: "密码不能超过20位")
+            self.SVshowErro(infoStr: "密码不能超过20位")
             return
             
         }
@@ -300,13 +303,14 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
             
             
             } else {
-                weakSelf?.KfbShowWithInfo(titleString: "注册失败")
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.resdataModel.errmsg)!)
+
             }
                 
-                
-  
+            
             
         }) { (erro) in
+            weakSelf?.SVshowErro(infoStr: "请求失败")
             
         }
 

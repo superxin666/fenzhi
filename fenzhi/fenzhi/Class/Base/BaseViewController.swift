@@ -7,8 +7,12 @@
 //
 
 import UIKit
-
+import SVProgressHUD
 class BaseViewController: UIViewController {
+    
+    let activityView:UIView = UIView(frame: CGRect(x: 0, y: -35, width: KSCREEN_WIDTH, height: 35))
+    var activityLabel:UILabel = UILabel()
+    var isShowing :Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +58,33 @@ class BaseViewController: UIViewController {
 
     }
     
+    func SVshow(infoStr:String) {
+        SVProgressHUD.setDefaultStyle(.light)
+        SVProgressHUD.show(withStatus: infoStr)
+    }
+    func SVshowErro(infoStr:String) {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setMaximumDismissTimeInterval(1)
+        SVProgressHUD.showError(withStatus: infoStr)
+    }
+    
+    func SVshowLoad() {
+        SVProgressHUD.setDefaultStyle(.light)
+        SVProgressHUD.setInfoImage(#imageLiteral(resourceName: "icon_jz"))
+        SVProgressHUD.show(withStatus: "正在努力加载中")
+    }
+    
+    func SVshowSuccess(infoStr:String) {
+        SVProgressHUD.dismiss()
+    }
+    
+    
+    
+    func SVdismiss() {
+        
+       
+    }
+    
     func KfbShowWithInfo(titleString:String) {
         
 //        if self.isShowing {
@@ -62,7 +93,7 @@ class BaseViewController: UIViewController {
 //        
 //        self.isShowing = true
 //        
-//        activityView.backgroundColor = green_COLOUR
+//        activityView.backgroundColor = .white
 //        activityView.alpha = 0.9
 //        self.view.addSubview(activityView)
 //        

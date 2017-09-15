@@ -293,6 +293,7 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
                     if str == "1" {
                         //成功
                         let vc : InfoViewController = InfoViewController()
+                        vc.type = .other
                         weakSelf?.navigationController?.pushViewController(vc, animated: true)
                     } else {
                         //存储信息失败

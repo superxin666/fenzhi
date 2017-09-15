@@ -9,7 +9,16 @@
 import UIKit
 let ICONCELLID = "ICONCELL_ID"//
 let INFOCELLID = "INFOCELLL_ID"//
+
+enum InfoView_Type {
+    case res_first
+    case other
+}
+
 class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+    var type :InfoView_Type!
+    
+    
     let mainTabelView : UITableView = UITableView()
     let nameArr = ["","姓名","地区","学校","年级","学科","教材版本",]
     let plaNameArr = ["","输入您的名字","请选择您所在的地区","请选择您所在学校","请选择您所在学校年级","请选择您所教学科","请选择您所用教材版本",]
@@ -84,7 +93,13 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     
     
     override func navigationLeftBtnClick() {
-        self.navigationController?.popViewController(animated: true)
+        if type == .res_first {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            let dele: AppDelegate =  UIApplication.shared.delegate as! AppDelegate
+            dele.showLogin()
+        }
+
     }
 
     override func didReceiveMemoryWarning() {

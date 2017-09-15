@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        self.mainMenu()
-        self.showLogin()
+        self.mainMenu()
+//        self.showLogin()
 //        self.showMain()
         return true
     }
@@ -46,10 +46,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     
     func showInfo() {
         let vc = InfoViewController()
+        vc.type = .other
         let nv :UINavigationController = UINavigationController(rootViewController: vc)
         self.window?.rootViewController = nv
     }
-    
+
 
     func showLogin()  {
         let loginVC = LoginViewController()

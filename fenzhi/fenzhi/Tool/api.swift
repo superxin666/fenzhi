@@ -16,6 +16,8 @@ let BASER_API = "http://fenzhi.wchao.org"//线上域名
 
 //let last_par = "&client=iphone&version="+St
 
+//-------------------通用接口
+let common_api = "/api/common?"
 
 
 //-------------------登陆注册

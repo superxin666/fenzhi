@@ -4,7 +4,7 @@
 //
 //  Created by lvxin on 2017/9/12.
 //  Copyright © 2017年 Xunqiu. All rights reserved.
-//
+//  基础请求
 
 import UIKit
 

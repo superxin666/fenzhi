@@ -17,7 +17,8 @@ enum InfoView_Type {
 
 class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
     var type :InfoView_Type!
-    
+    let dataVC = CommonDataMangerViewController()
+
     
     let mainTabelView : UITableView = UITableView()
     let nameArr = ["","姓名","地区","学校","年级","学科","教材版本",]
@@ -31,6 +32,16 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         
         self.creatUI()
         // Do any additional setup after loading the view.
+        self.getData()
+    }
+
+    func getData() {
+        dataVC.getCommon(completion: { (data) in
+            
+        }) { (erro) in
+
+        }
+
     }
     
     func creatUI()  {

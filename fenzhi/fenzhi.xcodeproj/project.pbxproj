@@ -11,6 +11,7 @@
 		21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062ADB1F6039640003C7C4 /* MineViewController.swift */; };
 		21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062ADD1F60396F0003C7C4 /* RecordViewController.swift */; };
 		21062AE11F603EA90003C7C4 /* pch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062AE01F603EA90003C7C4 /* pch.swift */; };
+		2112E91A1F6C434F0066CF5B /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E9191F6C434F0066CF5B /* CommonModel.swift */; };
 		213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF84D1F60317300D60AE5 /* AppDelegate.swift */; };
 		213BF8501F60317300D60AE5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF84F1F60317300D60AE5 /* ViewController.swift */; };
 		213BF8531F60317300D60AE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213BF8511F60317300D60AE5 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 		215822231F6C2122002BC6E6 /* FollowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822221F6C2122002BC6E6 /* FollowModel.swift */; };
 		215822271F6C3033002BC6E6 /* NoWifiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822261F6C3033002BC6E6 /* NoWifiView.swift */; };
 		215822291F6C3D7A002BC6E6 /* UIView+clipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */; };
+		2158222B1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2158222A1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift */; };
 		2178823B1F67E43D00365735 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2178823A1F67E43D00365735 /* RSA.m */; };
 		21BBF7FB1F6BB13B008D654D /* UserInfoHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */; };
 		21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */; };
@@ -81,6 +83,7 @@
 		21062ADB1F6039640003C7C4 /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		21062ADD1F60396F0003C7C4 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		21062AE01F603EA90003C7C4 /* pch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pch.swift; sourceTree = "<group>"; };
+		2112E9191F6C434F0066CF5B /* CommonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
 		213BF84A1F60317300D60AE5 /* fenzhi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fenzhi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		213BF84D1F60317300D60AE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		213BF84F1F60317300D60AE5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 		215822221F6C2122002BC6E6 /* FollowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowModel.swift; sourceTree = "<group>"; };
 		215822261F6C3033002BC6E6 /* NoWifiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoWifiView.swift; sourceTree = "<group>"; };
 		215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+clipping.swift"; sourceTree = "<group>"; };
+		2158222A1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDataMangerViewController.swift; sourceTree = "<group>"; };
 		217882381F67E39C00365735 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		217882391F67E43D00365735 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
 		2178823A1F67E43D00365735 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
@@ -305,6 +309,7 @@
 			children = (
 				21BD78761F618C1600539E8D /* BaseViewController.swift */,
 				215822261F6C3033002BC6E6 /* NoWifiView.swift */,
+				2112E9191F6C434F0066CF5B /* CommonModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				21FA059E1F6783A20083EFD4 /* LogDataMangerViewController.swift */,
 				21FA05A01F6784DF0083EFD4 /* FZRequestViewController.swift */,
 				2158221F1F6C2012002BC6E6 /* MineDataManger.swift */,
+				2158222A1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift */,
 			);
 			path = DataManger;
 			sourceTree = "<group>";
@@ -688,6 +694,7 @@
 				214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */,
 				215043671F6AD550009546D2 /* ActionCollectionViewCell.swift in Sources */,
 				21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */,
+				2112E91A1F6C434F0066CF5B /* CommonModel.swift in Sources */,
 				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
 				21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */,
 				215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */,
@@ -719,6 +726,7 @@
 				215043631F6AC16B009546D2 /* DingweiViewController.swift in Sources */,
 				2154EBAD1F68205900C992D1 /* RSAUtils.swift in Sources */,
 				21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */,
+				2158222B1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift in Sources */,
 				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,
 				215822271F6C3033002BC6E6 /* NoWifiView.swift in Sources */,
 			);

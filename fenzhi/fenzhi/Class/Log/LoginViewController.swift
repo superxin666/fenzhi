@@ -28,7 +28,6 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = .white
         self.creatUI()
-
     }
 
     func creatUI()  {
@@ -181,6 +180,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     }
     
     func login_click()  {
+      
         if _phoneTextField.isFirstResponder {
             _phoneTextField.resignFirstResponder()
         }
@@ -205,10 +205,10 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         }
         print("登录")
         //"YuYDThdAlCw%2FAVszVVdT4HEld43gusD%2F6JtR1kBW6vyxu8gfkptQDUtiRAeA0lAF0Jy3Ull5eWQ2JcKa5wKHWtVR8RiBauqiedkUeyznS9ByLeGZSUtTq41mSAMd51%2Fljc8dFbmAajKHgaFrqukCko1PSr03YPdvoCv3pFYzHFw%3D"
-//        self.SVshowLoad()
+        self.SVshowLoad()
         weak var weakSelf = self
         dataVC.login(phoneNum: phoneStr, paseWord: keyStr, completion: { (data) in
-//            self.SVdismiss()
+            weakSelf?.SVdismiss()
             weakSelf?.dataModel = data as! LoginModelMapper
             print(String(describing: weakSelf?.dataModel.errno))
             print("名字"+String(describing: weakSelf?.dataModel.data.name))
@@ -234,7 +234,8 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
             }
             
         }) { (error) in
-            
+            weakSelf?.SVdismiss()
+            weakSelf?.SVshowErro(infoStr: "请求失败")
         }
     }
     

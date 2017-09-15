@@ -283,10 +283,10 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
         
         //注册请求
          weak var weakSelf = self
-
+        self.SVshowLoad()
         dataVC.register(phoneNum: phoneStr, paseWord: keyStr, verification: codeStr, completion: { (data) in
               weakSelf?.resdataModel = data as! ResModelMaper
-            
+            weakSelf?.SVdismiss()
             if weakSelf?.resdataModel.errno == 0 {
                 LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.resdataModel.data.id), token: String(describing: weakSelf?.resdataModel.data.token), ishaveinfo: "0", complate: { (data) in
                     let str:String = data as! String
@@ -310,6 +310,7 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
             
             
         }) { (erro) in
+            weakSelf?.SVdismiss()
             weakSelf?.SVshowErro(infoStr: "请求失败")
             
         }

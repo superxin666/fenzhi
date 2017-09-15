@@ -58,21 +58,24 @@ class BaseViewController: UIViewController {
 
     }
     
-    func SVshow(infoStr:String) {
-        SVProgressHUD.setDefaultStyle(.light)
-        SVProgressHUD.show(withStatus: infoStr)
-    }
+
     func SVshowErro(infoStr:String) {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.setMaximumDismissTimeInterval(1)
         SVProgressHUD.showError(withStatus: infoStr)
     }
     
-    func SVshowLoad() {
+    
+    func SVshow(infoStr:String) {
         SVProgressHUD.setDefaultStyle(.light)
-        SVProgressHUD.setInfoImage(#imageLiteral(resourceName: "icon_jz"))
+        SVProgressHUD.show(withStatus: infoStr)
+    }
+    
+    func SVshowLoad() {
+        SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show(withStatus: "正在努力加载中")
     }
+    
     
     func SVshowSuccess(infoStr:String) {
         SVProgressHUD.dismiss()

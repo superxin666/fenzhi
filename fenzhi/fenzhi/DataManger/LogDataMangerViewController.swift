@@ -23,8 +23,13 @@ class LogDataMangerViewController: FZRequestViewController {
         var model:LoginModelMapper = LoginModelMapper()
         Alamofire.request(url, method: .post).responseJSON { (returnResult) in
             print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
-              model = Mapper<LoginModelMapper>().map(JSON: returnResult.result.value as! [String : Any])!
-            completion(model)
+            if let json = returnResult.result.value {
+                model = Mapper<LoginModelMapper>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+
         }
         
     }
@@ -40,8 +45,14 @@ class LogDataMangerViewController: FZRequestViewController {
         var model:SmsModel = SmsModel()
         Alamofire.request(url, method: .post).responseJSON { (returnResult) in
             print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
-            model = Mapper<SmsModel>().map(JSON: returnResult.result.value as! [String : Any])!
-            completion(model)
+            
+            if let json = returnResult.result.value {
+                model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+            
         }
 
     }
@@ -58,8 +69,13 @@ class LogDataMangerViewController: FZRequestViewController {
             
             print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
         
-            model = Mapper<SmsModel>().map(JSON: returnResult.result.value as! [String : Any])!
-            completion(model)
+            if let json = returnResult.result.value {
+                model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+            
         }
         
         
@@ -77,8 +93,12 @@ class LogDataMangerViewController: FZRequestViewController {
         Alamofire.request(url, method: .post).responseJSON { (returnResult) in
             
             print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
-            model = Mapper<ResModelMaper>().map(JSON: returnResult.result.value as! [String : Any])!
-            completion(model)
+            if let json = returnResult.result.value {
+                model = Mapper<ResModelMaper>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
         }
 
         

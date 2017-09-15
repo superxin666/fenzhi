@@ -227,9 +227,10 @@ class ForgetViewController: BaseViewController,UITextFieldDelegate {
 
         //注册请求
         weak var weakSelf = self
-
+        self.SVshowLoad()
 
         dataVC.findpwd(phoneNum: phoneStr, paseWord: keyStr, verification: codeStr, completion: { (data) in
+            weakSelf?.SVdismiss()
             weakSelf?.findpwddataModel = data as! SmsModel
             if weakSelf?.findpwddataModel.errno == 0 {
                 //修改成功
@@ -241,7 +242,8 @@ class ForgetViewController: BaseViewController,UITextFieldDelegate {
             }
 
         }) { (erro) in
-            weakSelf?.KfbShowWithInfo(titleString: erro as! String)
+            weakSelf?.SVdismiss()
+            weakSelf?.SVshowErro(infoStr: "请求失败")
         }
 
 

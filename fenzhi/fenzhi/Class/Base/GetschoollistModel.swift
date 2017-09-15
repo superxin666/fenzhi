@@ -1,20 +1,23 @@
 //
-//  GetregionlistModel.swift
+//  GetschoollistModel.swift
 //  fenzhi
 //
 //  Created by lvxin on 2017/9/16.
 //  Copyright © 2017年 Xunqiu. All rights reserved.
-//  获取区域列表
+//
 
 import UIKit
 import ObjectMapper
 
-class GetregionlistModel_regionList: Mappable {
+class GetschoollistModel_schoolList: Mappable {
     var name : String = ""
     var id : String = ""
     var type : Int = 100
+    var provinceId : Int = 100
+    var cityId : Int = 100
+    var distId : Int = 100
+    var sortNum : Int = 100
     var status : Int = 100
-    var parent : Int = 100
 
 
     init() {}
@@ -28,14 +31,20 @@ class GetregionlistModel_regionList: Mappable {
         id <- map["id"]
         type <- map["type"]
         status <- map["status"]
-        parent <- map["parent"]
+        provinceId <- map["provinceId"]
+        cityId <- map["cityId"]
+        distId <- map["distId"]
+        sortNum <- map["sortNum"]
+        status <- map["status"]
     }
 }
 
-class GetregionlistModel_data: Mappable {
+class GetschoollistModel_data: Mappable {
 
-    var totalNum: Int = 0
-    var regionList : [GetregionlistModel_regionList] = []
+    var totalNum: Int = 1
+    var pageNum: Int = 1
+    var count: Int = 1
+    var schoolList : [GetschoollistModel_schoolList] = []
 
 
     init() {}
@@ -44,19 +53,22 @@ class GetregionlistModel_data: Mappable {
     }
     // Mappable
     func mapping(map: Map) {
+
         totalNum <- map["totalNum"]
-        regionList <- map["regionList"]
-        
+        pageNum <- map["pageNum"]
+        count <- map["count"]
+        schoolList <- map["schoolList"]
+
     }
+    
 }
 
-class GetregionlistModel: Mappable {
+class GetschoollistModel: Mappable {
 
     var errno: Int = 1
     var errmsg : String = ""
     var logId : String = ""
-    var data : GetregionlistModel_data = GetregionlistModel_data()
-
+    var data : GetschoollistModel_data = GetschoollistModel_data()
 
 
     init() {}
@@ -69,7 +81,8 @@ class GetregionlistModel: Mappable {
         errno <- map["errno"]
         errmsg <- map["errmsg"]
         logId <- map["logId"]
-        data  <- map["data"]
-
+        data <- map["data"]
+        
     }
+    
 }

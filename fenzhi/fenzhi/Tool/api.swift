@@ -30,7 +30,7 @@ let findpwd_api = "/api/user/findpwd?"
 //-------------------个人
 
 let getfollowlist_api = "/api/user/getfollowlist?"//获取关注列表接口
-let getfanslist_api = "/api/user/getfanslist?"//获取关注列表接口
-
-
+let getfanslist_api = "/api/user/getfanslist?"//获取区域列表接口
+let getschoollist_api = "/api/getschoollist?"//获取学校列表接口
+let getbooklist_api = "/api/getbooklist?"//获取教材列表接口
 

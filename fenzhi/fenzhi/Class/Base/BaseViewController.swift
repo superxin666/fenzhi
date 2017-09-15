@@ -8,11 +8,16 @@
 
 import UIKit
 import SVProgressHUD
+import MJRefresh
+
 class BaseViewController: UIViewController {
     
     let activityView:UIView = UIView(frame: CGRect(x: 0, y: -35, width: KSCREEN_WIDTH, height: 35))
     var activityLabel:UILabel = UILabel()
     var isShowing :Bool = false
+
+    let header = MJRefreshNormalHeader() //头部刷新
+    let footer = MJRefreshAutoNormalFooter() // 底部刷新
 
     override func viewDidLoad() {
         super.viewDidLoad()

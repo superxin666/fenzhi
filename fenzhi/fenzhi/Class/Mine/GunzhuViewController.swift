@@ -10,6 +10,17 @@ import UIKit
 let GUANZHUELLID = "GUANZHUCELL_ID"//
 
 class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+    var dataModel : FollowModel = FollowModel()//
+    let requestVC = MineDataManger()
+    var dataArr : [FollowModel_data_list] = []
+
+    var page :Int = 1
+    let count : Int = 10
+    var isShow :Bool = false
+
+
+
+
     let mainTabelView : UITableView = UITableView()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -22,12 +33,48 @@ class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         self.navigation_title_fontsize(name: "关注", fontsize: 27)
         self.view.backgroundColor = backView_COLOUR
         self.navigationBar_leftBtn()
-        self.creatTableView()
-        
+        self.getData()
+
+
+    }
+
+    func getData()  {
+        weak var weakSelf = self
+        //        self.SVshowLoad()
+        requestVC.getfollowlist(pageNum: page, count: 10, completion: { (data) in
+            //            weakSelf?.SVdismiss()
+            weakSelf?.dataModel = data as! FollowModel
+            if weakSelf?.dataModel.errno == 0 {
+                if !(weakSelf?.isShow)! {
+                    self.creatTableView()
+                }
+                //修改成功
+                if (weakSelf?.dataModel.data.followList.count)! > 0{
+                    KFBLog(message: "数组")
+                    weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.followList)!
+                    weakSelf?.mainTabelView.reloadData()
+                } else {
+                    weakSelf?.SVshowErro(infoStr: "没有数据了")
+                }
+
+
+            } else {
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
+
+            }
+            weakSelf?.mainTabelView.mj_footer.endRefreshing()
+            
+        }) { (erro) in
+                 weakSelf?.SVshowErro(infoStr: "请求失败")
+
+        }
+
+
     }
     
     //MARK:tableView
     func creatTableView() {
+        self.isShow = true
         mainTabelView.frame = CGRect(x: 0, y: ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15))
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
@@ -37,17 +84,24 @@ class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         mainTabelView.register(GuanzhuTableViewCell.self, forCellReuseIdentifier: GUANZHUELLID)
+        mainTabelView.mj_footer = footer
+        footer.setRefreshingTarget(self, refreshingAction: #selector(GunzhuViewController.loadMoreData))
         self.view.addSubview(mainTabelView)
         
     }
-    
+    func loadMoreData() {
+        page = page + 1
+        self.getData()
+
+    }
+
     // MARK: tableView 代理
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return self.dataArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,8 +113,10 @@ class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         if (cell == nil)  {
             cell = GuanzhuTableViewCell(style: .default, reuseIdentifier: GUANZHUELLID)
         }
-        cell.setUpUIWithModel_cellType(type: .guanzhu)
-        weak var weakself = self
+        if indexPath.row < self.dataArr.count {
+            cell.setUpUIWithModel_cellType(type: .guanzhu,model:self.dataArr[indexPath.row])
+        }
+//        weak var weakself = self
 //        cell.IconImageViewBlock = { () in
 //            print("头像点击")
 //            let vc = UserInfoViewController()

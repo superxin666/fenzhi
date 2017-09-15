@@ -25,5 +25,10 @@ let sms_api = "/api/sendsms?"
 let register_api = "/api/user/register?"
 let findpwd_api = "/api/user/findpwd?"
 
+//-------------------个人
+
+let getfollowlist_api = "/api/user/getfollowlist?"//获取关注列表接口
+
+
 
 

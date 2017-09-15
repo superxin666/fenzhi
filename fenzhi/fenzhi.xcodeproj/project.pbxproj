@@ -33,6 +33,7 @@
 		215822201F6C2012002BC6E6 /* MineDataManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2158221F1F6C2012002BC6E6 /* MineDataManger.swift */; };
 		215822231F6C2122002BC6E6 /* FollowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822221F6C2122002BC6E6 /* FollowModel.swift */; };
 		215822271F6C3033002BC6E6 /* NoWifiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822261F6C3033002BC6E6 /* NoWifiView.swift */; };
+		215822291F6C3D7A002BC6E6 /* UIView+clipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */; };
 		2178823B1F67E43D00365735 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2178823A1F67E43D00365735 /* RSA.m */; };
 		21BBF7FB1F6BB13B008D654D /* UserInfoHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */; };
 		21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */; };
@@ -108,6 +109,7 @@
 		2158221F1F6C2012002BC6E6 /* MineDataManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineDataManger.swift; sourceTree = "<group>"; };
 		215822221F6C2122002BC6E6 /* FollowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowModel.swift; sourceTree = "<group>"; };
 		215822261F6C3033002BC6E6 /* NoWifiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoWifiView.swift; sourceTree = "<group>"; };
+		215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+clipping.swift"; sourceTree = "<group>"; };
 		217882381F67E39C00365735 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		217882391F67E43D00365735 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
 		2178823A1F67E43D00365735 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 		21062ADF1F603E9E0003C7C4 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */,
 				2154EBAC1F68205900C992D1 /* RSAUtils.swift */,
 				217882391F67E43D00365735 /* RSA.h */,
 				2178823A1F67E43D00365735 /* RSA.m */,
@@ -693,6 +696,7 @@
 				213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */,
 				21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */,
 				21FB3EAC1F66367500656B74 /* SettingViewController.swift in Sources */,
+				215822291F6C3D7A002BC6E6 /* UIView+clipping.swift in Sources */,
 				21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */,
 				21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */,
 				21570C921F6579ED003C7D38 /* UserInfoViewController.swift in Sources */,

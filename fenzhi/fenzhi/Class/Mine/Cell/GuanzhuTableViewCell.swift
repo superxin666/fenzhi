@@ -23,6 +23,7 @@ class GuanzhuTableViewCell: UITableViewCell {
         let iconImageView:UIImageView = UIImageView(frame: CGRect(x: ip7(27), y:  (viewH - ip7(50))/2, width: ip7(50), height: ip7(50) ))
         iconImageView.kf.setImage(with: URL(string: model.avatar))
         iconImageView.isUserInteractionEnabled = true
+        iconImageView.kfb_makeRound()
         self.addSubview(iconImageView)
         
     

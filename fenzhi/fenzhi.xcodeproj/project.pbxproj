@@ -31,6 +31,7 @@
 		21570C921F6579ED003C7D38 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C911F6579ED003C7D38 /* UserInfoViewController.swift */; };
 		21570C951F659002003C7D38 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C941F659002003C7D38 /* MainTableViewCell.swift */; };
 		2178823B1F67E43D00365735 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2178823A1F67E43D00365735 /* RSA.m */; };
+		21BBF7FB1F6BB13B008D654D /* UserInfoHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */; };
 		21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD78761F618C1600539E8D /* BaseViewController.swift */; };
 		21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AD1F6A54DE00806B62 /* ResModel.swift */; };
 		21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */; };
@@ -102,6 +103,7 @@
 		217882381F67E39C00365735 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		217882391F67E43D00365735 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
 		2178823A1F67E43D00365735 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
+		21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoHeadView.swift; sourceTree = "<group>"; };
 		21BD78761F618C1600539E8D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		21EE65AD1F6A54DE00806B62 /* ResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModel.swift; sourceTree = "<group>"; };
 		21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModelMaper.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				21570C941F659002003C7D38 /* MainTableViewCell.swift */,
+				21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */,
 				215592311F66D2800091A822 /* LoginViewController.swift in Sources */,
 				214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */,
+				21BBF7FB1F6BB13B008D654D /* UserInfoHeadView.swift in Sources */,
 				21F1C5A01F6924EB002FC28A /* InfoViewController.swift in Sources */,
 				21570C8D1F653572003C7D38 /* api.swift in Sources */,
 				215043651F6AD179009546D2 /* pdfViewController.swift in Sources */,

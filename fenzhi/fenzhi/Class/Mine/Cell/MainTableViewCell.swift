@@ -17,10 +17,6 @@ class MainTableViewCell: UITableViewCell {
 
     func setUpUIWith(name : String, image : UIImage, index : Int) {
         var height = ip7(80)
-        if index == 3 {
-            height = ip7(95)
-        }
-
         //头像
         let iconImageView:UIImageView = UIImageView(frame: CGRect(x: ip7(46), y: (height - ip7(30))/2, width: ip7(30), height: ip7(30)))
         iconImageView.image = image
@@ -41,12 +37,13 @@ class MainTableViewCell: UITableViewCell {
         let lineView = UIView()
         let lineViewY = height - 0.5
         lineView.frame = CGRect(x: 0, y: lineViewY, width: KSCREEN_WIDTH, height: 0.5)
-        lineView.backgroundColor = FZColorFromRGB(rgbValue: 0xaaaaaa)
+        lineView.backgroundColor = lineView_thin_COLOUR
         if index == 1 || index == 4{
             lineView.isHidden = true
         } else if index == 3 {
+            height = ip7(95)
             lineView.backgroundColor = backView_COLOUR
-            lineView.frame = CGRect(x: 0, y: lineViewY - 14.5 , width: KSCREEN_WIDTH, height: ip7(15))
+            lineView.frame = CGRect(x: 0, y: height - 14.5 , width: KSCREEN_WIDTH, height: ip7(15))
         }
         self.addSubview(lineView)
         

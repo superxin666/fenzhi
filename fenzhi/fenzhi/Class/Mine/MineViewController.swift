@@ -24,10 +24,25 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
         // Do any additional setup after loading the view.
         self.view.backgroundColor = backView_COLOUR
+        self.creatTopView()
+        self.creatTableView()
+    }
+    
+    func creatTopView() {
         topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(382))
         topBackView.creatHeadView()
+        topBackView.guanzhuViewBlock = { () in
+            let vc :GunzhuViewController = GunzhuViewController()
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+        topBackView.fensiViewBlock = {() in
+        
+        
+        }
         self.view.addSubview(topBackView)
-        self.creatTableView()
+        
     }
    
     func creatTableView() {

@@ -32,6 +32,8 @@
 		21570C951F659002003C7D38 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C941F659002003C7D38 /* MainTableViewCell.swift */; };
 		2178823B1F67E43D00365735 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2178823A1F67E43D00365735 /* RSA.m */; };
 		21BBF7FB1F6BB13B008D654D /* UserInfoHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */; };
+		21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */; };
+		21BBF7FF1F6BC385008D654D /* GuanzhuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FE1F6BC385008D654D /* GuanzhuTableViewCell.swift */; };
 		21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD78761F618C1600539E8D /* BaseViewController.swift */; };
 		21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AD1F6A54DE00806B62 /* ResModel.swift */; };
 		21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */; };
@@ -104,6 +106,8 @@
 		217882391F67E43D00365735 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
 		2178823A1F67E43D00365735 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
 		21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoHeadView.swift; sourceTree = "<group>"; };
+		21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GunzhuViewController.swift; sourceTree = "<group>"; };
+		21BBF7FE1F6BC385008D654D /* GuanzhuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuanzhuTableViewCell.swift; sourceTree = "<group>"; };
 		21BD78761F618C1600539E8D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		21EE65AD1F6A54DE00806B62 /* ResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModel.swift; sourceTree = "<group>"; };
 		21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModelMaper.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 				21062ADB1F6039640003C7C4 /* MineViewController.swift */,
 				21FB3EAB1F66367500656B74 /* SettingViewController.swift */,
 				21570C911F6579ED003C7D38 /* UserInfoViewController.swift */,
+				21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 			children = (
 				21570C941F659002003C7D38 /* MainTableViewCell.swift */,
 				21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */,
+				21BBF7FE1F6BC385008D654D /* GuanzhuTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -655,6 +661,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21F1C59E1F691CAF002FC28A /* SmsModel.swift in Sources */,
+				21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */,
 				21F1C5981F68E002002FC28A /* UserInfoModel.swift in Sources */,
 				2178823B1F67E43D00365735 /* RSA.m in Sources */,
 				214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */,
@@ -674,6 +681,7 @@
 				21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */,
 				21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */,
 				21570C8F1F653CB2003C7D38 /* fzStr.swift in Sources */,
+				21BBF7FF1F6BC385008D654D /* GuanzhuTableViewCell.swift in Sources */,
 				21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */,
 				21FB3EAE1F66392200656B74 /* TeachTableViewCell.swift in Sources */,
 				21570C951F659002003C7D38 /* MainTableViewCell.swift in Sources */,

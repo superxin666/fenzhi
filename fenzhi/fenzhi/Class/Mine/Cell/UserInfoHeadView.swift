@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+typealias UserInfoHeadViewBlock = ()->()
 class UserInfoHeadView: UIView {
 
     /*
@@ -17,8 +17,8 @@ class UserInfoHeadView: UIView {
         // Drawing code
     }
     */
-    
-    
+    var guanzhuViewBlock : UserInfoHeadViewBlock!
+    var fensiViewBlock : UserInfoHeadViewBlock!
 
     func creatHeadView() {
         self.backgroundColor = .white
@@ -59,7 +59,16 @@ class UserInfoHeadView: UIView {
         let viewWidth = KSCREEN_WIDTH / 4
         //底部按钮
         for i in 0...3 {
+            
             let view = UIView(frame: CGRect(x: viewWidth * CGFloat(i), y: backImageView.frame.maxY, width: viewWidth, height: ip7(92)))
+            view.tag = i
+            view.isUserInteractionEnabled = true
+            
+            
+            let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserInfoHeadView.iconImageClick(tapGesture:)))
+        
+            
+            view.addGestureRecognizer(tap)
             
             let lable : UILabel = UILabel(frame: CGRect(x: 0, y:  ip7(19), width: viewWidth, height: ip7(21)))
             lable.text = "200"
@@ -80,6 +89,28 @@ class UserInfoHeadView: UIView {
             
         }
         
+    }
+    
+    
+    func iconImageClick(tapGesture:UITapGestureRecognizer) {
+        let tagNum = tapGesture.view!.tag
+        if tagNum == 0 {
+            KFBLog(message: "关注")
+            if let _ = guanzhuViewBlock  {
+                guanzhuViewBlock()
+            }
+            
+        } else if tagNum == 1{
+            
+            KFBLog(message: "粉丝")
+            if let _ = fensiViewBlock  {
+                fensiViewBlock()
+            }
+        
+        
+        }
+        
+    
     }
 
 

@@ -12,6 +12,7 @@
 		21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062ADD1F60396F0003C7C4 /* RecordViewController.swift */; };
 		21062AE11F603EA90003C7C4 /* pch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062AE01F603EA90003C7C4 /* pch.swift */; };
 		2112E91A1F6C434F0066CF5B /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E9191F6C434F0066CF5B /* CommonModel.swift */; };
+		2112E91C1F6C47360066CF5B /* GetregionlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */; };
 		213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF84D1F60317300D60AE5 /* AppDelegate.swift */; };
 		213BF8501F60317300D60AE5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF84F1F60317300D60AE5 /* ViewController.swift */; };
 		213BF8531F60317300D60AE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213BF8511F60317300D60AE5 /* Main.storyboard */; };
@@ -84,6 +85,7 @@
 		21062ADD1F60396F0003C7C4 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		21062AE01F603EA90003C7C4 /* pch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pch.swift; sourceTree = "<group>"; };
 		2112E9191F6C434F0066CF5B /* CommonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
+		2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetregionlistModel.swift; sourceTree = "<group>"; };
 		213BF84A1F60317300D60AE5 /* fenzhi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fenzhi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		213BF84D1F60317300D60AE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		213BF84F1F60317300D60AE5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				21BD78761F618C1600539E8D /* BaseViewController.swift */,
 				215822261F6C3033002BC6E6 /* NoWifiView.swift */,
 				2112E9191F6C434F0066CF5B /* CommonModel.swift */,
+				2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -698,6 +701,7 @@
 				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
 				21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */,
 				215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */,
+				2112E91C1F6C47360066CF5B /* GetregionlistModel.swift in Sources */,
 				21FA059F1F6783A20083EFD4 /* LogDataMangerViewController.swift in Sources */,
 				21EE65B31F6A7C1900806B62 /* UpIconTableViewCell.swift in Sources */,
 				213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */,

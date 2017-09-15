@@ -44,7 +44,7 @@ class FollowModel_data: Mappable {
     var pageNum: Int = 0
     var count: Int = 0
     var followList: [FollowModel_data_list] = []
-
+    var fansList: [FollowModel_data_list] = []
     init() {}
     required init?(map: Map){
         mapping(map: map)
@@ -56,6 +56,7 @@ class FollowModel_data: Mappable {
         pageNum <- map["pageNum"]
         count <- map["count"]
         followList <- map["followList"]
+        fansList <- map["fansList"]
         
     }
 }

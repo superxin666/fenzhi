@@ -28,7 +28,7 @@ let findpwd_api = "/api/user/findpwd?"
 //-------------------个人
 
 let getfollowlist_api = "/api/user/getfollowlist?"//获取关注列表接口
-
+let getfanslist_api = "/api/user/getfanslist?"//获取关注列表接口
 
 
 

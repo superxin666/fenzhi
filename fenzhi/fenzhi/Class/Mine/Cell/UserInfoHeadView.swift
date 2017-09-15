@@ -107,7 +107,6 @@ class UserInfoHeadView: UIView {
                 fensiViewBlock()
             }
         
-        
         }
         
     

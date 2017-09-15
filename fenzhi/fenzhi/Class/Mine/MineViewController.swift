@@ -34,13 +34,19 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         topBackView.guanzhuViewBlock = { () in
             let vc :GunzhuViewController = GunzhuViewController()
             vc.hidesBottomBarWhenPushed = true
+            vc.vctype = .guanzhu_vc
             self.navigationController?.pushViewController(vc, animated: true)
             
         }
-        topBackView.fensiViewBlock = {() in
-        
-        
+        topBackView.fensiViewBlock = { () in
+            KFBLog(message: "点击")
+            let vc :GunzhuViewController = GunzhuViewController()
+            vc.hidesBottomBarWhenPushed = true
+            vc.vctype = .fensi_vc
+            self.navigationController?.pushViewController(vc, animated: true)
+
         }
+
         self.view.addSubview(topBackView)
         
     }

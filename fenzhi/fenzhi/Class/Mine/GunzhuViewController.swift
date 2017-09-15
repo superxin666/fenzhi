@@ -8,8 +8,13 @@
 
 import UIKit
 let GUANZHUELLID = "GUANZHUCELL_ID"//
-
+enum VCType_GUZNHU {
+    case guanzhu_vc
+    case fensi_vc
+}
 class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+
+    var vctype :VCType_GUZNHU!
     var dataModel : FollowModel = FollowModel()//
     let requestVC = MineDataManger()
     var dataArr : [FollowModel_data_list] = []
@@ -30,13 +35,54 @@ class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigation_title_fontsize(name: "关注", fontsize: 27)
+
         self.view.backgroundColor = backView_COLOUR
         self.navigationBar_leftBtn()
         self.creatTableView()
-        self.getData()
+        if vctype == .guanzhu_vc {
+            self.navigation_title_fontsize(name: "关注", fontsize: 27)
+            self.getData()
+        } else {
+            self.navigation_title_fontsize(name: "粉丝", fontsize: 27)
+            self.getFensiData()
+        }
 
 
+
+    }
+
+    func getFensiData()  {
+        weak var weakSelf = self
+        self.SVshowLoad()
+        requestVC.getfanslist(pageNum: page, count: 10, completion: { (data) in
+            weakSelf?.SVdismiss()
+            weakSelf?.dataModel = data as! FollowModel
+            if weakSelf?.dataModel.errno == 0 {
+                //修改成功
+                if (weakSelf?.dataModel.data.fansList.count)! > 0{
+                    KFBLog(message: "数组")
+                    weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.fansList)!
+                    weakSelf?.mainTabelView.reloadData()
+                } else {
+                    if weakSelf?.dataArr.count == 0 {
+                        weakSelf?.mainTabelView.removeFromSuperview()
+                        weakSelf?.view.addSubview(self.showNoData())
+                    } else {
+                        weakSelf?.SVshowErro(infoStr: "没有数据了")
+                    }
+
+                }
+
+
+            } else {
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
+
+            }
+            weakSelf?.mainTabelView.mj_footer.endRefreshing()
+
+        }) { (erro) in
+            weakSelf?.SVshowErro(infoStr: "请求失败")
+        }
     }
 
     func getData()  {
@@ -72,8 +118,6 @@ class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                  weakSelf?.SVshowErro(infoStr: "请求失败")
 
         }
-
-
     }
     
     //MARK:tableView

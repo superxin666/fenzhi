@@ -91,6 +91,7 @@ class BaseViewController: UIViewController {
     
     func SVshowLoad() {
         SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setMinimumDismissTimeInterval(1)
         SVProgressHUD.show(withStatus: "正在努力加载中")
     }
     

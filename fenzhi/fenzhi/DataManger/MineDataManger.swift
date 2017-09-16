@@ -15,6 +15,14 @@ class MineDataManger: FZRequestViewController {
 
 
 
+
+    /// 获取关注列表
+    ///
+    /// - Parameters:
+    ///   - pageNum: 	页码
+    ///   - count: 	每页的条数
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
     func getfollowlist(pageNum : Int, count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
 //
         let urlStr = BASER_API + getfollowlist_api + "pageNum="+"\(pageNum)"+"&count="+"\(count)"+last_pra
@@ -33,6 +41,14 @@ class MineDataManger: FZRequestViewController {
         
     }
 
+
+    /// 获取粉丝列表接口
+    ///
+    /// - Parameters:
+    ///   - pageNum: pageNum
+    ///   - count: count
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
     func getfanslist(pageNum : Int, count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
         let urlStr = BASER_API + getfanslist_api + "pageNum="+"\(pageNum)"+"&count="+"\(count)"+last_pra
@@ -50,6 +66,35 @@ class MineDataManger: FZRequestViewController {
         }
         
     }
+
+
+    /// 用户个人信息接口
+    ///
+    /// - Parameters:
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
+    func info( completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+
+//        let token = self.getToken_RSA()
+
+        //15910901725  + "token="+token
+        let url = BASER_API + info_api
+        print("编码"+url)
+        var model:LoginModelMapper = LoginModelMapper()
+        Alamofire.request(url, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<LoginModelMapper>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+
+        }
+
+    }
+
+
 
 
 

@@ -26,9 +26,19 @@ class UserInfoModel: Mappable {
     var subject: Int = 0
     var updateTime: String = ""
     var token: String = ""
-    
-    
-    
+
+
+    var subjectName: String = ""
+    var gradeName: String = ""
+    var provinceName: String = ""
+    var cityName: String = ""
+    var districtName: String = ""
+    var schoolName: String = ""
+    var bookName: String = ""
+    var versionName: String = ""
+
+
+
     init() {}
     required init?(map: Map){
         mapping(map: map)
@@ -49,6 +59,15 @@ class UserInfoModel: Mappable {
         subject <- map["subject"]
         updateTime <- map["updateTime"]
         token <- map["token"]
+
+        subjectName <- map["subjectName"]
+        gradeName <- map["gradeName"]
+        provinceName <- map["provinceName"]
+        cityName <- map["cityName"]
+        districtName <- map["districtName"]
+        schoolName <- map["schoolName"]
+        bookName <- map["bookName"]
+        versionName <- map["versionName"]
 
     }
 

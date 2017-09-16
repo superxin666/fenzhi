@@ -36,8 +36,17 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     }
 
     func getData() {
-        dataVC.getCommon(completion: { (data) in
-            
+        weak var weakSelf = self
+//        dataVC.getgetregionlist(parentId: 0, completion: { (data) in
+//            let model : GetregionlistModel = data as! GetregionlistModel
+//            KFBLog(message: model.data.regionList.count)
+//        }) { (erro) in
+//
+//        }
+
+        dataVC.getschoollist(regionId: 33, type: 2, pageNum: 1, count: 10, completion: { (data) in
+            let model : GetschoollistModel = data as! GetschoollistModel
+            KFBLog(message: model.data.schoolList.count)
         }) { (erro) in
 
         }

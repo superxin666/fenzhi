@@ -20,6 +20,18 @@ class UserInfoHeadView: UIView {
     var guanzhuViewBlock : UserInfoHeadViewBlock!
     var fensiViewBlock : UserInfoHeadViewBlock!
 
+    var iconImageView :UIImageView!
+    var nameLabel :UILabel!
+    var dressLabel :UILabel!
+    var infoLabel :UILabel!
+
+    var guanzhuLabel :UILabel!
+    var fensiLabel :UILabel!
+    var zanLabel :UILabel!
+    var shoucangLabel :UILabel!
+
+
+
     func creatHeadView() {
         self.backgroundColor = .white
         //背景图
@@ -28,28 +40,29 @@ class UserInfoHeadView: UIView {
         self.addSubview(backImageView)
         
         //头像
-        let iconImageView = UIImageView(image: #imageLiteral(resourceName: "touxiang"))
+        iconImageView = UIImageView(image: #imageLiteral(resourceName: "touxiang"))
         iconImageView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(70))/2, y: LNAVIGATION_HEIGHT, width: ip7(70), height: ip7(70))
+        iconImageView.kfb_makeRound()
         self.addSubview(iconImageView)
-        
+
         //名字
-        let nameLabel : UILabel = UILabel(frame: CGRect(x: 0, y:  iconImageView.frame.maxY +  ip7(15), width: KSCREEN_WIDTH, height: ip7(26)))
-        nameLabel.text = "尼古拉斯赵四"
+        nameLabel = UILabel(frame: CGRect(x: 0, y:  iconImageView.frame.maxY +  ip7(15), width: KSCREEN_WIDTH, height: ip7(26)))
+//        nameLabel.text = "尼古拉斯赵四"
         nameLabel.textColor = .white
         nameLabel.font = fzFont_Medium(ip7(26))
         nameLabel.textAlignment = .center
         self.addSubview(nameLabel)
         //住址
-        let dressLabel : UILabel = UILabel(frame: CGRect(x: 0, y:  nameLabel.frame.maxY +  ip7(15), width: KSCREEN_WIDTH, height: ip7(21)))
-        dressLabel.text = "北京 东城区 红磨坊小学 三年级"
+        dressLabel  = UILabel(frame: CGRect(x: 0, y:  nameLabel.frame.maxY +  ip7(15), width: KSCREEN_WIDTH, height: ip7(21)))
+//        dressLabel.text = "北京 东城区 红磨坊小学 三年级"
         dressLabel.textColor = .white
         dressLabel.font = fzFont_Thin(ip7(21))
         dressLabel.textAlignment = .center
         self.addSubview(dressLabel)
         
         //信息
-        let infoLabel : UILabel = UILabel(frame: CGRect(x: 0, y:  dressLabel.frame.maxY +  ip7(5), width: KSCREEN_WIDTH, height: ip7(21)))
-        infoLabel.text = "语文老师 人教版"
+        infoLabel = UILabel(frame: CGRect(x: 0, y:  dressLabel.frame.maxY +  ip7(5), width: KSCREEN_WIDTH, height: ip7(21)))
+//        infoLabel.text = "语文老师 人教版"
         infoLabel.textColor = .white
         infoLabel.font = fzFont_Thin(ip7(21))
         infoLabel.textAlignment = .center
@@ -71,13 +84,24 @@ class UserInfoHeadView: UIView {
             view.addGestureRecognizer(tap)
             
             let lable : UILabel = UILabel(frame: CGRect(x: 0, y:  ip7(19), width: viewWidth, height: ip7(21)))
-            lable.text = "200"
             lable.font = fzFont_Thin(ip7(21))
+            lable.text = "--"
             lable.textColor = FZColorFromRGB(rgbValue: 0x666666)
             lable.textAlignment = .center
             lable.adjustsFontSizeToFitWidth = true
             view.addSubview(lable)
-            
+            switch i {
+            case 0:
+                guanzhuLabel = lable
+            case 1:
+                fensiLabel = lable
+            case 2:
+                zanLabel = lable
+            default:
+                shoucangLabel = lable
+            }
+
+
             let lable2 : UILabel = UILabel(frame: CGRect(x: 0, y: lable.frame.maxY + ip7(10), width: viewWidth, height: ip7(21)))
             lable2.text = nameArr[i]
             lable2.font = fzFont_Thin(ip7(21))
@@ -89,6 +113,14 @@ class UserInfoHeadView: UIView {
             
         }
         
+    }
+
+    func setUpData(model : UserInfoModel) {
+        iconImageView.kf.setImage(with: URL(string: model.avatar))
+        nameLabel.text = model.name
+        dressLabel.text = model.cityName+" "+model.districtName+" "+model.schoolName+" "+model.gradeName
+        infoLabel.text = model.subjectName+" "+model.versionName
+
     }
     
     

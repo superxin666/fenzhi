@@ -13,7 +13,7 @@ let LOGINUDSTR = "LOGININLOGINID"
 let ISLOGINSTR = "ISHAVELOGIN"
 let ISHAVEINFOSTR = "ISHAVEINFO"
 class LoginModelMapper: Mappable {
-    var errno: Int = 0
+    var errno: Int = 100
     var errmsg : String = ""
     var data :  UserInfoModel = UserInfoModel()//
     

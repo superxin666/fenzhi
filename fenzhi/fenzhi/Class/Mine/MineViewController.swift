@@ -13,6 +13,9 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     let topBackView : UserInfoHeadView = UserInfoHeadView()
     let cellNameArr = ["我的消息","我的收藏","我的赞赏","我的收入","设置"]
     let cellIconNameArr = [#imageLiteral(resourceName: "icon_wdxx"),#imageLiteral(resourceName: "icon_wdsc"),#imageLiteral(resourceName: "icon_wdzs"),#imageLiteral(resourceName: "icon_wdsr"),#imageLiteral(resourceName: "icon_sz")]
+    let requestVC = MineDataManger()
+    var dataModel : LoginModelMapper = LoginModelMapper()
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,7 +29,26 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         self.view.backgroundColor = backView_COLOUR
         self.creatTopView()
         self.creatTableView()
+        self.getData()
     }
+
+    func getData() {
+        weak var weakSelf = self
+        requestVC.info(completion: { (data) in
+            weakSelf?.dataModel = data as! LoginModelMapper
+            if weakSelf?.dataModel.errno == 0 {
+                weakSelf?.headViewSetData()
+            }
+        }) { (erro) in
+
+        }
+    }
+
+    func headViewSetData() {
+        topBackView.setUpData(model: dataModel.data)
+
+    }
+
     
     func creatTopView() {
         topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(382))

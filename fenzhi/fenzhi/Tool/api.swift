@@ -33,4 +33,5 @@ let getfollowlist_api = "/api/user/getfollowlist?"//获取关注列表接口
 let getfanslist_api = "/api/user/getfanslist?"//获取区域列表接口
 let getschoollist_api = "/api/getschoollist?"//获取学校列表接口
 let getbooklist_api = "/api/getbooklist?"//获取教材列表接口
-
+let getfavoritelist_api = "/api/user/getfavoritelist?"//获取收藏列表接口
+let getzanlist_api = "/api/user/getzanlist?"//获取赞赏列表接口

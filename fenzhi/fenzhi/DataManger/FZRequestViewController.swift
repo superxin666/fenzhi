@@ -12,13 +12,7 @@ class FZRequestViewController: UIViewController {
      let last_pra = "&client=iphone&version="+"".getAppVersion()
      let last_pra_log = "&device=1&deviceId="+"".getAppVersion()
 
+     let token_pra="&token=" + "".getToken_RSA()
 
-
-
-    func getToken_RSA() -> String {
-        let token = LoginModelMapper.getLoginIdAndTokenInUD().tokenStr
-        let token_rsa = RSA.encryptString(token, publicKey: pubkey)
-        return token_rsa!
-    }
 
 }

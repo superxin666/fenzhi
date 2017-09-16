@@ -121,10 +121,19 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         if indexPath.row == 0 {
             
         } else if indexPath.row == 1 {
-            
+            //shoucang
+            let vc : ShoucangViewController = ShoucangViewController()
+            vc.hidesBottomBarWhenPushed = true
+            vc.vctype = .shoucang_vc
+            self.navigationController?.pushViewController(vc, animated: true)
+
         } else if indexPath.row == 2{
-        
-        
+            let vc : ShoucangViewController = ShoucangViewController()
+            vc.hidesBottomBarWhenPushed = true
+            vc.vctype = .zanshang_vc
+            self.navigationController?.pushViewController(vc, animated: true)
+
+
         } else if indexPath.row == 3{
         
         

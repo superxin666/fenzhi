@@ -63,6 +63,14 @@ extension String {
         }
     }
 
+
+    func getToken_RSA() -> String {
+        let token:String!  = LoginModelMapper.getLoginIdAndTokenInUD().tokenStr
+        KFBLog(message: "token   "+token)
+//        let token_rsa = RSA.encryptString(token, publicKey: pubkey)
+        return "eyJ0b2tlbiI6IjE0Zjk0ODU4MjI0YzQwMGZmMjQyNzY2MmY1ZjI0MTNjIiwic2VjcmV0IjoiN2FlMTcxY2NiM2M4NjIyN2E1ZGZkOGNiMTEzZDA0MmUifQ=="
+    }
+
     /// 判断是否为空字符串
     ///
     /// - parameter str: 字符串

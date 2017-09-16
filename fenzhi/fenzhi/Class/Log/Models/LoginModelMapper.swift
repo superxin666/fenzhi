@@ -58,7 +58,7 @@ class LoginModelMapper: Mappable {
         if loginStr == nil {
             loginStr = ""
         }
-        var tokenStr :String? = UserDefaults.standard.value(forKey: TOKENUDSTR) as! String?
+        var tokenStr :String! = UserDefaults.standard.value(forKey: TOKENUDSTR) as! String!
         if tokenStr == nil {
             tokenStr = ""
         }
@@ -66,6 +66,6 @@ class LoginModelMapper: Mappable {
         if ishaveinfoStr == nil {
             ishaveinfoStr = ""
         }
-        return (loginStr!,tokenStr!,isloginStr!,ishaveinfoStr!)
+        return (loginStr!,tokenStr,isloginStr!,ishaveinfoStr!)
     }
 }

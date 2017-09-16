@@ -139,7 +139,11 @@ class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
     func loadMoreData() {
         page = page + 1
-        self.getData()
+        if vctype == .guanzhu_vc {
+            self.getData()
+        } else {
+            self.getFensiData()
+        }
 
     }
 

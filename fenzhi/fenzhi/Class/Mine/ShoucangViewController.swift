@@ -36,7 +36,7 @@ class ShoucangViewController: BaseViewController ,UITableViewDelegate,UITableVie
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
+        self.edgesForExtendedLayout = UIRectEdge.bottom
         self.view.backgroundColor = backView_COLOUR
         self.navigationBar_leftBtn()
         self.creatTableView()
@@ -126,7 +126,7 @@ class ShoucangViewController: BaseViewController ,UITableViewDelegate,UITableVie
     //MARK:tableView
     func creatTableView() {
         self.isShow = true
-        mainTabelView.frame = CGRect(x: 0, y:LNAVIGATION_HEIGHT +  ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15) - LNAVIGATION_HEIGHT)
+        mainTabelView.frame = CGRect(x: 0, y: ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15))
         mainTabelView.backgroundColor = UIColor.white
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -137,13 +137,17 @@ class ShoucangViewController: BaseViewController ,UITableViewDelegate,UITableVie
         mainTabelView.register(ShoucangTableViewCell.self, forCellReuseIdentifier: SHOUCANGELLID)
         mainTabelView.register(ZanshangTableViewCell.self, forCellReuseIdentifier: ZANGSHANGELLID)
         mainTabelView.mj_footer = footer
-        footer.setRefreshingTarget(self, refreshingAction: #selector(GunzhuViewController.loadMoreData))
+        footer.setRefreshingTarget(self, refreshingAction: #selector(ShoucangViewController.loadMoreData))
         self.view.addSubview(mainTabelView)
 
     }
     func loadMoreData() {
         page = page + 1
-        self.getData()
+        if vctype == .shoucang_vc {
+            self.getData()
+        } else {
+            self.getzanData()
+        }
 
     }
 
@@ -163,7 +167,7 @@ class ShoucangViewController: BaseViewController ,UITableViewDelegate,UITableVie
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
             if (cell == nil)  {
-                cell = ShoucangTableViewCell(style: .default, reuseIdentifier: GUANZHUELLID)
+                cell = ShoucangTableViewCell(style: .default, reuseIdentifier: SHOUCANGELLID)
             }
             if indexPath.row < self.dataArr.count {
                 cell.setUpUIWithModel_cellType(model: self.dataArr[indexPath.row])
@@ -182,11 +186,10 @@ class ShoucangViewController: BaseViewController ,UITableViewDelegate,UITableVie
             return cell;
         }
 
-
-
-
-
     }
+
+
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         if vctype == .shoucang_vc {
             return ip7(95);
@@ -194,6 +197,10 @@ class ShoucangViewController: BaseViewController ,UITableViewDelegate,UITableVie
             return ip7(155);
         }
 
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
     }
     
     override func navigationLeftBtnClick() {

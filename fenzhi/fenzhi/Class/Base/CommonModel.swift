@@ -11,7 +11,7 @@ import ObjectMapper
 class CommonModel_data_regionList: Mappable {
 
     var name : String = ""
-    var id : String = ""
+    var id : Int = 1000
     var type : String = ""
     var status : String = ""
 

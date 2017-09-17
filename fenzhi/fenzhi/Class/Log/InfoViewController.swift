@@ -15,7 +15,7 @@ enum InfoView_Type {
     case other
 }
 
-class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource{
     var type :InfoView_Type!
     let dataVC = CommonDataMangerViewController()
     var iconImage : UIImage = UIImage()
@@ -25,32 +25,183 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     let mainTabelView : UITableView = UITableView()
     let nameArr = ["","姓名","地区","学校","年级","学科","教材版本",]
     let plaNameArr = ["","输入您的名字","请选择您所在的地区","请选择您所在学校","请选择您所在学校年级","请选择您所教学科","请选择您所用教材版本",]
+
+    var versionArr:[CommonModel_data_version] = Array()//教材版本
+    var subjectArr:[CommonModel_data_subject] = Array()//学科
+    var gradeArr:[CommonModel_data_grade] = Array()//年级
+    var regionListArr:[CommonModel_data_regionList] = Array()//区域
+    var currectNum:Int!
+
+    var avatarStr = ""
+    var nameStr = ""
+
+    var provinceNum:Int!
+    var cityNum:Int!
+    var districtNum:Int!
+
+    var schoolNum:Int!
+    var gradeNum:Int!
+    var subjectNum:Int!
+    var bookNum:Int!
+
+    var pickerView:UIPickerView = UIPickerView()
+    let pickerViewBackView:UIView = UIView()
+
+    lazy var maskView : UIView = {
+        ()-> UIView in
+        let maskView = UIView()
+        maskView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
+        maskView.backgroundColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.7)
+        return maskView
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = backView_COLOUR
         self.navigationBar_leftBtn()
         self.navigation_title_fontsize(name: "完善资料", fontsize: 27)
-        
+        self.edgesForExtendedLayout = UIRectEdge.bottom
         self.creatUI()
+
         // Do any additional setup after loading the view.
         self.getData()
     }
+    //MARK:PickerView
+    func cgreatPickerView()  {
 
+        self.view.window?.addSubview(self.maskView)
+
+        let viewHeight = ip7(280)
+        pickerViewBackView.frame = CGRect(x: 0, y: KSCREEN_HEIGHT - viewHeight, width: KSCREEN_WIDTH, height: viewHeight)
+        pickerViewBackView.backgroundColor = blue_COLOUR
+        self.maskView.addSubview(pickerViewBackView)
+
+
+        let cancleBtn : UIButton = UIButton(frame: CGRect(x: ip7(20), y: (ip7(70)-ip7(24))/2, width: ip7(100), height: ip7(24)))
+        cancleBtn.setTitle("取消", for: .normal)
+        cancleBtn.setTitleColor(.white, for: .normal)
+        cancleBtn.titleLabel?.font = fzFont_Medium(ip7(24))
+        cancleBtn.backgroundColor = .clear
+        cancleBtn.addTarget(self, action:#selector(InfoViewController.cancle_clik), for: .touchUpInside)
+        pickerViewBackView.addSubview(cancleBtn)
+
+        let sureBtn : UIButton = UIButton(frame: CGRect(x:KSCREEN_WIDTH -  ip7(20) - ip7(100), y: (ip7(70)-ip7(24))/2, width: ip7(100), height: ip7(24)))
+        sureBtn.setTitle("确定", for: .normal)
+        sureBtn.setTitleColor(.white, for: .normal)
+        sureBtn.titleLabel?.font = fzFont_Medium(ip7(24))
+        sureBtn.backgroundColor = .clear
+        sureBtn.addTarget(self, action:#selector(InfoViewController.sure_click), for: .touchUpInside)
+        pickerViewBackView.addSubview(sureBtn)
+
+        pickerView.frame = CGRect(x: 0, y: ip7(70), width: KSCREEN_WIDTH, height: ip7(210))
+        pickerView.delegate = self;
+        pickerView.backgroundColor = .white
+        if currectNum == 0 {
+             pickerView.selectRow(0, inComponent: 0, animated: true)
+        } else {
+             pickerView.selectRow(0, inComponent: 0, animated: true)
+             pickerView.selectRow(1, inComponent: 0, animated: true)
+             pickerView.selectRow(2, inComponent: 0, animated: true)
+        }
+
+        pickerViewBackView.addSubview(pickerView);
+
+    }
+    func sure_click(){
+        self.removeMask()
+    }
+
+    func cancle_clik() {
+        self.removeMask()
+    }
+
+    func removeMask() {
+        pickerViewBackView.removeFromSuperview()
+        self.maskView.removeFromSuperview()
+    }
+
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch currectNum {
+        case 2:
+            return regionListArr.count
+        case 3:
+            return 0
+        case 4:
+            return gradeArr.count
+        case 5:
+            return subjectArr.count
+        case 6:
+            return versionArr.count
+        default:
+            return 0
+        }
+
+    }
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if currectNum == 2 {
+            return 3
+        } else {
+            return 1
+        }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var nameStr :String = ""
+
+        switch currectNum {
+        case 2:
+            let model : CommonModel_data_regionList = regionListArr[row]
+            nameStr = model.name
+        case 3:
+            nameStr = "学校"
+        case 4:
+            let model : CommonModel_data_grade = gradeArr[row]
+            nameStr = model.name
+        case 5:
+            let model : CommonModel_data_subject = subjectArr[row]
+            nameStr = model.name
+        case 6:
+            let model : CommonModel_data_version = versionArr[row]
+            nameStr = model.name
+        default:
+            nameStr = ""
+        }
+
+        let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(65)))
+        nameLabel.text = nameStr
+        nameLabel.textAlignment = .center
+        nameLabel.textColor = dark_6_COLOUR
+        nameLabel.font = fzFont_Thin(ip7(21))
+        return nameLabel
+    }
+    func pickerView(_ pickerView: UIPickerView,rowHeightForComponent component: Int) -> CGFloat{
+        return ip7(65)
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(component)
+        print(row)
+    }
+
+    //MARK:获取公共数据
     func getData() {
         weak var weakSelf = self
-//        dataVC.getgetregionlist(parentId: 0, completion: { (data) in
-//            let model : GetregionlistModel = data as! GetregionlistModel
-//            KFBLog(message: model.data.regionList.count)
-//        }) { (erro) in
-//
-//        }
 
-        dataVC.getschoollist(regionId: 33, type: 2, pageNum: 1, count: 10, completion: { (data) in
-            let model : GetschoollistModel = data as! GetschoollistModel
-            KFBLog(message: model.data.schoolList.count)
+        dataVC.getCommon(completion: { (data) in
+            let model : CommonModel = data as! CommonModel
+            if model.errno == 0 {
+                weakSelf?.versionArr = model.data.version
+                weakSelf?.subjectArr = model.data.subject
+                weakSelf?.gradeArr = model.data.grade
+                weakSelf?.regionListArr = model.data.regionList
+            } else {
+                weakSelf?.SVshowErro(infoStr: model.errmsg)
+            }
         }) { (erro) in
-
+                weakSelf?.SVshowErro(infoStr: "请求失败")
         }
 
     }
@@ -114,7 +265,31 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         if indexPath.row == 0 {
              KFBLog(message: "上传头像")
              self.pic_click()
-            
+        } else if indexPath.row == 2 {
+             KFBLog(message: "地区")
+             currectNum = 2
+            if regionListArr.count > 0 {
+                let model = regionListArr[0]
+                provinceNum = model.id
+                self.cgreatPickerView()
+            }
+
+        }else if indexPath.row == 3 {
+            KFBLog(message: "学校")
+
+
+        }else if indexPath.row == 4 {
+            KFBLog(message: "年级")
+            currectNum = 4
+            self.cgreatPickerView()
+        }else if indexPath.row == 5 {
+            KFBLog(message: "学科")
+            currectNum = 5
+            self.cgreatPickerView()
+        }else if indexPath.row == 6 {
+            KFBLog(message: "教材版本")
+            currectNum = 6
+            self.cgreatPickerView()
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{

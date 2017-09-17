@@ -34,8 +34,8 @@ class CommonModel_data_regionList: Mappable {
 class CommonModel_data_grade: Mappable {
 
     var name : String = ""
-    var id : Int = 100
-    var type : String = ""
+    var id : Int!
+    var type_grade : String = ""
 
     init() {}
     required init?(map: Map){
@@ -46,8 +46,7 @@ class CommonModel_data_grade: Mappable {
 
         name <- map["name"]
         id <- map["id"]
-        type <- map["type"]
-
+        type_grade <- map["type"]
 
     }
 }
@@ -104,6 +103,7 @@ class CommonModel_data: Mappable {
         version <- map["version"]
         subject <- map["subject"]
         grade <- map["grade"]
+
         regionList <- map["regionList"]
     }
 }

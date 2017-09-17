@@ -27,6 +27,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     let plaNameArr = ["","输入您的名字","请选择您所在的地区","请选择您所在学校","请选择您所在学校年级","请选择您所教学科","请选择您所用教材版本",]
     var schoolArr:[GetschoollistModel_schoolList] = Array()//学校
     var versionArr:[CommonModel_data_version] = Array()//教材版本
+    var bookArr:[GetbooklistModel_data_bookList] = Array()//书本
     var subjectArr:[CommonModel_data_subject] = Array()//学科
     var gradeArr:[CommonModel_data_grade] = Array()//年级
     var regionListArr:[CommonModel_data_regionList] = Array()//区域 省
@@ -51,12 +52,15 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
     var schoolNum:Int!
     var schoolNameStr = ""
-    var gradeNum:Int =  100
+    var gradeNum:Int = 100
     var gradeNameStr = ""
-    var subjectNum:Int!
+    var subjectNum:Int = 0
     var subjectNameStr = ""
     var bookNum:Int!
     var bookNameStr = ""
+
+    var versionNum : Int!
+    var versionStr = ""
 
     var pickerView:UIPickerView = UIPickerView()
     let pickerViewBackView:UIView = UIView()
@@ -115,11 +119,12 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             pickerView.selectRow(0, inComponent: 0, animated: true)
             pickerView.selectRow(0, inComponent: 1, animated: true)
             pickerView.selectRow(0, inComponent: 2, animated: true)
-
+        } else if currectNum ==  6{
+             pickerView.selectRow(0, inComponent: 0, animated: true)
+             pickerView.selectRow(0, inComponent: 1, animated: true)
         } else {
-            pickerView.selectRow(0, inComponent: 0, animated: true)
+             pickerView.selectRow (0, inComponent: 0, animated: true)
         }
-
         pickerViewBackView.addSubview(pickerView);
 
     }
@@ -145,7 +150,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             dirShowStr = subjectNameStr
         case 6:
             cell = mainTabelView.visibleCells[6] as! InfoTableViewCell
-            dirShowStr = bookNameStr
+            dirShowStr = versionStr + versionStr
         default:
             dirShowStr = ""
         }
@@ -197,7 +202,12 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         case 5:
             return subjectArr.count
         case 6:
-            return versionArr.count
+            if component == 0 {
+                return versionArr.count//版本
+            } else {
+                return bookArr.count//书
+            }
+
         default:
             return 0
         }
@@ -207,6 +217,8 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if currectNum == 2 {
             return 3
+        } else if currectNum == 6 {
+            return 2
         } else {
             return 1
         }
@@ -249,18 +261,26 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         case 4://年纪
             let model : CommonModel_data_grade = gradeArr[row]
             nameStr = model.name
-            gradeNum = model.id
-            gradeNameStr = model.name
+            gradeNum = Int(model.type_grade)!
+            gradeNameStr = model.name + "\(gradeNum)"
         case 5://学科
             let model : CommonModel_data_subject = subjectArr[row]
             nameStr = model.name
             subjectNum = model.id
             subjectNameStr = model.name
         case 6://教材版本
-            let model : CommonModel_data_version = versionArr[row]
-            nameStr = model.name
-            bookNameStr = model.name
-            bookNum = model.id
+
+            if component == 0 {
+                let model : CommonModel_data_version = versionArr[row]
+                nameStr = model.name
+                versionStr = model.name
+                versionNum = model.id
+            } else {
+                let model : GetbooklistModel_data_bookList = bookArr[row]
+                nameStr = model.name
+                bookNameStr = model.name
+                bookNum = model.id
+            }
 
         default:
             nameStr = ""
@@ -344,20 +364,31 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                weakSelf?.SVshowErro(infoStr: "请求失败")
         }
     }
-    //MARK:获取区域
+    //MARK:获取学校
     func getSchoolData() {
         weak var weakSelf = self
         dataVC.getschoollist(regionId: currectDisModel.id, type: gradeNum, pageNum: 1, count: 20, completion: { (data) in
             let model : GetschoollistModel = data as! GetschoollistModel
-
-            let model2  : GetschoollistModel_schoolList =  model.data.schoolList[0]
-            KFBLog(message: model2.name)
             weakSelf?.schoolArr = model.data.schoolList
             self.pickerView.reloadComponent(0)
         }) { (erro) in
 
         }
     }
+
+    //MARK:获取书本
+    func getbookData() {
+        weak var weakSelf = self
+        KFBLog(message: "gradeNum\(String(describing: subjectNum))")
+        dataVC.getbooklist(version: versionNum, grade: 1, subject: subjectNum, completion: { (data) in
+            let model : GetbooklistModel = data as! GetbooklistModel
+            weakSelf?.bookArr = model.data.bookList
+             self.pickerView.reloadComponent(1)
+        }) { (erro) in
+
+        }
+    }
+
 
     func creatUI()  {
         mainTabelView.frame = CGRect(x: 0, y: ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15))
@@ -454,6 +485,21 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             self.cgreatPickerView()
         }else if indexPath.row == 6 {
             KFBLog(message: "教材版本")
+            let model = versionArr[0]
+            versionNum = model.id
+            if versionNum == nil {
+                self.SVshowErro(infoStr: "请选择教材版本")
+                return
+            }
+            if gradeNum == 100 {
+                self.SVshowErro(infoStr: "请选择年级")
+                return
+            }
+            if (subjectNum == 0) {
+                self.SVshowErro(infoStr: "请选择学科")
+                return
+            }
+            self.getbookData()
             currectNum = 6
             self.cgreatPickerView()
         }

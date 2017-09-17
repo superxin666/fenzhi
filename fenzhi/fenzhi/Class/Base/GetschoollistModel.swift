@@ -36,6 +36,7 @@ class GetschoollistModel_schoolList: Mappable {
         distId <- map["distId"]
         sortNum <- map["sortNum"]
         status <- map["status"]
+        KFBLog(message: "id\(id)")
     }
 }
 

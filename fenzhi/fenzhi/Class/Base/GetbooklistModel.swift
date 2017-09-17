@@ -9,9 +9,9 @@
 import UIKit
 import ObjectMapper
 
-class GetbooklistModel_data: Mappable {
+class GetbooklistModel_data_bookList: Mappable {
     var name : String = ""
-    var id : String = ""
+    var id : Int!
     var type : Int = 100
     var provinceId : Int = 100
     var cityId : Int = 100
@@ -39,12 +39,29 @@ class GetbooklistModel_data: Mappable {
     }
 }
 
+class GetbooklistModel_data: Mappable {
+
+    var totalNum : Int = 100
+    var bookList : [GetbooklistModel_data_bookList] = []
+
+    init() {}
+    required init?(map: Map){
+        mapping(map: map)
+    }
+    // Mappable
+    func mapping(map: Map) {
+
+        totalNum <- map["totalNum"]
+        bookList <- map["bookList"]
+    }
+}
+
 class GetbooklistModel: Mappable {
 
     var errno: Int = 1
     var errmsg : String = ""
     var logId : String = ""
-    var bookList : [GetschoollistModel_data] = []
+    var data : GetbooklistModel_data = GetbooklistModel_data()
 
 
     init() {}
@@ -57,7 +74,7 @@ class GetbooklistModel: Mappable {
         errno <- map["errno"]
         errmsg <- map["errmsg"]
         logId <- map["logId"]
-        bookList <- map["data"]["bookList"]
+        data <- map["data"]
         
     }
     

@@ -44,6 +44,7 @@
 		21B084F31F6D4BCA00D9F3A0 /* GetzanlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B084F21F6D4BCA00D9F3A0 /* GetzanlistModel.swift */; };
 		21B084F51F6D540600D9F3A0 /* ShoucangTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B084F41F6D540600D9F3A0 /* ShoucangTableViewCell.swift */; };
 		21B084F71F6D5A1D00D9F3A0 /* ZanshangTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B084F61F6D5A1D00D9F3A0 /* ZanshangTableViewCell.swift */; };
+		21B084F91F6E9AA400D9F3A0 /* UploadimgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B084F81F6E9AA400D9F3A0 /* UploadimgModel.swift */; };
 		21BBF7FB1F6BB13B008D654D /* UserInfoHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */; };
 		21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */; };
 		21BBF7FF1F6BC385008D654D /* GuanzhuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FE1F6BC385008D654D /* GuanzhuTableViewCell.swift */; };
@@ -131,6 +132,7 @@
 		21B084F21F6D4BCA00D9F3A0 /* GetzanlistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetzanlistModel.swift; sourceTree = "<group>"; };
 		21B084F41F6D540600D9F3A0 /* ShoucangTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoucangTableViewCell.swift; sourceTree = "<group>"; };
 		21B084F61F6D5A1D00D9F3A0 /* ZanshangTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZanshangTableViewCell.swift; sourceTree = "<group>"; };
+		21B084F81F6E9AA400D9F3A0 /* UploadimgModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadimgModel.swift; sourceTree = "<group>"; };
 		21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoHeadView.swift; sourceTree = "<group>"; };
 		21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GunzhuViewController.swift; sourceTree = "<group>"; };
 		21BBF7FE1F6BC385008D654D /* GuanzhuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuanzhuTableViewCell.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */,
 				2112E91D1F6C4A3E0066CF5B /* GetschoollistModel.swift */,
 				2112E9211F6C4C8D0066CF5B /* GetbooklistModel.swift */,
+				21B084F81F6E9AA400D9F3A0 /* UploadimgModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */,
 				2178823B1F67E43D00365735 /* RSA.m in Sources */,
 				214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */,
+				21B084F91F6E9AA400D9F3A0 /* UploadimgModel.swift in Sources */,
 				21B084F51F6D540600D9F3A0 /* ShoucangTableViewCell.swift in Sources */,
 				215043671F6AD550009546D2 /* ActionCollectionViewCell.swift in Sources */,
 				21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */,

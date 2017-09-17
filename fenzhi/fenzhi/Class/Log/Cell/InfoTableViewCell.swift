@@ -9,7 +9,7 @@
 import UIKit
 
 class InfoTableViewCell: UITableViewCell {
-    
+    let infoLabel2:UILabel = UILabel()
     
     func setUpUI_name(name:String,pla:String)  {
         
@@ -26,7 +26,7 @@ class InfoTableViewCell: UITableViewCell {
         
         
         //
-        let infoLabel2 : UILabel = UILabel(frame: CGRect(x:infoLabel.frame.maxX + ip7(50), y: (viewH - ip7(21))/2, width: KSCREEN_WIDTH - infoLabel.frame.maxX - ip7(50), height: ip7(21)))
+        infoLabel2.frame = CGRect(x:infoLabel.frame.maxX + ip7(50), y: (viewH - ip7(21))/2, width: KSCREEN_WIDTH - infoLabel.frame.maxX - ip7(50), height: ip7(21))
         infoLabel2.text = pla
         infoLabel2.font = fzFont_Thin(ip7(21))
         infoLabel2.textColor  = FZColor(red: 105, green: 105, blue: 105, alpha: 1.0)
@@ -40,6 +40,12 @@ class InfoTableViewCell: UITableViewCell {
         
         
     }
+
+    func setUpName(name : String) {
+        infoLabel2.text = name
+    }
+
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

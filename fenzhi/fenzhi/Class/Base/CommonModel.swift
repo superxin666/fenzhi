@@ -34,7 +34,7 @@ class CommonModel_data_regionList: Mappable {
 class CommonModel_data_grade: Mappable {
 
     var name : String = ""
-    var id : String = ""
+    var id : Int = 100
     var type : String = ""
 
     init() {}
@@ -55,7 +55,7 @@ class CommonModel_data_grade: Mappable {
 class CommonModel_data_subject: Mappable {
 
     var name : String = ""
-    var id : String = ""
+    var id : Int = 100
 
     init() {}
     required init?(map: Map){
@@ -73,7 +73,7 @@ class CommonModel_data_subject: Mappable {
 class CommonModel_data_version: Mappable {
 
     var name : String = ""
-    var id : String = ""
+    var id : Int = 100
 
 
     init() {}

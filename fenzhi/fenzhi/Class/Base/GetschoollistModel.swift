@@ -11,7 +11,7 @@ import ObjectMapper
 
 class GetschoollistModel_schoolList: Mappable {
     var name : String = ""
-    var id : String = ""
+    var id : Int = 100
     var type : Int = 100
     var provinceId : Int = 100
     var cityId : Int = 100

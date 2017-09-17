@@ -25,13 +25,15 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     let mainTabelView : UITableView = UITableView()
     let nameArr = ["","姓名","地区","学校","年级","学科","教材版本",]
     let plaNameArr = ["","输入您的名字","请选择您所在的地区","请选择您所在学校","请选择您所在学校年级","请选择您所教学科","请选择您所用教材版本",]
-
+    var schoolArr:[GetschoollistModel_schoolList] = Array()//学校
     var versionArr:[CommonModel_data_version] = Array()//教材版本
     var subjectArr:[CommonModel_data_subject] = Array()//学科
     var gradeArr:[CommonModel_data_grade] = Array()//年级
     var regionListArr:[CommonModel_data_regionList] = Array()//区域 省
     var cityArr:[GetregionlistModel_regionList] = Array()//区域 city
     var districtArr:[GetregionlistModel_regionList] = Array()//区域 district
+    var currectDisModel : GetregionlistModel_regionList = GetregionlistModel_regionList()//当前所选择区域
+
 
     var currectNum:Int!
 
@@ -39,13 +41,22 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     var nameStr = ""
 
     var provinceNum:Int!
+    var provinceNameStr = ""
     var cityNum:Int!
+    var cityNameStr = ""
     var districtNum:Int!
+    var districtNameStr = ""
+    var dirShowStr : String = ""
+
 
     var schoolNum:Int!
-    var gradeNum:Int!
+    var schoolNameStr = ""
+    var gradeNum:Int =  100
+    var gradeNameStr = ""
     var subjectNum:Int!
+    var subjectNameStr = ""
     var bookNum:Int!
+    var bookNameStr = ""
 
     var pickerView:UIPickerView = UIPickerView()
     let pickerViewBackView:UIView = UIView()
@@ -100,24 +111,67 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         pickerView.frame = CGRect(x: 0, y: ip7(70), width: KSCREEN_WIDTH, height: ip7(210))
         pickerView.delegate = self;
         pickerView.backgroundColor = .white
-        if currectNum == 0 {
-             pickerView.selectRow(0, inComponent: 0, animated: true)
+        if currectNum == 2 {
+            pickerView.selectRow(0, inComponent: 0, animated: true)
+            pickerView.selectRow(0, inComponent: 1, animated: true)
+            pickerView.selectRow(0, inComponent: 2, animated: true)
+
         } else {
-             pickerView.selectRow(0, inComponent: 0, animated: true)
-             pickerView.selectRow(0, inComponent: 1, animated: true)
-             pickerView.selectRow(0, inComponent: 2, animated: true)
+            pickerView.selectRow(0, inComponent: 0, animated: true)
         }
 
         pickerViewBackView.addSubview(pickerView);
 
     }
     func sure_click(){
+        if cityArr.count > 0 {
+            cityArr.removeAll()
+        } else if districtArr.count > 0 {
+            districtArr.removeAll()
+        }
+        var cell : InfoTableViewCell!
+        switch currectNum {
+        case 2:
+            cell = mainTabelView.visibleCells[2] as! InfoTableViewCell
+            dirShowStr = provinceNameStr + cityNameStr + districtNameStr
+        case 3:
+            cell = mainTabelView.visibleCells[3] as! InfoTableViewCell
+            dirShowStr = schoolNameStr
+        case 4:
+            cell = mainTabelView.visibleCells[4] as! InfoTableViewCell
+            dirShowStr = gradeNameStr
+        case 5:
+            cell = mainTabelView.visibleCells[5] as! InfoTableViewCell
+            dirShowStr = subjectNameStr
+        case 6:
+            cell = mainTabelView.visibleCells[6] as! InfoTableViewCell
+            dirShowStr = bookNameStr
+        default:
+            dirShowStr = ""
+        }
+
+        KFBLog(message: dirShowStr)
+        cell.setUpName(name: dirShowStr)
         self.removeMask()
     }
 
     func cancle_clik() {
+        if cityArr.count > 0 {
+            cityArr.removeAll()
+        } else if districtArr.count > 0 {
+            districtArr.removeAll()
+        }
+        if schoolArr.count > 0 {
+            schoolArr.removeAll()
+        }
+
+
+        provinceNum = 0
+        cityNum = 0
+        districtNum = 0
         self.removeMask()
     }
+
 
     func removeMask() {
         pickerViewBackView.removeFromSuperview()
@@ -137,7 +191,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             }
 
         case 3:
-            return 0
+            return schoolArr.count
         case 4:
             return gradeArr.count
         case 5:
@@ -162,33 +216,52 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         var nameStr :String = ""
 
         switch currectNum {
-        case 2:
+        case 2://地区
 
             if component == 0 {
                 var model : CommonModel_data_regionList = CommonModel_data_regionList()
                 model = regionListArr[row]
+                provinceNameStr = model.name
+                provinceNum = model.id
                 nameStr = model.name
             } else if component == 1 {
                 var model : GetregionlistModel_regionList = GetregionlistModel_regionList()
                 model = cityArr[row]
+                cityNameStr = model.name
+                cityNum = model.id
                 nameStr = model.name//city
+                currectDisModel = model
             } else {
                 var model : GetregionlistModel_regionList = GetregionlistModel_regionList()
                 model = districtArr[row]
+                districtNameStr = model.name
+                districtNum = model.id
                 nameStr = model.name//city
+                currectDisModel = model
             }
 
         case 3:
-            nameStr = "学校"
-        case 4:
+            let model : GetschoollistModel_schoolList = schoolArr[row]
+            nameStr = model.name
+            schoolNum = model.id
+            schoolNameStr = model.name
+            nameStr = model.name
+        case 4://年纪
             let model : CommonModel_data_grade = gradeArr[row]
             nameStr = model.name
-        case 5:
+            gradeNum = model.id
+            gradeNameStr = model.name
+        case 5://学科
             let model : CommonModel_data_subject = subjectArr[row]
             nameStr = model.name
-        case 6:
+            subjectNum = model.id
+            subjectNameStr = model.name
+        case 6://教材版本
             let model : CommonModel_data_version = versionArr[row]
             nameStr = model.name
+            bookNameStr = model.name
+            bookNum = model.id
+
         default:
             nameStr = ""
         }
@@ -212,6 +285,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                 //省
                 let model : CommonModel_data_regionList = regionListArr[row]
                 provinceNum = model.id
+                provinceNameStr = model.name
                 self.getRegsionData(type: 0,parentId: provinceNum)
             } else if component == 1{
                 //市
@@ -268,6 +342,20 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
         }) { (erro) in
                weakSelf?.SVshowErro(infoStr: "请求失败")
+        }
+    }
+    //MARK:获取区域
+    func getSchoolData() {
+        weak var weakSelf = self
+        dataVC.getschoollist(regionId: currectDisModel.id, type: gradeNum, pageNum: 1, count: 20, completion: { (data) in
+            let model : GetschoollistModel = data as! GetschoollistModel
+
+            let model2  : GetschoollistModel_schoolList =  model.data.schoolList[0]
+            KFBLog(message: model2.name)
+            weakSelf?.schoolArr = model.data.schoolList
+            self.pickerView.reloadComponent(0)
+        }) { (erro) in
+
         }
     }
 
@@ -342,6 +430,18 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
         }else if indexPath.row == 3 {
             KFBLog(message: "学校")
+            currectNum = 3
+            if !(currectDisModel.type == 3) {
+                 self.SVshowErro(infoStr: "请选择城市具体到区")
+                return
+            }
+
+            if gradeNum == 100 {
+                self.SVshowErro(infoStr: "请选择年级")
+                return
+            }
+            self.getSchoolData()
+            self.cgreatPickerView()
 
 
         }else if indexPath.row == 4 {

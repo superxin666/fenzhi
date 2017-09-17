@@ -19,6 +19,10 @@ let BASER_API = "http://fenzhi.wchao.org"//线上域名
 //-------------------通用接口
 let common_api = "/api/common?"
 let getregionlist_api = "/api/getregionlist?"
+let getschoollist_api = "/api/getschoollist?"//获取学校列表接口
+let getbooklist_api = "/api/getbooklist?"//获取教材列表接口
+let getfanslist_api = "/api/user/getfanslist?"//获取区域列表接口
+let uploadimg_api = "/api/uploadimg?"//上传图片接口
 
 //-------------------登陆注册
 
@@ -30,8 +34,5 @@ let info_api = "/api/user/info?"
 //-------------------个人
 
 let getfollowlist_api = "/api/user/getfollowlist?"//获取关注列表接口
-let getfanslist_api = "/api/user/getfanslist?"//获取区域列表接口
-let getschoollist_api = "/api/getschoollist?"//获取学校列表接口
-let getbooklist_api = "/api/getbooklist?"//获取教材列表接口
 let getfavoritelist_api = "/api/user/getfavoritelist?"//获取收藏列表接口
 let getzanlist_api = "/api/user/getzanlist?"//获取赞赏列表接口

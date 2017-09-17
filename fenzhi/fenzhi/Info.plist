@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>是否允许Recova访问您的相册？</string>
+	<string>是否允许纷知访问您的相册？</string>
 	<key>NSCameraUsageDescription</key>
-	<string>是否允许Recova访问您的相机？</string>
+	<string>是否允许纷知访问您的相机？</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

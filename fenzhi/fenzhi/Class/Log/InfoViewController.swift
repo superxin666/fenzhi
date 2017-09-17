@@ -15,10 +15,12 @@ enum InfoView_Type {
     case other
 }
 
-class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     var type :InfoView_Type!
     let dataVC = CommonDataMangerViewController()
-
+    var iconImage : UIImage = UIImage()
+    var upIconcell : UpIconTableViewCell!
+    var uploadImageModel : UploadimgModel = UploadimgModel()
     
     let mainTabelView : UITableView = UITableView()
     let nameArr = ["","姓名","地区","学校","年级","学科","教材版本",]
@@ -52,7 +54,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         }
 
     }
-    
+
     func creatUI()  {
         mainTabelView.frame = CGRect(x: 0, y: ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15))
         mainTabelView.backgroundColor = UIColor.white
@@ -79,14 +81,20 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            var cell : UpIconTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: ICONCELLID, for: indexPath) as! UpIconTableViewCell
-            cell.backgroundColor = .clear
-            cell.selectionStyle = .none
-            if (cell == nil)  {
-                cell = UpIconTableViewCell(style: .default, reuseIdentifier: ICONCELLID)
+            upIconcell  = tableView.dequeueReusableCell(withIdentifier: ICONCELLID, for: indexPath) as! UpIconTableViewCell
+            upIconcell.backgroundColor = .clear
+            upIconcell.selectionStyle = .none
+            if (upIconcell == nil)  {
+                upIconcell = UpIconTableViewCell(style: .default, reuseIdentifier: ICONCELLID)
             }
-            cell.setUpUI()
-            return cell;
+            upIconcell.setUpUI()
+            upIconcell.IconImageViewBlock = {() in
+                //
+                KFBLog(message: "上传头像")
+                
+
+            }
+            return upIconcell;
         } else {
             var cell : InfoTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: INFOCELLID, for: indexPath) as! InfoTableViewCell
             cell.backgroundColor = .clear
@@ -100,6 +108,15 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         }
         
     }
+
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+             KFBLog(message: "上传头像")
+             self.pic_click()
+            
+        }
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         if indexPath.row == 0 {
             return ip7(130);
@@ -108,9 +125,81 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         }
         
     }
-    
-    
-    
+
+    //MARK:选择照片
+    func pic_click() {
+        KFBLog(message: "图片")
+        let alertController = UIAlertController(title: "提示", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
+        let AlbumAction = UIAlertAction(title: "从相册选择", style: .default, handler: {
+            (action: UIAlertAction) -> Void in
+            self.openAlbum()
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(AlbumAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+
+    func openAlbum() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            //初始化图片控制器
+            let picker = UIImagePickerController()
+            //设置代理
+            picker.delegate = self
+            //指定图片控制器类型
+            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            //设置是否允许编辑
+            picker.allowsEditing = true
+
+            //弹出控制器，显示界面
+            self.present(picker, animated: true, completion: {
+                () -> Void in
+            })
+        }else{
+            KFBLog(message: "读取相册错误")
+        }
+
+    }
+
+    //选择图片成功后代理
+    func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : Any]) {
+        //查看info对象
+        KFBLog(message: info)
+
+        //获取选择的编辑后的
+        let  image = info[UIImagePickerControllerEditedImage] as! UIImage
+        iconImage = image
+
+        //图片控制器退出
+        picker.dismiss(animated: true, completion: {
+            () -> Void in
+
+            //显示图片
+            self.upIconcell.iconImageView.image = image
+            self.upLoadIcon()
+        })
+    }
+
+    func upLoadIcon(){
+        weak var weakSelf = self
+        dataVC.upLoadImage(uploadimg: iconImage, type: "avatar", completion: { (data) in
+
+            weakSelf?.uploadImageModel = data as! UploadimgModel
+            if weakSelf!.uploadImageModel.errno == 0 {
+                KFBLog(message: "图片地址"+weakSelf!.uploadImageModel.data)
+            } else {
+
+
+            }
+
+        }) { (erro) in
+
+        }
+    }
+
+
+
     
     override func navigationLeftBtnClick() {
         if type == .res_first {

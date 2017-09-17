@@ -7,10 +7,10 @@
 //
 
 import UIKit
-
+typealias UpIconViewBlock = ()->()
 class UpIconTableViewCell: UITableViewCell {
     let iconImageView : UIImageView = UIImageView()
-    
+    var IconImageViewBlock : UpIconViewBlock!
     func setUpUI()  {
         
         //名字
@@ -27,8 +27,15 @@ class UpIconTableViewCell: UITableViewCell {
         //头像
         iconImageView.frame =  CGRect(x:KSCREEN_WIDTH - ip7(80) - ip7(40), y: (viewH - ip7(80))/2, width: ip7(80), height: ip7(80))
         iconImageView.image = #imageLiteral(resourceName: "tx_m")
+        iconImageView.isUserInteractionEnabled = true
+        iconImageView.kfb_makeRound()
         self.addSubview(iconImageView)
-        
+
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UpIconTableViewCell.icon_click))
+
+        iconImageView.addGestureRecognizer(tap)
+
+
         //点击上传
         let infoLabel2X = iconImageView.frame.origin.x - ip7(120)
         
@@ -46,6 +53,13 @@ class UpIconTableViewCell: UITableViewCell {
         self.addSubview(lineView2)
         
         
+    }
+
+    func icon_click() {
+        if let _ =  IconImageViewBlock {
+            IconImageViewBlock()
+        }
+
     }
 
     override func awakeFromNib() {

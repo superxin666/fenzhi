@@ -100,4 +100,42 @@ class CommonDataMangerViewController: FZRequestViewController {
 
     }
 
+    /// 上传图片接口
+    ///
+    /// - Parameters:
+    ///   - uploadimg: 	图片二进制内容
+    ///   - type: 	类型, normal: 普通图片 avatar: 头像
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
+    func upLoadImage(uploadimg:UIImage,type:String, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        let urlStr = BASER_API + uploadimg_api + "type=" + type + token_pra
+        KFBLog(message: urlStr)
+        let imageData = UIImageJPEGRepresentation(uploadimg, 1.0)!
+
+        var model:UploadimgModel = UploadimgModel()
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData, withName: "imgFile", fileName: "imgFile", mimeType: "image/*")
+
+        },
+            to: urlStr,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        if let json = response.result.value {
+                            model = Mapper<UploadimgModel>().map(JSON: json as! [String : Any])!
+                            completion(model)
+                        } else {
+                            failure("请求失败")
+                        }
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+        }
+        )
+    }
+
 }

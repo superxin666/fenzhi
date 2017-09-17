@@ -29,7 +29,10 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     var versionArr:[CommonModel_data_version] = Array()//教材版本
     var subjectArr:[CommonModel_data_subject] = Array()//学科
     var gradeArr:[CommonModel_data_grade] = Array()//年级
-    var regionListArr:[CommonModel_data_regionList] = Array()//区域
+    var regionListArr:[CommonModel_data_regionList] = Array()//区域 省
+    var cityArr:[GetregionlistModel_regionList] = Array()//区域 city
+    var districtArr:[GetregionlistModel_regionList] = Array()//区域 district
+
     var currectNum:Int!
 
     var avatarStr = ""
@@ -101,8 +104,8 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
              pickerView.selectRow(0, inComponent: 0, animated: true)
         } else {
              pickerView.selectRow(0, inComponent: 0, animated: true)
-             pickerView.selectRow(1, inComponent: 0, animated: true)
-             pickerView.selectRow(2, inComponent: 0, animated: true)
+             pickerView.selectRow(0, inComponent: 1, animated: true)
+             pickerView.selectRow(0, inComponent: 2, animated: true)
         }
 
         pickerViewBackView.addSubview(pickerView);
@@ -125,7 +128,14 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch currectNum {
         case 2:
-            return regionListArr.count
+            if component == 0 {
+                return regionListArr.count//省
+            } else if component == 1 {
+                return cityArr.count//city
+            } else {
+                return districtArr.count//区
+            }
+
         case 3:
             return 0
         case 4:
@@ -153,8 +163,21 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
         switch currectNum {
         case 2:
-            let model : CommonModel_data_regionList = regionListArr[row]
-            nameStr = model.name
+
+            if component == 0 {
+                var model : CommonModel_data_regionList = CommonModel_data_regionList()
+                model = regionListArr[row]
+                nameStr = model.name
+            } else if component == 1 {
+                var model : GetregionlistModel_regionList = GetregionlistModel_regionList()
+                model = cityArr[row]
+                nameStr = model.name//city
+            } else {
+                var model : GetregionlistModel_regionList = GetregionlistModel_regionList()
+                model = districtArr[row]
+                nameStr = model.name//city
+            }
+
         case 3:
             nameStr = "学校"
         case 4:
@@ -184,6 +207,23 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(component)
         print(row)
+        if currectNum == 2 {
+            if component == 0 {
+                //省
+                let model : CommonModel_data_regionList = regionListArr[row]
+                provinceNum = model.id
+                self.getRegsionData(type: 0,parentId: provinceNum)
+            } else if component == 1{
+                //市
+                let model : GetregionlistModel_regionList = cityArr[row]
+                cityNum = model.id
+                self.getRegsionData(type: 1,parentId: cityNum)
+            } else {
+                //区
+
+            }
+        }
+
     }
 
     //MARK:获取公共数据
@@ -204,6 +244,31 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                 weakSelf?.SVshowErro(infoStr: "请求失败")
         }
 
+    }
+
+    //MARK:获取区域
+    func getRegsionData(type :Int,parentId : Int) {
+        weak var weakSelf = self
+        dataVC.getgetregionlist(parentId: parentId, completion: { (data) in
+            let model : GetregionlistModel = data as! GetregionlistModel
+            if model.errno == 0 {
+                if type == 0 {
+                    //city
+                    weakSelf?.cityArr = model.data.regionList
+                    self.pickerView.reloadComponent(1)
+                } else if type == 1 {
+                    //district
+                    weakSelf?.districtArr = model.data.regionList
+                    self.pickerView.reloadComponent(2)
+                }
+
+            } else {
+                weakSelf?.SVshowErro(infoStr: model.errmsg)
+            }
+
+        }) { (erro) in
+               weakSelf?.SVshowErro(infoStr: "请求失败")
+        }
     }
 
     func creatUI()  {
@@ -271,6 +336,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             if regionListArr.count > 0 {
                 let model = regionListArr[0]
                 provinceNum = model.id
+                self.getRegsionData(type: 0, parentId: provinceNum)
                 self.cgreatPickerView()
             }
 

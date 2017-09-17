@@ -11,7 +11,7 @@ import ObjectMapper
 
 class GetregionlistModel_regionList: Mappable {
     var name : String = ""
-    var id : String = ""
+    var id : Int = 100
     var type : Int = 100
     var status : Int = 100
     var parent : Int = 100

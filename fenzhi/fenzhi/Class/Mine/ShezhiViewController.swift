@@ -1,0 +1,112 @@
+//
+//  ShezhiViewController.swift
+//  fenzhi
+//
+//  Created by lvxin on 2017/9/18.
+//  Copyright © 2017年 Xunqiu. All rights reserved.
+//
+
+import UIKit
+
+class ShezhiViewController: BaseViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        self.view.backgroundColor = backView_COLOUR
+        self.navigationBar_leftBtn()
+        self.navigation_title_fontsize(name: "设置", fontsize: 27)
+        self.creatUI()
+    }
+    func creatUI() {
+        //清除换存
+        let backView1 = UIView(frame: CGRect(x: 0, y:LNAVIGATION_HEIGHT +  ip7(15), width: KSCREEN_WIDTH, height: ip7(90)))
+        backView1.backgroundColor = .white
+        self.view.addSubview(backView1)
+
+        let iconImageView:UIImageView = UIImageView(frame: CGRect(x: ip7(31), y:  (ip7(90) - ip7(40))/2, width: ip7(40), height: ip7(40) ))
+        iconImageView.image = #imageLiteral(resourceName: "icon_qchc")
+        iconImageView.isUserInteractionEnabled = true
+        backView1.addSubview(iconImageView)
+
+        let monyLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(27), y: (ip7(90) - ip7(24))/2, width: ip7(200), height: ip7(24)))
+        monyLabel.text = "清除缓存"
+        monyLabel.isUserInteractionEnabled = true
+        monyLabel.textColor = dark_3_COLOUR
+        monyLabel.font = fzFont_Thin(ip7(24))
+        monyLabel.textAlignment = .left
+        backView1.addSubview(monyLabel)
+
+        //意见反馈
+        let backView2 = UIView(frame: CGRect(x: 0, y:backView1.frame.maxY + ip7(15), width: KSCREEN_WIDTH, height: ip7(90)))
+        backView2.backgroundColor = .white
+        self.view.addSubview(backView2)
+
+
+        let iconImageView2:UIImageView = UIImageView(frame: CGRect(x: ip7(31), y:  (ip7(90) - ip7(40))/2, width: ip7(40), height: ip7(40) ))
+        iconImageView2.image = #imageLiteral(resourceName: "icon_yjfk")
+        iconImageView2.isUserInteractionEnabled = true
+        backView2.addSubview(iconImageView2)
+
+        let monyLabel2 : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(27), y:   (ip7(90) - ip7(24))/2, width: ip7(200), height: ip7(24)))
+        monyLabel2.text = "意见反馈"
+        monyLabel2.isUserInteractionEnabled = true
+        monyLabel2.textColor = dark_3_COLOUR
+        monyLabel2.font = fzFont_Thin(ip7(24))
+        monyLabel2.textAlignment = .left
+        backView2.addSubview(monyLabel2)
+
+        //意见反馈
+        let backView3 = UIView(frame: CGRect(x: 0, y: backView2.frame.maxY + 2, width: KSCREEN_WIDTH, height: ip7(90)))
+        backView3.backgroundColor = .white
+        self.view.addSubview(backView3)
+
+        let iconImageView3:UIImageView = UIImageView(frame: CGRect(x: ip7(31), y:  (ip7(90) - ip7(40))/2, width: ip7(40), height: ip7(40) ))
+        iconImageView3.image = #imageLiteral(resourceName: "icon_gywm")
+        iconImageView3.isUserInteractionEnabled = true
+        backView3.addSubview(iconImageView3)
+
+        let monyLabel3 : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(27), y:   (ip7(90) - ip7(24))/2, width: ip7(200), height: ip7(24)))
+        monyLabel3.text = "意见反馈"
+        monyLabel3.isUserInteractionEnabled = true
+        monyLabel3.textColor = dark_3_COLOUR
+        monyLabel3.font = fzFont_Thin(ip7(24))
+        monyLabel3.textAlignment = .left
+        backView3.addSubview(monyLabel3)
+        //退出登录
+        let logBtn : UIButton = UIButton(frame: CGRect(x: 0, y: backView3.frame.maxY + ip7(15), width: KSCREEN_WIDTH, height: ip7(75)))
+        logBtn.setTitle("退出登录", for: .normal)
+        logBtn.backgroundColor = .white
+        logBtn.setTitleColor(dark_3_COLOUR, for: .normal)
+        logBtn.titleLabel?.font = fzFont_Thin(ip7(24))
+        logBtn.addTarget(self, action:#selector(ShezhiViewController.logout_click), for: .touchUpInside)
+        self.view.addSubview(logBtn)
+    }
+
+    func logout_click() {
+
+    }
+    override func navigationLeftBtnClick() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

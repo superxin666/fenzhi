@@ -141,8 +141,7 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             self.navigationController?.pushViewController(vc, animated: true)
         
         } else {
-            let vc : SettingViewController = SettingViewController()
-    
+            let vc : ShezhiViewController = ShezhiViewController()
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }

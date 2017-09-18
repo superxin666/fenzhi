@@ -56,6 +56,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     var schoolNum:Int? = Int()
     var schoolNameStr = ""
     var gradeNum:Int? = Int()
+    var gradeType:Int? = Int()
     var gradeNameStr = ""
     var subjectNum:String = ""
     var subjectNameStr = ""
@@ -286,6 +287,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             let model : CommonModel_data_grade = gradeArr[row]
             nameStr = model.name
             gradeNum = Int(model.id)!
+            gradeType = Int(model.type_grade)!
             gradeNameStr = model.name
         case 5://学科
             let model : CommonModel_data_subject = subjectArr[row]
@@ -588,7 +590,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                 return
             }
 
-            if gradeNum == 100 {
+            if gradeNameStr.characters.count == 0 {
                 self.SVshowErro(infoStr: "请选择年级")
                 return
             }
@@ -612,7 +614,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                 self.SVshowErro(infoStr: "请选择教材版本")
                 return
             }
-            if gradeNum == 100 {
+            if gradeNum == nil {
                 self.SVshowErro(infoStr: "请选择年级")
                 return
             }

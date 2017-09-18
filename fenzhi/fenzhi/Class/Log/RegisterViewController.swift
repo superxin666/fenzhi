@@ -288,22 +288,13 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
               weakSelf?.resdataModel = data as! ResModelMaper
             weakSelf?.SVdismiss()
             if weakSelf?.resdataModel.errno == 0 {
-                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.resdataModel.data.id), token: String(describing: weakSelf?.resdataModel.data.token), ishaveinfo: "0", complate: { (data) in
+                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.resdataModel.data.id), token: String(describing: weakSelf?.resdataModel.data.token), ishaveinfo: "1", complate: { (data) in
                     let str:String = data as! String
                     if str == "1" {
-                        LoginModelMapper.setIsHaveInfo(complate: { (data) in
-                            let str:String = data as! String
-                            if str == "1" {
-                                //成功
-                                let vc : InfoViewController = InfoViewController()
-                                vc.type = .other
-                                weakSelf?.navigationController?.pushViewController(vc, animated: true)
-                            } else {
-                                //存储信息失败
-                            }
-                            
-                        })
-
+                        //成功
+                        let vc : InfoViewController = InfoViewController()
+                        vc.type = .other
+                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
                     } else {
                         //存储信息失败
                         weakSelf?.KfbShowWithInfo(titleString: (weakSelf?.resdataModel.errmsg)!)

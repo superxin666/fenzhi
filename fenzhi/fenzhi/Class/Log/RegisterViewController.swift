@@ -297,7 +297,7 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
                         weakSelf?.navigationController?.pushViewController(vc, animated: true)
                     } else {
                         //存储信息失败
-                        weakSelf?.KfbShowWithInfo(titleString: (weakSelf?.resdataModel.errmsg)!)
+ 
                     }
         
                 })

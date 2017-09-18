@@ -287,7 +287,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             let model : CommonModel_data_grade = gradeArr[row]
             nameStr = model.name
             gradeNum = Int(model.id)!
-            gradeType = Int(model.type_grade)!
+            gradeType = Int(model.type)!
             gradeNameStr = model.name
         case 5://学科
             let model : CommonModel_data_subject = subjectArr[row]
@@ -393,7 +393,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     //MARK:获取学校
     func getSchoolData() {
         weak var weakSelf = self
-        dataVC.getschoollist(regionId: currectDisModel.id, type: gradeNum!, pageNum: 1, count: 20, completion: { (data) in
+        dataVC.getschoollist(regionId: currectDisModel.id, type: gradeType!, pageNum: 1, count: 20, completion: { (data) in
             let model : GetschoollistModel = data as! GetschoollistModel
             weakSelf?.schoolArr = model.data.schoolList
             self.pickerView.reloadComponent(0)
@@ -419,20 +419,29 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         self.SVshowLoad()
         weak var weakSelf = self
 
-        
         if currectDisModel.type == 3 {
             cityNum = provinceNum
             districtNum = currectDisModel.id
         }
         
         lodginDataVC.supplyinfo(name: nameStr, province: provinceNum!, city: cityNum!, district: districtNum!, school: schoolNum!, grade: gradeNum!, subject: Int(subjectNum)!, book: bookNum!, avatar: avatarStr, completion: { (data) in
+
+
              weakSelf?.smsdataModel = data as! SmsModel
             if  weakSelf?.smsdataModel.errno == 0 {
-                //提交信息成功
-                KFBLog(message: "提交成功")
-                let dele: AppDelegate =  UIApplication.shared.delegate as! AppDelegate
-                dele.showMain()
-                
+//                提交信息成功
+                LoginModelMapper.setIsHaveInfo(complate: { (data2) in
+                    let str:String = data2 as! String
+                    if str == "1" {
+                        //存储信息成功
+                        KFBLog(message: "提交成功")
+                        let dele: AppDelegate =  UIApplication.shared.delegate as! AppDelegate
+                        dele.showMain()
+                    } else {
+                        //存储信息失败
+                        
+                    }
+                })
             } else {
                 //
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.smsdataModel.errmsg)!)

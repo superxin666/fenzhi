@@ -35,7 +35,7 @@ class CommonModel_data_grade: Mappable {
 
     var name : String = ""
     var id : String = ""
-    var type_grade : String = ""
+    var type : String = ""
 
     init() {}
     required init?(map: Map){
@@ -46,7 +46,7 @@ class CommonModel_data_grade: Mappable {
 
         name <- map["name"]
         id <- map["id"]
-        type_grade <- map["type"]
+        type <- map["type"]
 
     }
 }

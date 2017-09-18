@@ -79,4 +79,20 @@ class LoginModelMapper: Mappable {
         return tokenStr!
         
     }
+    
+    
+    class func setIsHaveInfo( complate:(_ data : Any) ->() ){
+        UserDefaults.standard.set("1", forKey: ISHAVEINFOSTR)
+        let ok = UserDefaults.standard.synchronize()
+        if ok {
+            print("存储成功")
+            
+            complate("1")
+        } else {
+            print("存储失败")
+            complate("0")
+        }
+    }
+    
+    
 }

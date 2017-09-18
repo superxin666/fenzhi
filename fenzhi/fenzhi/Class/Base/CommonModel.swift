@@ -54,7 +54,7 @@ class CommonModel_data_grade: Mappable {
 class CommonModel_data_subject: Mappable {
 
     var name : String = ""
-    var id : Int = 100
+    var id : String = "" 
 
     init() {}
     required init?(map: Map){
@@ -65,6 +65,8 @@ class CommonModel_data_subject: Mappable {
 
         name <- map["name"]
         id <- map["id"]
+        
+//        KFBLog(message: "\(id)")
 
     }
 }

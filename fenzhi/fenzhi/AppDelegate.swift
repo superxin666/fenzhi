@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        self.mainMenu()
-//        self.showLogin()
+        self.showLogin()
 //        self.showMain()
-        self.showInfo()
+//        self.showInfo()
         return true
     }
     
@@ -27,8 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         
         let login = LoginModelMapper.getLoginIdAndTokenInUD().isHaveLogin
         let info = LoginModelMapper.getLoginIdAndTokenInUD().isHaveInfo
+        let token = LoginModelMapper.getToken()
         print("login\(login)")
-        print("login\(info)")
+        print("info\(info)")
+        KFBLog(message: token)
         if login == "1" {
             if info == "1" {
                 //显示主页

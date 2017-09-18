@@ -218,8 +218,8 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
                 if (weakSelf?.dataModel.data.name.characters.count)! > 0{
                     ishaveInfo = "1"
                 }
-                
-                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.dataModel.data.id), token: String(describing: weakSelf?.dataModel.data.token), ishaveinfo: ishaveInfo, complate: { (data) in
+                KFBLog(message:  (weakSelf?.dataModel.data.token)!)
+                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.dataModel.data.id), token:  (weakSelf?.dataModel.data.token)!, ishaveinfo: ishaveInfo, complate: { (data) in
                     let str:String = data as! String
                     if str == "1" {
                         //登陆成功

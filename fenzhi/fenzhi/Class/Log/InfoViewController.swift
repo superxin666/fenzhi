@@ -18,11 +18,14 @@ enum InfoView_Type {
 class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource{
     var type :InfoView_Type!
     let dataVC = CommonDataMangerViewController()
+    let lodginDataVC = LogDataMangerViewController()
     var iconImage : UIImage = UIImage()
     var upIconcell : UpIconTableViewCell!
     var uploadImageModel : UploadimgModel = UploadimgModel()
+    var smsdataModel : SmsModel = SmsModel()
     
     let mainTabelView : UITableView = UITableView()
+
     let nameArr = ["","姓名","地区","学校","年级","学科","教材版本",]
     let plaNameArr = ["","输入您的名字","请选择您所在的地区","请选择您所在学校","请选择您所在学校年级","请选择您所教学科","请选择您所用教材版本",]
     var schoolArr:[GetschoollistModel_schoolList] = Array()//学校
@@ -41,25 +44,25 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     var avatarStr = ""
     var nameStr = ""
 
-    var provinceNum:Int!
+    var provinceNum:Int? = Int()
     var provinceNameStr = ""
-    var cityNum:Int!
+    var cityNum:Int? = Int()
     var cityNameStr = ""
-    var districtNum:Int!
+    var districtNum:Int? = Int()
     var districtNameStr = ""
     var dirShowStr : String = ""
 
 
-    var schoolNum:Int!
+    var schoolNum:Int? = Int()
     var schoolNameStr = ""
-    var gradeNum:Int = 100
+    var gradeNum:Int? = Int()
     var gradeNameStr = ""
-    var subjectNum:Int = 0
+    var subjectNum:String = ""
     var subjectNameStr = ""
-    var bookNum:Int!
+    var bookNum:Int? = Int()
     var bookNameStr = ""
 
-    var versionNum : Int!
+    var versionNum : Int? = Int()
     var versionStr = ""
 
     var pickerView:UIPickerView = UIPickerView()
@@ -84,9 +87,16 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
         // Do any additional setup after loading the view.
         self.getData()
+        
     }
     //MARK:PickerView
     func cgreatPickerView()  {
+        
+        var cell : InfoTableViewCell!
+        cell = mainTabelView.visibleCells[1] as! InfoTableViewCell
+        if cell._nameTextField.isFirstResponder {
+            cell._nameTextField.resignFirstResponder()
+        }
 
         self.view.window?.addSubview(self.maskView)
 
@@ -131,9 +141,18 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     func sure_click(){
         if cityArr.count > 0 {
             cityArr.removeAll()
-        } else if districtArr.count > 0 {
+        }
+        if districtArr.count > 0 {
             districtArr.removeAll()
         }
+        if schoolArr.count > 0 {
+            schoolArr.removeAll()
+        }
+        if bookArr.count>0 {
+            bookArr.removeAll()
+        }
+        
+        
         var cell : InfoTableViewCell!
         switch currectNum {
         case 2:
@@ -150,7 +169,8 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             dirShowStr = subjectNameStr
         case 6:
             cell = mainTabelView.visibleCells[6] as! InfoTableViewCell
-            dirShowStr = versionStr + versionStr
+            //"\(bookNum)"
+            dirShowStr = versionStr + bookNameStr
         default:
             dirShowStr = ""
         }
@@ -163,13 +183,17 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     func cancle_clik() {
         if cityArr.count > 0 {
             cityArr.removeAll()
-        } else if districtArr.count > 0 {
+        }
+        if districtArr.count > 0 {
             districtArr.removeAll()
         }
         if schoolArr.count > 0 {
             schoolArr.removeAll()
         }
-
+        if bookArr.count>0 {
+            bookArr.removeAll()
+        }
+        
 
         provinceNum = 0
         cityNum = 0
@@ -262,7 +286,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             let model : CommonModel_data_grade = gradeArr[row]
             nameStr = model.name
             gradeNum = Int(model.type_grade)!
-            gradeNameStr = model.name + "\(gradeNum)"
+            gradeNameStr = model.name
         case 5://学科
             let model : CommonModel_data_subject = subjectArr[row]
             nameStr = model.name
@@ -279,7 +303,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                 let model : GetbooklistModel_data_bookList = bookArr[row]
                 nameStr = model.name
                 bookNameStr = model.name
-                bookNum = model.id
+                bookNum = model.id!
             }
 
         default:
@@ -306,12 +330,12 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                 let model : CommonModel_data_regionList = regionListArr[row]
                 provinceNum = model.id
                 provinceNameStr = model.name
-                self.getRegsionData(type: 0,parentId: provinceNum)
+                self.getRegsionData(type: 0,parentId: provinceNum!)
             } else if component == 1{
                 //市
                 let model : GetregionlistModel_regionList = cityArr[row]
                 cityNum = model.id
-                self.getRegsionData(type: 1,parentId: cityNum)
+                self.getRegsionData(type: 1,parentId: cityNum!)
             } else {
                 //区
 
@@ -367,7 +391,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     //MARK:获取学校
     func getSchoolData() {
         weak var weakSelf = self
-        dataVC.getschoollist(regionId: currectDisModel.id, type: gradeNum, pageNum: 1, count: 20, completion: { (data) in
+        dataVC.getschoollist(regionId: currectDisModel.id, type: gradeNum!, pageNum: 1, count: 20, completion: { (data) in
             let model : GetschoollistModel = data as! GetschoollistModel
             weakSelf?.schoolArr = model.data.schoolList
             self.pickerView.reloadComponent(0)
@@ -380,7 +404,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     func getbookData() {
         weak var weakSelf = self
         KFBLog(message: "gradeNum\(String(describing: subjectNum))")
-        dataVC.getbooklist(version: versionNum, grade: 1, subject: subjectNum, completion: { (data) in
+        dataVC.getbooklist(version: versionNum!, grade: 1, subject: Int(subjectNum)!, completion: { (data) in
             let model : GetbooklistModel = data as! GetbooklistModel
             weakSelf?.bookArr = model.data.bookList
              self.pickerView.reloadComponent(1)
@@ -388,10 +412,38 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
         }
     }
+     //MARK:开启纷知
+    func getSupplyinfoData() {
+        self.SVshowLoad()
+        weak var weakSelf = self
+
+        
+        if currectDisModel.type == 3 {
+            cityNum = provinceNum
+            districtNum = currectDisModel.id
+        }
+        
+        lodginDataVC.supplyinfo(name: nameStr, province: provinceNum!, city: cityNum!, district: districtNum!, school: schoolNum!, grade: gradeNum!, subject: Int(subjectNum)!, book: bookNum!, avatar: avatarStr, completion: { (data) in
+             weakSelf?.smsdataModel = data as! SmsModel
+            if  weakSelf?.smsdataModel.errno == 0 {
+                //提交信息成功
+                KFBLog(message: "提交成功")
+                let dele: AppDelegate =  UIApplication.shared.delegate as! AppDelegate
+                dele.showMain()
+                
+            } else {
+                //
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.smsdataModel.errmsg)!)
+            }
+        }, failure: { (erro) in
+            
+        })
+
+    }
 
 
     func creatUI()  {
-        mainTabelView.frame = CGRect(x: 0, y: ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15))
+        mainTabelView.frame = CGRect(x: 0, y: ip7(15), width: KSCREEN_WIDTH, height: ip7(130) + ip7(90*6))
         mainTabelView.backgroundColor = UIColor.white
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -402,6 +454,69 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         mainTabelView.register(UpIconTableViewCell.self, forCellReuseIdentifier: ICONCELLID)
         mainTabelView.register(InfoTableViewCell.self, forCellReuseIdentifier: INFOCELLID)
         self.view.addSubview(mainTabelView)
+        
+        
+
+        let logBtn : UIButton = UIButton(frame: CGRect(x: ip7(40), y: mainTabelView.frame.maxY + ip7(50), width: KSCREEN_WIDTH - ip7(80), height: ip7(50)))
+        logBtn.setTitle("开启纷知", for: .normal)
+        logBtn.backgroundColor = blue_COLOUR
+        logBtn.setTitleColor( .white, for: .normal)
+        logBtn.titleLabel?.font = fzFont_Thin(ip7(21))
+        logBtn.addTarget(self, action:#selector(InfoViewController.login_click), for: .touchUpInside)
+        self.view.addSubview(logBtn)
+        
+    }
+    
+    func login_click() {
+        KFBLog(message: "开启纷知")
+        //头像
+        if avatarStr.characters.count == 0 {
+            self.SVshowErro(infoStr: "请选择头像")
+            return
+        }
+//        姓名
+        var cell : InfoTableViewCell!
+        cell = mainTabelView.visibleCells[1] as! InfoTableViewCell
+        nameStr = cell.nameStr
+        if cell.nameStr.characters.count == 0 {
+            self.SVshowErro(infoStr: "请填写姓名")
+            return
+        }
+        //区域
+        if !(currectDisModel.type == 3) {
+            self.SVshowErro(infoStr: "请选择城市具体到区")
+            return
+        }
+        //教材 版本
+        if versionNum == nil {
+            self.SVshowErro(infoStr: "请选择教材版本")
+            return
+        }
+        //书本
+        if bookNameStr.characters.count == 0 {
+            self.SVshowErro(infoStr: "请选择教材版本")
+            return
+        }
+        
+        //年级
+        if gradeNum == 100 {
+            self.SVshowErro(infoStr: "请选择年级")
+            return
+        }
+        //学科
+        if (subjectNum == "") {
+            self.SVshowErro(infoStr: "请选择学科")
+            return
+        }
+
+        //学校
+        if schoolNameStr.characters.count == 0 {
+            self.SVshowErro(infoStr: "请选择学校")
+            return
+        }
+        self.getSupplyinfoData()
+        
+        
     }
     
     // MARK: tableView 代理
@@ -437,7 +552,12 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             if (cell == nil)  {
                 cell = InfoTableViewCell(style: .default, reuseIdentifier: INFOCELLID)
             }
-            cell.setUpUI_name(name: nameArr[indexPath.row], pla: plaNameArr[indexPath.row])
+            if indexPath.row == 1 {
+                cell.setUpUI_name_txtFiled(name: nameArr[indexPath.row], pla: plaNameArr[indexPath.row])
+            } else {
+                cell.setUpUI_name(name: nameArr[indexPath.row], pla: plaNameArr[indexPath.row])
+            }
+     
             return cell;
     
         }
@@ -452,10 +572,11 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         } else if indexPath.row == 2 {
              KFBLog(message: "地区")
              currectNum = 2
+            
             if regionListArr.count > 0 {
                 let model = regionListArr[0]
                 provinceNum = model.id
-                self.getRegsionData(type: 0, parentId: provinceNum)
+                self.getRegsionData(type: 0, parentId: provinceNum!)
                 self.cgreatPickerView()
             }
 
@@ -495,7 +616,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                 self.SVshowErro(infoStr: "请选择年级")
                 return
             }
-            if (subjectNum == 0) {
+            if (subjectNum == "") {
                 self.SVshowErro(infoStr: "请选择学科")
                 return
             }
@@ -575,6 +696,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             weakSelf?.uploadImageModel = data as! UploadimgModel
             if weakSelf!.uploadImageModel.errno == 0 {
                 KFBLog(message: "图片地址"+weakSelf!.uploadImageModel.data)
+                weakSelf!.avatarStr = weakSelf!.uploadImageModel.data
             } else {
 
 
@@ -584,7 +706,9 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
         }
     }
-
+    
+    
+    
 
 
     

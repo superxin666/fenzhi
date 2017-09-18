@@ -136,7 +136,9 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
 
         } else if indexPath.row == 3{
-        
+            let vc : ShouruViewController = ShouruViewController()
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
         
         } else {
             let vc : SettingViewController = SettingViewController()

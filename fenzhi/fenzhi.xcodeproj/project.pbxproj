@@ -22,6 +22,10 @@
 		213BF8581F60317300D60AE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213BF8561F60317300D60AE5 /* LaunchScreen.storyboard */; };
 		213BF8631F60317300D60AE5 /* fenzhiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF8621F60317300D60AE5 /* fenzhiTests.swift */; };
 		213BF86E1F60317300D60AE5 /* fenzhiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */; };
+		214448CE1F7002880073EA06 /* ShouruViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214448CD1F7002880073EA06 /* ShouruViewController.swift */; };
+		214448D01F7003A30073EA06 /* ShouruHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214448CF1F7003A30073EA06 /* ShouruHeadView.swift */; };
+		214448D21F7007F60073EA06 /* GetincomelistModl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214448D11F7007F60073EA06 /* GetincomelistModl.swift */; };
+		214448D41F700A2B0073EA06 /* ShouruTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214448D31F700A2B0073EA06 /* ShouruTableViewCell.swift */; };
 		214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */; };
 		214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */; };
 		215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043601F6AADBD009546D2 /* ForgetViewController.swift */; };
@@ -108,6 +112,10 @@
 		213BF8691F60317300D60AE5 /* fenzhiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fenzhiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fenzhiUITests.swift; sourceTree = "<group>"; };
 		213BF86F1F60317300D60AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		214448CD1F7002880073EA06 /* ShouruViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouruViewController.swift; sourceTree = "<group>"; };
+		214448CF1F7003A30073EA06 /* ShouruHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouruHeadView.swift; sourceTree = "<group>"; };
+		214448D11F7007F60073EA06 /* GetincomelistModl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetincomelistModl.swift; sourceTree = "<group>"; };
+		214448D31F700A2B0073EA06 /* ShouruTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouruTableViewCell.swift; sourceTree = "<group>"; };
 		214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachReleaseViewController.swift; sourceTree = "<group>"; };
 		214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartReleaseViewController.swift; sourceTree = "<group>"; };
 		215043601F6AADBD009546D2 /* ForgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +246,7 @@
 				21570C911F6579ED003C7D38 /* UserInfoViewController.swift */,
 				21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */,
 				21B084F01F6D42B500D9F3A0 /* ShoucangViewController.swift */,
+				214448CD1F7002880073EA06 /* ShouruViewController.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -358,11 +367,13 @@
 		21570C931F658FF1003C7D38 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				214448CF1F7003A30073EA06 /* ShouruHeadView.swift */,
 				21570C941F659002003C7D38 /* MainTableViewCell.swift */,
 				21BBF7FA1F6BB13B008D654D /* UserInfoHeadView.swift */,
 				21BBF7FE1F6BC385008D654D /* GuanzhuTableViewCell.swift */,
 				21B084F41F6D540600D9F3A0 /* ShoucangTableViewCell.swift */,
 				21B084F61F6D5A1D00D9F3A0 /* ZanshangTableViewCell.swift */,
+				214448D31F700A2B0073EA06 /* ShouruTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -372,6 +383,7 @@
 			children = (
 				215822221F6C2122002BC6E6 /* FollowModel.swift */,
 				21B084F21F6D4BCA00D9F3A0 /* GetzanlistModel.swift */,
+				214448D11F7007F60073EA06 /* GetincomelistModl.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -720,16 +732,19 @@
 				21B084F91F6E9AA400D9F3A0 /* UploadimgModel.swift in Sources */,
 				21B084F51F6D540600D9F3A0 /* ShoucangTableViewCell.swift in Sources */,
 				215043671F6AD550009546D2 /* ActionCollectionViewCell.swift in Sources */,
+				214448CE1F7002880073EA06 /* ShouruViewController.swift in Sources */,
 				21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */,
 				2112E91A1F6C434F0066CF5B /* CommonModel.swift in Sources */,
 				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
 				2112E9221F6C4C8D0066CF5B /* GetbooklistModel.swift in Sources */,
+				214448D21F7007F60073EA06 /* GetincomelistModl.swift in Sources */,
 				21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */,
 				215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */,
 				21B084F71F6D5A1D00D9F3A0 /* ZanshangTableViewCell.swift in Sources */,
 				2112E91C1F6C47360066CF5B /* GetregionlistModel.swift in Sources */,
 				21FA059F1F6783A20083EFD4 /* LogDataMangerViewController.swift in Sources */,
 				21EE65B31F6A7C1900806B62 /* UpIconTableViewCell.swift in Sources */,
+				214448D01F7003A30073EA06 /* ShouruHeadView.swift in Sources */,
 				213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */,
 				21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */,
 				21FB3EAC1F66367500656B74 /* SettingViewController.swift in Sources */,
@@ -747,6 +762,7 @@
 				21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */,
 				21FB3EAE1F66392200656B74 /* TeachTableViewCell.swift in Sources */,
 				21570C951F659002003C7D38 /* MainTableViewCell.swift in Sources */,
+				214448D41F700A2B0073EA06 /* ShouruTableViewCell.swift in Sources */,
 				21EE65B51F6A7C2600806B62 /* InfoTableViewCell.swift in Sources */,
 				21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */,
 				215592311F66D2800091A822 /* LoginViewController.swift in Sources */,

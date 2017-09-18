@@ -18,13 +18,11 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         self.getData()
     }
     
  
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

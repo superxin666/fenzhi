@@ -34,7 +34,7 @@ class CommonModel_data_regionList: Mappable {
 class CommonModel_data_grade: Mappable {
 
     var name : String = ""
-    var id : Int!
+    var id : String = ""
     var type_grade : String = ""
 
     init() {}

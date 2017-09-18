@@ -285,7 +285,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         case 4://年纪
             let model : CommonModel_data_grade = gradeArr[row]
             nameStr = model.name
-            gradeNum = Int(model.type_grade)!
+            gradeNum = Int(model.id)!
             gradeNameStr = model.name
         case 5://学科
             let model : CommonModel_data_subject = subjectArr[row]
@@ -404,7 +404,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     func getbookData() {
         weak var weakSelf = self
         KFBLog(message: "gradeNum\(String(describing: subjectNum))")
-        dataVC.getbooklist(version: versionNum!, grade: 1, subject: Int(subjectNum)!, completion: { (data) in
+        dataVC.getbooklist(version: versionNum!, grade: gradeNum!, subject: Int(subjectNum)!, completion: { (data) in
             let model : GetbooklistModel = data as! GetbooklistModel
             weakSelf?.bookArr = model.data.bookList
              self.pickerView.reloadComponent(1)

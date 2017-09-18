@@ -16,12 +16,15 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     let requestVC = MineDataManger()
     var dataModel : LoginModelMapper = LoginModelMapper()
 
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.getData()
     }
-
+    
+ 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +32,7 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         self.view.backgroundColor = backView_COLOUR
         self.creatTopView()
         self.creatTableView()
-        self.getData()
+        
     }
 
     func getData() {

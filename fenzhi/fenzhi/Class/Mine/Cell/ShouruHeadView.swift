@@ -32,7 +32,7 @@ class ShouruHeadView: UIView {
         label.font = fzFont_Medium(ip7(24))
         backView.addSubview(label)
 
-        let monyLabel : UILabel = UILabel(frame: CGRect(x: label.frame.maxX + ip7(10), y:  ip7(25), width: ip7(120), height: KSCREEN_WIDTH - label.frame.maxX - ip7(10)))
+        let monyLabel : UILabel = UILabel(frame: CGRect(x: label.frame.maxX + ip7(10), y:  (viewH - ip7(65))/2, width: ip7(120), height:ip7(25) ))
         monyLabel.text = "\(90)元"
         monyLabel.isUserInteractionEnabled = true
         monyLabel.textColor = blue_COLOUR
@@ -42,9 +42,9 @@ class ShouruHeadView: UIView {
         backView.addSubview(monyLabel)
 
 
-        let infoLabel : UILabel = UILabel(frame: CGRect(x: label.frame.maxX + ip7(10), y: monyLabel.frame.maxY + ip7(12), width: KSCREEN_WIDTH - label.frame.maxX - ip7(10), height: ip7(21)))
-        infoLabel.font = fzFont_Thin(ip7(21))
-        infoLabel.textColor  = blue_COLOUR
+        let infoLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX +  ip7(25), y: monyLabel.frame.maxY + ip7(12), width: KSCREEN_WIDTH - label.frame.maxX - ip7(10), height: ip7(21)))
+        infoLabel.font = fzFont_Medium(ip7(21))
+        infoLabel.textColor  = dark_6_COLOUR
         infoLabel.textAlignment = .left
         infoLabel.text = "提现请联系客服qq：814038418"
         backView.addSubview(infoLabel)

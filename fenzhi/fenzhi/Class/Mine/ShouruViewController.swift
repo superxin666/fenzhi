@@ -43,7 +43,7 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     func getData()  {
         weak var weakSelf = self
         //        self.SVshowLoad()
-        requestVC.getzanlistlist(pageNum: page, count: 10, completion: { (data) in
+        requestVC.getgetincomelist(pageNum: page, count: 10, completion: { (data) in
             //            weakSelf?.SVdismiss()
             weakSelf?.dataModel = data as! GetincomelistModl
             if weakSelf?.dataModel.errno == 0 {
@@ -87,6 +87,7 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         mainTabelView.separatorStyle = .none
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
+
         mainTabelView.register(ShouruTableViewCell.self, forCellReuseIdentifier: SHOURUELLID)
         mainTabelView.mj_footer = footer
         footer.setRefreshingTarget(self, refreshingAction: #selector(ShouruViewController.loadMoreData))
@@ -125,21 +126,18 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let  view = ShouruHeadView()
+        let  view = ShouruHeadView(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(140)))
+        view.backgroundColor = backView_COLOUR
         view.setUpUIWithModel_cellType()
         return view
     }
 
-    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        return ip7(140)
-    }
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-            return ip7(155);
+            return ip7(155)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1
+            return ip7(140)
     }
     
     override func navigationLeftBtnClick() {

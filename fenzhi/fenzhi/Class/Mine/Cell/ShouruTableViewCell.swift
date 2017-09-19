@@ -63,7 +63,7 @@ class ShouruTableViewCell: UITableViewCell {
         self.addSubview(infoLabel)
 
 
-        let timeLabel : UILabel = UILabel(frame: CGRect(x: ip7(27), y: infoLabel.frame.maxY + ip7(15), width: ip7(200), height: ip7(18)))
+        let timeLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(24), y: infoLabel.frame.maxY + ip7(15), width: ip7(200), height: ip7(18)))
         timeLabel.text = model.createTime
         timeLabel.font = fzFont_Thin(ip7(18))
         timeLabel.textColor  = dark_a_COLOUR

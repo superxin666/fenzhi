@@ -68,6 +68,23 @@ class LoginModelMapper: Mappable {
         }
         return (loginStr!,tokenStr!,isloginStr!,ishaveinfoStr!)
     }
+
+
+    class func setLogout(complate:(_ data : Any) ->()) {
+        UserDefaults.standard.set("0", forKey: ISLOGINSTR)
+        UserDefaults.standard.set("", forKey: TOKENUDSTR)
+        UserDefaults.standard.set("", forKey: LOGINUDSTR)
+        UserDefaults.standard.set("0", forKey: ISHAVEINFOSTR)
+        let ok = UserDefaults.standard.synchronize()
+        if ok {
+            print("存储成功")
+            complate("1")
+        } else {
+            print("存储失败")
+            complate("0")
+        }
+
+    }
     
     
     class func getToken() -> String {

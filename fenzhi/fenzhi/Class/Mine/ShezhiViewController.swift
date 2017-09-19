@@ -9,6 +9,11 @@
 import UIKit
 
 class ShezhiViewController: BaseViewController {
+
+    let dataVC : LogDataMangerViewController = LogDataMangerViewController()
+    var dataModel : SmsModel = SmsModel()
+
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -88,6 +93,49 @@ class ShezhiViewController: BaseViewController {
     }
 
     func logout_click() {
+        let alertController = UIAlertController(title: "确定要退出登录吗？", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+            (action: UIAlertAction) -> Void in
+            self.loginOutData()
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+
+    }
+
+    func loginOutData() {
+
+        self.SVshowLoad()
+        weak var weakSelf = self
+        dataVC.logout(completion: { (data) in
+            weakSelf?.SVdismiss()
+            weakSelf?.dataModel = data as! SmsModel
+            print(String(describing: weakSelf?.dataModel.errno))
+            if weakSelf?.dataModel.errno == 0{
+                //
+                KFBLog(message: "退出成功")
+                LoginModelMapper.setLogout(complate: { (data2) in
+                    let str:String = data2 as! String
+                    if str == "1" {
+                        //成功
+                        let dele: AppDelegate =  UIApplication.shared.delegate as! AppDelegate
+                        dele.mainMenu()
+                    } else {
+                        //存储信息失败
+                    }
+
+                })
+            } else {
+
+
+            }
+
+        }) { (erro) in
+            
+        }
+
 
     }
     override func navigationLeftBtnClick() {

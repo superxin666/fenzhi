@@ -27,6 +27,7 @@ let uploadimg_api = "/api/uploadimg?"//上传图片接口
 //-------------------登陆注册
 
 let login_api = "/api/user/login?"
+let logout_api = "/api/user/logout?"
 let sms_api = "/api/sendsms?"
 let register_api = "/api/user/register?"
 let findpwd_api = "/api/user/findpwd?"

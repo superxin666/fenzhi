@@ -80,6 +80,30 @@ class LogDataMangerViewController: FZRequestViewController {
         
         
     }
+
+
+    func logout( completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+
+
+        let url = BASER_API + logout_api + token_pra
+        KFBLog(message: url)
+
+        var model:SmsModel = SmsModel()
+        Alamofire.request(url, method: .get).responseJSON { (returnResult) in
+
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+
+            if let json = returnResult.result.value {
+                model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+
+        }
+    }
+
+
     
     func register(phoneNum : String, paseWord : String, verification: String,completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         

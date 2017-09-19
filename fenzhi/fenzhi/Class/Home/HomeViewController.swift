@@ -149,6 +149,14 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         }
 
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = TeachDetailViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return ip7(700);
     }

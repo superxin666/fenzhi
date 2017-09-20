@@ -21,9 +21,11 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.view.backgroundColor = backView_COLOUR
         self.navigation_title_fontsize(name: "教学分享详情", fontsize: 27)
         self.navigationBar_leftBtn()
-        self.getHeadData()
+//        self.getHeadData()
+        self.getcommentlistData()
     }
 
+    //MARK:获取分享头部数据
     func getHeadData() {
         weak var weakSelf = self
         self.SVshowLoad()
@@ -49,7 +51,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.view.addSubview(headView)
 
     }
-
+    //MARK:获取分享头部尺寸
     func getSize() {
         headViewHeight = ip7(380)
         //文字
@@ -82,6 +84,18 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             headViewHeight = headViewHeight + ip7(29) + (imageWidth * CGFloat(backViewNum))
         }
     }
+
+    //MARK:获取评论列表数据
+    func getcommentlistData() {
+
+        dataVC.getcommentlist(fenxId: 1, pageNum: 1, count: 10, completion: { (data) in
+
+        }) { (erro) in
+
+        }
+
+    }
+
 
     //MARK:tableView
     func creatTableView() {

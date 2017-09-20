@@ -43,3 +43,4 @@ let getincomelist_api = "/api/user/getincomelist?"//获取赞赏列表接口
 
 //----------------------------分享相关接口
 let profile_api = "/api/fenx/profile?"//分享详情接口
+let getcommentlist_api = "/api/fenx/getcommentlist?"//获取评论列表接口

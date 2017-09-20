@@ -7,15 +7,18 @@
 //
 
 import UIKit
-
+let COMMONTELLID = "COMMONTELL_ID"//
 class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let mainTabelView : UITableView = UITableView()
     let dataVC = HomeDataMangerController()
     var headData : TeachDetailModel = TeachDetailModel()
     var commentlistData : GetcommentlistModel = GetcommentlistModel()
+    let headView : TeachDetailHeadView =  TeachDetailHeadView()
     var headViewHeight : CGFloat = 0.0
     var sectionNum = 1
-
+    var hotArr : [GetcommentlistModel_data_list_commentList] = []
+    var otherArr : [GetcommentlistModel_data_list_commentList] = []
+    var newArr : [GetcommentlistModel_data_list_commentList] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +27,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.view.backgroundColor = backView_COLOUR
         self.navigation_title_fontsize(name: "教学分享详情", fontsize: 27)
         self.navigationBar_leftBtn()
-//        self.getHeadData()
-        self.getcommentlistData()
+        self.getHeadData()
+//        self.getcommentlistData()
     }
 
     //MARK:获取分享头部数据
@@ -36,8 +39,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             weakSelf?.SVdismiss()
             weakSelf?.headData = data as! TeachDetailModel
             if weakSelf?.headData.errno == 0 {
-                self.getSize()
+                weakSelf?.getSize()
                 weakSelf?.cgreatHeadView()
+                weakSelf?.getcommentlistData()
             } else {
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.headData.errmsg)!)
 
@@ -49,7 +53,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     }
 
     func cgreatHeadView() {
-        let headView : TeachDetailHeadView = TeachDetailHeadView(frame: CGRect(x: 0, y:LNAVIGATION_HEIGHT + ip7(20), width: KSCREEN_WIDTH, height: headViewHeight))
+        headView.frame = CGRect(x: 0, y:LNAVIGATION_HEIGHT + ip7(20), width: KSCREEN_WIDTH, height: headViewHeight)
         headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight)
         self.view.addSubview(headView)
 
@@ -95,7 +99,25 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             weakSelf?.commentlistData = data as! GetcommentlistModel
             if weakSelf?.commentlistData.errno == 0 {
                 weakSelf?.getTabelViewSectionNum()
-                
+                if weakSelf?.sectionNum == 2 {
+                    //1最热评论+其他评论
+                    weakSelf?.hotArr = (weakSelf?.commentlistData.data.list[0].commentList)!
+                    for model in (weakSelf?.hotArr)! {
+                        weakSelf?.getCommentCellHeight(model: model)
+                    }
+                    weakSelf?.otherArr = (weakSelf?.commentlistData.data.list[1].commentList)!
+                    for model in (weakSelf?.otherArr)! {
+                        weakSelf?.getCommentCellHeight(model: model)
+                    }
+                } else  {
+                   //1 最新评论
+                    weakSelf?.newArr = (weakSelf?.commentlistData.data.list[0].commentList)!
+                    for model in (weakSelf?.newArr)! {
+                        weakSelf?.getCommentCellHeight(model: model)
+                    }
+                }
+
+                weakSelf?.creatTableView()
             } else {
 
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.headData.errmsg)!)
@@ -110,6 +132,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     func getTabelViewSectionNum() {
         var num = 0
         for model in self.commentlistData.data.list {
+            KFBLog(message: model.title)
             if model.title != "" {
                 num = num + 1
             }
@@ -122,10 +145,22 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         KFBLog(message: (sectionNum))
     }
 
+    func getCommentCellHeight(model : GetcommentlistModel_data_list_commentList) {
+        let str = model.content
+        let txtW = KSCREEN_WIDTH - ip7(25) - ip7(60) - ip7(25) - ip7(50)
+        let txtH :CGFloat = str.getLabHeight(font: fzFont_Thin(ip7(21)), LabelWidth: txtW)
+        var heiht = ip7(140) + txtH
+        if model.toCommentInfo.content.characters.count > 0 {
+            heiht = heiht + ip7(78)
+        }
+        heiht = heiht  + ip7(44)
+        model.cellHeight = heiht
+    }
+
 
     //MARK:tableView
     func creatTableView() {
-        mainTabelView.frame = CGRect(x: 0, y:LNAVIGATION_HEIGHT +  ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20) - LNAVIGATION_HEIGHT)
+        mainTabelView.frame = CGRect(x: 0, y:headView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - headView.frame.maxY)
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -133,33 +168,92 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainTabelView.separatorStyle = .none
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
-        mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
-        mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
+        mainTabelView.register(commentTableViewCell.self, forCellReuseIdentifier: COMMONTELLID)
         self.view.addSubview(mainTabelView)
     }
 
     // MARK: tableView 代理
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sectionNum
     }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        if sectionNum == 2 {
+            if  section == 0{
+                return self.hotArr.count
+            } else {
+                return self.otherArr.count
+
+            }
+        } else {
+            return self.newArr.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : TeachTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID, for: indexPath) as! TeachTableViewCell
-        cell.backgroundColor = .clear
+        var cell : commentTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: COMMONTELLID, for: indexPath) as! commentTableViewCell
+        cell.backgroundColor = .white
         cell.selectionStyle = .none
         if (cell == nil)  {
-            cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
+            cell = commentTableViewCell(style: .default, reuseIdentifier: COMMONTELLID)
         }
-        cell.setUpUIWithModelAndType(cellType: .home_Teach)
+     
+        var model : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()
+        if sectionNum == 2 {
+            if  indexPath.section == 0{
+                model = self.hotArr[indexPath.row]
+            } else {
+                model = self.otherArr[indexPath.row]
+            }
+        } else {
+                model = self.newArr[indexPath.row]
+        }
+        cell.setUpUIWithModel_cellType(model: model)
         return cell;
 
     }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let view : UIView = UIView()
+        let nameLabel : UILabel = UILabel(frame: CGRect(x: ip7(30), y: (ip7(136/2) - ip7(21))/2, width: KSCREEN_WIDTH - ip7(30), height: ip7(21)))
+        nameLabel.font = fzFont_Thin(ip7(21))
+        nameLabel.textColor = dark_3_COLOUR
+        view.addSubview(nameLabel)
+
+        if sectionNum == 2 {
+            //两组
+            if section == 0 {
+                 let str = self.commentlistData.data.list[0].title
+                 nameLabel.text = str
+            } else {
+                let str = self.commentlistData.data.list[1].title
+                nameLabel.text = str
+            }
+
+        } else {
+            //一组
+            nameLabel.text = "最新评论"
+        }
+        return view
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return ip7(136/2)
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return ip7(700);
+        if sectionNum == 2 {
+            if  indexPath.section == 0{
+                let model = self.hotArr[indexPath.row]
+                return model.cellHeight
+            } else {
+                let model = self.otherArr[indexPath.row]
+                return model.cellHeight
+            }
+        } else {
+            let model = self.newArr[indexPath.row]
+            return model.cellHeight
+        }
     }
 
     override func navigationLeftBtnClick() {

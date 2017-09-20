@@ -72,6 +72,8 @@ class GetcommentlistModel_data_list_commentList: Mappable {
     var userInfo : GetcommentlistModel_data_list_commentList_userInfo = GetcommentlistModel_data_list_commentList_userInfo()
     var toUserInfo : GetcommentlistModel_data_list_commentList_userInfo = GetcommentlistModel_data_list_commentList_userInfo()
     var toCommentInfo : GetcommentlistModel_data_list_commentList_toCommentInfo = GetcommentlistModel_data_list_commentList_toCommentInfo()
+    var cellHeight: CGFloat = 0.0
+
 
     init() {}
     required init?(map: Map){

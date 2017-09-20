@@ -12,7 +12,10 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     let mainTabelView : UITableView = UITableView()
     let dataVC = HomeDataMangerController()
     var headData : TeachDetailModel = TeachDetailModel()
+    var commentlistData : GetcommentlistModel = GetcommentlistModel()
     var headViewHeight : CGFloat = 0.0
+    var sectionNum = 1
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,13 +90,36 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     //MARK:获取评论列表数据
     func getcommentlistData() {
-
+        weak var weakSelf = self
         dataVC.getcommentlist(fenxId: 1, pageNum: 1, count: 10, completion: { (data) in
+            weakSelf?.commentlistData = data as! GetcommentlistModel
+            if weakSelf?.commentlistData.errno == 0 {
+                weakSelf?.getTabelViewSectionNum()
+                
+            } else {
+
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.headData.errmsg)!)
+            }
 
         }) { (erro) in
-
+               weakSelf?.SVshowErro(infoStr: "请求失败")
         }
 
+    }
+
+    func getTabelViewSectionNum() {
+        var num = 0
+        for model in self.commentlistData.data.list {
+            if model.title != "" {
+                num = num + 1
+            }
+        }
+        if num > 1 {
+            sectionNum = 2
+        } else {
+            sectionNum = 1
+        }
+        KFBLog(message: (sectionNum))
     }
 
 

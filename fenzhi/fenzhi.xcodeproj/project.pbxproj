@@ -32,7 +32,6 @@
 		215043631F6AC16B009546D2 /* DingweiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043621F6AC16B009546D2 /* DingweiViewController.swift */; };
 		215043651F6AD179009546D2 /* pdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043641F6AD179009546D2 /* pdfViewController.swift */; };
 		215043671F6AD550009546D2 /* ActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043661F6AD550009546D2 /* ActionCollectionViewCell.swift */; };
-		2154EBAD1F68205900C992D1 /* RSAUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2154EBAC1F68205900C992D1 /* RSAUtils.swift */; };
 		215592311F66D2800091A822 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215592301F66D2800091A822 /* LoginViewController.swift */; };
 		21570C8D1F653572003C7D38 /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C8C1F653572003C7D38 /* api.swift */; };
 		21570C8F1F653CB2003C7D38 /* fzStr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21570C8E1F653CB2003C7D38 /* fzStr.swift */; };
@@ -53,6 +52,10 @@
 		21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */; };
 		21BBF7FF1F6BC385008D654D /* GuanzhuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FE1F6BC385008D654D /* GuanzhuTableViewCell.swift */; };
 		21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD78761F618C1600539E8D /* BaseViewController.swift */; };
+		21CB58C51F726D5A00F41448 /* TeachDetailHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58C41F726D5A00F41448 /* TeachDetailHeadView.swift */; };
+		21CB58C71F726D7500F41448 /* TeachDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */; };
+		21CB58C91F726DB100F41448 /* HomeDataMangerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58C81F726DB100F41448 /* HomeDataMangerController.swift */; };
+		21CB58CC1F726E7A00F41448 /* ShezhiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58CB1F726E7A00F41448 /* ShezhiViewController.swift */; };
 		21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AD1F6A54DE00806B62 /* ResModel.swift */; };
 		21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */; };
 		21EE65B31F6A7C1900806B62 /* UpIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65B21F6A7C1900806B62 /* UpIconTableViewCell.swift */; };
@@ -62,6 +65,7 @@
 		21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */; };
 		21F1C59E1F691CAF002FC28A /* SmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C59D1F691CAF002FC28A /* SmsModel.swift */; };
 		21F1C5A01F6924EB002FC28A /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C59F1F6924EB002FC28A /* InfoViewController.swift */; };
+		21F5563B1F7272F00017C701 /* TeachDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5563A1F72726B0017C701 /* TeachDetailModel.swift */; };
 		21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */; };
 		21FA059F1F6783A20083EFD4 /* LogDataMangerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA059E1F6783A20083EFD4 /* LogDataMangerViewController.swift */; };
 		21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA05A01F6784DF0083EFD4 /* FZRequestViewController.swift */; };
@@ -122,7 +126,6 @@
 		215043621F6AC16B009546D2 /* DingweiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DingweiViewController.swift; sourceTree = "<group>"; };
 		215043641F6AD179009546D2 /* pdfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pdfViewController.swift; sourceTree = "<group>"; };
 		215043661F6AD550009546D2 /* ActionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCollectionViewCell.swift; sourceTree = "<group>"; };
-		2154EBAC1F68205900C992D1 /* RSAUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSAUtils.swift; sourceTree = "<group>"; };
 		215592301F66D2800091A822 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		21570C8C1F653572003C7D38 /* api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = api.swift; sourceTree = "<group>"; };
 		21570C8E1F653CB2003C7D38 /* fzStr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fzStr.swift; sourceTree = "<group>"; };
@@ -145,6 +148,10 @@
 		21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GunzhuViewController.swift; sourceTree = "<group>"; };
 		21BBF7FE1F6BC385008D654D /* GuanzhuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuanzhuTableViewCell.swift; sourceTree = "<group>"; };
 		21BD78761F618C1600539E8D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		21CB58C41F726D5A00F41448 /* TeachDetailHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachDetailHeadView.swift; sourceTree = "<group>"; };
+		21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachDetailViewController.swift; sourceTree = "<group>"; };
+		21CB58C81F726DB100F41448 /* HomeDataMangerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataMangerController.swift; sourceTree = "<group>"; };
+		21CB58CB1F726E7A00F41448 /* ShezhiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShezhiViewController.swift; sourceTree = "<group>"; };
 		21EE65AD1F6A54DE00806B62 /* ResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModel.swift; sourceTree = "<group>"; };
 		21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModelMaper.swift; sourceTree = "<group>"; };
 		21EE65B21F6A7C1900806B62 /* UpIconTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpIconTableViewCell.swift; sourceTree = "<group>"; };
@@ -154,6 +161,7 @@
 		21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		21F1C59D1F691CAF002FC28A /* SmsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmsModel.swift; sourceTree = "<group>"; };
 		21F1C59F1F6924EB002FC28A /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		21F5563A1F72726B0017C701 /* TeachDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachDetailModel.swift; sourceTree = "<group>"; };
 		21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartTableViewCell.swift; sourceTree = "<group>"; };
 		21FA059E1F6783A20083EFD4 /* LogDataMangerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogDataMangerViewController.swift; sourceTree = "<group>"; };
 		21FA05A01F6784DF0083EFD4 /* FZRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZRequestViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +240,7 @@
 				214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */,
 				215043621F6AC16B009546D2 /* DingweiViewController.swift */,
 				215043641F6AD179009546D2 /* pdfViewController.swift */,
+				21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -247,6 +256,7 @@
 				21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */,
 				21B084F01F6D42B500D9F3A0 /* ShoucangViewController.swift */,
 				214448CD1F7002880073EA06 /* ShouruViewController.swift */,
+				21CB58CB1F726E7A00F41448 /* ShezhiViewController.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -263,7 +273,6 @@
 			isa = PBXGroup;
 			children = (
 				215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */,
-				2154EBAC1F68205900C992D1 /* RSAUtils.swift */,
 				217882391F67E43D00365735 /* RSA.h */,
 				2178823A1F67E43D00365735 /* RSA.m */,
 				21062AE01F603EA90003C7C4 /* pch.swift */,
@@ -360,6 +369,7 @@
 		21570C901F653EAA003C7D38 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				21F5563A1F72726B0017C701 /* TeachDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -412,6 +422,7 @@
 		21F8421F1F6267DC00A54D68 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				21CB58C41F726D5A00F41448 /* TeachDetailHeadView.swift */,
 				215043661F6AD550009546D2 /* ActionCollectionViewCell.swift */,
 				21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */,
 				21FB3EAD1F66392200656B74 /* TeachTableViewCell.swift */,
@@ -422,6 +433,7 @@
 		21FA059D1F677CDD0083EFD4 /* DataManger */ = {
 			isa = PBXGroup;
 			children = (
+				21CB58C81F726DB100F41448 /* HomeDataMangerController.swift */,
 				21FA059E1F6783A20083EFD4 /* LogDataMangerViewController.swift */,
 				21FA05A01F6784DF0083EFD4 /* FZRequestViewController.swift */,
 				2158221F1F6C2012002BC6E6 /* MineDataManger.swift */,
@@ -723,6 +735,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21F1C59E1F691CAF002FC28A /* SmsModel.swift in Sources */,
+				21CB58C51F726D5A00F41448 /* TeachDetailHeadView.swift in Sources */,
 				215822231F6C2122002BC6E6 /* FollowModel.swift in Sources */,
 				21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */,
 				21F1C5981F68E002002FC28A /* UserInfoModel.swift in Sources */,
@@ -730,6 +743,7 @@
 				2178823B1F67E43D00365735 /* RSA.m in Sources */,
 				214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */,
 				21B084F91F6E9AA400D9F3A0 /* UploadimgModel.swift in Sources */,
+				21CB58C71F726D7500F41448 /* TeachDetailViewController.swift in Sources */,
 				21B084F51F6D540600D9F3A0 /* ShoucangTableViewCell.swift in Sources */,
 				215043671F6AD550009546D2 /* ActionCollectionViewCell.swift in Sources */,
 				214448CE1F7002880073EA06 /* ShouruViewController.swift in Sources */,
@@ -738,6 +752,7 @@
 				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
 				2112E9221F6C4C8D0066CF5B /* GetbooklistModel.swift in Sources */,
 				214448D21F7007F60073EA06 /* GetincomelistModl.swift in Sources */,
+				21F5563B1F7272F00017C701 /* TeachDetailModel.swift in Sources */,
 				21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */,
 				215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */,
 				21B084F71F6D5A1D00D9F3A0 /* ZanshangTableViewCell.swift in Sources */,
@@ -748,6 +763,7 @@
 				213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */,
 				21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */,
 				21FB3EAC1F66367500656B74 /* SettingViewController.swift in Sources */,
+				21CB58CC1F726E7A00F41448 /* ShezhiViewController.swift in Sources */,
 				21B084F11F6D42B500D9F3A0 /* ShoucangViewController.swift in Sources */,
 				215822291F6C3D7A002BC6E6 /* UIView+clipping.swift in Sources */,
 				21B084F31F6D4BCA00D9F3A0 /* GetzanlistModel.swift in Sources */,
@@ -762,6 +778,7 @@
 				21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */,
 				21FB3EAE1F66392200656B74 /* TeachTableViewCell.swift in Sources */,
 				21570C951F659002003C7D38 /* MainTableViewCell.swift in Sources */,
+				21CB58C91F726DB100F41448 /* HomeDataMangerController.swift in Sources */,
 				214448D41F700A2B0073EA06 /* ShouruTableViewCell.swift in Sources */,
 				21EE65B51F6A7C2600806B62 /* InfoTableViewCell.swift in Sources */,
 				21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */,
@@ -772,7 +789,6 @@
 				21570C8D1F653572003C7D38 /* api.swift in Sources */,
 				215043651F6AD179009546D2 /* pdfViewController.swift in Sources */,
 				215043631F6AC16B009546D2 /* DingweiViewController.swift in Sources */,
-				2154EBAD1F68205900C992D1 /* RSAUtils.swift in Sources */,
 				21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */,
 				2158222B1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift in Sources */,
 				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,

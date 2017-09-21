@@ -59,7 +59,7 @@ class LoginModelMapper: Mappable {
             loginStr = ""
         }
         var tokenStr :String? = UserDefaults.standard.value(forKey: TOKENUDSTR) as! String?
-        if tokenStr == "" {
+        if tokenStr == nil {
             tokenStr = ""
         }
         var ishaveinfoStr :String? = UserDefaults.standard.value(forKey: ISHAVEINFOSTR) as! String?
@@ -89,12 +89,11 @@ class LoginModelMapper: Mappable {
     
     class func getToken() -> String {
     
-        var tokenStr  = UserDefaults.standard.value(forKey: TOKENUDSTR) as! String!
-        if tokenStr == "" {
+        var tokenStr : String? = UserDefaults.standard.value(forKey: TOKENUDSTR) as! String?
+        if tokenStr == nil {
             tokenStr = ""
         }
         return tokenStr!
-        
     }
     
     

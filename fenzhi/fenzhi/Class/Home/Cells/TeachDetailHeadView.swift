@@ -15,7 +15,7 @@ class TeachDetailHeadView: UIView {
         let viewW = KSCREEN_WIDTH
         let viewH = height
 
-        let backView : UIView = UIView(frame: CGRect(x: ip7(10), y: 0, width: viewW, height: viewH - ip7(10)))
+        let backView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH - ip7(10)))
         backView.backgroundColor = .white
         backView.isUserInteractionEnabled = true
         self.addSubview(backView)
@@ -28,8 +28,6 @@ class TeachDetailHeadView: UIView {
 //        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
 //        iconImageView.addGestureRecognizer(iconImageViewTap)
         //时间
-
-
         let timeLabel : UILabel = UILabel(frame: CGRect(x: viewW - ip7(31) - ip7(90), y: ip7(25), width: ip7(90), height: ip7(20)))
         timeLabel.text = model.data.createTime
         timeLabel.font = fzFont_Thin(ip7(15))
@@ -37,6 +35,7 @@ class TeachDetailHeadView: UIView {
         timeLabel.textAlignment = .right
         backView.addSubview(timeLabel)
 
+        
 
         //105105105
         //名字

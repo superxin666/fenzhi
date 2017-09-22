@@ -9,6 +9,7 @@
 import UIKit
 let COMMONTELLID = "COMMONTELL_ID"//
 class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+    let mainScrollow : UIScrollView = UIScrollView()
     let mainTabelView : UITableView = UITableView()
     let dataVC = HomeDataMangerController()
     var headData : TeachDetailModel = TeachDetailModel()
@@ -22,8 +23,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        self.edgesForExtendedLayout = UIRectEdge.bottom
         self.view.backgroundColor = backView_COLOUR
         self.navigation_title_fontsize(name: "教学分享详情", fontsize: 27)
         self.navigationBar_leftBtn()
@@ -53,9 +55,16 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     }
 
     func cgreatHeadView() {
-        headView.frame = CGRect(x: 0, y:LNAVIGATION_HEIGHT + ip7(20), width: KSCREEN_WIDTH, height: headViewHeight)
+        
+        mainScrollow.frame = CGRect(x: 0, y: ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20))
+        mainScrollow.backgroundColor = .clear
+        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight  + KSCREEN_HEIGHT - ip7(20))
+        self.view.addSubview(mainScrollow)
+        
+        headView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: headViewHeight)
         headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight)
-        self.view.addSubview(headView)
+        mainScrollow.addSubview(headView)
+
 
     }
     //MARK:获取分享头部尺寸
@@ -160,7 +169,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     //MARK:tableView
     func creatTableView() {
-        mainTabelView.frame = CGRect(x: 0, y:headView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - headView.frame.maxY)
+        mainTabelView.frame = CGRect(x: 0, y:headView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20) - LNAVIGATION_HEIGHT)
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -169,7 +178,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         mainTabelView.register(commentTableViewCell.self, forCellReuseIdentifier: COMMONTELLID)
-        self.view.addSubview(mainTabelView)
+        mainScrollow.addSubview(mainTabelView)
+//        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight + mainTabelView.contentSize.height)
     }
 
     // MARK: tableView 代理

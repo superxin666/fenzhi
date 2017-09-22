@@ -13,6 +13,11 @@ class commentTableViewCell: UITableViewCell {
     let nameLabel : UILabel = UILabel()//姓名
 
     let timeLabel : UILabel = UILabel()//时间
+    let zanBtn : UIButton = UIButton()//点赞
+    let zanNumLabel : UILabel = UILabel()//点赞数
+    
+    let pinglunBtn : UIButton = UIButton()//评论
+    
     let contentLabel : UILabel = UILabel()//内容
 
     let toUserName : UILabel = UILabel()//底下姓名
@@ -20,6 +25,8 @@ class commentTableViewCell: UITableViewCell {
 
     let backView : UIView = UIView()
     let lineView : UIView = UIView()
+    
+    
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -59,6 +66,25 @@ class commentTableViewCell: UITableViewCell {
         timeLabel.textColor  = dark_6_COLOUR
         timeLabel.textAlignment = .left
         self.addSubview(timeLabel)
+        
+        //点赞
+        zanBtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(25) - ip7(25), y: nameLabel.frame.maxY + ip7(5), width: ip7(25), height: ip7(25))
+        zanBtn.setImage(#imageLiteral(resourceName: "icon_dz1"), for: .normal)
+        zanBtn.setImage(#imageLiteral(resourceName: "icon_dz1_s"), for: .selected)
+        self.addSubview(zanBtn)
+        //点赞数目
+        zanNumLabel.frame = CGRect(x: zanBtn.frame.origin.x - ip7(42), y: nameLabel.frame.maxY + ip7(8), width: ip7(30), height: ip7(15))
+        zanNumLabel.font = fzFont_Thin(ip7(15))
+        zanNumLabel.textColor  = dark_6_COLOUR
+        zanNumLabel.textAlignment = .right
+//        zanNumLabel.backgroundColor = .red
+        self.addSubview(zanNumLabel)
+        
+        //评论
+        pinglunBtn.frame = CGRect(x: zanNumLabel.frame.origin.x - ip7(37+25), y: nameLabel.frame.maxY + ip7(5), width: ip7(25), height: ip7(25))
+        pinglunBtn.setImage(#imageLiteral(resourceName: "icon_pl1"), for: .normal)
+        self.addSubview(pinglunBtn)
+        
         //文字
         contentLabel.font = fzFont_Thin(ip7(21))
         contentLabel.textColor  = FZColor(red: 102, green: 102, blue: 102, alpha: 1.0)
@@ -78,6 +104,14 @@ class commentTableViewCell: UITableViewCell {
         iconImageView.kf.setImage(with: URL(string: model.userInfo.avatar))//头像
         nameLabel.text = model.userInfo.name//名字
         timeLabel.text = model.createTime//时间
+        zanNumLabel.text = "\(model.likeNum!)"//赞数目
+        if model.isLike == 1 {
+            //已经赞过
+            zanBtn.isSelected = true
+        } else {
+            //没赞过
+            zanBtn.isSelected = false
+        }
         //内容
         let str = model.content
         let txtW = viewW - iconImageView.frame.maxX - ip7(25)  - ip7(50)

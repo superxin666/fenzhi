@@ -66,7 +66,7 @@ class GetcommentlistModel_data_list_commentList: Mappable {
     var status : Int!
     var createTime : String = ""
     var updateTime : String = ""
-    var likeNum : String = ""
+    var likeNum : Int!
     var isHot : Int!
     var isLike: Int!
     var userInfo : GetcommentlistModel_data_list_commentList_userInfo = GetcommentlistModel_data_list_commentList_userInfo()

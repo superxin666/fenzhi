@@ -26,6 +26,10 @@ class commentTableViewCell: UITableViewCell {
     let backView : UIView = UIView()
     let lineView : UIView = UIView()
     
+    let dataVC = CommonDataMangerViewController()
+    
+    var dataModel : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()
+    
     
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -41,23 +45,24 @@ class commentTableViewCell: UITableViewCell {
         let viewW = KSCREEN_WIDTH
         //头像
         iconImageView.frame = CGRect(x: ip7(25), y: ip7(50), width: ip7(60), height: ip7(60))
-
         iconImageView.kfb_makeRound()
         iconImageView.isUserInteractionEnabled = true
         self.addSubview(iconImageView)
 
-//        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
-//        iconImageView.addGestureRecognizer(iconImageViewTap)
+        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(commentTableViewCell.image_Click))
+        iconImageView.addGestureRecognizer(iconImageViewTap)
 
         //名字
         let nameWidth = viewW - ip7(19) - iconImageView.frame.maxX - ip7(31) - ip7(90)
         nameLabel.frame = CGRect(x: iconImageView.frame.maxX + ip7(25), y:  ip7(50), width: nameWidth, height: ip7(24))
-
         nameLabel.isUserInteractionEnabled = true
         nameLabel.textColor = dark_3_COLOUR
         nameLabel.font = fzFont_Medium(ip7(24))
         nameLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(nameLabel)
+        
+        let nameTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(commentTableViewCell.image_Click))
+        nameLabel.addGestureRecognizer(nameTap)
 
         //时间
         timeLabel.frame = CGRect(x: iconImageView.frame.maxX + ip7(25), y: nameLabel.frame.maxY + ip7(5), width: ip7(90), height: ip7(15))
@@ -99,7 +104,7 @@ class commentTableViewCell: UITableViewCell {
     }
 
     func setUpUIWithModel_cellType(model : GetcommentlistModel_data_list_commentList) {
-
+        dataModel = model;
         let viewW = KSCREEN_WIDTH
         iconImageView.kf.setImage(with: URL(string: model.userInfo.avatar))//头像
         nameLabel.text = model.userInfo.name//名字
@@ -111,6 +116,7 @@ class commentTableViewCell: UITableViewCell {
         } else {
             //没赞过
             zanBtn.isSelected = false
+            zanBtn.addTarget(self, action: #selector(commentTableViewCell.zan_Click), for: .touchUpInside)
         }
         //内容
         let str = model.content
@@ -141,7 +147,37 @@ class commentTableViewCell: UITableViewCell {
         lineView.frame = CGRect(x: 0, y: model.cellHeight - 0.5, width: KSCREEN_WIDTH, height: 0.5)
         
     }
+    
+    func zan_Click() {
+        if self.dataModel.isLike == 1 {
+            return
+        }
+        KFBLog(message: "赞点击")
+        weak var weakSelf = self
+        dataVC.like(type: 1, objectId: self.dataModel.id!, completion: { (data) in
+            let model : LikeModel = data as! LikeModel
+            if model.errno == 0 {
+                weakSelf?.zanBtn.isSelected = true
+                weakSelf?.dataModel.isLike = 1
+                let num = (weakSelf?.dataModel.likeNum)! + 1
+                weakSelf?.dataModel.isLike = num
+                weakSelf?.zanNumLabel.text = "\(num)"
+            } else {
+                KFBLog(message: "点赞失败")
+            }
+            
+        }) { (erro) in
+            
+        }
+    }
+    func image_Click() {
+        KFBLog(message: "头像点击")
+    }
+    
 
+    func pinglun_Click() {
+         KFBLog(message: "评论点击")
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -159,18 +159,18 @@ class CommonDataMangerViewController: FZRequestViewController {
     ///   - failure: <#failure description#>
     func like(type : Int,objectId : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
-        let urlStr = BASER_API + getbooklist_api+"type="+"\(type)"+"&objectId="+"\(objectId)"+last_pra+token_pra
-        var model:GetbooklistModel = GetbooklistModel()
+        let urlStr = BASER_API + like_api+"type="+"\(type)"+"&objectId="+"\(objectId)"+last_pra+token_pra
+        var model:LikeModel = LikeModel()
         KFBLog(message: urlStr)
         Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
             print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
             if let json = returnResult.result.value {
-                model = Mapper<GetbooklistModel>().map(JSON: json as! [String : Any])!
+                model = Mapper<LikeModel>().map(JSON: json as! [String : Any])!
                 completion(model)
             } else {
                 failure("请求失败")
             }
-            
+
         }
     }
     

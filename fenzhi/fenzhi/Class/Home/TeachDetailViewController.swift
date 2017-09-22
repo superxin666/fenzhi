@@ -15,6 +15,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     var headData : TeachDetailModel = TeachDetailModel()
     var commentlistData : GetcommentlistModel = GetcommentlistModel()
     let headView : TeachDetailHeadView =  TeachDetailHeadView()
+    let txtTextView : UITextView = UITextView()
     var headViewHeight : CGFloat = 0.0
     var sectionNum = 1
     var hotArr : [GetcommentlistModel_data_list_commentList] = []
@@ -241,15 +242,27 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         btn.titleLabel?.font = fzFont_Thin(ip7(18))
         btn.kfb_makeRadius(radius: 14)
         btn.kfb_makeBorderWithBorderWidth(width: 1, color: lineView_thin_COLOUR)
+        btn.addTarget(self, action: #selector(showTxt_click), for: .touchUpInside)
         backView.addSubview(btn)
-        
         let imageView = UIImageView(frame: CGRect(x: btn.frame.maxX + ip7(10), y: (ip7(80) - ip7(35))/2, width: ip7(35), height: ip7(35)))
         imageView.image = #imageLiteral(resourceName: "button_fs")
         backView.addSubview(imageView)
         
+    }
+    //MARK:显示打字窗口
+    func showTxt_click() {
+        self.view.window?.addSubview(self.maskView)
+        
+        let backView : UIView  = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        backView.backgroundColor = .white
+
         
     }
-
+    
+    func dismissTxtView() {
+        self.maskView.removeFromSuperview()
+    }
+    
     //MARK:tableView
     func creatTableView() {
         mainTabelView.frame = CGRect(x: 0, y:headView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20) - LNAVIGATION_HEIGHT - ip7(80))

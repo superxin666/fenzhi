@@ -69,13 +69,13 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     var pickerView:UIPickerView = UIPickerView()
     let pickerViewBackView:UIView = UIView()
 
-    lazy var maskView : UIView = {
-        ()-> UIView in
-        let maskView = UIView()
-        maskView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
-        maskView.backgroundColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.7)
-        return maskView
-    }()
+//    lazy var maskView : UIView = {
+//        ()-> UIView in
+//        let maskView = UIView()
+//        maskView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
+//        maskView.backgroundColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.7)
+//        return maskView
+//    }()
 
     
     override func viewDidLoad() {

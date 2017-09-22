@@ -20,7 +20,15 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     var hotArr : [GetcommentlistModel_data_list_commentList] = []
     var otherArr : [GetcommentlistModel_data_list_commentList] = []
     var newArr : [GetcommentlistModel_data_list_commentList] = []
-
+    var page :Int = 1
+    let count : Int = 10
+    var hotTitle = ""
+    var otherTitle = ""
+    var newTitle = ""
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +39,11 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.navigationBar_leftBtn()
         self.getHeadData()
 //        self.getcommentlistData()
+    }
+    
+    func loadMoreData() {
+        page = page + 1
+        self.getcommentlistData()
     }
 
     //MARK:获取分享头部数据
@@ -104,31 +117,66 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     //MARK:获取评论列表数据
     func getcommentlistData() {
         weak var weakSelf = self
-        dataVC.getcommentlist(fenxId: 1, pageNum: 1, count: 10, completion: { (data) in
+        dataVC.getcommentlist(fenxId: 1, pageNum: page, count: count, completion: { (data) in
             weakSelf?.commentlistData = data as! GetcommentlistModel
             if weakSelf?.commentlistData.errno == 0 {
-                weakSelf?.getTabelViewSectionNum()
-                if weakSelf?.sectionNum == 2 {
-                    //1最热评论+其他评论
-                    weakSelf?.hotArr = (weakSelf?.commentlistData.data.list[0].commentList)!
-                    for model in (weakSelf?.hotArr)! {
-                        weakSelf?.getCommentCellHeight(model: model)
+                if (weakSelf?.commentlistData.data.list.count)! > 0 {
+                    if weakSelf?.page == 1 {
+                        weakSelf?.getTabelViewSectionNum()
                     }
-                    weakSelf?.otherArr = (weakSelf?.commentlistData.data.list[1].commentList)!
-                    for model in (weakSelf?.otherArr)! {
-                        weakSelf?.getCommentCellHeight(model: model)
+                    
+                    if weakSelf?.sectionNum == 2 {
+                        if weakSelf?.page  == 1 {
+                            //1最热评论+其他评论
+                            weakSelf?.hotArr = (weakSelf?.commentlistData.data.list[0].commentList)!
+                            weakSelf?.hotTitle  = self.commentlistData.data.list[0].title
+                            for model in (weakSelf?.hotArr)! {
+                                weakSelf?.getCommentCellHeight(model: model)
+                            }
+                            weakSelf?.otherArr = (weakSelf?.commentlistData.data.list[1].commentList)!
+                            weakSelf?.otherTitle  = self.commentlistData.data.list[1].title
+                            for model in (weakSelf?.otherArr)! {
+                                weakSelf?.getCommentCellHeight(model: model)
+                            }
+                        } else {
+                            //上拉加载
+                            let newArr = (weakSelf?.commentlistData.data.list[0].commentList)!
+//                            if weakSelf?.page == 1 {
+//                                weakSelf?.newTitle  = self.commentlistData.data.list[0].title
+//                            }
+                            if newArr.count > 0 {
+                                weakSelf?.otherArr =  (weakSelf?.otherArr)! + newArr
+                                for model in (weakSelf?.otherArr)! {
+                                    weakSelf?.getCommentCellHeight(model: model)
+                                }
+                            } else {
+                                 weakSelf?.SVshowErro(infoStr: "没有数据了")
+                            }
+                        }
+
+                    } else  {
+                        //1 最新评论
+                        weakSelf?.newArr = (weakSelf?.newArr)! + (weakSelf?.commentlistData.data.list[0].commentList)!
+                        for model in (weakSelf?.newArr)! {
+                            weakSelf?.getCommentCellHeight(model: model)
+                        }
                     }
-                } else  {
-                   //1 最新评论
-                    weakSelf?.newArr = (weakSelf?.commentlistData.data.list[0].commentList)!
-                    for model in (weakSelf?.newArr)! {
-                        weakSelf?.getCommentCellHeight(model: model)
+                    if weakSelf?.page == 1{
+                         weakSelf?.creatTableView()
+                    } else {
+                        weakSelf?.mainTabelView.reloadData()
+                        weakSelf?.mainTabelView.mj_footer.endRefreshing()
                     }
+                    
+           
+                } else {
+                    //没有评论
+                    
                 }
+                
 
-                weakSelf?.creatTableView()
+
             } else {
-
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.headData.errmsg)!)
             }
 
@@ -137,6 +185,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
 
     }
+    
+
 
     func getTabelViewSectionNum() {
         var num = 0
@@ -178,6 +228,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         mainTabelView.register(commentTableViewCell.self, forCellReuseIdentifier: COMMONTELLID)
+        mainTabelView.mj_footer = footer
+        footer.setRefreshingTarget(self, refreshingAction: #selector(TeachDetailViewController.loadMoreData))
         mainScrollow.addSubview(mainTabelView)
 //        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight + mainTabelView.contentSize.height)
     }
@@ -233,11 +285,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         if sectionNum == 2 {
             //两组
             if section == 0 {
-                 let str = self.commentlistData.data.list[0].title
-                 nameLabel.text = str
+                 nameLabel.text = hotTitle
             } else {
-                let str = self.commentlistData.data.list[1].title
-                nameLabel.text = str
+                nameLabel.text = otherTitle
             }
 
         } else {

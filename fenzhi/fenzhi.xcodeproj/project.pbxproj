@@ -44,6 +44,7 @@
 		215822271F6C3033002BC6E6 /* NoWifiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822261F6C3033002BC6E6 /* NoWifiView.swift */; };
 		215822291F6C3D7A002BC6E6 /* UIView+clipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */; };
 		2158222B1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2158222A1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift */; };
+		2176597B1F74BBB600A54A1D /* LikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176597A1F74BBB600A54A1D /* LikeModel.swift */; };
 		2178823B1F67E43D00365735 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2178823A1F67E43D00365735 /* RSA.m */; };
 		21B084F11F6D42B500D9F3A0 /* ShoucangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B084F01F6D42B500D9F3A0 /* ShoucangViewController.swift */; };
 		21B084F31F6D4BCA00D9F3A0 /* GetzanlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B084F21F6D4BCA00D9F3A0 /* GetzanlistModel.swift */; };
@@ -140,6 +141,7 @@
 		215822261F6C3033002BC6E6 /* NoWifiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoWifiView.swift; sourceTree = "<group>"; };
 		215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+clipping.swift"; sourceTree = "<group>"; };
 		2158222A1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDataMangerViewController.swift; sourceTree = "<group>"; };
+		2176597A1F74BBB600A54A1D /* LikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeModel.swift; sourceTree = "<group>"; };
 		217882381F67E39C00365735 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		217882391F67E43D00365735 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
 		2178823A1F67E43D00365735 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				2112E91D1F6C4A3E0066CF5B /* GetschoollistModel.swift */,
 				2112E9211F6C4C8D0066CF5B /* GetbooklistModel.swift */,
 				21B084F81F6E9AA400D9F3A0 /* UploadimgModel.swift */,
+				2176597A1F74BBB600A54A1D /* LikeModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -778,6 +781,7 @@
 				21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */,
 				21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */,
 				21570C921F6579ED003C7D38 /* UserInfoViewController.swift in Sources */,
+				2176597B1F74BBB600A54A1D /* LikeModel.swift in Sources */,
 				21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */,
 				21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */,
 				215822201F6C2012002BC6E6 /* MineDataManger.swift in Sources */,

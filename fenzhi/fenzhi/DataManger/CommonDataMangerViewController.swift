@@ -82,6 +82,16 @@ class CommonDataMangerViewController: FZRequestViewController {
         
     }
 
+
+
+    /// 获取教材列表接口
+    ///
+    /// - Parameters:
+    ///   - version:     教材版本id, id数据可从公共数据接口中获取，目前只支持人教版
+    ///   - grade:     年级id, id数据可从公共数据接口中获取
+    ///   - subject: 学科id, id数据可从公共数据接口中获取
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
     func getbooklist(version : Int,grade : Int, subject : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
         let urlStr = BASER_API + getbooklist_api+"version="+"\(version)"+"&grade="+"\(grade)"+"&subject="+"\(subject)"
@@ -137,5 +147,32 @@ class CommonDataMangerViewController: FZRequestViewController {
         }
         )
     }
+    
+    
+    
+    /// 点赞接口
+    ///
+    /// - Parameters:
+    ///   - type:     类型: 0-分享 1-评论
+    ///   - objectId:     对象id, 如果点赞的是分享就是分享id 如果点赞的是评论就是评论id
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
+    func like(type : Int,objectId : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        let urlStr = BASER_API + getbooklist_api+"type="+"\(type)"+"&objectId="+"\(objectId)"+last_pra+token_pra
+        var model:GetbooklistModel = GetbooklistModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<GetbooklistModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+            
+        }
+    }
+    
 
 }

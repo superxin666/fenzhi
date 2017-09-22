@@ -69,16 +69,16 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     func cgreatHeadView() {
         
-        mainScrollow.frame = CGRect(x: 0, y: ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20))
+        mainScrollow.frame = CGRect(x: 0, y: ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20) - ip7(80))
         mainScrollow.backgroundColor = .clear
-        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight  + KSCREEN_HEIGHT - ip7(20))
+        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight  + KSCREEN_HEIGHT - ip7(20) - ip7(80))
         self.view.addSubview(mainScrollow)
         
         headView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: headViewHeight)
         headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight)
         mainScrollow.addSubview(headView)
 
-
+        self.creatTxtView()
     }
     //MARK:获取分享头部尺寸
     func getSize() {
@@ -171,7 +171,10 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
            
                 } else {
                     //没有评论
-                    
+                    if (weakSelf?.hotArr.count)! == 0 && (weakSelf?.newArr.count)! == 0 {
+                        
+                    }
+
                 }
                 
 
@@ -215,11 +218,41 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         heiht = heiht  + ip7(44)
         model.cellHeight = heiht
     }
-
+    //MARK:没有数据
+    func creatNoData() {
+        
+    }
+    //MARK:底部留言
+    func creatTxtView() {
+        let veiwHeight = ip7(80)
+        let backView : UIView = UIView(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(80) - LNAVIGATION_HEIGHT, width: KSCREEN_HEIGHT, height: veiwHeight))
+        backView.backgroundColor = .white
+        self.view.addSubview(backView)
+        
+        let lineView = UIView(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: 0.5))
+        lineView.backgroundColor = lineView_thin_COLOUR
+        backView.addSubview(lineView)
+        
+        let btn : UIButton = UIButton(type: .custom)
+        btn.frame = CGRect(x: ip7(10), y: ip7(15), width: ip7(911/2), height: ip7(50))
+        btn.setTitle("谢谢您留下宝贵的评论！", for: .normal)
+        btn.titleLabel?.textAlignment = .left
+        btn.setTitleColor(dark_a_COLOUR, for: .normal)
+        btn.titleLabel?.font = fzFont_Thin(ip7(18))
+        btn.kfb_makeRadius(radius: 14)
+        btn.kfb_makeBorderWithBorderWidth(width: 1, color: lineView_thin_COLOUR)
+        backView.addSubview(btn)
+        
+        let imageView = UIImageView(frame: CGRect(x: btn.frame.maxX + ip7(10), y: (ip7(80) - ip7(35))/2, width: ip7(35), height: ip7(35)))
+        imageView.image = #imageLiteral(resourceName: "button_fs")
+        backView.addSubview(imageView)
+        
+        
+    }
 
     //MARK:tableView
     func creatTableView() {
-        mainTabelView.frame = CGRect(x: 0, y:headView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20) - LNAVIGATION_HEIGHT)
+        mainTabelView.frame = CGRect(x: 0, y:headView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20) - LNAVIGATION_HEIGHT - ip7(80))
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -231,6 +264,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainTabelView.mj_footer = footer
         footer.setRefreshingTarget(self, refreshingAction: #selector(TeachDetailViewController.loadMoreData))
         mainScrollow.addSubview(mainTabelView)
+
 //        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight + mainTabelView.contentSize.height)
     }
 

@@ -67,8 +67,14 @@ class HomeDataMangerController: FZRequestViewController {
     func submitcomment(content : String,fenxId : Int, toUserId : Int,toCommentId : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
         let contentStr : String  = RSA.encodeParameter(content)
+        var urlStr = ""
+        if toUserId != 0 && toCommentId != 0 {
+            urlStr = BASER_API + submitcomment_api + "fenxId="+"\(fenxId)"+"&content="+contentStr+"&toUserId="+"\(toUserId)"+"&toCommentId="+"\(toCommentId)" + last_pra + token_pra
+        } else {
+             urlStr = BASER_API + submitcomment_api + "fenxId="+"\(fenxId)"+"&content="+contentStr + last_pra + token_pra
 
-        let urlStr = BASER_API + submitcomment_api + "fenxId="+"\(fenxId)"+"&content="+contentStr + last_pra + token_pra
+        }
+
         var model:SmsModel = SmsModel()
         KFBLog(message: urlStr)
         Alamofire.request(urlStr, method: .post).responseJSON { (returnResult) in

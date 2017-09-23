@@ -30,9 +30,10 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     let txtTextView : UITextView = UITextView()
     var keybodHeight : CGFloat = 0.0
     var txt : String = ""
+    var ispinglun :String = "1"//0 是回复用户评论 1 是评论该分享
 
     
-    
+    var pinglunUserModel : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()//被回复人的数据模型
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -254,13 +255,19 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         btn.titleLabel?.font = fzFont_Thin(ip7(18))
         btn.kfb_makeRadius(radius: 14)
         btn.kfb_makeBorderWithBorderWidth(width: 1, color: lineView_thin_COLOUR)
-        btn.addTarget(self, action: #selector(showTxt_click), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(liuyan_click), for: .touchUpInside)
         backView.addSubview(btn)
         let imageView = UIImageView(frame: CGRect(x: btn.frame.maxX + ip7(10), y: (ip7(80) - ip7(35))/2, width: ip7(35), height: ip7(35)))
         imageView.image = #imageLiteral(resourceName: "button_fs")
         backView.addSubview(imageView)
         
     }
+
+    func liuyan_click()  {
+        ispinglun = "1"
+        self.showTxt_click()
+    }
+
     //MARK:显示打字窗口
     func showTxt_click() {
         self.view.window?.addSubview(self.maskView)
@@ -272,8 +279,10 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     func dismissTxtView() {
         txtTextView.resignFirstResponder()
         self.maskView.removeFromSuperview()
-        self.submitcomment()
+
     }
+
+
     //MARK:留言页面
     func creatTxtUI() {
         KFBLog(message: "键盘高度---\(headViewHeight)")
@@ -295,7 +304,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         cancleBtn.setTitleColor( .white, for: .normal)
         cancleBtn.titleLabel?.font = fzFont_Thin(ip7(21))
         cancleBtn.kfb_makeRadius(radius: 7)
-        cancleBtn.addTarget(self, action:#selector(TeachDetailViewController.dismissTxtView), for: .touchUpInside)
+        cancleBtn.addTarget(self, action:#selector(TeachDetailViewController.cancle_submitcomment), for: .touchUpInside)
         backView.addSubview(cancleBtn)
         //确定按钮
 
@@ -305,16 +314,34 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         sureBtn.setTitleColor( .white, for: .normal)
         sureBtn.titleLabel?.font = fzFont_Medium(ip7(21))
         sureBtn.kfb_makeRadius(radius: 7)
-        sureBtn.addTarget(self, action:#selector(TeachDetailViewController.dismissTxtView), for: .touchUpInside)
+        sureBtn.addTarget(self, action:#selector(TeachDetailViewController.sure_submitcomment), for: .touchUpInside)
         backView.addSubview(sureBtn)
 
+    }
+
+
+    func sure_submitcomment() {
+        self.dismissTxtView()
+        self.submitcomment()
+    }
+    func cancle_submitcomment() {
+        self.dismissTxtView()
     }
 
     func submitcomment() {
         KFBLog(message: txt)
         self.SVshowLoad()
         weak var weakSelf = self
-        dataVC.submitcomment(content: txt, fenxId: 1, toUserId: 0, toCommentId: 0, completion: { (data) in
+
+        var toUserId = 0
+        var toCommentId = 0
+        if ispinglun == "0" {
+            toUserId = self.pinglunUserModel.userId
+            toCommentId = self.pinglunUserModel.id
+        }
+        KFBLog(message: "\(toUserId)==\((toCommentId))")
+
+        dataVC.submitcomment(content: txt, fenxId: 1, toUserId: toUserId, toCommentId: toCommentId, completion: { (data) in
             weakSelf?.SVdismiss()
             let model :SmsModel = data as! SmsModel
             if model.errno == 0 {
@@ -389,6 +416,12 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                 model = self.newArr[indexPath.row]
         }
         cell.setUpUIWithModel_cellType(model: model)
+       weak var weakSelf = self
+        cell.pinglunViewBlock = {(data) in
+            weakSelf?.ispinglun = "0"
+            weakSelf?.pinglunUserModel = data
+            weakSelf?.showTxt_click()
+        }
         return cell;
 
     }

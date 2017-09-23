@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+typealias commentTableViewCellBlock = (_ model:GetcommentlistModel_data_list_commentList)->()
 class commentTableViewCell: UITableViewCell {
     let iconImageView:UIImageView = UIImageView()//头像
     let nameLabel : UILabel = UILabel()//姓名
@@ -27,8 +27,8 @@ class commentTableViewCell: UITableViewCell {
     let lineView : UIView = UIView()
     
     let dataVC = CommonDataMangerViewController()
-    
     var dataModel : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()
+    var pinglunViewBlock : commentTableViewCellBlock!
     
     
 
@@ -88,6 +88,7 @@ class commentTableViewCell: UITableViewCell {
         //评论
         pinglunBtn.frame = CGRect(x: zanNumLabel.frame.origin.x - ip7(37+25), y: nameLabel.frame.maxY + ip7(5), width: ip7(25), height: ip7(25))
         pinglunBtn.setImage(#imageLiteral(resourceName: "icon_pl1"), for: .normal)
+        pinglunBtn.addTarget(self, action: #selector(commentTableViewCell.pinglun_Click), for: .touchUpInside)
         self.addSubview(pinglunBtn)
         
         //文字
@@ -173,10 +174,12 @@ class commentTableViewCell: UITableViewCell {
     func image_Click() {
         KFBLog(message: "头像点击")
     }
-    
 
     func pinglun_Click() {
          KFBLog(message: "评论点击")
+        if let _ =  pinglunViewBlock {
+            pinglunViewBlock(self.dataModel)
+        }
     }
 
     override func awakeFromNib() {

@@ -724,6 +724,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
     
     override func navigationLeftBtnClick() {
+         self.SVdismiss()
         if type == .res_first {
             self.navigationController?.popViewController(animated: true)
         } else {

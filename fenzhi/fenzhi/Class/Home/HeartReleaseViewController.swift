@@ -234,6 +234,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     
     
     override func navigationLeftBtnClick() {
+         self.SVdismiss()
         self.dismiss(animated: true) { 
             
         }

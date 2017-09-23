@@ -20,6 +20,7 @@ class UserInfoViewController: BaseViewController {
     }
 
     override func navigationLeftBtnClick() {
+         self.SVdismiss()
         self.navigationController?.popViewController(animated: true)
     }
     override func didReceiveMemoryWarning() {

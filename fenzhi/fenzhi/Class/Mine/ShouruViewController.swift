@@ -141,6 +141,7 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
     
     override func navigationLeftBtnClick() {
+        self.SVdismiss()
         self.navigationController?.popViewController(animated: true)
     }
     

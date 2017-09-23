@@ -511,6 +511,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     }
 
     override func navigationLeftBtnClick() {
+        self.SVdismiss()
         self.navigationController?.popViewController(animated: true)
     }
 

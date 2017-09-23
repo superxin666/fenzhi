@@ -134,6 +134,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate {
 
 
     override func navigationLeftBtnClick() {
+         self.SVdismiss()
         self.dismiss(animated: true) { 
             
         }

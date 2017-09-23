@@ -35,10 +35,12 @@ class pdfViewController: BaseViewController,UIWebViewDelegate {
         let urlRequest = NSURLRequest(url :url! as URL)
         self.webView!.loadRequest(urlRequest as URLRequest)
     }
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-
+//    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+//        self.SVshowLoad()
+//        return true
+//    }
+    func webViewDidStartLoad(_ webView: UIWebView) {
         self.SVshowLoad()
-        return true
     }
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.SVdismiss()
@@ -47,7 +49,10 @@ class pdfViewController: BaseViewController,UIWebViewDelegate {
 
         self.SVshowErro(infoStr: error.localizedDescription)
     }
+
+
     override func navigationLeftBtnClick() {
+        self.SVdismiss()
         self.navigationController?.popViewController(animated: true)
     }
 

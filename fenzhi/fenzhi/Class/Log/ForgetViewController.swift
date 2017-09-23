@@ -391,6 +391,7 @@ class ForgetViewController: BaseViewController,UITextFieldDelegate {
 
 
     override func navigationLeftBtnClick() {
+         self.SVdismiss()
         self.navigationController?.popViewController(animated: true)
     }
 

@@ -184,6 +184,7 @@ class GunzhuViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
     
     override func navigationLeftBtnClick() {
+         self.SVdismiss()
         self.navigationController?.popViewController(animated: true)
     }
 

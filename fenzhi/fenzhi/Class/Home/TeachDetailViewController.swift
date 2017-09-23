@@ -91,6 +91,13 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         headView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: headViewHeight)
         headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight)
         mainScrollow.addSubview(headView)
+         weak var weakSelf = self
+        headView.docBlock = {(model) in
+            KFBLog(message: "文档点击")
+            let vc = pdfViewController()
+            vc.model = model
+            weakSelf?.navigationController?.pushViewController(vc, animated: true)
+        }
 
         self.creatTxtView()
     }

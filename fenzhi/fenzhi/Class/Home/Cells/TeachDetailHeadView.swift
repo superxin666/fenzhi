@@ -7,7 +7,7 @@
 //  教学分享头部
 
 import UIKit
-typealias TeachDetailHeadViewBlock = (_ str:String)->()
+typealias TeachDetailHeadViewBlock = (_ model:TeachDetailModel_data_coursewares)->()
 class TeachDetailHeadView: UIView {
 
     var dataModel : TeachDetailModel = TeachDetailModel()
@@ -17,7 +17,7 @@ class TeachDetailHeadView: UIView {
     var shoucangBtn : UIButton = UIButton()
     var fenxinagBtn : UIButton = UIButton()
     var baseVC : BaseViewController = BaseViewController()
-    var noticeBlock : TeachDetailHeadViewBlock!
+    var docBlock : TeachDetailHeadViewBlock!
 
 
     func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat) {
@@ -102,11 +102,15 @@ class TeachDetailHeadView: UIView {
 
             for i in 0..<model.data.coursewares.count {
                 let model = model.data.coursewares[i]
-
-
                 let view = UIView(frame: CGRect(x: imageX, y: imageY + CGFloat(i) * (imageHeight + ip7(15)), width: imageWidth, height: imageHeight))
+                view.tag = i
                 view.backgroundColor = backView_COLOUR
+                view.isUserInteractionEnabled = true
                 lastFream = view.frame
+
+                let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TeachDetailHeadView.ppt_click(tap:)))
+                view.addGestureRecognizer(iconImageViewTap)
+
 
                 //图片
                 let imageView = UIImageView(image: #imageLiteral(resourceName: "pdf"))
@@ -319,13 +323,22 @@ class TeachDetailHeadView: UIView {
                 })
             }
 
-            if let _ = noticeBlock {
-                noticeBlock("")
-            }
-
         } else {
             //分享
 
+        }
+
+    }
+
+
+    func ppt_click(tap : UITapGestureRecognizer) {
+        let tagNum = tap.view!.tag
+        let model = self.dataModel.data.coursewares[tagNum]
+
+        if model.file.characters.count > 0 {
+            if let _ = docBlock {
+                docBlock(model)
+            }
         }
 
     }

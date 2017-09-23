@@ -110,6 +110,42 @@ class CommonDataMangerViewController: FZRequestViewController {
 
     }
 
+
+    /// 获取我的分享列表接口  该接口的使用场景: 1、我的记录tab 2、他人态profile接口中，用于分享列表翻页，这时需要传userId
+    ///
+    /// - Parameters:
+    ///   - userId: 用户userId 不传该参数表示主人态，查看的是用户自己的分享
+    ///   - pageNum:     页码
+    ///   - count: 每页的条数
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
+    func getmyfeedlist(userId : Int,pageNum : Int,count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        var urlStr = ""
+        if userId  == 0 {
+        //自己的列表
+            urlStr = BASER_API + getmyfeedlist_api+"pageNum="+"\(pageNum)"+"&count="+"\(count)"+last_pra+token_pra
+        } else {
+        //他人的列表
+            urlStr = BASER_API + getmyfeedlist_api+"userId="+"\(userId)"+"&pageNum="+"\(pageNum)"+"&count="+"\(count)"+last_pra
+        }
+
+        var model:GetmyfeedlistModel = GetmyfeedlistModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<GetmyfeedlistModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+
+        }
+
+    }
+
+
     /// 上传图片接口
     ///
     /// - Parameters:

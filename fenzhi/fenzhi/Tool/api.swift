@@ -39,7 +39,7 @@ let getfollowlist_api = "/api/user/getfollowlist?"//获取关注列表接口
 let getfavoritelist_api = "/api/user/getfavoritelist?"//获取收藏列表接口
 let getzanlist_api = "/api/user/getzanlist?"//获取赞赏列表接口
 let getincomelist_api = "/api/user/getincomelist?"//获取赞赏列表接口
-
+let getmyfeedlist_api = "/api/user/getmyfeedlist?"//获取我的分享列表接口
 
 //----------------------------分享相关接口
 let profile_api = "/api/fenx/profile?"//分享详情接口

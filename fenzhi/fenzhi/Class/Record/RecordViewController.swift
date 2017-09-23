@@ -10,6 +10,8 @@ import UIKit
 
 class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let mainTabelView : UITableView = UITableView()
+    let dataVC : CommonDataMangerViewController = CommonDataMangerViewController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,8 +19,17 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         self.view.backgroundColor = backView_COLOUR
         self.navigation_title_fontsize(name: "记录", fontsize: 27)
         self.creatTableView()
+        self.getData()
     }
-    
+
+    func getData() {
+        dataVC.getmyfeedlist(userId: 0, pageNum: 1, count: 10, completion: { (data) in
+
+        }) { (erro) in
+
+        }
+    }
+
     func creatTableView() {
         mainTabelView.frame = CGRect(x: 0, y: ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20))
         mainTabelView.backgroundColor = UIColor.clear

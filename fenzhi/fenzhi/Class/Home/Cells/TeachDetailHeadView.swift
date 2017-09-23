@@ -39,7 +39,7 @@ class TeachDetailHeadView: UIView {
 //        iconImageView.addGestureRecognizer(iconImageViewTap)
         //时间
         let timeLabel : UILabel = UILabel(frame: CGRect(x: viewW - ip7(31) - ip7(90), y: ip7(25), width: ip7(90), height: ip7(20)))
-        timeLabel.text = model.data.createTime
+        timeLabel.text = String.getDate_detail(dateStr: model.data.createTime)
         timeLabel.font = fzFont_Thin(ip7(15))
         timeLabel.textColor  = dark_6_COLOUR
         timeLabel.textAlignment = .right

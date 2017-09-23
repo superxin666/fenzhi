@@ -111,7 +111,7 @@ class commentTableViewCell: UITableViewCell {
         let viewW = KSCREEN_WIDTH
         iconImageView.kf.setImage(with: URL(string: model.userInfo.avatar))//头像
         nameLabel.text = model.userInfo.name//名字
-        timeLabel.text = model.createTime//时间
+        timeLabel.text = String.getDate_detail_cell(dateStr: model.createTime)//时间
         zanNumLabel.text = "\(model.likeNum!)"//赞数目
         if model.isLike == 1 {
             //已经赞过

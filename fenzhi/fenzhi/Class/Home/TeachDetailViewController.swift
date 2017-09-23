@@ -32,7 +32,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     var txt : String = ""
     var ispinglun :String = "1"//0 是回复用户评论 1 是评论该分享
 
-    
+    var alertController : UIAlertController!
     var pinglunUserModel : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()//被回复人的数据模型
     
     override func viewDidLoad() {
@@ -355,6 +355,38 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
     }
 
+
+
+    func delcomment(model : GetcommentlistModel_data_list_commentList)  {
+      weak var weakSelf = self
+        alertController  = UIAlertController(title: "提示", message: "是否要删除本条评论", preferredStyle: .alert)
+        let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            //取消
+            weakSelf?.alertController.dismiss(animated: true, completion: {
+
+            })
+        }
+        let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
+            //删除
+            self.SVshowLoad()
+            weakSelf?.dataVC.delcomment(commentId: model.id, completion: { (data) in
+                weakSelf?.SVdismiss()
+                let model :SmsModel = data as! SmsModel
+                if model.errno == 0 {
+                    weakSelf?.SVshowSuccess(infoStr: "删除成功")
+                } else {
+                    weakSelf?.SVshowErro(infoStr: model.errmsg)
+                }
+            }) { (erro) in
+                weakSelf?.SVshowErro(infoStr: "网络请求失败")
+            }
+        }
+        alertController.addAction(cancleAction)
+        alertController.addAction(sureAction)
+        self.present(alertController, animated: true, completion: nil)
+
+    }
+
     //MARK:textView
     func textViewDidEndEditing(_ textView: UITextView) {
         txt = textView.text
@@ -421,6 +453,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             weakSelf?.ispinglun = "0"
             weakSelf?.pinglunUserModel = data
             weakSelf?.showTxt_click()
+        }
+        cell.delViewBlock = {(data) in
+            weakSelf?.delcomment(model: data)
         }
         return cell;
 

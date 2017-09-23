@@ -154,15 +154,18 @@ class commentTableViewCell: UITableViewCell {
             let str : String  = model.toUserInfo.name+"："
             let attributeStr = NSMutableAttributedString(string: str)
             let range : NSRange = NSRange.init(location: 0, length: str.characters.count)
-            attributeStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: range)
+            attributeStr.addAttribute(NSForegroundColorAttributeName, value: blue_COLOUR, range: range)
             let str2 : String  = model.toCommentInfo.content
             let attributeStr2 = NSMutableAttributedString(string: str2)
+            let range2 : NSRange = NSRange.init(location: 0, length: str2.characters.count)
+            attributeStr2.addAttribute(NSForegroundColorAttributeName, value: dark_6_COLOUR, range: range2)
             attributeStr.append(attributeStr2)
+
             toUserName.frame = CGRect(x:0, y:  ip7(16), width: backView.frame.size.width, height: ip7(21))
             toUserName.attributedText = attributeStr
             toUserName.isUserInteractionEnabled = true
-            toUserName.textColor = dark_6_COLOUR
-            toUserName.font = fzFont_Medium(ip7(21))
+//            toUserName.textColor = dark_6_COLOUR
+            toUserName.font = fzFont_Thin(ip7(21))
             toUserName.adjustsFontSizeToFitWidth = true
             backView.addSubview(toUserName)
 

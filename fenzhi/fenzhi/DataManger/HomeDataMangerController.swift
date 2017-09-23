@@ -64,6 +64,15 @@ class HomeDataMangerController: FZRequestViewController {
     }
 
 
+    /// 发布评论接口
+    ///
+    /// - Parameters:
+    ///   - content:     评论内容
+    ///   - fenxId:     分享id
+    ///   - toUserId:     被评论用户id，当回复别人的评论时需要传递该参数
+    ///   - toCommentId:     被评论的评论id，当回复别人的评论时需要传递该参数
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
     func submitcomment(content : String,fenxId : Int, toUserId : Int,toCommentId : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
         let contentStr : String  = RSA.encodeParameter(content)
@@ -85,6 +94,30 @@ class HomeDataMangerController: FZRequestViewController {
             } else {
                 failure("请求失败")
             }
+        }
+    }
+
+
+    /// 删除评论接口
+    ///
+    /// - Parameters:
+    ///   - fenxId:     评论id
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
+    func delcomment(commentId : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        let urlStr = BASER_API + delcomment_api + "commentId="+"\(commentId)"+last_pra+token_pra
+        var model:SmsModel = SmsModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+
         }
     }
 

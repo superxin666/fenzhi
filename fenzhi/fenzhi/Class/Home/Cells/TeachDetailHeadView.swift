@@ -12,6 +12,7 @@ class TeachDetailHeadView: UIView {
 
     var dataModel : TeachDetailModel = TeachDetailModel()
     var dataVC : HomeDataMangerController = HomeDataMangerController()
+    var comVC : CommonDataMangerViewController = CommonDataMangerViewController()
     var dianzanBtn : UIButton = UIButton()
     var shoucangBtn : UIButton = UIButton()
     var fenxinagBtn : UIButton = UIButton()
@@ -246,7 +247,7 @@ class TeachDetailHeadView: UIView {
 
     func btn_click(sender : UIButton) {
         weak var weakSelf = self
-        var notice : String = ""
+
 
         if sender.tag == 0 {
             if dataModel.data.isLike == 1 {
@@ -254,6 +255,24 @@ class TeachDetailHeadView: UIView {
 
             } else {
                 //没有点过赞
+                weak var weakSelf = self
+                comVC.like(type: 0, objectId: self.dataModel.data.id!, completion: { (data) in
+                    let model : LikeModel = data as! LikeModel
+                    if model.errno == 0 {
+                        weakSelf?.baseVC.SVshowSucess(infoStr: "点赞成功")
+                        weakSelf?.dianzanBtn.isSelected = true
+                        weakSelf?.dataModel.data.isLike = 1
+                        let num = (weakSelf?.dataModel.data.likeNum)! + 1
+                        weakSelf?.dataModel.data.likeNum = num
+                        weakSelf?.dianzanBtn.setTitle("\(num)点赞", for: .normal)
+                    } else {
+                        weakSelf?.baseVC.SVshowErro(infoStr: model.errmsg)
+                    }
+
+                }) { (erro) in
+
+                }
+
 
             }
 
@@ -261,7 +280,7 @@ class TeachDetailHeadView: UIView {
             //
             if dataModel.data.isFavorite == 1 {
                 //已经收藏
-                dataVC.delfavorite(fenxId: self.dataModel.data.id, completion: { (data) in
+                dataVC.delfavorite(fenxId: self.dataModel.data.id!, completion: { (data) in
                     let data : SmsModel = data as! SmsModel
                     if data.errno == 0 {
                         //取消收藏成功
@@ -270,9 +289,9 @@ class TeachDetailHeadView: UIView {
                         weakSelf?.dataModel.data.isFavorite = 0
                         weakSelf?.dataModel.data.favoriteNum = (weakSelf?.dataModel.data.favoriteNum)! - 1
                         weakSelf?.shoucangBtn.isSelected = false
-                        weakSelf?.shoucangBtn.setTitle("\((weakSelf?.dataModel.data.favoriteNum)!)", for: .normal)
+                        weakSelf?.shoucangBtn.setTitle("\((weakSelf?.dataModel.data.favoriteNum)!)收藏", for: .normal)
                     } else {
-                        KFBLog(message: "取消收藏失败")
+                         weakSelf?.baseVC.SVshowErro(infoStr: data.errmsg)
                     }
 
                 }, failure: { (erro) in
@@ -281,7 +300,7 @@ class TeachDetailHeadView: UIView {
 
             } else {
                 //没有收藏
-                dataVC.favorite(fenxId: self.dataModel.data.id, completion: { (data) in
+                dataVC.favorite(fenxId: self.dataModel.data.id!, completion: { (data) in
                     let data : SmsModel = data as! SmsModel
                     if data.errno == 0 {
                         //收藏成功
@@ -289,10 +308,10 @@ class TeachDetailHeadView: UIView {
                         weakSelf?.dataModel.data.isFavorite = 1
                         weakSelf?.dataModel.data.favoriteNum = (weakSelf?.dataModel.data.favoriteNum)! + 1
                         weakSelf?.shoucangBtn.isSelected = true
-                        weakSelf?.shoucangBtn.setTitle("\((weakSelf?.dataModel.data.favoriteNum)!)", for: .selected)
+                        weakSelf?.shoucangBtn.setTitle("\((weakSelf?.dataModel.data.favoriteNum)!)收藏", for: .selected)
 
                     } else {
-                        KFBLog(message: "收藏失败")
+                         weakSelf?.baseVC.SVshowErro(infoStr: data.errmsg)
                     }
 
                 }, failure: { (erro) in

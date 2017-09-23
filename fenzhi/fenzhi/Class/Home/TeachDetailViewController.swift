@@ -8,14 +8,14 @@
 
 import UIKit
 let COMMONTELLID = "COMMONTELL_ID"//
-class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
     let mainScrollow : UIScrollView = UIScrollView()
     let mainTabelView : UITableView = UITableView()
     let dataVC = HomeDataMangerController()
     var headData : TeachDetailModel = TeachDetailModel()
     var commentlistData : GetcommentlistModel = GetcommentlistModel()
     let headView : TeachDetailHeadView =  TeachDetailHeadView()
-    let txtTextView : UITextView = UITextView()
+
     var headViewHeight : CGFloat = 0.0
     var sectionNum = 1
     var hotArr : [GetcommentlistModel_data_list_commentList] = []
@@ -26,7 +26,11 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     var hotTitle = ""
     var otherTitle = ""
     var newTitle = ""
-    
+
+    let txtTextView : UITextView = UITextView()
+    var keybodHeight : CGFloat = 0.0
+    var txt : String = ""
+
     
     
     
@@ -36,12 +40,20 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         // Do any additional setup after loading the view.
         self.edgesForExtendedLayout = UIRectEdge.bottom
         self.view.backgroundColor = backView_COLOUR
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         self.navigation_title_fontsize(name: "教学分享详情", fontsize: 27)
         self.navigationBar_leftBtn()
         self.getHeadData()
 //        self.getcommentlistData()
     }
-    
+    func keyboardWillShow(notification: NSNotification) {
+        let userinfo: NSDictionary = notification.userInfo! as NSDictionary
+        let nsValue = userinfo.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRec = nsValue.cgRectValue
+        let height = keyboardRec.size.height
+        keybodHeight = height
+        print("keybordShow:\(height)")
+    }
     func loadMoreData() {
         page = page + 1
         self.getcommentlistData()
@@ -252,16 +264,60 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     //MARK:显示打字窗口
     func showTxt_click() {
         self.view.window?.addSubview(self.maskView)
-        
-        let backView : UIView  = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        backView.backgroundColor = .white
+        self.creatTxtUI()
+        txtTextView.becomeFirstResponder()
 
-        
     }
     
     func dismissTxtView() {
+        txtTextView.resignFirstResponder()
         self.maskView.removeFromSuperview()
     }
+    //MARK:留言页面
+    func creatTxtUI() {
+        KFBLog(message: "键盘高度---\(headViewHeight)")
+        let backView : UIView  = UIView(frame: CGRect(x: 0, y:KSCREEN_HEIGHT - headViewHeight - ip7(260) +  LNAVIGATION_HEIGHT, width: KSCREEN_WIDTH, height: ip7(260)))
+        backView.backgroundColor = .white
+        self.maskView.addSubview(backView)
+        txtTextView.delegate = self
+        txtTextView.frame = CGRect(x: ip7(20), y: ip7(20), width: KSCREEN_WIDTH - ip7(40), height: ip7(327/2))
+        txtTextView.font = fzFont_Thin(ip7(18))
+        txtTextView.textColor = dark_3_COLOUR
+        txtTextView.kfb_makeBorderWithBorderWidth(width: 1, color: lineView_thin_COLOUR)
+        txtTextView.kfb_makeRadius(radius: 7)
+        backView.addSubview(txtTextView)
+
+        //取消按钮
+        let cancleBtn : UIButton = UIButton(frame: CGRect(x: ip7(20),y: txtTextView.frame.maxY + ip7(14), width: ip7(189/2),height: ip7(50)))
+        cancleBtn.setTitle("取消", for: .normal)
+        cancleBtn.backgroundColor = FZColorFromRGB(rgbValue: 0x8cd815)
+        cancleBtn.setTitleColor( .white, for: .normal)
+        cancleBtn.titleLabel?.font = fzFont_Thin(ip7(21))
+        cancleBtn.kfb_makeRadius(radius: 7)
+        cancleBtn.addTarget(self, action:#selector(TeachDetailViewController.dismissTxtView), for: .touchUpInside)
+        backView.addSubview(cancleBtn)
+        //确定按钮
+
+        let sureBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(20) - ip7(289/2),y: txtTextView.frame.maxY + ip7(14), width: ip7(289/2),height: ip7(50)))
+        sureBtn.setTitle("发表评论", for: .normal)
+        sureBtn.backgroundColor = FZColorFromRGB(rgbValue: 0x15a5ea)
+        sureBtn.setTitleColor( .white, for: .normal)
+        sureBtn.titleLabel?.font = fzFont_Medium(ip7(21))
+        sureBtn.kfb_makeRadius(radius: 7)
+        sureBtn.addTarget(self, action:#selector(TeachDetailViewController.dismissTxtView), for: .touchUpInside)
+        backView.addSubview(sureBtn)
+
+    }
+    func submitcomment() {
+
+    }
+
+    //MARK:textView
+    func textViewDidEndEditing(_ textView: UITextView) {
+        txt = textView.text
+    }
+
+
     
     //MARK:tableView
     func creatTableView() {

@@ -22,6 +22,9 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     let nsetBtn : UIButton = UIButton()
     var keybodHeight : CGFloat = 0.0
 
+//    deinit {
+//        NotificationCenter.removeObserver(NSNotification.Name.UIKeyboardWillShow)
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

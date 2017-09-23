@@ -25,8 +25,8 @@ class BaseViewController: UIViewController {
     lazy var maskView : UIView = {
         ()-> UIView in
         let maskView = UIView()
+        maskView.backgroundColor = UIColor.init(white: 0.0, alpha: 0.7)
         maskView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
-        maskView.backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.7)
         return maskView
     }()
 

@@ -272,6 +272,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     func dismissTxtView() {
         txtTextView.resignFirstResponder()
         self.maskView.removeFromSuperview()
+        self.submitcomment()
     }
     //MARK:留言页面
     func creatTxtUI() {
@@ -308,8 +309,23 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         backView.addSubview(sureBtn)
 
     }
-    func submitcomment() {
 
+    func submitcomment() {
+        KFBLog(message: txt)
+        self.SVshowLoad()
+        weak var weakSelf = self
+        dataVC.submitcomment(content: txt, fenxId: 1, toUserId: 0, toCommentId: 0, completion: { (data) in
+            weakSelf?.SVdismiss()
+            let model :SmsModel = data as! SmsModel
+            if model.errno == 0 {
+                weakSelf?.SVshowSuccess(infoStr: "评论成功")
+            } else {
+                weakSelf?.SVshowErro(infoStr: model.errmsg)
+            }
+
+        }) { (erro) in
+            weakSelf?.SVshowErro(infoStr: "网络请求失败")
+        }
     }
 
     //MARK:textView

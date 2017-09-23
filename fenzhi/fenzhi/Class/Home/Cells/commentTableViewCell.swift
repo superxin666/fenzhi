@@ -29,7 +29,9 @@ class commentTableViewCell: UITableViewCell {
     let dataVC = CommonDataMangerViewController()
     var dataModel : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()
     var pinglunViewBlock : commentTableViewCellBlock!
-    
+    var delViewBlock : commentTableViewCellBlock!
+
+    let delbtn : UIButton = UIButton()
     
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -132,16 +134,56 @@ class commentTableViewCell: UITableViewCell {
             backView.frame = CGRect(x: iconImageView.frame.maxX + ip7(25), y: contentLabel.frame.maxY + ip7(29), width: KSCREEN_WIDTH - iconImageView.frame.maxX - ip7(50), height: ip7(53))
             backView.backgroundColor = FZColorFromRGB(rgbValue: 0xf7f7f7)
             self.addSubview(backView)
+            //删除按钮
+            delbtn.frame = CGRect(x: backView.frame.size.width - ip7(60), y: 0, width: ip7(60), height: ip7(53))
+            delbtn.setTitle("删除", for: .normal)
+            delbtn.backgroundColor = .white
+            delbtn.setTitleColor(blue_COLOUR, for: .normal)
+            delbtn.titleLabel?.font = fzFont_Medium(ip7(21))
+            delbtn.addTarget(self, action:#selector(commentTableViewCell.del_click), for: .touchUpInside)
+            backView.addSubview(delbtn)
+//            KFBLog(message: "\(model.userId)")
+//            KFBLog(message: LoginModelMapper.getLoginIdAndTokenInUD().loginId)
+            if "\(model.userId!)" == LoginModelMapper.getLoginIdAndTokenInUD().loginId{
+                delbtn.isHidden = false
+            } else {
+                delbtn.isHidden = true
+            }
 
             //名字
+            let str : String  = model.toUserInfo.name+"："
+            let attributeStr = NSMutableAttributedString(string: str)
+            let range : NSRange = NSRange.init(location: 0, length: str.characters.count)
+            attributeStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: range)
+            let str2 : String  = model.toCommentInfo.content
+            let attributeStr2 = NSMutableAttributedString(string: str2)
+            attributeStr.append(attributeStr2)
             toUserName.frame = CGRect(x:0, y:  ip7(16), width: backView.frame.size.width, height: ip7(21))
-            toUserName.text = model.toCommentInfo.content
+            toUserName.attributedText = attributeStr
             toUserName.isUserInteractionEnabled = true
             toUserName.textColor = dark_6_COLOUR
             toUserName.font = fzFont_Medium(ip7(21))
             toUserName.adjustsFontSizeToFitWidth = true
             backView.addSubview(toUserName)
+
         } else {
+            //判断有没有删除按钮
+            //删除按钮
+            delbtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(60) - ip7(25), y: contentLabel.frame.maxY + ip7(10), width: ip7(60), height: ip7(21))
+            delbtn.setTitle("删除", for: .normal)
+            delbtn.backgroundColor = .clear
+            delbtn.setTitleColor(blue_COLOUR, for: .normal)
+            delbtn.titleLabel?.font = fzFont_Medium(ip7(21))
+            delbtn.addTarget(self, action:#selector(commentTableViewCell.del_click), for: .touchUpInside)
+            self.addSubview(delbtn)
+            //            KFBLog(message: "\(model.userId)")
+            //            KFBLog(message: LoginModelMapper.getLoginIdAndTokenInUD().loginId)
+            if "\(model.userId!)" == LoginModelMapper.getLoginIdAndTokenInUD().loginId{
+                delbtn.isHidden = false
+            } else {
+                delbtn.isHidden = true
+            }
+
             backView.removeFromSuperview()
         }
         //横线
@@ -179,6 +221,13 @@ class commentTableViewCell: UITableViewCell {
          KFBLog(message: "评论点击")
         if let _ =  pinglunViewBlock {
             pinglunViewBlock(self.dataModel)
+        }
+    }
+
+    func del_click()  {
+        KFBLog(message: "删除评论")
+        if let _ =  delViewBlock {
+            delViewBlock(self.dataModel)
         }
     }
 

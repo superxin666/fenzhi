@@ -121,4 +121,53 @@ class HomeDataMangerController: FZRequestViewController {
         }
     }
 
+
+
+    /// 收藏接口
+    ///
+    /// - Parameters:
+    ///   - fenxId:     分享id
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
+    func favorite(fenxId : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        let urlStr = BASER_API + favorite_api + "fenxId="+"\(fenxId)"+last_pra+token_pra
+        var model:SmsModel = SmsModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+
+        }
+    }
+
+
+    /// 取消收藏接口
+    ///
+    /// - Parameters:
+    ///   - fenxId:     分享id
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
+    func delfavorite(fenxId : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        let urlStr = BASER_API + delfavorite_api + "fenxId="+"\(fenxId)"+last_pra+token_pra
+        var model:SmsModel = SmsModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+
+        }
+    }
+
 }

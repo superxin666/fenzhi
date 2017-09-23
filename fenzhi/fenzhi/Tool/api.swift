@@ -47,3 +47,5 @@ let getcommentlist_api = "/api/fenx/getcommentlist?"//获取评论列表接口
 let like_api = "/api/fenx/like?"//点赞接口
 let submitcomment_api = "/api/fenx/submitcomment?"//提交评论接口
 let delcomment_api = "/api/fenx/delcomment?"//删除评论接口
+let favorite_api = "/api/fenx/favorite?"//收藏接口
+let delfavorite_api = "/api/fenx/delfavorite?"//取消收藏接口

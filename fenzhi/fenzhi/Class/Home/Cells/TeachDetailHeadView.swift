@@ -7,11 +7,20 @@
 //  教学分享头部
 
 import UIKit
-
+typealias TeachDetailHeadViewBlock = (_ str:String)->()
 class TeachDetailHeadView: UIView {
 
-    func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat) {
+    var dataModel : TeachDetailModel = TeachDetailModel()
+    var dataVC : HomeDataMangerController = HomeDataMangerController()
+    var dianzanBtn : UIButton = UIButton()
+    var shoucangBtn : UIButton = UIButton()
+    var fenxinagBtn : UIButton = UIButton()
+    var baseVC : BaseViewController = BaseViewController()
+    var noticeBlock : TeachDetailHeadViewBlock!
 
+
+    func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat) {
+        self.dataModel = model
         let viewW = KSCREEN_WIDTH
         let viewH = height
 
@@ -192,18 +201,112 @@ class TeachDetailHeadView: UIView {
         let btnW = (viewW - appadWidth * 2)/3
         let nameArray : Array = ["\(model.data.likeNum!)点赞","\(model.data.favoriteNum!)收藏","\(model.data.shareNum!)分享"]
         let imageArr : Array = [#imageLiteral(resourceName: "icon_dz1"),#imageLiteral(resourceName: "sc2"),#imageLiteral(resourceName: "fx3")]
+        let image_selectedArr : Array = [#imageLiteral(resourceName: "icon_dz1_s"),#imageLiteral(resourceName: "shape"),#imageLiteral(resourceName: "fx3_s")]
 
         for i in 0...2 {
             let btn : UIButton = UIButton(type: .custom)
             btn.tag = i
+            if i == 0 {
+                dianzanBtn = btn
+                //点赞
+                if model.data.isLike == 1 {
+                    btn.isSelected = true
+                } else {
+                   btn.isSelected = false
+                }
+            } else if i == 1 {
+                //收藏
+                shoucangBtn = btn
+                if model.data.isFavorite == 1 {
+                    btn.isSelected = true
+                } else {
+                    btn.isSelected = false
+                }
+
+            } else {
+                //分享
+                fenxinagBtn = btn
+
+            }
             btn.frame = CGRect(x: appadWidth + CGFloat(i) * btnW , y: lastfream_bottom.maxY + ip7(45), width: btnW, height: ip7(60))
             btn.titleLabel?.font = fzFont_Thin(18)
-            btn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
+            btn.tag = i
+            btn.addTarget(self, action: #selector(btn_click(sender:)), for: .touchUpInside)
+            btn.setTitleColor(dark_6_COLOUR, for: .normal)
             btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: ip7(20))
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
             btn.setTitle(nameArray[i], for: .normal)
+            btn.setTitle(nameArray[i], for: .selected)
             btn.setImage(imageArr[i], for: .normal)
+            btn.setImage(image_selectedArr[i], for: .selected)
             backView.addSubview(btn)
+        }
+
+    }
+
+    func btn_click(sender : UIButton) {
+        weak var weakSelf = self
+        var notice : String = ""
+
+        if sender.tag == 0 {
+            if dataModel.data.isLike == 1 {
+                //已经点过赞
+
+            } else {
+                //没有点过赞
+
+            }
+
+        } else if sender.tag == 1 {
+            //
+            if dataModel.data.isFavorite == 1 {
+                //已经收藏
+                dataVC.delfavorite(fenxId: self.dataModel.data.id, completion: { (data) in
+                    let data : SmsModel = data as! SmsModel
+                    if data.errno == 0 {
+                        //取消收藏成功
+
+                        weakSelf?.baseVC.SVshowSucess(infoStr: "取消收藏")
+                        weakSelf?.dataModel.data.isFavorite = 0
+                        weakSelf?.dataModel.data.favoriteNum = (weakSelf?.dataModel.data.favoriteNum)! - 1
+                        weakSelf?.shoucangBtn.isSelected = false
+                        weakSelf?.shoucangBtn.setTitle("\((weakSelf?.dataModel.data.favoriteNum)!)", for: .normal)
+                    } else {
+                        KFBLog(message: "取消收藏失败")
+                    }
+
+                }, failure: { (erro) in
+
+                })
+
+            } else {
+                //没有收藏
+                dataVC.favorite(fenxId: self.dataModel.data.id, completion: { (data) in
+                    let data : SmsModel = data as! SmsModel
+                    if data.errno == 0 {
+                        //收藏成功
+                        weakSelf?.baseVC.SVshowSucess(infoStr: "收藏成功")
+                        weakSelf?.dataModel.data.isFavorite = 1
+                        weakSelf?.dataModel.data.favoriteNum = (weakSelf?.dataModel.data.favoriteNum)! + 1
+                        weakSelf?.shoucangBtn.isSelected = true
+                        weakSelf?.shoucangBtn.setTitle("\((weakSelf?.dataModel.data.favoriteNum)!)", for: .selected)
+
+                    } else {
+                        KFBLog(message: "收藏失败")
+                    }
+
+                }, failure: { (erro) in
+
+                })
+            }
+
+            if let _ = noticeBlock {
+                noticeBlock("")
+            }
+
+        } else {
+            //分享
+
         }
 
     }

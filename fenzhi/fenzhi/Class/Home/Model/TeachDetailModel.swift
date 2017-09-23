@@ -63,6 +63,9 @@ class TeachDetailModel_data: Mappable {
     var likeNum: Int!
     var favoriteNum: Int!
     var shareNum: Int!
+    var isLike: Int!
+    var isFavorite: Int!
+
     var zanUsers : [TeachDetailModel_data_zanUsers] = []
     var userInfo : UserInfoModel = UserInfoModel()
 
@@ -87,6 +90,8 @@ class TeachDetailModel_data: Mappable {
         createTime <- map["createTime"]
         updateTime <- map["updateTime"]
         likeNum <- map["likeNum"]
+        isLike <- map["isLike"]
+        isFavorite <- map["isFavorite"]
 
         favoriteNum <- map["favoriteNum"]
         shareNum <- map["shareNum"]

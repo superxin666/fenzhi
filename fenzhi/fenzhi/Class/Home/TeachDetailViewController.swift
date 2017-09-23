@@ -345,7 +345,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             weakSelf?.SVdismiss()
             let model :SmsModel = data as! SmsModel
             if model.errno == 0 {
-                weakSelf?.SVshowSuccess(infoStr: "评论成功")
+                weakSelf?.SVshowSucess(infoStr: "评论成功")
             } else {
                 weakSelf?.SVshowErro(infoStr: model.errmsg)
             }
@@ -373,7 +373,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                 weakSelf?.SVdismiss()
                 let model :SmsModel = data as! SmsModel
                 if model.errno == 0 {
-                    weakSelf?.SVshowSuccess(infoStr: "删除成功")
+                    weakSelf?.SVshowSucess(infoStr: "删除成功")
                 } else {
                     weakSelf?.SVshowErro(infoStr: model.errmsg)
                 }

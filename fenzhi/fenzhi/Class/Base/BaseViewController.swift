@@ -90,6 +90,12 @@ class BaseViewController: UIViewController {
         SVProgressHUD.setMaximumDismissTimeInterval(1)
         SVProgressHUD.showError(withStatus: infoStr)
     }
+
+    func SVshowSucess(infoStr:String) {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setMaximumDismissTimeInterval(1)
+        SVProgressHUD.showSuccess(withStatus: infoStr)
+    }
     
     
     func SVshow(infoStr:String) {
@@ -102,13 +108,6 @@ class BaseViewController: UIViewController {
         SVProgressHUD.setMinimumDismissTimeInterval(1)
         SVProgressHUD.show(withStatus: "正在努力加载中")
     }
-    
-    
-    func SVshowSuccess(infoStr:String) {
-        SVProgressHUD.dismiss()
-    }
-    
-    
     
     func SVdismiss() {
         SVProgressHUD.dismiss()

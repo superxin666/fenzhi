@@ -99,4 +99,29 @@ extension String {
         return predicate.evaluate(with: currObject)
     }
 
+
+    /// 详情页头部时间转换
+    ///
+    /// - Parameter dateStr: 时间 String
+    /// - Returns: <#return value description#>
+    static func getDate_detail(dateStr : String) -> String {
+        let dfmatter = DateFormatter()
+        dfmatter.dateFormat="yyyy-MM-dd HH:mm:ss"
+        let date = dfmatter.date(from: dateStr)
+
+        let dfmatter2 = DateFormatter()
+        dfmatter2.dateFormat="MM.dd HH:mm"
+        return dfmatter2.string(from: date!)
+    }
+
+    static func getDate_detail_cell(dateStr : String) -> String {
+        let dfmatter = DateFormatter()
+        dfmatter.dateFormat="yyyy-MM-dd HH:mm:ss"
+        let date = dfmatter.date(from: dateStr)
+
+        let dfmatter2 = DateFormatter()
+        dfmatter2.dateFormat="HH:mm"
+        return dfmatter2.string(from: date!)
+    }
+
 }

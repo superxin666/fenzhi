@@ -205,7 +205,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                 } else {
                     //没有评论
                     if (weakSelf?.hotArr.count)! == 0 && (weakSelf?.newArr.count)! == 0 {
-                        
+                        KFBLog(message: "没有评论")
+                        weakSelf?.noCommendData()
                     }
 
                 }
@@ -251,10 +252,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         heiht = heiht  + ip7(44)
         model.cellHeight = heiht
     }
-    //MARK:没有数据
-    func creatNoData() {
-        
-    }
+
     //MARK:底部留言
     func creatTxtView() {
         let veiwHeight = ip7(80)
@@ -429,6 +427,18 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainScrollow.addSubview(mainTabelView)
 
 //        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight + mainTabelView.contentSize.height)
+    }
+    //MARK:没有数据
+    func noCommendData()  {
+        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight  + ip7(190))
+        let backView : UIView = UIView(frame: CGRect(x: 0, y: headView.frame.maxY + ip7(11/2), width: KSCREEN_WIDTH, height: ip7(190)))
+        backView.backgroundColor = .white
+        mainScrollow.addSubview(backView)
+        let imageView : UIImageView = UIImageView(frame: CGRect(x: (KSCREEN_WIDTH - ip7(230/2))/2, y: ip7(78/2), width: ip7(230/2), height: ip7(158/2)))
+        imageView.image = #imageLiteral(resourceName: "icon_zwpl")
+        backView.addSubview(imageView)
+        mainScrollow.addSubview(backView)
+        
     }
 
     // MARK: tableView 代理

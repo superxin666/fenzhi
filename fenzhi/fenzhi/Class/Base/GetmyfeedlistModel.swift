@@ -46,6 +46,9 @@ class GetmyfeedlistModel_data_fenxList: Mappable {
     var commentNum: Int!
     var isLike: Int!
 
+    var cellHeight :  CGFloat  = 0.0
+
+
 
 
     init() {}
@@ -103,7 +106,7 @@ class GetmyfeedlistModel: Mappable {
         var errno: Int = 1
         var errmsg : String = ""
         var logId : String = ""
-        var data : LikeModel_data = LikeModel_data()
+        var data : GetmyfeedlistModel_data = GetmyfeedlistModel_data()
 
 
         init() {}

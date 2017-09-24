@@ -31,6 +31,7 @@
 		214448D41F700A2B0073EA06 /* ShouruTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214448D31F700A2B0073EA06 /* ShouruTableViewCell.swift */; };
 		214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */; };
 		214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */; };
+		214EEC8E1F76AFAA00B5F38A /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EEC8D1F76AFAA00B5F38A /* RecordTableViewCell.swift */; };
 		215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043601F6AADBD009546D2 /* ForgetViewController.swift */; };
 		215043631F6AC16B009546D2 /* DingweiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043621F6AC16B009546D2 /* DingweiViewController.swift */; };
 		215043651F6AD179009546D2 /* pdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043641F6AD179009546D2 /* pdfViewController.swift */; };
@@ -129,6 +130,7 @@
 		214448D31F700A2B0073EA06 /* ShouruTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouruTableViewCell.swift; sourceTree = "<group>"; };
 		214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachReleaseViewController.swift; sourceTree = "<group>"; };
 		214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartReleaseViewController.swift; sourceTree = "<group>"; };
+		214EEC8D1F76AFAA00B5F38A /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		215043601F6AADBD009546D2 /* ForgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetViewController.swift; sourceTree = "<group>"; };
 		215043621F6AC16B009546D2 /* DingweiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DingweiViewController.swift; sourceTree = "<group>"; };
 		215043641F6AD179009546D2 /* pdfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pdfViewController.swift; sourceTree = "<group>"; };
@@ -272,6 +274,8 @@
 		21062AD81F6039130003C7C4 /* Record */ = {
 			isa = PBXGroup;
 			children = (
+				214EEC8C1F76AF8B00B5F38A /* cells */,
+				214EEC8B1F76AF7900B5F38A /* Model */,
 				21062ADD1F60396F0003C7C4 /* RecordViewController.swift */,
 			);
 			path = Record;
@@ -361,6 +365,21 @@
 				213015E01F768D060029EFD1 /* GetmyfeedlistModel.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		214EEC8B1F76AF7900B5F38A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		214EEC8C1F76AF8B00B5F38A /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				214EEC8D1F76AFAA00B5F38A /* RecordTableViewCell.swift */,
+			);
+			path = cells;
 			sourceTree = "<group>";
 		};
 		2155922F1F66D0E00091A822 /* Log */ = {
@@ -768,6 +787,7 @@
 				21F842211F6267ED00A54D68 /* HeartTableViewCell.swift in Sources */,
 				215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */,
 				21B084F71F6D5A1D00D9F3A0 /* ZanshangTableViewCell.swift in Sources */,
+				214EEC8E1F76AFAA00B5F38A /* RecordTableViewCell.swift in Sources */,
 				2112E91C1F6C47360066CF5B /* GetregionlistModel.swift in Sources */,
 				21FA059F1F6783A20083EFD4 /* LogDataMangerViewController.swift in Sources */,
 				212D284E1F7359A1004DD669 /* GetcommentlistModel.swift in Sources */,

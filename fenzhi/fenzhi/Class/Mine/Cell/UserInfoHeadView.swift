@@ -86,7 +86,7 @@ class UserInfoHeadView: UIView {
             let lable : UILabel = UILabel(frame: CGRect(x: 0, y:  ip7(19), width: viewWidth, height: ip7(21)))
             lable.font = fzFont_Thin(ip7(21))
             lable.text = "--"
-            lable.textColor = FZColorFromRGB(rgbValue: 0x666666)
+            lable.textColor = dark_6_COLOUR
             lable.textAlignment = .center
             lable.adjustsFontSizeToFitWidth = true
             view.addSubview(lable)
@@ -105,7 +105,7 @@ class UserInfoHeadView: UIView {
             let lable2 : UILabel = UILabel(frame: CGRect(x: 0, y: lable.frame.maxY + ip7(10), width: viewWidth, height: ip7(21)))
             lable2.text = nameArr[i]
             lable2.font = fzFont_Thin(ip7(21))
-            lable2.textColor = FZColorFromRGB(rgbValue: 0xaaaaaa)
+            lable2.textColor = dark_a_COLOUR
             lable2.textAlignment = .center
             lable2.adjustsFontSizeToFitWidth = true
             view.addSubview(lable2)
@@ -115,11 +115,16 @@ class UserInfoHeadView: UIView {
         
     }
 
-    func setUpData(model : UserInfoModel) {
+    func setUpData(model : ProfileMineModel_data) {
         iconImageView.kf.setImage(with: URL(string: model.avatar))
         nameLabel.text = model.name
         dressLabel.text = model.cityName+" "+model.districtName+" "+model.schoolName+" "+model.gradeName
         infoLabel.text = model.subjectName+" "+model.versionName
+
+        guanzhuLabel.text = "\(model.followNum!)"
+        fensiLabel.text = "\(model.fansNum!)"
+        zanLabel.text = "\(model.likeNum!)"
+        shoucangLabel.text = "\(model.favoriteNum!)"
 
     }
     

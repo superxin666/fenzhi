@@ -14,7 +14,7 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     let cellNameArr = ["我的消息","我的收藏","我的赞赏","我的收入","设置"]
     let cellIconNameArr = [#imageLiteral(resourceName: "icon_wdxx"),#imageLiteral(resourceName: "icon_wdsc"),#imageLiteral(resourceName: "icon_wdzs"),#imageLiteral(resourceName: "icon_wdsr"),#imageLiteral(resourceName: "icon_sz")]
     let requestVC = MineDataManger()
-    var dataModel : LoginModelMapper = LoginModelMapper()
+    var dataModel : ProfileMineModel = ProfileMineModel()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,8 +35,8 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
     func getData() {
         weak var weakSelf = self
-        requestVC.info(completion: { (data) in
-            weakSelf?.dataModel = data as! LoginModelMapper
+        requestVC.my_user_profile(completion: { (data) in
+            weakSelf?.dataModel = data as! ProfileMineModel
             if weakSelf?.dataModel.errno == 0 {
                 weakSelf?.headViewSetData()
             }

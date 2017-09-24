@@ -77,6 +77,7 @@
 		21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA05A01F6784DF0083EFD4 /* FZRequestViewController.swift */; };
 		21FB3EAC1F66367500656B74 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB3EAB1F66367500656B74 /* SettingViewController.swift */; };
 		21FB3EAE1F66392200656B74 /* TeachTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB3EAD1F66392200656B74 /* TeachTableViewCell.swift */; };
+		21FEA6071F77F988009B1FBC /* ProfileMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FEA6061F77F988009B1FBC /* ProfileMineModel.swift */; };
 		85AC0AA241E550BCCE81BA92 /* Pods_fenzhi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */; };
 		9F1B36B82E4579C0E1ED8A93 /* Pods_fenzhiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A415FB4CE0E9595F86C656D9 /* Pods_fenzhiUITests.framework */; };
 		C076668C8B97F4A97FB14A24 /* Pods_fenzhiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCA162FC084537701A39EDF /* Pods_fenzhiTests.framework */; };
@@ -179,6 +180,7 @@
 		21FA05A01F6784DF0083EFD4 /* FZRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZRequestViewController.swift; sourceTree = "<group>"; };
 		21FB3EAB1F66367500656B74 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		21FB3EAD1F66392200656B74 /* TeachTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachTableViewCell.swift; sourceTree = "<group>"; };
+		21FEA6061F77F988009B1FBC /* ProfileMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMineModel.swift; sourceTree = "<group>"; };
 		3BF53C885381150890BD1D77 /* Pods-fenzhi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi.debug.xcconfig"; sourceTree = "<group>"; };
 		5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fenzhi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DCA162FC084537701A39EDF /* Pods_fenzhiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fenzhiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -427,6 +429,7 @@
 				215822221F6C2122002BC6E6 /* FollowModel.swift */,
 				21B084F21F6D4BCA00D9F3A0 /* GetzanlistModel.swift */,
 				214448D11F7007F60073EA06 /* GetincomelistModl.swift */,
+				21FEA6061F77F988009B1FBC /* ProfileMineModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */,
 				2178823B1F67E43D00365735 /* RSA.m in Sources */,
 				214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */,
+				21FEA6071F77F988009B1FBC /* ProfileMineModel.swift in Sources */,
 				21B084F91F6E9AA400D9F3A0 /* UploadimgModel.swift in Sources */,
 				21CB58C71F726D7500F41448 /* TeachDetailViewController.swift in Sources */,
 				21B084F51F6D540600D9F3A0 /* ShoucangTableViewCell.swift in Sources */,

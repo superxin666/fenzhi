@@ -31,7 +31,6 @@ let logout_api = "/api/user/logout?"
 let sms_api = "/api/sendsms?"
 let register_api = "/api/user/register?"
 let findpwd_api = "/api/user/findpwd?"
-let info_api = "/api/user/info?"
 let supplyinfo_api = "/api/user/supplyinfo?"
 //-------------------个人
 
@@ -40,6 +39,8 @@ let getfavoritelist_api = "/api/user/getfavoritelist?"//获取收藏列表接口
 let getzanlist_api = "/api/user/getzanlist?"//获取赞赏列表接口
 let getincomelist_api = "/api/user/getincomelist?"//获取赞赏列表接口
 let getmyfeedlist_api = "/api/user/getmyfeedlist?"//获取我的分享列表接口
+let info_api = "/api/user/info?"
+let profileuser_api = "/api/user/profile?"
 
 //----------------------------分享相关接口
 let profile_api = "/api/fenx/profile?"//分享详情接口

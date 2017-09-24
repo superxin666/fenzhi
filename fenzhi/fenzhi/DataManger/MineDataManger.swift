@@ -159,4 +159,27 @@ class MineDataManger: FZRequestViewController {
         
     }
 
+    func my_user_profile( completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+
+        //        let token = self.getToken_RSA()
+
+        //15910901725  + "token="+token
+        let url = BASER_API + profileuser_api + last_pra + token_pra
+        print("访问"+url)
+        var model:ProfileMineModel = ProfileMineModel()
+        Alamofire.request(url, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<ProfileMineModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+
+        }
+
+    }
+
+
+
 }

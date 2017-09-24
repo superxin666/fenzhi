@@ -48,6 +48,7 @@ class GetmyfeedlistModel_data_fenxList: Mappable {
 
     var cellHeight :  CGFloat  = 0.0
 
+    var indexRow:Int!//第几个模型
 
 
 

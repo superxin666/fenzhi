@@ -149,6 +149,7 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < self.dataArr.count {
             let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
+            model.indexRow = indexPath.row
             if model.type == 0 {
                 //教学
                 var cell : RecordTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID_RECORD, for: indexPath) as! RecordTableViewCell
@@ -170,19 +171,23 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                     }
                     let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
                         //删除
-//                        self.SVshowLoad()
-//                        weakSelf?.dataVC.delcomment(commentId: model.id, completion: { (data) in
-//                            weakSelf?.SVdismiss()
-//                            let model :SmsModel = data as! SmsModel
-//                            if model.errno == 0 {
-//                                weakSelf?.SVshowSucess(infoStr: "删除成功")
-//                            } else {
-//                                weakSelf?.SVshowErro(infoStr: model.errmsg)
-//                            }
-//                        }) { (erro) in
-//                            weakSelf?.SVshowErro(infoStr: "网络请求失败")
-//                        }
+                        self.SVshowLoad()
+                        weakSelf?.dataVC.delfenx(fenxId: delmodel.id, completion: { (data) in
+                            weakSelf?.SVdismiss()
+                            let model :SmsModel = data as! SmsModel
+                            if model.errno == 0 {
+                                weakSelf?.SVshowSucess(infoStr: "删除成功")
+                                weakSelf?.dataArr.remove(at: delmodel.indexRow)
+                                weakSelf?.mainTabelView.reloadData()
+                            } else {
+                                weakSelf?.SVshowErro(infoStr: model.errmsg)
+                            }
+                        }, failure: { (erro) in
+                            weakSelf?.SVshowErro(infoStr: "网络请求失败")
+                        })
+
                     }
+
                     weakSelf?.alertController.addAction(cancleAction)
                     weakSelf?.alertController.addAction(sureAction)
                     self.present((weakSelf?.alertController)!, animated: true, completion: nil)

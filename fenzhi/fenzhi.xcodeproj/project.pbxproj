@@ -15,6 +15,7 @@
 		2112E91C1F6C47360066CF5B /* GetregionlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */; };
 		2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E91D1F6C4A3E0066CF5B /* GetschoollistModel.swift */; };
 		2112E9221F6C4C8D0066CF5B /* GetbooklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E9211F6C4C8D0066CF5B /* GetbooklistModel.swift */; };
+		2119946B1F7745EF00FB8016 /* RecordHeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2119946A1F7745EF00FB8016 /* RecordHeartTableViewCell.swift */; };
 		212D284E1F7359A1004DD669 /* GetcommentlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D284D1F7359A1004DD669 /* GetcommentlistModel.swift */; };
 		212D28501F7359BD004DD669 /* commentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D284F1F7359BC004DD669 /* commentTableViewCell.swift */; };
 		213015E11F768D060029EFD1 /* GetmyfeedlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213015E01F768D060029EFD1 /* GetmyfeedlistModel.swift */; };
@@ -108,6 +109,7 @@
 		2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetregionlistModel.swift; sourceTree = "<group>"; };
 		2112E91D1F6C4A3E0066CF5B /* GetschoollistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetschoollistModel.swift; sourceTree = "<group>"; };
 		2112E9211F6C4C8D0066CF5B /* GetbooklistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetbooklistModel.swift; sourceTree = "<group>"; };
+		2119946A1F7745EF00FB8016 /* RecordHeartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeartTableViewCell.swift; sourceTree = "<group>"; };
 		212D284D1F7359A1004DD669 /* GetcommentlistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetcommentlistModel.swift; sourceTree = "<group>"; };
 		212D284F1F7359BC004DD669 /* commentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentTableViewCell.swift; sourceTree = "<group>"; };
 		213015E01F768D060029EFD1 /* GetmyfeedlistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetmyfeedlistModel.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				214EEC8D1F76AFAA00B5F38A /* RecordTableViewCell.swift */,
+				2119946A1F7745EF00FB8016 /* RecordHeartTableViewCell.swift */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */,
 				215822201F6C2012002BC6E6 /* MineDataManger.swift in Sources */,
 				21570C8F1F653CB2003C7D38 /* fzStr.swift in Sources */,
+				2119946B1F7745EF00FB8016 /* RecordHeartTableViewCell.swift in Sources */,
 				21BBF7FF1F6BC385008D654D /* GuanzhuTableViewCell.swift in Sources */,
 				21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */,
 				21FB3EAE1F66392200656B74 /* TeachTableViewCell.swift in Sources */,

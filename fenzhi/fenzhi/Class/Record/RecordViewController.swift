@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+let HEARTCELLID_RECORD = "HEARTCELL_RECORD_ID"//
+let TEACHCELLID_RECORD = "TEACHCELL__RECORD_ID"//
 class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let mainTabelView : UITableView = UITableView()
     let dataVC : CommonDataMangerViewController = CommonDataMangerViewController()
@@ -36,8 +37,8 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         footer.setRefreshingTarget(self, refreshingAction: #selector(RecordViewController.loadMoreData))
-//        mainTabelView.register(RecordTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
-        mainTabelView.register(RecordTableViewCell.self.self, forCellReuseIdentifier: TEACHCELLID)
+        mainTabelView.register(RecordHeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID_RECORD)
+        mainTabelView.register(RecordTableViewCell.self.self, forCellReuseIdentifier: TEACHCELLID_RECORD)
         self.view.addSubview(mainTabelView)
         
     }
@@ -91,10 +92,20 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         }
 
         headViewHeight = headViewHeight + txtH
-        //教学
-        if model.coursewares.count > 0 {
-            headViewHeight = headViewHeight +  (ip7(80) * CGFloat(model.coursewares.count))
+        if model.type == 1 {
+            //教学
+            if model.coursewares.count > 0 {
+                headViewHeight = headViewHeight +  (ip7(80) * CGFloat(model.coursewares.count))
+            }
+        } else {
+            //心得
+            if model.images.count > 0 {
+                let imageWidth = (KSCREEN_WIDTH - ip7(60) - ip7(20))/2
+                let imageHeight = imageWidth * 355/428
+                headViewHeight = headViewHeight +  (imageHeight * CGFloat(model.images.count)) + ip7(15)
+            }
         }
+
         if model.catalog.characters.count > 0 {
             headViewHeight = headViewHeight + ip7(35) + ip7(21)
         }
@@ -113,9 +124,9 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < self.dataArr.count {
             let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
-            if model.type == 0 {
+            if model.type == 1 {
                 //教学
-                var cell : RecordTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID, for: indexPath) as! RecordTableViewCell
+                var cell : RecordTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID_RECORD, for: indexPath) as! RecordTableViewCell
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
                 if (cell == nil)  {
@@ -125,8 +136,14 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                 return cell;
             } else {
                 //心得
-                let cell = UITableViewCell()
-                return cell
+                var cell : RecordHeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID_RECORD, for: indexPath) as! RecordHeartTableViewCell
+                cell.backgroundColor = .clear
+                cell.selectionStyle = .none
+                if (cell == nil)  {
+                    cell = RecordHeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID_RECORD)
+                }
+                cell.setUpUIWithModelAndType(model: model)
+                return cell;
             }
         } else {
             return UITableViewCell()

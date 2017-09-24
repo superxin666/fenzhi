@@ -1,14 +1,14 @@
 //
-//  RecordTableViewCell.swift
+//  RecordHeartTableViewCell.swift
 //  fenzhi
 //
-//  Created by lvxin on 2017/9/23.
+//  Created by lvxin on 2017/9/24.
 //  Copyright © 2017年 Xunqiu. All rights reserved.
 //
 
 import UIKit
 
-class RecordTableViewCell: UITableViewCell {
+class RecordHeartTableViewCell: UITableViewCell {
 
     var dataModel : GetmyfeedlistModel_data_fenxList = GetmyfeedlistModel_data_fenxList()
     var dataVC : HomeDataMangerController = HomeDataMangerController()
@@ -52,8 +52,8 @@ class RecordTableViewCell: UITableViewCell {
 
 
         //105105105
-        //名字 viewW - ip7(19) - iconImageView.frame.maxX - ip7(31) - ip7(90)
-        let nameWidth = ip7(200)
+        //名字
+        let nameWidth = viewW - ip7(19) - iconImageView.frame.maxX - ip7(31) - ip7(90)
         nameLabel.frame = CGRect(x: iconImageView.frame.maxX + ip7(19), y:  ip7(25), width: nameWidth, height: ip7(24))
         nameLabel.text = model.userInfo.name
         nameLabel.isUserInteractionEnabled = true
@@ -102,41 +102,23 @@ class RecordTableViewCell: UITableViewCell {
         let appadWidth = ip7(30)
 
         //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 +
-        if model.coursewares.count > 0 {
-            //文件
-            let imageX = ip7(30)
-            let imageY = ip7(28) + txtLabel.frame.maxY
+        //图片
+        let imageX = ip7(30)
+        let imageY = ip7(32) + txtLabel.frame.maxY
+        let appad = ip7(20)
+        let imageWidth = (viewW - ip7(60) - ip7(20))/2
+        let imageHeight = imageWidth * 355/428
 
-            let imageWidth = viewW - ip7(60)
-            let imageHeight = ip7(65)
-
-
-            for i in 0..<model.coursewares.count {
-                let model = model.coursewares[i]
-                let view = UIView(frame: CGRect(x: imageX, y: imageY + CGFloat(i) * (imageHeight + ip7(15)), width: imageWidth, height: imageHeight))
-                view.tag = i
-                view.backgroundColor = backView_COLOUR
-                view.isUserInteractionEnabled = true
-                lastFream = view.frame
-
-                let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TeachDetailHeadView.ppt_click(tap:)))
-                view.addGestureRecognizer(iconImageViewTap)
-
-
-                //图片
-                let imageView = UIImageView(image: #imageLiteral(resourceName: "pdf"))
-                imageView.frame = CGRect(x: 0, y: 0, width: ip7(65), height: ip7(65))
-                view.addSubview(imageView)
-
-                //描述
-                let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (imageHeight - ip7(21))/2, width: imageWidth - imageView.frame.maxX - ip7(10), height: ip7(21)))
-                label.text = model.name
-                label.font = fzFont_Thin(ip7(21))
-                label.textColor  = dark_3_COLOUR
-                label.textAlignment = .left
-                view.addSubview(label)
-                backView.addSubview(view)
-            }
+        for i in 0..<model.images.count  {
+            let imageStr :String = model.images[i]
+            let imageView = UIImageView()
+            imageView.kf.setImage(with: URL(string: imageStr))
+            imageView.tag = i
+            let Y = CGFloat((i/2)) * (imageHeight + ip7(20))
+            let X = ((appad + imageWidth) * CGFloat(i%2))
+            imageView.frame =  CGRect(x: imageX + X, y: imageY + Y, width: imageWidth, height: imageHeight)
+            lastFream = imageView.frame;
+            backView.addSubview(imageView)
         }
         //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 + // ip(35)+ip(21)//课时定位 +
 
@@ -172,32 +154,32 @@ class RecordTableViewCell: UITableViewCell {
         for i in 0...2 {
             let btn : UIButton = UIButton(type: .custom)
             btn.tag = i
-//            if i == 0 {
-//                dianzanBtn = btn
-//                //点赞
-//                if model.data.isLike == 1 {
-//                    btn.isSelected = true
-//                } else {
-//                    btn.isSelected = false
-//                }
-//            } else if i == 1 {
-//                //收藏
-//                shoucangBtn = btn
-//                if model.data.isFavorite == 1 {
-//                    btn.isSelected = true
-//                } else {
-//                    btn.isSelected = false
-//                }
-//
-//            } else {
-//                //分享
-//                fenxinagBtn = btn
-//
-//            }
+            //            if i == 0 {
+            //                dianzanBtn = btn
+            //                //点赞
+            //                if model.data.isLike == 1 {
+            //                    btn.isSelected = true
+            //                } else {
+            //                    btn.isSelected = false
+            //                }
+            //            } else if i == 1 {
+            //                //收藏
+            //                shoucangBtn = btn
+            //                if model.data.isFavorite == 1 {
+            //                    btn.isSelected = true
+            //                } else {
+            //                    btn.isSelected = false
+            //                }
+            //
+            //            } else {
+            //                //分享
+            //                fenxinagBtn = btn
+            //
+            //            }
             btn.frame = CGRect(x: appadWidth + CGFloat(i) * btnW , y: lastFream.maxY + ip7(45), width: btnW, height: ip7(60))
             btn.titleLabel?.font = fzFont_Thin(18)
             btn.tag = i
-//            btn.addTarget(self, action: #selector(btn_click(sender:)), for: .touchUpInside)
+            //            btn.addTarget(self, action: #selector(btn_click(sender:)), for: .touchUpInside)
             btn.setTitleColor(dark_6_COLOUR, for: .normal)
             btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: ip7(20))
             btn.titleLabel?.adjustsFontSizeToFitWidth = true

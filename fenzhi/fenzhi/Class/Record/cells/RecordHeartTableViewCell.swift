@@ -67,7 +67,7 @@ class RecordHeartTableViewCell: UITableViewCell {
 
         //用户信息
         infoLabel.frame = CGRect(x: iconImageView.frame.maxX + ip7(19), y: nameLabel.frame.maxY + ip7(14), width: viewW - ip7(19) - iconImageView.frame.maxX, height: ip7(21))
-        infoLabel.text = model.userInfo.cityName + " " + model.userInfo.gradeName+model.userInfo.gradeName+"老师"
+        infoLabel.text = model.userInfo.cityName + " " + model.userInfo.gradeName+model.userInfo.subjectName+"老师"
         infoLabel.font = fzFont_Thin(ip7(21))
         infoLabel.textColor  = dark_6_COLOUR
         infoLabel.textAlignment = .left

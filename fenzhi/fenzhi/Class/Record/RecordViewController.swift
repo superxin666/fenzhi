@@ -15,6 +15,8 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     var dataModel : GetmyfeedlistModel = GetmyfeedlistModel()
     var dataArr : [GetmyfeedlistModel_data_fenxList] = []
 
+    var page :Int = 1
+    let count : Int = 10
 
 
     override func viewDidLoad() {
@@ -37,6 +39,9 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         footer.setRefreshingTarget(self, refreshingAction: #selector(RecordViewController.loadMoreData))
+        header.setRefreshingTarget(self, refreshingAction: #selector(RecordViewController.freshData))
+        mainTabelView.mj_footer = footer
+        mainTabelView.mj_header = header
         mainTabelView.register(RecordHeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID_RECORD)
         mainTabelView.register(RecordTableViewCell.self.self, forCellReuseIdentifier: TEACHCELLID_RECORD)
         self.view.addSubview(mainTabelView)
@@ -44,12 +49,19 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
 
     func loadMoreData() {
+        page = page + 1
+        self.getData()
+    }
 
+    func freshData() {
+        page = 1
+        self.dataArr.removeAll()
+        self.getData()
     }
 
     func getData() {
         weak var weakSelf = self
-        dataVC.getmyfeedlist(userId: 0, pageNum: 1, count: 10, completion: { (data) in
+        dataVC.getmyfeedlist(userId: 0, pageNum: page, count: count, completion: { (data) in
             weakSelf?.dataModel = data as! GetmyfeedlistModel
             if weakSelf?.dataModel.errno == 0 {
                 if (weakSelf?.dataModel.data.fenxList.count)! > 0{
@@ -74,9 +86,14 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             } else {
                weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
             }
+            weakSelf?.mainTabelView.mj_footer.endRefreshing()
+            weakSelf?.mainTabelView.mj_header.endRefreshing()
 
         }) { (erro) in
                 weakSelf?.SVshowErro(infoStr: "网络请求失败")
+                weakSelf?.mainTabelView.mj_header.endRefreshing()
+                weakSelf?.mainTabelView.mj_footer.endRefreshing()
+
         }
     }
 
@@ -92,7 +109,7 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         }
 
         headViewHeight = headViewHeight + txtH
-        if model.type == 1 {
+        if model.type == 0 {
             //教学
             if model.coursewares.count > 0 {
                 headViewHeight = headViewHeight +  (ip7(80) * CGFloat(model.coursewares.count))
@@ -124,7 +141,7 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < self.dataArr.count {
             let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
-            if model.type == 1 {
+            if model.type == 0 {
                 //教学
                 var cell : RecordTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID_RECORD, for: indexPath) as! RecordTableViewCell
                 cell.backgroundColor = .clear
@@ -149,6 +166,8 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             return UITableViewCell()
         }
     }
+
+    
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         let model = self.dataArr[indexPath.row]

@@ -20,7 +20,7 @@ class TeachDetailHeadView: UIView {
     var docBlock : TeachDetailHeadViewBlock!
 
 
-    func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat) {
+    func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat,type : Int) {
         self.dataModel = model
         let viewW = KSCREEN_WIDTH
         let viewH = height
@@ -91,42 +91,72 @@ class TeachDetailHeadView: UIView {
         let appadWidth = ip7(30)
 
 //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 +
-        if model.data.coursewares.count > 0 {
-            //文件
-            let imageX = ip7(30)
-            let imageY = ip7(28) + txtLabel.frame.maxY
+        if type == 0 {
+            //教学
+            if model.data.coursewares.count > 0 {
+                //文件
+                let imageX = ip7(30)
+                let imageY = ip7(28) + txtLabel.frame.maxY
 
-            let imageWidth = viewW - ip7(60)
-            let imageHeight = ip7(65)
-
-
-            for i in 0..<model.data.coursewares.count {
-                let model = model.data.coursewares[i]
-                let view = UIView(frame: CGRect(x: imageX, y: imageY + CGFloat(i) * (imageHeight + ip7(15)), width: imageWidth, height: imageHeight))
-                view.tag = i
-                view.backgroundColor = backView_COLOUR
-                view.isUserInteractionEnabled = true
-                lastFream = view.frame
-
-                let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TeachDetailHeadView.ppt_click(tap:)))
-                view.addGestureRecognizer(iconImageViewTap)
+                let imageWidth = viewW - ip7(60)
+                let imageHeight = ip7(65)
 
 
-                //图片
-                let imageView = UIImageView(image: #imageLiteral(resourceName: "pdf"))
-                imageView.frame = CGRect(x: 0, y: 0, width: ip7(65), height: ip7(65))
-                view.addSubview(imageView)
+                for i in 0..<model.data.coursewares.count {
+                    let model = model.data.coursewares[i]
+                    let view = UIView(frame: CGRect(x: imageX, y: imageY + CGFloat(i) * (imageHeight + ip7(15)), width: imageWidth, height: imageHeight))
+                    view.tag = i
+                    view.backgroundColor = backView_COLOUR
+                    view.isUserInteractionEnabled = true
+                    lastFream = view.frame
 
-                //描述
-                let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (imageHeight - ip7(21))/2, width: imageWidth - imageView.frame.maxX - ip7(10), height: ip7(21)))
-                label.text = model.name
-                label.font = fzFont_Thin(ip7(21))
-                label.textColor  = dark_3_COLOUR
-                label.textAlignment = .left
-                view.addSubview(label)
-                backView.addSubview(view)
+                    let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TeachDetailHeadView.ppt_click(tap:)))
+                    view.addGestureRecognizer(iconImageViewTap)
+
+
+                    //图片
+                    let imageView = UIImageView(image: #imageLiteral(resourceName: "pdf"))
+                    imageView.frame = CGRect(x: 0, y: 0, width: ip7(65), height: ip7(65))
+                    view.addSubview(imageView)
+
+                    //描述
+                    let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (imageHeight - ip7(21))/2, width: imageWidth - imageView.frame.maxX - ip7(10), height: ip7(21)))
+                    label.text = model.name
+                    label.font = fzFont_Thin(ip7(21))
+                    label.textColor  = dark_3_COLOUR
+                    label.textAlignment = .left
+                    view.addSubview(label)
+                    backView.addSubview(view)
+                }
             }
+
+        } else {
+            //心得
+            if model.data.images.count > 0 {
+                //图片
+                let imageX = ip7(30)
+                let imageY = ip7(32) + txtLabel.frame.maxY
+                let appad = ip7(20)
+                let imageWidth = (viewW - ip7(60) - ip7(20))/2
+                let imageHeight = imageWidth * 355/428
+
+                for i in 0..<model.data.images.count  {
+                    let imageStr :String = model.data.images[i]
+                    let imageView = UIImageView()
+                    imageView.kf.setImage(with: URL(string: imageStr))
+                    imageView.tag = i
+                    let Y = CGFloat((i/2)) * (imageHeight + ip7(20))
+                    let X = ((appad + imageWidth) * CGFloat(i%2))
+                    imageView.frame =  CGRect(x: imageX + X, y: imageY + Y, width: imageWidth, height: imageHeight)
+                    lastFream = imageView.frame;
+                    backView.addSubview(imageView)
+                }
+
+                
+            }
+
         }
+
 //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 + // ip(35)+ip(21)//课时定位 +
 
         if model.data.catalog.characters.count > 0 {

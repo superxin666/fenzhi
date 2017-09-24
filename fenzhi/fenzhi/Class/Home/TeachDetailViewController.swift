@@ -89,7 +89,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.view.addSubview(mainScrollow)
         
         headView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: headViewHeight)
-        headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight)
+        headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight,type:1)
         mainScrollow.addSubview(headView)
          weak var weakSelf = self
         headView.docBlock = {(model) in
@@ -113,11 +113,21 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
 
         headViewHeight = headViewHeight + txtH
-
-        //教学
-        if self.headData.data.coursewares.count > 0 {
-          headViewHeight = headViewHeight +  (ip7(80) * CGFloat(self.headData.data.coursewares.count))
+        if self.headData.data.type == 0 {
+            //教学
+            if self.headData.data.coursewares.count > 0 {
+                headViewHeight = headViewHeight +  (ip7(80) * CGFloat(self.headData.data.coursewares.count))
+            }
+        } else {
+            //心得
+            if self.headData.data.images.count > 0 {
+                let imageWidth = (KSCREEN_WIDTH - ip7(60) - ip7(20))/2
+                let imageHeight = imageWidth * 355/428
+                let num = CGFloat((self.headData.data.images.count/2)) + CGFloat(self.headData.data.images.count%2)
+                headViewHeight = headViewHeight +  ((imageHeight + ip7(20)) * num)
+            }
         }
+
 
         if self.headData.data.catalog.characters.count > 0 {
             headViewHeight = headViewHeight + ip7(35) + ip7(21)

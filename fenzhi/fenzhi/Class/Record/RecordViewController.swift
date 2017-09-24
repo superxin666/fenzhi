@@ -121,7 +121,8 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             if model.images.count > 0 {
                 let imageWidth = (KSCREEN_WIDTH - ip7(60) - ip7(20))/2
                 let imageHeight = imageWidth * 355/428
-                headViewHeight = headViewHeight +  (imageHeight * CGFloat(model.images.count)) + ip7(15)
+                let num = CGFloat((model.images.count/2)) + CGFloat(model.images.count%2)
+                headViewHeight = headViewHeight +  ((imageHeight + ip7(20)) * num) + ip7(15)
             }
         }
 

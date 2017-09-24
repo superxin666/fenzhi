@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+typealias  RecordTableViewCellBlock = (_ model:GetmyfeedlistModel_data_fenxList)->()
 class RecordTableViewCell: UITableViewCell {
 
     var dataModel : GetmyfeedlistModel_data_fenxList = GetmyfeedlistModel_data_fenxList()
@@ -25,6 +25,8 @@ class RecordTableViewCell: UITableViewCell {
     let nameLabel : UILabel = UILabel()
     let infoLabel : UILabel = UILabel()
     let txtLabel : UILabel = UILabel()
+
+    var delViewBlock : RecordTableViewCellBlock!
 
     func setUpUIWithModelAndType(model : GetmyfeedlistModel_data_fenxList) {
         self.dataModel = model
@@ -49,6 +51,10 @@ class RecordTableViewCell: UITableViewCell {
         moreImageView.image = #imageLiteral(resourceName: "button_more")
         moreImageView.isUserInteractionEnabled = true
         backView.addSubview(moreImageView)
+
+        let moreImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RecordTableViewCell.del_click))
+        moreImageView.addGestureRecognizer(moreImageViewTap)
+
 
 
         //105105105
@@ -206,6 +212,14 @@ class RecordTableViewCell: UITableViewCell {
             btn.setImage(imageArr[i], for: .normal)
             btn.setImage(image_selectedArr[i], for: .selected)
             backView.addSubview(btn)
+        }
+
+    }
+
+    func del_click() {
+        KFBLog(message: "删除")
+        if let _ =  delViewBlock {
+            delViewBlock(self.dataModel)
         }
 
     }

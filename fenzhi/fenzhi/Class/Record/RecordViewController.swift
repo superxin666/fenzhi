@@ -15,6 +15,8 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     var dataModel : GetmyfeedlistModel = GetmyfeedlistModel()
     var dataArr : [GetmyfeedlistModel_data_fenxList] = []
 
+    var alertController : UIAlertController!
+
     var page :Int = 1
     let count : Int = 10
 
@@ -47,7 +49,7 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         self.view.addSubview(mainTabelView)
         
     }
-
+    //MARK:数据请求
     func loadMoreData() {
         page = page + 1
         self.getData()
@@ -150,6 +152,37 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                     cell = RecordTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
                 }
                 cell.setUpUIWithModelAndType(model: model)
+                weak var weakSelf = self
+                cell.delViewBlock = {(delmodel) in
+                    KFBLog(message: "删除block")
+                    weakSelf?.alertController  = UIAlertController(title: "提示", message: "是否要删除本条分享", preferredStyle: .alert)
+                    let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+                        //取消
+                        weakSelf?.alertController.dismiss(animated: true, completion: {
+
+                        })
+                    }
+                    let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
+                        //删除
+//                        self.SVshowLoad()
+//                        weakSelf?.dataVC.delcomment(commentId: model.id, completion: { (data) in
+//                            weakSelf?.SVdismiss()
+//                            let model :SmsModel = data as! SmsModel
+//                            if model.errno == 0 {
+//                                weakSelf?.SVshowSucess(infoStr: "删除成功")
+//                            } else {
+//                                weakSelf?.SVshowErro(infoStr: model.errmsg)
+//                            }
+//                        }) { (erro) in
+//                            weakSelf?.SVshowErro(infoStr: "网络请求失败")
+//                        }
+                    }
+                    weakSelf?.alertController.addAction(cancleAction)
+                    weakSelf?.alertController.addAction(sureAction)
+                    self.present((weakSelf?.alertController)!, animated: true, completion: nil)
+                    
+
+                }
                 return cell;
             } else {
                 //心得
@@ -168,7 +201,6 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
 
     
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         let model = self.dataArr[indexPath.row]
         return model.cellHeight;

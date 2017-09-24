@@ -298,7 +298,7 @@ class TeachDetailHeadView: UIView {
                         weakSelf?.dataModel.data.isLike = 1
                         let num = (weakSelf?.dataModel.data.likeNum)! + 1
                         weakSelf?.dataModel.data.likeNum = num
-                        weakSelf?.dianzanBtn.setTitle("\(num)点赞", for: .normal)
+                        weakSelf?.dianzanBtn.setTitle("\(num)点赞", for: .selected)
                     } else {
                         weakSelf?.baseVC.SVshowErro(infoStr: model.errmsg)
                     }

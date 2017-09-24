@@ -173,37 +173,30 @@ class RecordTableViewCell: UITableViewCell {
         let btnW = (viewW - appadWidth * 2)/3
         let nameArray : Array = ["\(model.likeNum!)点赞","\(model.commentNum!)评论","\(model.zanNum!)赞赏"]
         let imageArr : Array = [#imageLiteral(resourceName: "icon_dz1"),#imageLiteral(resourceName: "icon_pl1"),#imageLiteral(resourceName: "icon_zs")]
-        let image_selectedArr : Array = [#imageLiteral(resourceName: "icon_dz1_s"),#imageLiteral(resourceName: "shape"),#imageLiteral(resourceName: "fx3_s")]
+        let image_selectedArr : Array = [#imageLiteral(resourceName: "icon_dz1_s"),#imageLiteral(resourceName: "icon_pl1_s"),#imageLiteral(resourceName: "icon_zs_s")]
 
         for i in 0...2 {
             let btn : UIButton = UIButton(type: .custom)
             btn.tag = i
-//            if i == 0 {
-//                dianzanBtn = btn
-//                //点赞
-//                if model.data.isLike == 1 {
-//                    btn.isSelected = true
-//                } else {
-//                    btn.isSelected = false
-//                }
-//            } else if i == 1 {
-//                //收藏
-//                shoucangBtn = btn
-//                if model.data.isFavorite == 1 {
-//                    btn.isSelected = true
-//                } else {
-//                    btn.isSelected = false
-//                }
-//
-//            } else {
-//                //分享
-//                fenxinagBtn = btn
-//
-//            }
+            if i == 0 {
+                dianzanBtn = btn
+                //点赞
+                if model.isLike == 1 {
+                    btn.isSelected = true
+                } else {
+                    btn.isSelected = false
+                }
+            } else if i == 1 {
+
+            } else {
+                //赞赏
+                fenxinagBtn = btn
+
+            }
             btn.frame = CGRect(x: appadWidth + CGFloat(i) * btnW , y: lastFream.maxY + ip7(45), width: btnW, height: ip7(60))
             btn.titleLabel?.font = fzFont_Thin(18)
             btn.tag = i
-//            btn.addTarget(self, action: #selector(btn_click(sender:)), for: .touchUpInside)
+            btn.addTarget(self, action: #selector(btn_click(sender:)), for: .touchUpInside)
             btn.setTitleColor(dark_6_COLOUR, for: .normal)
             btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: ip7(20))
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -212,6 +205,43 @@ class RecordTableViewCell: UITableViewCell {
             btn.setImage(imageArr[i], for: .normal)
             btn.setImage(image_selectedArr[i], for: .selected)
             backView.addSubview(btn)
+        }
+
+    }
+
+    func btn_click(sender : UIButton) {
+        if sender.tag == 0 {
+            if dataModel.isLike == 1 {
+                //已经点过赞
+
+            } else {
+                //没有点过赞
+                weak var weakSelf = self
+                comVC.like(type: 0, objectId: self.dataModel.id!, completion: { (data) in
+                    let model : LikeModel = data as! LikeModel
+                    if model.errno == 0 {
+                        weakSelf?.baseVC.SVshowSucess(infoStr: "点赞成功")
+                        weakSelf?.dianzanBtn.isSelected = true
+                        weakSelf?.dataModel.isLike = 1
+                        let num = (weakSelf?.dataModel.likeNum)! + 1
+                        weakSelf?.dataModel.likeNum = num
+                        weakSelf?.dianzanBtn.setTitle("\(num)点赞", for: .selected)
+                    } else {
+                        weakSelf?.baseVC.SVshowErro(infoStr: model.errmsg)
+                    }
+
+                }) { (erro) in
+
+                }
+
+
+            }
+
+        } else if sender.tag == 1 {
+
+        } else {
+            //赞赏
+
         }
 
     }

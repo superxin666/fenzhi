@@ -9,6 +9,8 @@
 import UIKit
 let COMMONTELLID = "COMMONTELL_ID"//
 class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
+    var fenxId :Int!
+
     let mainScrollow : UIScrollView = UIScrollView()
     let mainTabelView : UITableView = UITableView()
     let dataVC = HomeDataMangerController()
@@ -64,7 +66,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     func getHeadData() {
         weak var weakSelf = self
         self.SVshowLoad()
-        dataVC.profile(fenxId: 1, completion: { (data) in
+        dataVC.profile(fenxId: fenxId!, completion: { (data) in
             weakSelf?.SVdismiss()
             weakSelf?.headData = data as! TeachDetailModel
             if weakSelf?.headData.errno == 0 {
@@ -89,7 +91,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.view.addSubview(mainScrollow)
         
         headView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: headViewHeight)
-        headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight,type:1)
+        headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight,type:self.headData.data.type!)
         mainScrollow.addSubview(headView)
          weak var weakSelf = self
         headView.docBlock = {(model) in
@@ -148,7 +150,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     //MARK:获取评论列表数据
     func getcommentlistData() {
         weak var weakSelf = self
-        dataVC.getcommentlist(fenxId: 1, pageNum: page, count: count, completion: { (data) in
+        dataVC.getcommentlist(fenxId: fenxId!, pageNum: page, count: count, completion: { (data) in
             weakSelf?.commentlistData = data as! GetcommentlistModel
             if weakSelf?.commentlistData.errno == 0 {
                 if (weakSelf?.commentlistData.data.list.count)! > 0 {

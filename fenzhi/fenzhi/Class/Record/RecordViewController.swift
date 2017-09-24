@@ -19,7 +19,10 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
 
     var page :Int = 1
     let count : Int = 10
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.SVdismiss()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +66,9 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
 
     func getData() {
         weak var weakSelf = self
+        self.SVshowLoad()
         dataVC.getmyfeedlist(userId: 0, pageNum: page, count: count, completion: { (data) in
+            self.SVdismiss()
             weakSelf?.dataModel = data as! GetmyfeedlistModel
             if weakSelf?.dataModel.errno == 0 {
                 if (weakSelf?.dataModel.data.fenxList.count)! > 0{
@@ -201,6 +206,16 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         }
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row < self.dataArr.count {
+            let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
+            let vc = TeachDetailViewController()
+            vc.fenxId = model.id
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+
+        }
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         let model = self.dataArr[indexPath.row]

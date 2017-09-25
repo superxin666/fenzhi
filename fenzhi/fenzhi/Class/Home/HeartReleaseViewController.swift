@@ -57,13 +57,19 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         let keyboardRec = nsValue.cgRectValue
 
         let height = keyboardRec.size.height
-        keybodHeight = height
+        
         if !isHaveBtnBackView {
             self.creatBtnView()
             self.view.addSubview(btnBackView)
         } else {
             
         }
+        UIView.animate(withDuration: 1, animations: {
+            var frame = self.btnBackView.frame
+            frame.origin.y = KSCREEN_HEIGHT - height - ip7(55)
+            self.btnBackView.frame = frame
+            self.keybodHeight = height
+        })
         print("keybordShow:\(height)")
     }
 
@@ -105,7 +111,8 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         //按钮
         KFBLog(message: "asdf--\(keybodHeight)")
         isHaveBtnBackView = true
-        btnBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - keybodHeight - LNAVIGATION_HEIGHT , width: KSCREEN_WIDTH, height: ip7(55))
+        //KSCREEN_HEIGHT - keybodHeight - LNAVIGATION_HEIGHT
+        btnBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT , width: KSCREEN_WIDTH, height: ip7(55))
         btnBackView.backgroundColor = blue_COLOUR
         //
         nsetBtn.frame = CGRect(x: ip7(25), y: (ip7(55) - ip7(14))/2, width: ip7(25), height: ip7(14))

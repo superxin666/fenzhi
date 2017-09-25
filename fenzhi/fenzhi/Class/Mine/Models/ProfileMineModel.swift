@@ -44,6 +44,9 @@ class ProfileMineModel_data: Mappable {
     var fansNum: Int!
     var likeNum: Int!
     var favoriteNum:Int!
+    
+    //看其他用户信息时 有以下数据
+    var myfeedList:GetmyfeedlistModel_data = GetmyfeedlistModel_data()
 
 
     init() {}
@@ -80,6 +83,8 @@ class ProfileMineModel_data: Mappable {
         fansNum <- map["fansNum"]
         likeNum <- map["likeNum"]
         favoriteNum <- map["favoriteNum"]
+        
+        myfeedList <- map["myfeedList"]
 
     }
 }

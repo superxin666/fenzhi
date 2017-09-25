@@ -123,5 +123,15 @@ extension String {
         dfmatter2.dateFormat="HH:mm"
         return dfmatter2.string(from: date!)
     }
+    
+    static func getDate_userinfo_cell(dateStr : String) -> String {
+        let dfmatter = DateFormatter()
+        dfmatter.dateFormat="yyyy-MM-dd HH:mm:ss"
+        let date = dfmatter.date(from: dateStr)
+        
+        let dfmatter2 = DateFormatter()
+        dfmatter2.dateFormat="yyyy.MM.dd HH:mm"
+        return dfmatter2.string(from: date!)
+    }
 
 }

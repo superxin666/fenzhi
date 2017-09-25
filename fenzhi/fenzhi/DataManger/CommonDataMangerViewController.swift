@@ -162,7 +162,7 @@ class CommonDataMangerViewController: FZRequestViewController {
         var model:UploadimgModel = UploadimgModel()
         Alamofire.upload(
             multipartFormData: { multipartFormData in
-                multipartFormData.append(imageData, withName: "imgFile", fileName: "imgFile", mimeType: "image/*")
+                multipartFormData.append(imageData, withName: "imgFile", fileName: "imgFile.jpg", mimeType: "image/*")
 
         },
             to: urlStr,
@@ -171,6 +171,7 @@ class CommonDataMangerViewController: FZRequestViewController {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
                         if let json = response.result.value {
+                            KFBLog(message: response.result.value)
                             model = Mapper<UploadimgModel>().map(JSON: json as! [String : Any])!
                             completion(model)
                         } else {

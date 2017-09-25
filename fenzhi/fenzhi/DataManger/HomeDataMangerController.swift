@@ -171,23 +171,29 @@ class HomeDataMangerController: FZRequestViewController {
     }
 
 
-    func submitfenx_heart(content : String,catalog_id : Int, images : String, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+    func submitfenx_heart(content : String,catalog_id : Int, images : Array<String>, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
+
+
         let contentStr : String  = RSA.encodeParameter(content)
-        let urlStr = BASER_API + submitfenx_api + "content="+contentStr + "&type=" + "\(1)" + last_pra + token_pra
+        var urlStr = BASER_API + submitfenx_api + "content="+contentStr + "&type=" + "\(1)" + last_pra + token_pra
         
 
-//        if toUserId != 0 && toCommentId != 0 {
-//            urlStr =
-//        } else {
-//            urlStr = BASER_API + submitcomment_api + "fenxId="+"\(fenxId)"+"&content="+contentStr + last_pra + token_pra
-//
-//        }
+        if images.count > 0 {
+//            let imageStr :String = JSON.init(images)
+            let data = try? JSONSerialization.data(withJSONObject: images, options: [])
+            let jsonStr :String = String(data: data!, encoding: String.Encoding.utf8)!
+            let imageUncode : String = RSA.encodeParameter(jsonStr)
+            urlStr = BASER_API + submitfenx_api + "content=" + contentStr + "&type=" + "\(1)" + "&images=" + imageUncode + last_pra + token_pra
+        } else {
+            urlStr = BASER_API + submitfenx_api + "content="+contentStr + "&type=" + "\(1)" + last_pra + token_pra
+
+        }
 
         var model:SmsModel = SmsModel()
         KFBLog(message: urlStr)
         Alamofire.request(urlStr, method: .post).responseJSON { (returnResult) in
-            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
             if let json = returnResult.result.value {
                 model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
                 completion(model)

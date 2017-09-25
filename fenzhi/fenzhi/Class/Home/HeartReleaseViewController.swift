@@ -65,33 +65,44 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
             return
         }
 
-//        if imageArr.count>0 {
-//            //有图片
-//            let image = imageArr[0]
-//
-//            loadVC.upLoadImage(uploadimg: image, type: "normal", completion: { (data) in
-//
-//            }, failure: { (erro) in
-//
-//            })
-//
-//        }
-        self.subTxt()
+        if imageArr.count>0 {
+            //有图片
+            let image = imageArr[0]
+            self.SVshowLoad()
+            loadVC.upLoadImage(uploadimg: image, type: "normal", completion: { (data) in
+                let model :UploadimgModel = data as! UploadimgModel
+                if model.errno == 0 {
+                    KFBLog(message: model.data)
+                    self.subTxt(imageStr: model.data)
+                } else {
+                    weakSelf?.SVshowErro(infoStr: model.errmsg)
+                }
 
 
+            }, failure: { (erro) in
+                 weakSelf?.SVdismiss()
+            })
+
+        }
 
     }
 
-    func subTxt()  {
+    func subTxt(imageStr : String)  {
          weak var weakSelf = self
-        dataVC.submitfenx_heart(content: txtStr, catalog_id: 0, images: "", completion: { (data) in
+
+        let arr = [imageStr]
+
+        dataVC.submitfenx_heart(content: txtStr, catalog_id: 0, images: arr, completion: { (data) in
             let model :SmsModel = data as! SmsModel
             if model.errno == 0{
+                weakSelf?.SVdismiss()
                 weakSelf?.SVshowSucess(infoStr: "发布成功")
+                weakSelf?.navigationLeftBtnClick()
             } else {
                 weakSelf?.SVshowErro(infoStr: model.errmsg)
             }
         }) { (erro) in
+             weakSelf?.SVdismiss()
             weakSelf?.SVshowErro(infoStr: "网络请求失败")
         }
     }

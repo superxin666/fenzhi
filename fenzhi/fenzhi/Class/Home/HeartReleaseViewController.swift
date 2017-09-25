@@ -29,7 +29,10 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     var colletionView : UICollectionView!//图片浏览
     var dingweiLabel : UILabel = UILabel()//定位显示
     
-    
+    var txtStr : String = ""
+    let dataVC = HomeDataMangerController()
+    let loadVC = CommonDataMangerViewController()
+
     
 //    deinit {
 //        NotificationCenter.removeObserver(NSNotification.Name.UIKeyboardWillShow)
@@ -45,8 +48,52 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         self.navigation_title_fontsize(name: "心得分享", fontsize: 27)
         self.view.backgroundColor = .white
         self.navigationBar_leftBtn()
+        self.navigationBar_rightBtn_title(name: "发布")
         self.creatUI()
 
+    }
+
+    //MARK:发布
+    override func navigationRightBtnClick() {
+        //weak
+         weak var weakSelf = self
+        if textField.isFirstResponder {
+            textField.resignFirstResponder()
+        }
+        if !(txtStr.characters.count > 0) {
+            self.SVshowErro(infoStr: "请输入文字")
+            return
+        }
+
+//        if imageArr.count>0 {
+//            //有图片
+//            let image = imageArr[0]
+//
+//            loadVC.upLoadImage(uploadimg: image, type: "normal", completion: { (data) in
+//
+//            }, failure: { (erro) in
+//
+//            })
+//
+//        }
+        self.subTxt()
+
+
+
+    }
+
+    func subTxt()  {
+         weak var weakSelf = self
+        dataVC.submitfenx_heart(content: txtStr, catalog_id: 0, images: "", completion: { (data) in
+            let model :SmsModel = data as! SmsModel
+            if model.errno == 0{
+                weakSelf?.SVshowSucess(infoStr: "发布成功")
+            } else {
+                weakSelf?.SVshowErro(infoStr: model.errmsg)
+            }
+        }) { (erro) in
+            weakSelf?.SVshowErro(infoStr: "网络请求失败")
+        }
     }
 
     func keyboardWillShow(notification: NSNotification) {
@@ -304,12 +351,20 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
        //MARK:textView
     func textViewDidEndEditing(_ textView: UITextView) {
         textView.resignFirstResponder()
+        txtStr = textView.text
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
 
     }
-    
+
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+        }
+        return true
+    }
+
     
     override func navigationLeftBtnClick() {
          self.SVdismiss()

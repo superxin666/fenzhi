@@ -51,3 +51,4 @@ let delcomment_api = "/api/fenx/delcomment?"//删除评论接口
 let favorite_api = "/api/fenx/favorite?"//收藏接口
 let delfavorite_api = "/api/fenx/delfavorite?"//取消收藏接口
 let delfenx_api = "/api/fenx/delfenx?"//删除分享接口
+let submitfenx_api = "/api/fenx/submitfenx?"//发布分享接口

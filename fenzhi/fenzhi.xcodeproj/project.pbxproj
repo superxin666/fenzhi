@@ -11,6 +11,7 @@
 		21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062ADB1F6039640003C7C4 /* MineViewController.swift */; };
 		21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062ADD1F60396F0003C7C4 /* RecordViewController.swift */; };
 		21062AE11F603EA90003C7C4 /* pch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062AE01F603EA90003C7C4 /* pch.swift */; };
+		210862541F7A24F2000936B9 /* PdfListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210862531F7A24F2000936B9 /* PdfListViewController.swift */; };
 		2112E91A1F6C434F0066CF5B /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E9191F6C434F0066CF5B /* CommonModel.swift */; };
 		2112E91C1F6C47360066CF5B /* GetregionlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */; };
 		2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E91D1F6C4A3E0066CF5B /* GetschoollistModel.swift */; };
@@ -108,6 +109,7 @@
 		21062ADB1F6039640003C7C4 /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		21062ADD1F60396F0003C7C4 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		21062AE01F603EA90003C7C4 /* pch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pch.swift; sourceTree = "<group>"; };
+		210862531F7A24F2000936B9 /* PdfListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfListViewController.swift; sourceTree = "<group>"; };
 		2112E9191F6C434F0066CF5B /* CommonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
 		2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetregionlistModel.swift; sourceTree = "<group>"; };
 		2112E91D1F6C4A3E0066CF5B /* GetschoollistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetschoollistModel.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */,
 				215043621F6AC16B009546D2 /* DingweiViewController.swift */,
 				215043641F6AD179009546D2 /* pdfViewController.swift */,
+				210862531F7A24F2000936B9 /* PdfListViewController.swift */,
 				21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */,
 			);
 			path = Home;
@@ -283,7 +286,6 @@
 			isa = PBXGroup;
 			children = (
 				214EEC8C1F76AF8B00B5F38A /* cells */,
-				214EEC8B1F76AF7900B5F38A /* Model */,
 				21062ADD1F60396F0003C7C4 /* RecordViewController.swift */,
 			);
 			path = Record;
@@ -373,13 +375,6 @@
 				213015E01F768D060029EFD1 /* GetmyfeedlistModel.swift */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		214EEC8B1F76AF7900B5F38A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		214EEC8C1F76AF8B00B5F38A /* cells */ = {
@@ -780,6 +775,7 @@
 				21F1C59E1F691CAF002FC28A /* SmsModel.swift in Sources */,
 				21CB58C51F726D5A00F41448 /* TeachDetailHeadView.swift in Sources */,
 				215822231F6C2122002BC6E6 /* FollowModel.swift in Sources */,
+				210862541F7A24F2000936B9 /* PdfListViewController.swift in Sources */,
 				21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */,
 				21F1C5981F68E002002FC28A /* UserInfoModel.swift in Sources */,
 				2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */,

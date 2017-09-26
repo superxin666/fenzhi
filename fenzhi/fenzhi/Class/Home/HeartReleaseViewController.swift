@@ -37,7 +37,10 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
 //    deinit {
 //        NotificationCenter.removeObserver(NSNotification.Name.UIKeyboardWillShow)
 //    }
-
+    deinit {
+        //记得移除通知监听
+        NotificationCenter.default.removeObserver(self)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

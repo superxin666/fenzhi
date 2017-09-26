@@ -155,7 +155,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         isHaveBackView = true
         //中间打背景
         imageBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - keybodHeight , width: KSCREEN_WIDTH, height: keybodHeight)
-        imageBackView.backgroundColor = .green
+        imageBackView.backgroundColor = .white
         self.view.addSubview(imageBackView)
         self.view.bringSubview(toFront: self.btnBackView)
     }
@@ -227,14 +227,13 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         self.isHaveImageViewBackView = true
         KFBLog(message: "文件选择背景")
         tableView.frame = CGRect(x: 15, y: ip7(165/2), width: KSCREEN_WIDTH-30, height: keybodHeight - ip7(165/2) - ip7(55))
-        tableView.backgroundColor = UIColor.red
+        tableView.backgroundColor = .clear
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
-//        tableView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         imageBackView.addSubview(tableView)
 
     }
@@ -268,14 +267,6 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     //MARK:文件点击
     func pdf_click() {
         let vc :PdfListViewController = PdfListViewController()
-        vc.selectedPdfBlock = {(name : String) in
-            if self.isHaveImageViewBackView {
-                KFBLog(message: "已经有文件背景")
-            } else {
-
-                self.creatImageView()
-            }
-        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

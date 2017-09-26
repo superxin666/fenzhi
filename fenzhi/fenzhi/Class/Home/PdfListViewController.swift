@@ -7,9 +7,9 @@
 //
 
 import UIKit
-typealias PdfListViewControllerBloke = (_ data:String) -> ()
+
 class PdfListViewController: BaseViewController {
-    var selectedPdfBlock : PdfListViewControllerBloke!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +19,7 @@ class PdfListViewController: BaseViewController {
         self.navigationBar_leftBtn()
     }
     override func navigationLeftBtnClick() {
-        if let _ = selectedPdfBlock {
-            selectedPdfBlock("第二课 我爱你塞北的学")
-        }
-        self.navigationController?.popViewController(animated: true)
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -381,9 +381,12 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
 
     
     override func navigationLeftBtnClick() {
-         self.SVdismiss()
         self.dismiss(animated: true) { 
+            self.SVdismiss()
             
+            if self.textField.isFirstResponder {
+                self.textField.resignFirstResponder()
+            }
         }
     }
 

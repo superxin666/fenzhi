@@ -338,13 +338,14 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     
     override func navigationLeftBtnClick() {
-        self.SVdismiss()
-        
-        if textField.isFirstResponder {
-            textField.resignFirstResponder()
-        }
+
         self.dismiss(animated: true) {
             
+            
+            if self.textField.isFirstResponder {
+                self.SVdismiss()
+                self.textField.resignFirstResponder()
+            }
         }
     }
 

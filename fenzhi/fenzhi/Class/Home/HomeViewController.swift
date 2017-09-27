@@ -16,8 +16,13 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     var contentOffsetY:CGFloat = 0.0
     var oldContentOffsetY:CGFloat = 0.0
     var newContentOffsetY:CGFloat = 0.0
-
-
+    
+    let dataVC = HomeDataMangerController()
+    var dataModel : GetmyfeedlistModel = GetmyfeedlistModel()
+    var dataArr : [GetmyfeedlistModel_data_fenxList] = []
+    
+    var page :Int = 1
+    let count : Int = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +33,93 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         self.navigation_title_fontsize(name: "首页", fontsize: 27)
         self.creatTopView()
         self.creatTableView()
+        self.getData()
     }
+    
+    //MARK:数据请求
+    func loadMoreData() {
+        page = page + 1
+        self.getData()
+    }
+    
+    func freshData() {
+        page = 1
+        self.dataArr.removeAll()
+        self.getData()
+    }
+    
+    func getData() {
+        weak var weakSelf = self
+        self.SVshowLoad()
+        dataVC.getfeedlist(pageNum: page, count: count, completion: { (data) in
+            self.SVdismiss()
+            weakSelf?.dataModel = data as! GetmyfeedlistModel
+            if weakSelf?.dataModel.errno == 0 {
+                if (weakSelf?.dataModel.data.fenxList.count)! > 0{
+                    for model in (weakSelf?.dataModel.data.fenxList)!{
+                        KFBLog(message: model.content)
+                        weakSelf?.getSize(model: model)
+                    }
+                    KFBLog(message: "数组")
+                    weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.fenxList)!
+                    weakSelf?.mainTabelView.reloadData()
+                } else {
+                    if weakSelf?.dataArr.count == 0 {
+                        weakSelf?.mainTabelView.removeFromSuperview()
+                        weakSelf?.view.addSubview(self.showNoData())
+                    } else {
+                        weakSelf?.SVshowErro(infoStr: "没有数据了")
+                    }
+                    
+                }
+                
+                
+            } else {
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
+            }
+            weakSelf?.mainTabelView.mj_footer.endRefreshing()
+            weakSelf?.mainTabelView.mj_header.endRefreshing()
+            
+        }) { (erro) in
+            weakSelf?.SVshowErro(infoStr: "网络请求失败")
+            weakSelf?.mainTabelView.mj_header.endRefreshing()
+            weakSelf?.mainTabelView.mj_footer.endRefreshing()
+            
+        }
+    }
+    
+    func getSize(model : GetmyfeedlistModel_data_fenxList) {
+        var headViewHeight = ip7(245)
+        //文字
+        let str = model.content
+        let txtW = KSCREEN_WIDTH - ip7(50)
+        var txtH :CGFloat = str.getLabHeight(font: fzFont_Thin(ip7(21)), LabelWidth: txtW)
+        if txtH > ip7(21) * 4 {
+            txtH = ip7(21) * 4
+        }
+        
+        headViewHeight = headViewHeight + txtH
+        if model.type == 0 {
+            //教学
+            if model.coursewares.count > 0 {
+                headViewHeight = headViewHeight +  (ip7(80) * CGFloat(model.coursewares.count))
+            }
+        } else {
+            //心得
+            if model.images.count > 0 {
+                let imageWidth = (KSCREEN_WIDTH - ip7(60) - ip7(20))/2
+                let imageHeight = imageWidth * 355/428
+                let num = CGFloat((model.images.count/2)) + CGFloat(model.images.count%2)
+                headViewHeight = headViewHeight +  ((imageHeight + ip7(20)) * num)
+            }
+        }
+        
+        if model.catalog.characters.count > 0 {
+            headViewHeight = headViewHeight + ip7(35) + ip7(21)
+        }
+        model.cellHeight = headViewHeight
+    }
+    
     //MARK:头部view
     func creatTopView() {
         let viewHeight  = ip7(66)
@@ -104,6 +195,10 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         mainTabelView.separatorStyle = .none
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
+        footer.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.loadMoreData))
+        header.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.freshData))
+        mainTabelView.mj_footer = footer
+        mainTabelView.mj_header = header
         mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
         self.view.addSubview(mainTabelView)
@@ -115,37 +210,47 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return self.dataArr.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row%2 == 0 {
-            var cell : HeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID, for: indexPath) as! HeartTableViewCell
-            cell.backgroundColor = .clear
-            cell.selectionStyle = .none
-            if (cell == nil)  {
-                cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
+        if indexPath.row < self.dataArr.count {
+            let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
+            
+            if model.type == 0 {
+                //教学
+//                var cell : TeachTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID, for: indexPath) as! TeachTableViewCell
+//
+//                if (cell == nil)  {
+//                    cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
+//                }
+                
+                let cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
+                cell.backgroundColor = .clear
+                cell.selectionStyle = .none
+                cell.setUpUIWithModelAndType(model: model)
+//                weak var weakSelf = self
+                return cell;
+                
+            } else {
+                //心得
+//                var cell : HeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID, for: indexPath) as! HeartTableViewCell
+//
+//                if (cell == nil)  {
+//                    cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
+//                }
+                
+                let cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
+                cell.backgroundColor = .clear
+                cell.selectionStyle = .none
+                cell.setUpUIWithModel_cellType(model: model)
+                return cell;
+                
+                
             }
-            cell.setUpUIWithModel_cellType(celltype: .home)
-            weak var weakself = self
-            cell.IconImageViewBlock = { () in
-                print("头像点击")
-                let vc = UserInfoViewController()
-                vc.hidesBottomBarWhenPushed = true
-                weakself?.navigationController?.pushViewController(vc, animated: true)
-            }
-            return cell;
         } else {
-            var cell : TeachTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID, for: indexPath) as! TeachTableViewCell
-            cell.backgroundColor = .clear
-            cell.selectionStyle = .none
-            if (cell == nil)  {
-                cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
-            }
-            cell.setUpUIWithModelAndType(cellType: .home_Teach)
-            return cell;
-    
+            return UITableViewCell()
         }
 
     }
@@ -158,7 +263,8 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return ip7(700);
+        let model = self.dataArr[indexPath.row]
+        return model.cellHeight;
     }
     // MARK: scrollView 代理
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -25,6 +25,8 @@ class RecordTableViewCell: UITableViewCell {
     let nameLabel : UILabel = UILabel()
     let infoLabel : UILabel = UILabel()
     let txtLabel : UILabel = UILabel()
+    let dingweiImageView : UIImageView = UIImageView()
+    let lessonLabel: UILabel = UILabel()
 
     var delViewBlock : RecordTableViewCellBlock!
 
@@ -148,20 +150,23 @@ class RecordTableViewCell: UITableViewCell {
 
         if model.catalog.characters.count > 0 {
             //课时定位
-            let dingweiImageView : UIImageView = UIImageView(image: #imageLiteral(resourceName: "icon_dingwei"))
+            dingweiImageView.image = #imageLiteral(resourceName: "icon_dingwei")
             dingweiImageView.frame = CGRect(x: appadWidth, y: lastFream.maxY + ip7(35), width: ip7(20), height: ip7(20))
             backView.addSubview(dingweiImageView)
-
-            let lessonLabel : UILabel = UILabel(frame: CGRect(x: dingweiImageView.frame.maxX + ip7(10), y: lastFream.maxY + ip7(35), width: viewW - dingweiImageView.frame.maxX - ip7(10) , height: ip7(21)))
+            
+            lessonLabel.frame = CGRect(x: dingweiImageView.frame.maxX + ip7(10), y: lastFream.maxY + ip7(35), width: viewW - dingweiImageView.frame.maxX - ip7(10) , height: ip7(21))
             lessonLabel.text = model.catalog
             lessonLabel.font = fzFont_Thin(ip7(21))
             lessonLabel.textColor  = FZColor(red: 88, green: 165, blue: 255, alpha: 1.0)
             lessonLabel.textAlignment = .left
             lessonLabel.adjustsFontSizeToFitWidth = true
             backView.addSubview(lessonLabel)
-
             lastFream = lessonLabel.frame
 
+        } else {
+            KFBLog(message: "移除")
+                        dingweiImageView.removeFromSuperview()
+                        lessonLabel.removeFromSuperview()
         }
 
         //横线
@@ -187,7 +192,7 @@ class RecordTableViewCell: UITableViewCell {
                     btn.isSelected = false
                 }
             } else if i == 1 {
-
+                shoucangBtn = btn
             } else {
                 //赞赏
                 fenxinagBtn = btn

@@ -25,6 +25,8 @@ class RecordHeartTableViewCell: UITableViewCell {
     let nameLabel : UILabel = UILabel()
     let infoLabel : UILabel = UILabel()
     let txtLabel : UILabel = UILabel()
+    let dingweiImageView : UIImageView = UIImageView()
+    let lessonLabel: UILabel = UILabel()
 
     func setUpUIWithModelAndType(model : GetmyfeedlistModel_data_fenxList) {
         self.dataModel = model
@@ -124,20 +126,23 @@ class RecordHeartTableViewCell: UITableViewCell {
 
         if model.catalog.characters.count > 0 {
             //课时定位
-            let dingweiImageView : UIImageView = UIImageView(image: #imageLiteral(resourceName: "icon_dingwei"))
+            dingweiImageView.image = #imageLiteral(resourceName: "icon_dingwei")
             dingweiImageView.frame = CGRect(x: appadWidth, y: lastFream.maxY + ip7(35), width: ip7(20), height: ip7(20))
             backView.addSubview(dingweiImageView)
 
-            let lessonLabel : UILabel = UILabel(frame: CGRect(x: dingweiImageView.frame.maxX + ip7(10), y: lastFream.maxY + ip7(35), width: viewW - dingweiImageView.frame.maxX - ip7(10) , height: ip7(21)))
+            lessonLabel.frame = CGRect(x: dingweiImageView.frame.maxX + ip7(10), y: lastFream.maxY + ip7(35), width: viewW - dingweiImageView.frame.maxX - ip7(10) , height: ip7(21))
             lessonLabel.text = model.catalog
             lessonLabel.font = fzFont_Thin(ip7(21))
             lessonLabel.textColor  = FZColor(red: 88, green: 165, blue: 255, alpha: 1.0)
             lessonLabel.textAlignment = .left
             lessonLabel.adjustsFontSizeToFitWidth = true
             backView.addSubview(lessonLabel)
-
             lastFream = lessonLabel.frame
 
+        } else {
+            KFBLog(message: "移除")
+            dingweiImageView.removeFromSuperview()
+            lessonLabel.removeFromSuperview()
         }
 
         //横线
@@ -154,32 +159,30 @@ class RecordHeartTableViewCell: UITableViewCell {
         for i in 0...2 {
             let btn : UIButton = UIButton(type: .custom)
             btn.tag = i
-            //            if i == 0 {
-            //                dianzanBtn = btn
-            //                //点赞
-            //                if model.data.isLike == 1 {
-            //                    btn.isSelected = true
-            //                } else {
-            //                    btn.isSelected = false
-            //                }
-            //            } else if i == 1 {
-            //                //收藏
-            //                shoucangBtn = btn
-            //                if model.data.isFavorite == 1 {
-            //                    btn.isSelected = true
-            //                } else {
-            //                    btn.isSelected = false
-            //                }
-            //
-            //            } else {
-            //                //分享
-            //                fenxinagBtn = btn
-            //
-            //            }
+            if i == 0 {
+                dianzanBtn = btn
+                    backView.addSubview(dianzanBtn)
+                //点赞
+                if model.isLike == 1 {
+                    btn.isSelected = true
+                } else {
+                    btn.isSelected = false
+                }
+            } else if i == 1 {
+                //收藏
+                shoucangBtn = btn
+           backView.addSubview(shoucangBtn)
+                
+            } else {
+                //分享
+                fenxinagBtn = btn
+                    backView.addSubview(fenxinagBtn)
+                
+            }
             btn.frame = CGRect(x: appadWidth + CGFloat(i) * btnW , y: lastFream.maxY + ip7(45), width: btnW, height: ip7(60))
             btn.titleLabel?.font = fzFont_Thin(18)
             btn.tag = i
-            //            btn.addTarget(self, action: #selector(btn_click(sender:)), for: .touchUpInside)
+            btn.addTarget(self, action: #selector(btn_click(sender:)), for: .touchUpInside)
             btn.setTitleColor(dark_6_COLOUR, for: .normal)
             btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: ip7(20))
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -187,9 +190,46 @@ class RecordHeartTableViewCell: UITableViewCell {
             btn.setTitle(nameArray[i], for: .selected)
             btn.setImage(imageArr[i], for: .normal)
             btn.setImage(image_selectedArr[i], for: .selected)
-            backView.addSubview(btn)
+
         }
 
+    }
+    
+    func btn_click(sender : UIButton) {
+        if sender.tag == 0 {
+            if dataModel.isLike == 1 {
+                //已经点过赞
+                
+            } else {
+                //没有点过赞
+                weak var weakSelf = self
+                comVC.like(type: 0, objectId: self.dataModel.id!, completion: { (data) in
+                    let model : LikeModel = data as! LikeModel
+                    if model.errno == 0 {
+                        weakSelf?.baseVC.SVshowSucess(infoStr: "点赞成功")
+                        weakSelf?.dianzanBtn.isSelected = true
+                        weakSelf?.dataModel.isLike = 1
+                        let num = (weakSelf?.dataModel.likeNum)! + 1
+                        weakSelf?.dataModel.likeNum = num
+                        weakSelf?.dianzanBtn.setTitle("\(num)点赞", for: .selected)
+                    } else {
+                        weakSelf?.baseVC.SVshowErro(infoStr: model.errmsg)
+                    }
+                    
+                }) { (erro) in
+                    
+                }
+                
+                
+            }
+            
+        } else if sender.tag == 1 {
+            
+        } else {
+            //赞赏
+            
+        }
+        
     }
 
     override func awakeFromNib() {

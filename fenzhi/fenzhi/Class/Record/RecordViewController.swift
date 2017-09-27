@@ -48,7 +48,7 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         mainTabelView.mj_footer = footer
         mainTabelView.mj_header = header
         mainTabelView.register(RecordHeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID_RECORD)
-        mainTabelView.register(RecordTableViewCell.self.self, forCellReuseIdentifier: TEACHCELLID_RECORD)
+        mainTabelView.register(RecordTableViewCell.self, forCellReuseIdentifier: TEACHCELLID_RECORD)
         self.view.addSubview(mainTabelView)
         
     }
@@ -152,12 +152,14 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             model.indexRow = indexPath.row
             if model.type == 0 {
                 //教学
-                var cell : RecordTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID_RECORD, for: indexPath) as! RecordTableViewCell
+//                var cell : RecordTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID_RECORD, for: indexPath) as! RecordTableViewCell
+//
+//                if (cell == nil)  {
+//                    cell = RecordTableViewCell(style: .default, reuseIdentifier: TEACHCELLID_RECORD)
+//                }
+                let  cell = RecordTableViewCell(style: .default, reuseIdentifier: TEACHCELLID_RECORD)
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
-                if (cell == nil)  {
-                    cell = RecordTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
-                }
                 cell.setUpUIWithModelAndType(model: model)
                 weak var weakSelf = self
                 cell.delViewBlock = {(delmodel) in
@@ -197,12 +199,13 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                 return cell;
             } else {
                 //心得
-                var cell : RecordHeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID_RECORD, for: indexPath) as! RecordHeartTableViewCell
+//                var cell : RecordHeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID_RECORD, for: indexPath) as! RecordHeartTableViewCell
+//                if (cell == nil)  {
+//                     cell = RecordHeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID_RECORD)
+//                }
+                let    cell = RecordHeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID_RECORD)
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
-                if (cell == nil)  {
-                    cell = RecordHeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID_RECORD)
-                }
                 cell.setUpUIWithModelAndType(model: model)
                 return cell;
             }

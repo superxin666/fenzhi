@@ -11,6 +11,35 @@ import Alamofire
 import ObjectMapper
 import SwiftyJSON
 class HomeDataMangerController: FZRequestViewController {
+    
+    
+    /// 首页feed接口
+    ///
+    /// - Parameters:
+    ///   - pageNum:     页码
+    ///   - count:     每页的条数
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
+    func getfeedlist(pageNum : Int,count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        let urlStr = BASER_API + getfeedlist_api+"pageNum=" + "\(pageNum)"+"&count="+"\(count)"+last_pra+token_pra
+        var model:GetmyfeedlistModel = GetmyfeedlistModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<GetmyfeedlistModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+            
+        }
+    }
+    
+    
+    
+    
 
     /// 分享详情接口
     ///

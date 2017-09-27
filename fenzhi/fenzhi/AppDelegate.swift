@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate {
 
     var window: UIWindow?
-
+    var fileManager = FileManager.default
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -97,8 +97,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         KFBLog(message: application)
+        KFBLog(message: annotation)
+        KFBLog(message: sourceApplication)
+        
+        KFBLog(message: url)
+        let str2 = url.absoluteString
+//        KFBLog(message: str2.removingPercentEncoding)
+        let str3 :String = str2.removingPercentEncoding!
+        let arr = str3.components(separatedBy: "/")
+        let nameStr = arr.last
+        KFBLog(message: nameStr!)
+        
+        if (self.window != nil) {
+            if fileManager.fileExists(atPath: filePath) {
+                KFBLog(message: "文件夹已存在")
+            } else {
+                KFBLog(message: "创建文件夹")
+                do {
+                    try fileManager.createDirectory(atPath: filePath, withIntermediateDirectories: true, attributes: nil)
+                } catch _ {
+                    KFBLog(message: "创建文件夹失败")
+                }
+            }
+            let fileData = NSData(contentsOf: url)
+            let filePathStr : String = filePath + "/" + nameStr!
+            let isok =  fileData?.write(toFile: filePathStr, atomically: true)
+            if let _ = isok {
+                 KFBLog(message: "文件保存成功")
+           
+            } else {
+                KFBLog(message: "文件保存失败")
+            }
+            
+            do {
+                try fileManager.removeItem(at: url)
+                 KFBLog(message: "源文件删除成功")
+            } catch _ {
+                KFBLog(message: "源文件删除失败")
+            }
+            
+        }
         return true
     }
+    
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -30,6 +30,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     let dataVC = HomeDataMangerController()
     let loadVC = CommonDataMangerViewController()
     
+    var fileManager = FileManager.default
     deinit {
         //记得移除通知监听
         NotificationCenter.default.removeObserver(self)
@@ -46,8 +47,17 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")
         self.creatUI()
-
-
+        self.getFileData()
+    }
+    
+    func getFileData() {
+        
+        if fileManager.fileExists(atPath: filePath) {
+            let contentsOfPath = try? fileManager.contentsOfDirectory(atPath: filePath)
+            KFBLog(message: contentsOfPath)
+        } else {
+            KFBLog(message: "文件夹不存在")
+        }
     }
 
     //MARK:发布

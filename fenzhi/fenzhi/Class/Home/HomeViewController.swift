@@ -270,9 +270,15 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = TeachDetailViewController()
-        vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        if indexPath.row < self.dataArr.count {
+            let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
+            let vc = TeachDetailViewController()
+            vc.fenxId = model.id
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+
 
     }
 

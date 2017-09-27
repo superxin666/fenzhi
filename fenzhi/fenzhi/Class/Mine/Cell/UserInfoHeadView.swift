@@ -8,6 +8,10 @@
 
 import UIKit
 typealias UserInfoHeadViewBlock = ()->()
+enum viewType {
+    case main
+    case other
+}
 class UserInfoHeadView: UIView {
 
     /*
@@ -17,6 +21,7 @@ class UserInfoHeadView: UIView {
         // Drawing code
     }
     */
+
     var guanzhuViewBlock : UserInfoHeadViewBlock!
     var fensiViewBlock : UserInfoHeadViewBlock!
 
@@ -29,14 +34,19 @@ class UserInfoHeadView: UIView {
     var fensiLabel :UILabel!
     var zanLabel :UILabel!
     var shoucangLabel :UILabel!
+    var guanzhuBtn :UIButton!
 
 
 
-    func creatHeadView() {
+    func creatHeadView(type : viewType) {
         self.backgroundColor = .white
         //背景图
+        var height = ip7(300)
+        if type == .other {
+            height = ip7(350)
+        }
         let backImageView : UIImageView = UIImageView(image: #imageLiteral(resourceName: "bg1"))
-        backImageView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(290))
+        backImageView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: height)
         self.addSubview(backImageView)
         
         //头像
@@ -67,6 +77,18 @@ class UserInfoHeadView: UIView {
         infoLabel.font = fzFont_Thin(ip7(21))
         infoLabel.textAlignment = .center
         self.addSubview(infoLabel)
+        if type == .other {
+            // 关注
+            guanzhuBtn = UIButton(frame: CGRect(x: (KSCREEN_WIDTH - ip7(125))/2, y: infoLabel.frame.maxY + ip7(20), width: ip7(125), height: ip7(40)))
+            guanzhuBtn.setTitle("关注", for: .normal)
+            guanzhuBtn.backgroundColor = blue_COLOUR
+            guanzhuBtn.setTitleColor( .white, for: .normal)
+            guanzhuBtn.titleLabel?.font = fzFont_Medium(ip7(21))
+            guanzhuBtn.kfb_makeRadius(radius: 4)
+            guanzhuBtn.addTarget(self, action:#selector(UserInfoHeadView.gunzhuClick), for: .touchUpInside)
+            self.addSubview(guanzhuBtn)
+        }
+
         
         let nameArr = ["关注","粉丝","被赞","被收藏",]
         let viewWidth = KSCREEN_WIDTH / 4
@@ -145,8 +167,11 @@ class UserInfoHeadView: UIView {
             }
         
         }
-        
-    
+
+    }
+
+    func gunzhuClick()  {
+
     }
 
 

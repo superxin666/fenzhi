@@ -53,7 +53,8 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     
     func creatTopView() {
         topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(382))
-        topBackView.creatHeadView()
+        topBackView.creatHeadView(type: .main)
+
         topBackView.guanzhuViewBlock = { () in
             let vc :GunzhuViewController = GunzhuViewController()
             vc.hidesBottomBarWhenPushed = true

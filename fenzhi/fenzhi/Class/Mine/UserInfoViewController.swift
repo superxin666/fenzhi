@@ -30,7 +30,11 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarPosition.any, barMetrics: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
 
     }
     override func viewDidLoad() {
@@ -87,8 +91,9 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     
     func creatTopView() {
-        topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(382))
-        topBackView.creatHeadView()
+        topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(382+60))
+        topBackView.creatHeadView(type: .other)
+
         topBackView.guanzhuViewBlock = { () in
             let vc :GunzhuViewController = GunzhuViewController()
             vc.hidesBottomBarWhenPushed = true

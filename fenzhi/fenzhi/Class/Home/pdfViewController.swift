@@ -7,16 +7,23 @@
 //
 
 import UIKit
-
+enum pdfType {
+    case url
+    case path
+}
 class pdfViewController: BaseViewController,UIWebViewDelegate {
     var model :TeachDetailModel_data_coursewares = TeachDetailModel_data_coursewares()
+    var path :String = String()
+    var fileName :String = String()
+    
     var webView:UIWebView?
-
+    var pdftype :pdfType!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigation_title_fontsize(name: model.name, fontsize: 27)
+
         self.navigationBar_leftBtn()
         self.createWebView()
 
@@ -29,10 +36,18 @@ class pdfViewController: BaseViewController,UIWebViewDelegate {
         self.view.addSubview(self.webView!)
     }
     func loadData(){
-        let urlStr = model.file
-        KFBLog(message: urlStr)
-        let url = NSURL(string: urlStr)
-        let urlRequest = NSURLRequest(url :url! as URL)
+        var url:URL!
+        if self.pdftype == .url {
+            self.navigation_title_fontsize(name: model.name, fontsize: 27)
+            let urlStr = model.file
+            KFBLog(message: urlStr)
+            url = NSURL(string: urlStr) as URL!
+        } else {
+            self.navigation_title_fontsize(name: fileName, fontsize: 27)
+            url = URL(fileURLWithPath: path) as URL!
+        }
+        KFBLog(message: url)
+        let urlRequest = NSURLRequest(url :url)
         self.webView!.loadRequest(urlRequest as URLRequest)
     }
 //    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {

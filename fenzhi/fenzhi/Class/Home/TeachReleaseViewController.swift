@@ -21,7 +21,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     var isHaveBackView = false//中间背景
     var isHaveBtnBackView = false//是否已经有了 按钮栏
-    var isHaveImageViewBackView = false//是否已经有了 图片栏
+    var isHaveImageViewBackView = false//是否已经有了 文件栏
     var isHaveDingweiBackView = false//是否已经有了 定位
     var tableView : UITableView = UITableView()//文件浏览
     var dingweiLabel : UILabel = UILabel()//定位显示
@@ -46,15 +46,17 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         self.view.backgroundColor = .white
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")
-        self.creatUI()
+
         self.getFileData()
+        self.creatUI()
     }
     
     func getFileData() {
         
         if fileManager.fileExists(atPath: filePath) {
             let contentsOfPath = try? fileManager.contentsOfDirectory(atPath: filePath)
-            KFBLog(message: contentsOfPath)
+            self.fileArr = contentsOfPath!
+            KFBLog(message: contentsOfPath!)
         } else {
             KFBLog(message: "文件夹不存在")
         }
@@ -144,19 +146,21 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         let lineView = UIView(frame: CGRect(x: 0, y: LNAVIGATION_HEIGHT, width: KSCREEN_WIDTH, height: ip7(11)))
         lineView.backgroundColor = backView_COLOUR
         self.view.addSubview(lineView)
-        
         //
         textField.frame = CGRect(x: ip7(15), y: lineView.frame.maxY + ip7(25), width: KSCREEN_WIDTH - ip7(30), height: ip7(200))
         textField.textAlignment = .left
         textField.returnKeyType = .done
         textField.delegate = self
         textField.tag = 101
-        textField.becomeFirstResponder()
+
         textField.backgroundColor = .clear
         textField.font =  fzFont_Thin(ip7(18))
         self.view.addSubview(textField)
-        
-        
+//        if self.fileArr.count > 0 {
+//            self.creatImageView()
+//        } else {
+            textField.becomeFirstResponder()
+//        }
         
     }
     
@@ -227,7 +231,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         dingweiLabel.textAlignment = .left
         dingweiLabel.adjustsFontSizeToFitWidth = true
         dingweiBackView.addSubview(dingweiLabel)
-        
+    
     }
     //MARK:展示文件
     func creatImageView() {
@@ -253,22 +257,43 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return self.fileArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "pdfcell")
-        cell.textLabel?.text = "123"
+        cell.selectionStyle = .none
+        let name  = self.fileArr[indexPath.row]
+
+        let view = UIView(frame: CGRect(x: ip7(30), y: 0, width: KSCREEN_WIDTH - ip7(60), height: ip7(65)))
+        view.backgroundColor = backView_COLOUR
+        view.isUserInteractionEnabled = true
+        view.backgroundColor = backView_COLOUR
+        //图片
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "pdf"))
+        imageView.frame = CGRect(x: 0, y: 0, width: ip7(65), height: ip7(65))
+        view.addSubview(imageView)
+        //描述
+        let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (ip7(65) - ip7(21))/2, width: view.frame.width - imageView.frame.maxX - ip7(10), height: ip7(21)))
+        label.text = name
+        label.font = fzFont_Thin(ip7(21))
+        label.textColor  = dark_3_COLOUR
+        label.textAlignment = .left
+        view.addSubview(label)
+        cell.addSubview(view)
         return cell
         
     }
 
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let vc = TeachDetailViewController()
-//        vc.hidesBottomBarWhenPushed = true
-//        self.navigationController?.pushViewController(vc, animated: true)
-//
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let str = self.fileArr[indexPath.row]
+        let filePathStr : String = filePath + "/" + str
+        let vc = pdfViewController()
+        vc.pdftype = .path
+        vc.path = filePathStr
+        vc.fileName = str
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return ip7(65);
@@ -276,8 +301,14 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     //MARK:文件点击
     func pdf_click() {
-        let vc :PdfListViewController = PdfListViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc :PdfListViewController = PdfListViewController()
+        if isHaveImageViewBackView {
+            self.tableView.reloadData()
+        } else {
+            self.creatImageView()
+        }
+        
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     

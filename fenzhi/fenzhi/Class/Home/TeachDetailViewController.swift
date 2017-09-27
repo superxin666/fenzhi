@@ -98,6 +98,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             KFBLog(message: "文档点击")
             let vc = pdfViewController()
             vc.model = model
+            vc.pdftype = .url
             weakSelf?.navigationController?.pushViewController(vc, animated: true)
         }
 

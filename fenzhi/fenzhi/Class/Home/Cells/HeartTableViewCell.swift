@@ -8,7 +8,7 @@
 
 import UIKit
 //typealias InjuryHeadViewBlock = (_ model : commonInjuriesModel) ->()
-typealias HeartCellViewBlock = ()->()
+typealias HeartCellViewBlock = (_ model : GetmyfeedlistModel_data_fenxList)->()
 enum CellType {
     case home
     case record
@@ -67,7 +67,7 @@ class HeartTableViewCell: UITableViewCell {
         
         //105105105
         //名字
-        let nameWidth = viewW - ip7(19) - iconImageView.frame.maxX - ip7(31) - ip7(90)
+        let nameWidth = ip7(200)
         nameLabel.frame = CGRect(x: iconImageView.frame.maxX + ip7(19), y:  ip7(25), width: nameWidth, height: ip7(24))
         nameLabel.text = model.userInfo.name
         nameLabel.isUserInteractionEnabled = true
@@ -76,8 +76,8 @@ class HeartTableViewCell: UITableViewCell {
         nameLabel.adjustsFontSizeToFitWidth = true
         backView.addSubview(nameLabel)
         
-        //        let nameLabelTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
-        //        nameLabel.addGestureRecognizer(nameLabelTap)
+        let nameLabelTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
+        nameLabel.addGestureRecognizer(nameLabelTap)
         
         //用户信息
         infoLabel.frame = CGRect(x: iconImageView.frame.maxX + ip7(19), y: nameLabel.frame.maxY + ip7(14), width: viewW - ip7(19) - iconImageView.frame.maxX, height: ip7(21))
@@ -233,7 +233,7 @@ class HeartTableViewCell: UITableViewCell {
 
     func iconImageClick()  {
         if let _ =  IconImageViewBlock {
-            IconImageViewBlock()
+            IconImageViewBlock(self.dataModel)
         }
     }
 

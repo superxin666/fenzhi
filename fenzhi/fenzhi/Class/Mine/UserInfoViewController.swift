@@ -10,6 +10,9 @@ import UIKit
 let HEARTCELLID_USERINFO = "HEARTCELL_USERINFO_ID"//
 let TEACHCELLID_USERINFO = "TEACHCELL__USERINFO_ID"//
 class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+    
+    var userId:Int!
+    
     let mainTabelView : UITableView = UITableView()
     let topBackView : UserInfoHeadView = UserInfoHeadView()
     
@@ -42,6 +45,10 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
         self.getHeadData()
     }
     
+    override func navigationLeftBtnClick() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func creatTableView() {
         mainTabelView.frame = CGRect(x: 0, y: topBackView.frame.maxY + ip7(10), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY - ip7(10))
         mainTabelView.backgroundColor = UIColor.clear
@@ -63,7 +70,7 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
     
     func getHeadData() {
         weak var weakSelf = self
-        dataVC.other_user_profile(userId: 0,completion: { (data) in
+        dataVC.other_user_profile(userId: userId!,completion: { (data) in
             weakSelf?.headDataModel = data as! ProfileMineModel
             if weakSelf?.headDataModel.errno == 0 {
                 weakSelf?.headViewSetData()
@@ -115,7 +122,7 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
  func getData() {
         weak var weakSelf = self
         self.SVshowLoad()
-        requestVC.getmyfeedlist(userId: 0, pageNum: page, count: count, completion: { (data) in
+        requestVC.getmyfeedlist(userId: userId!, pageNum: page, count: count, completion: { (data) in
             self.SVdismiss()
             weakSelf?.dataModel = data as! GetmyfeedlistModel
             if weakSelf?.dataModel.errno == 0 {
@@ -202,22 +209,26 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
             model.indexRow = indexPath.row
             if model.type == 0 {
                 //教学
-                var cell : UserInfoShareTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID_USERINFO, for: indexPath) as! UserInfoShareTableViewCell
+//                var cell : UserInfoShareTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID_USERINFO, for: indexPath) as! UserInfoShareTableViewCell
+//
+//                if (cell == nil)  {
+//                    cell = UserInfoShareTableViewCell(style: .default, reuseIdentifier: TEACHCELLID_USERINFO)
+//                }
+                let  cell = UserInfoShareTableViewCell(style: .default, reuseIdentifier: TEACHCELLID_USERINFO)
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
-                if (cell == nil)  {
-                    cell = UserInfoShareTableViewCell(style: .default, reuseIdentifier: TEACHCELLID_USERINFO)
-                }
                 cell.setUpUIWithModelAndType(model: model)
                 return cell;
             } else {
-                //心得
-                var cell : UserInfoHeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID_USERINFO, for: indexPath) as! UserInfoHeartTableViewCell
+//                //心得
+//                var cell : UserInfoHeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID_USERINFO, for: indexPath) as! UserInfoHeartTableViewCell
+//
+//                if (cell == nil)  {
+//                    cell = UserInfoHeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID_USERINFO)
+//                }
+                let cell = UserInfoHeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID_USERINFO)
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
-                if (cell == nil)  {
-                    cell = UserInfoHeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID_USERINFO)
-                }
                 cell.setUpUIWithModelAndType(model: model)
                 return cell;
             }

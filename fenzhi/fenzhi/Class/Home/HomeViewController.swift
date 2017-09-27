@@ -230,7 +230,13 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
                 cell.setUpUIWithModelAndType(model: model)
-//                weak var weakSelf = self
+                weak var weakSelf = self
+                cell.IconImageViewBlock = {(click_model) in
+                    let vc = UserInfoViewController()
+                    vc.userId  = click_model.userId
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                }
                 return cell;
                 
             } else {
@@ -245,6 +251,14 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
                 cell.setUpUIWithModel_cellType(model: model)
+                weak var weakSelf = self
+                cell.IconImageViewBlock = {click_model in
+                    let vc = UserInfoViewController()
+                    vc.userId  = click_model.userId
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
                 return cell;
                 
                 

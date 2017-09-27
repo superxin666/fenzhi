@@ -7,12 +7,14 @@
 //
 
 import UIKit
+typealias TeachTableViewBlock = (_ model : GetmyfeedlistModel_data_fenxList)->()
 enum TeachCellType {
     case home_Teach
     case record_Teach
 }
 class TeachTableViewCell: UITableViewCell {
-    var IconImageViewBlock : HeartCellViewBlock!
+    var IconImageViewBlock : TeachTableViewBlock!
+    
     var dataModel : GetmyfeedlistModel_data_fenxList = GetmyfeedlistModel_data_fenxList()
     var dataVC : HomeDataMangerController = HomeDataMangerController()
     var comVC : CommonDataMangerViewController = CommonDataMangerViewController()
@@ -48,7 +50,7 @@ class TeachTableViewCell: UITableViewCell {
         iconImageView.isUserInteractionEnabled = true
         backView.addSubview(iconImageView)
         
-        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
+        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TeachTableViewCell.iconImageClick))
         iconImageView.addGestureRecognizer(iconImageViewTap)
         
         //首页
@@ -72,8 +74,8 @@ class TeachTableViewCell: UITableViewCell {
         nameLabel.adjustsFontSizeToFitWidth = true
         backView.addSubview(nameLabel)
         
-        //        let nameLabelTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
-        //        nameLabel.addGestureRecognizer(nameLabelTap)
+        let nameLabelTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TeachTableViewCell.iconImageClick))
+        nameLabel.addGestureRecognizer(nameLabelTap)
         
         //用户信息
         infoLabel.frame = CGRect(x: iconImageView.frame.maxX + ip7(19), y: nameLabel.frame.maxY + ip7(14), width: viewW - ip7(19) - iconImageView.frame.maxX, height: ip7(21))
@@ -243,6 +245,12 @@ class TeachTableViewCell: UITableViewCell {
             
         }
         
+    }
+    
+    func iconImageClick(){
+        if let _ =  IconImageViewBlock {
+            IconImageViewBlock(self.dataModel)
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

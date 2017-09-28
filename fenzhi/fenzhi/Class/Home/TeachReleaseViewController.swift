@@ -12,17 +12,26 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     let textField: UITextView = UITextView()
     let btnBackView :UIView = UIView()
     let imageBackView :UIView = UIView()
+    let dingweiBackView:UIView = UIView()
+    
     var fileArr :[String]  = Array()
     
     
     
     let nsetBtn : UIButton = UIButton()
     var keybodHeight : CGFloat = 0.0
+    let viewHeight = ip7(730/2)
+    let btnViewHeight =  ip7(55)
+   
     
     var isHaveBackView = false//中间背景
+    
     var isHaveBtnBackView = false//是否已经有了 按钮栏
     var isHaveImageViewBackView = false//是否已经有了 文件栏
     var isHaveDingweiBackView = false//是否已经有了 定位
+    
+    var isHaveFiles = false//是否有文件
+    var isHaveDingwei = false//是否有定位
     var tableView : UITableView = UITableView()//文件浏览
     var dingweiLabel : UILabel = UILabel()//定位显示
     
@@ -38,7 +47,6 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     override func viewDidLoad() {
 
-//        self.navigationBar_rightBtn_title(name: "发布")
         // Do any additional setup after loading the view
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -47,8 +55,9 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")
 
-        self.getFileData()
+//        self.getFileData()
         self.creatUI()
+
     }
     
     func getFileData() {
@@ -135,7 +144,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
             var frame = self.btnBackView.frame
             frame.origin.y = KSCREEN_HEIGHT - height - ip7(55)
             self.btnBackView.frame = frame
-            self.keybodHeight = height
+//            self.keybodHeight = height
         })
         print("keybordShow:\(height)")
     }
@@ -156,22 +165,39 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         textField.backgroundColor = .clear
         textField.font =  fzFont_Thin(ip7(18))
         self.view.addSubview(textField)
-//        if self.fileArr.count > 0 {
-//            self.creatImageView()
-//        } else {
-            textField.becomeFirstResponder()
-//        }
+         self.creatBackView()
+        if isHaveFiles {
+           self.imageBackView.isHidden = false
+        } else {
+          self.imageBackView.isHidden = true
+           textField.becomeFirstResponder()
+        }
         
     }
     
     //MARK:中间背景
     func creatBackView() {
-        isHaveBackView = true
         //中间打背景
-        imageBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - keybodHeight , width: KSCREEN_WIDTH, height: keybodHeight)
-        imageBackView.backgroundColor = .white
+        imageBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - viewHeight , width: KSCREEN_WIDTH, height: viewHeight)
+        imageBackView.backgroundColor = .red
+        imageBackView.isHidden = true
+        
+        let lineView : UIView = UIView(frame: CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: ip7(12), width: ip7(480), height: 0.5))
+        lineView.backgroundColor = lineView_thin_COLOUR
+        imageBackView.addSubview(lineView)
+        
         self.view.addSubview(imageBackView)
         self.view.bringSubview(toFront: self.btnBackView)
+         self.creaDingweiBackView()
+        //课时定位
+        if !isHaveDingwei {
+           self.dingweiBackView.isHidden = true
+        }
+        //文件浏览
+        self.creatImageView()
+        if !isHaveFiles {
+            tableView.isHidden = true
+        }
     }
     
     //MARK:按钮
@@ -181,7 +207,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         KFBLog(message: "asdf--\(keybodHeight)")
         isHaveBtnBackView = true
         //KSCREEN_HEIGHT - keybodHeight - LNAVIGATION_HEIGHT
-        btnBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT , width: KSCREEN_WIDTH, height: ip7(55))
+        btnBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT , width: KSCREEN_WIDTH, height: btnViewHeight)
         btnBackView.backgroundColor = blue_COLOUR
         //
         nsetBtn.frame = CGRect(x: ip7(25), y: (ip7(55) - ip7(14))/2, width: ip7(25), height: ip7(14))
@@ -212,11 +238,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     }
     //MARK:课时定位
     func creaDingweiBackView() {
-        if !isHaveBackView {
-            self.creatBackView()
-        }
-        isHaveDingweiBackView = true
-        let dingweiBackView = UIView(frame: CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: ip7(6), width: ip7(480), height: ip7(70)))
+        dingweiBackView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: ip7(13), width: ip7(480), height: ip7(70))
         dingweiBackView.backgroundColor = backView_COLOUR
         imageBackView.addSubview(dingweiBackView)
         
@@ -235,15 +257,16 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     }
     //MARK:展示文件
     func creatImageView() {
-        if !isHaveBackView {
-            self.creatBackView()
-        }
-        self.isHaveImageViewBackView = true
         KFBLog(message: "文件选择背景")
-        tableView.frame = CGRect(x: 15, y: ip7(165/2), width: KSCREEN_WIDTH-30, height: keybodHeight - ip7(165/2) - ip7(55))
-        tableView.backgroundColor = .clear
-        tableView.delegate = self;
-        tableView.dataSource = self;
+        if isHaveDingwei {
+           tableView.frame = CGRect(x: 15, y: dingweiBackView.frame.maxY + ip7(15), width: KSCREEN_WIDTH-30, height: viewHeight - ip7(165/2) - ip7(55))
+        } else {
+           tableView.frame = CGRect(x: 15, y: ip7(13) ,width: KSCREEN_WIDTH-30, height: viewHeight - ip7(165/2) - ip7(55))
+        }
+
+        tableView.backgroundColor = .red
+//        tableView.delegate = self;
+//        tableView.dataSource = self;
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
@@ -301,14 +324,8 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     //MARK:文件点击
     func pdf_click() {
-//        let vc :PdfListViewController = PdfListViewController()
-        if isHaveImageViewBackView {
-            self.tableView.reloadData()
-        } else {
-            self.creatImageView()
-        }
-        
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc :PdfListViewController = PdfListViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -319,12 +336,22 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         KFBLog(message: "退出键盘")
         nsetBtn.isSelected = !nsetBtn.isSelected
         if  nsetBtn.isSelected {
+            //键盘回收
+            //显示文件背景
+            self.imageBackView.isHidden = false
+            self.imageBackView.frame.origin.y = self.imageBackView.frame.origin.y -  btnViewHeight
+            //键盘操作
             if textField.isFirstResponder {
                 textField.resignFirstResponder()
             }
             self.view.bringSubview(toFront: btnBackView)
             btnBackView.frame.origin.y =  KSCREEN_HEIGHT  - btnBackView.frame.size.height
         } else {
+            //键盘弹起
+            //隐藏文件背景
+            self.imageBackView.frame.origin.y = self.imageBackView.frame.origin.y +  btnViewHeight
+            self.imageBackView.isHidden = true
+            //键盘操作
             textField.becomeFirstResponder()
             self.view.bringSubview(toFront: btnBackView)
             btnBackView.frame.origin.y =  KSCREEN_HEIGHT - keybodHeight - LNAVIGATION_HEIGHT
@@ -335,13 +362,16 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     //MARK:课时定位
     func dingwei_click() {
         KfbShowWithInfo(titleString: "定位")
+        if !nsetBtn.isSelected {
+            self.nestBtnClik()
+        }
         let vc = DingweiViewController()
         vc.sureBlock = {(name : String) in
-            if self.isHaveDingweiBackView {
-                self.dingweiLabel.text = name
-            } else {
-                self.dingweiLabel.text = name
-                self.creaDingweiBackView()
+            self.isHaveDingwei = true
+            self.imageBackView.isHidden = false
+            self.dingweiBackView.isHidden = false
+            if self.isHaveFiles {
+               self.tableView.frame.origin.y = self.dingweiBackView.frame.maxY + ip7(15)
             }
         }
         self.navigationController?.pushViewController(vc, animated: true)

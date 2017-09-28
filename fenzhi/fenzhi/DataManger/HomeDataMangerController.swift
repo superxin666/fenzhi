@@ -232,7 +232,25 @@ class HomeDataMangerController: FZRequestViewController {
         }
     }
 
+    func submitfenx_teach(content : String,catalog_id : Int, file : Array<Dictionary<String,String>>, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
 
-
+        let contentStr : String  = RSA.encodeParameter(content)
+        let data = try? JSONSerialization.data(withJSONObject: file, options: [])
+        let jsonStr :String = String(data: data!, encoding: String.Encoding.utf8)!
+        let filesUncode : String = RSA.encodeParameter(jsonStr)
+        let  urlStr = BASER_API + submitfenx_api + "content=" + contentStr + "&type=" + "\(1)" + "&coursewares=" + filesUncode + last_pra + token_pra
+        var model:SmsModel = SmsModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .post).responseJSON { (returnResult) in
+            print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+        }
+    }
 
 }

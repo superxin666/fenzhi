@@ -242,7 +242,7 @@ class CommonDataMangerViewController: FZRequestViewController {
         let nameStr : String = RSA.encodeParameter(fileName)
 
 
-        var model:UploadimgModel = UploadimgModel()
+        var model:UpFileDataModel = UpFileDataModel()
         Alamofire.upload(
             multipartFormData: { multipartFormData in
                 multipartFormData.append(fileData, withName: "file", fileName: nameStr, mimeType: "file/*")
@@ -255,7 +255,7 @@ class CommonDataMangerViewController: FZRequestViewController {
                     upload.responseJSON { response in
                         if let json = response.result.value {
                             KFBLog(message: response.result.value)
-                            model = Mapper<UploadimgModel>().map(JSON: json as! [String : Any])!
+                            model = Mapper<UpFileDataModel>().map(JSON: json as! [String : Any])!
                             completion(model)
                         } else {
                             failure("请求失败")

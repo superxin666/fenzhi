@@ -92,6 +92,7 @@ class RecordTableViewCell: UITableViewCell {
         //85
         //102 + 文字
         //文字
+        KFBLog(message: model.content)
         let str = model.content
         let txtW = viewW - ip7(50)
         var txtH :CGFloat = str.getLabHeight(font: fzFont_Thin(ip7(21)), LabelWidth: txtW)
@@ -127,8 +128,8 @@ class RecordTableViewCell: UITableViewCell {
                 view.isUserInteractionEnabled = true
                 lastFream = view.frame
 
-                let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TeachDetailHeadView.ppt_click(tap:)))
-                view.addGestureRecognizer(iconImageViewTap)
+//                let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TeachDetailHeadView.ppt_click(tap:)))
+//                view.addGestureRecognizer(iconImageViewTap)
 
 
                 //图片

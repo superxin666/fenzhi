@@ -93,11 +93,10 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
             let file : String = fileArr[0]
             self.SVshowLoad()
             self.loadVC.uploadfile(fileName: file, completion: { (data) in
-                self.SVdismiss()
-                let model :UploadimgModel = data as! UploadimgModel
+                let model :UpFileDataModel = data as! UpFileDataModel
                 if model.errno == 0 {
                     KFBLog(message: model.data)
-
+                    self.subTxt(fileData: model.data)
                 } else {
                     weakSelf?.SVshowErro(infoStr: model.errmsg)
                 }
@@ -110,12 +109,19 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
 
     }
     
-    func subTxt(imageStr : String)  {
+    func subTxt(fileData : UpFileDataModel_data)  {
         weak var weakSelf = self
+
+        let dict :Dictionary = [
+            "name":fileData.name,
+            "type":fileData.type,
+            "file":fileData.file,
+        ]
+
         
-        let arr = [imageStr]
+        let arr = [dict]
         
-        dataVC.submitfenx_heart(content: txtStr, catalog_id: 0, images: arr, completion: { (data) in
+        dataVC.submitfenx_teach(content: txtStr, catalog_id: 0, file: arr, completion: { (data) in
             let model :SmsModel = data as! SmsModel
             if model.errno == 0{
                 weakSelf?.SVdismiss()
@@ -403,7 +409,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            textView.resignFirstResponder()
+            self.nestBtnClik()
         }
         return true
     }

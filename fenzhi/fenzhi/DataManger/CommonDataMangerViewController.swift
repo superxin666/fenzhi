@@ -227,6 +227,46 @@ class CommonDataMangerViewController: FZRequestViewController {
 
         }
     }
+
+
+    func uploadfile(fileName:String, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        KFBLog(message: "上传文件开始")
+        let urlStr = BASER_API + uploadfile_api + token_pra
+        KFBLog(message: urlStr)
+
+
+        let filePathStr : String = filePath + "/" + fileName
+        let url :URL = URL(fileURLWithPath: filePathStr) as URL!
+        let fileData:Data = try! Data(contentsOf: url)
+        let nameStr : String = RSA.encodeParameter(fileName)
+
+
+        var model:UploadimgModel = UploadimgModel()
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(fileData, withName: "file", fileName: nameStr, mimeType: "file/*")
+
+        },
+            to: urlStr,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        if let json = response.result.value {
+                            KFBLog(message: response.result.value)
+                            model = Mapper<UploadimgModel>().map(JSON: json as! [String : Any])!
+                            completion(model)
+                        } else {
+                            failure("请求失败")
+                        }
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+        }
+        )
+    }
     
 
 }

@@ -55,7 +55,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")
 
-//        self.getFileData()
+        self.getFileData()
         self.creatUI()
 
     }
@@ -65,6 +65,9 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         if fileManager.fileExists(atPath: filePath) {
             let contentsOfPath = try? fileManager.contentsOfDirectory(atPath: filePath)
             self.fileArr = contentsOfPath!
+            if self.fileArr.count > 0 {
+                self.isHaveFiles = true
+            }
             KFBLog(message: contentsOfPath!)
         } else {
             KFBLog(message: "文件夹不存在")
@@ -78,31 +81,33 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         if textField.isFirstResponder {
             textField.resignFirstResponder()
         }
-        if !(txtStr.characters.count > 0) {
-            self.SVshowErro(infoStr: "请输入文字")
-            return
-        }
-        
-//        if imageArr.count>0 {
-//            //有图片
-//            let image = imageArr[0]
-//            self.SVshowLoad()
-//            loadVC.upLoadImage(uploadimg: image, type: "normal", completion: { (data) in
-//                let model :UploadimgModel = data as! UploadimgModel
-//                if model.errno == 0 {
-//                    KFBLog(message: model.data)
-//                    self.subTxt(imageStr: model.data)
-//                } else {
-//                    weakSelf?.SVshowErro(infoStr: model.errmsg)
-//                }
-//
-//
-//            }, failure: { (erro) in
-//                weakSelf?.SVdismiss()
-//            })
-//
+//        if !(txtStr.characters.count > 0) {
+//            self.SVshowErro(infoStr: "请输入文字")
+//            return
 //        }
+
+
         
+        if fileArr.count>0 {
+            //有图片
+            let file : String = fileArr[0]
+            self.SVshowLoad()
+            self.loadVC.uploadfile(fileName: file, completion: { (data) in
+                self.SVdismiss()
+                let model :UploadimgModel = data as! UploadimgModel
+                if model.errno == 0 {
+                    KFBLog(message: model.data)
+
+                } else {
+                    weakSelf?.SVshowErro(infoStr: model.errmsg)
+                }
+            }, failure: { (erro) in
+
+            })
+
+        }
+
+
     }
     
     func subTxt(imageStr : String)  {
@@ -165,8 +170,13 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         textField.backgroundColor = .clear
         textField.font =  fzFont_Thin(ip7(18))
         self.view.addSubview(textField)
-         self.creatBackView()
+        self.creatBackView()
         if isHaveFiles {
+            self.creatBtnView()
+//            btnBackView.frame.origin.y =  KSCREEN_HEIGHT  - btnBackView.frame.size.height
+            self.view.addSubview(btnBackView)
+            self.nestBtnClik()
+//            self.view.bringSubview(toFront: btnBackView)
            self.imageBackView.isHidden = false
         } else {
           self.imageBackView.isHidden = true
@@ -179,10 +189,10 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     func creatBackView() {
         //中间打背景
         imageBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - viewHeight , width: KSCREEN_WIDTH, height: viewHeight)
-        imageBackView.backgroundColor = .red
+        imageBackView.backgroundColor = .clear
         imageBackView.isHidden = true
         
-        let lineView : UIView = UIView(frame: CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: ip7(12), width: ip7(480), height: 0.5))
+        let lineView : UIView = UIView(frame: CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: 0, width: ip7(480), height: 0.5))
         lineView.backgroundColor = lineView_thin_COLOUR
         imageBackView.addSubview(lineView)
         
@@ -259,14 +269,14 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     func creatImageView() {
         KFBLog(message: "文件选择背景")
         if isHaveDingwei {
-           tableView.frame = CGRect(x: 15, y: dingweiBackView.frame.maxY + ip7(15), width: KSCREEN_WIDTH-30, height: viewHeight - ip7(165/2) - ip7(55))
+           tableView.frame = CGRect(x: ip7(50), y: dingweiBackView.frame.maxY + ip7(15), width: KSCREEN_WIDTH-ip7(100), height: viewHeight - ip7(165/2) - ip7(55))
         } else {
-           tableView.frame = CGRect(x: 15, y: ip7(13) ,width: KSCREEN_WIDTH-30, height: viewHeight - ip7(165/2) - ip7(55))
+           tableView.frame = CGRect(x: ip7(50), y: ip7(13) ,width: KSCREEN_WIDTH-ip7(100), height: viewHeight - ip7(165/2) - ip7(55))
         }
 
-        tableView.backgroundColor = .red
-//        tableView.delegate = self;
-//        tableView.dataSource = self;
+        tableView.backgroundColor = .clear
+        tableView.delegate = self;
+        tableView.dataSource = self;
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
@@ -288,7 +298,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         cell.selectionStyle = .none
         let name  = self.fileArr[indexPath.row]
 
-        let view = UIView(frame: CGRect(x: ip7(30), y: 0, width: KSCREEN_WIDTH - ip7(60), height: ip7(65)))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH - ip7(100), height: ip7(65)))
         view.backgroundColor = backView_COLOUR
         view.isUserInteractionEnabled = true
         view.backgroundColor = backView_COLOUR
@@ -319,7 +329,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return ip7(65);
+        return ip7(80);
     }
     
     //MARK:文件点击

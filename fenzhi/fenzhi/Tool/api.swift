@@ -52,6 +52,7 @@ let favorite_api = "/api/fenx/favorite?"//收藏接口
 let delfavorite_api = "/api/fenx/delfavorite?"//取消收藏接口
 let delfenx_api = "/api/fenx/delfenx?"//删除分享接口
 let submitfenx_api = "/api/fenx/submitfenx?"//发布分享接口
+let uploadfile_api = "/api/fenx/uploadfile?"//上传资料接口
 
 //-------------------首页
 let getfeedlist_api = "/api/user/getfeedlist?"

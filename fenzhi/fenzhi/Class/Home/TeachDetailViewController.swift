@@ -97,7 +97,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         headView.docBlock = {(model) in
             KFBLog(message: "文档点击")
             let vc = pdfViewController()
-            vc.model = model
+            vc.urlStr =  model.file
+            vc.fileName = model.name
             vc.pdftype = .url
             weakSelf?.navigationController?.pushViewController(vc, animated: true)
         }

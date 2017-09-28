@@ -239,7 +239,7 @@ class HomeDataMangerController: FZRequestViewController {
         let data = try? JSONSerialization.data(withJSONObject: file, options: [])
         let jsonStr :String = String(data: data!, encoding: String.Encoding.utf8)!
         let filesUncode : String = RSA.encodeParameter(jsonStr)
-        let  urlStr = BASER_API + submitfenx_api + "content=" + contentStr + "&type=" + "\(1)" + "&coursewares=" + filesUncode + last_pra + token_pra
+        let  urlStr = BASER_API + submitfenx_api + "content=" + contentStr + "&type=" + "\(0)" + "&coursewares=" + filesUncode + last_pra + token_pra
         var model:SmsModel = SmsModel()
         KFBLog(message: urlStr)
         Alamofire.request(urlStr, method: .post).responseJSON { (returnResult) in

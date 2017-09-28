@@ -13,6 +13,8 @@ enum pdfType {
 }
 class pdfViewController: BaseViewController,UIWebViewDelegate {
     var model :TeachDetailModel_data_coursewares = TeachDetailModel_data_coursewares()
+    var urlStr: String = String()
+
     var path :String = String()
     var fileName :String = String()
     
@@ -38,8 +40,7 @@ class pdfViewController: BaseViewController,UIWebViewDelegate {
     func loadData(){
         var url:URL!
         if self.pdftype == .url {
-            self.navigation_title_fontsize(name: model.name, fontsize: 27)
-            let urlStr = model.file
+            self.navigation_title_fontsize(name: fileName, fontsize: 27)
             KFBLog(message: urlStr)
             url = NSURL(string: urlStr) as URL!
         } else {

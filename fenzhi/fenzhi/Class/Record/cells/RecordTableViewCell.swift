@@ -7,7 +7,7 @@
 //
 
 import UIKit
-typealias  RecordTableViewCellBlock = (_ model:GetmyfeedlistModel_data_fenxList)->()
+typealias  RecordTableViewCellBlock = (_ model:GetmyfeedlistModel_data_fenxList,_ indexFile : Int)->()
 class RecordTableViewCell: UITableViewCell {
 
     var dataModel : GetmyfeedlistModel_data_fenxList = GetmyfeedlistModel_data_fenxList()
@@ -29,6 +29,7 @@ class RecordTableViewCell: UITableViewCell {
     let lessonLabel: UILabel = UILabel()
 
     var delViewBlock : RecordTableViewCellBlock!
+    var fileBlock : RecordTableViewCellBlock!
 
     func setUpUIWithModelAndType(model : GetmyfeedlistModel_data_fenxList) {
         self.dataModel = model
@@ -128,8 +129,8 @@ class RecordTableViewCell: UITableViewCell {
                 view.isUserInteractionEnabled = true
                 lastFream = view.frame
 
-//                let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TeachDetailHeadView.ppt_click(tap:)))
-//                view.addGestureRecognizer(iconImageViewTap)
+                let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RecordTableViewCell.ppt_click(tap:)))
+                view.addGestureRecognizer(iconImageViewTap)
 
 
                 //图片
@@ -139,7 +140,7 @@ class RecordTableViewCell: UITableViewCell {
 
                 //描述
                 let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (imageHeight - ip7(21))/2, width: imageWidth - imageView.frame.maxX - ip7(10), height: ip7(21)))
-                label.text = model.name
+                label.text =  model.name.removingPercentEncoding!
                 label.font = fzFont_Thin(ip7(21))
                 label.textColor  = dark_3_COLOUR
                 label.textAlignment = .left
@@ -255,9 +256,16 @@ class RecordTableViewCell: UITableViewCell {
     func del_click() {
         KFBLog(message: "删除")
         if let _ =  delViewBlock {
-            delViewBlock(self.dataModel)
+            delViewBlock(self.dataModel,0)
         }
 
+    }
+
+    func ppt_click(tap:UITapGestureRecognizer)  {
+        let tagNum : Int = (tap.view?.tag)!
+        if let _ =  fileBlock {
+            fileBlock(self.dataModel,tagNum)
+        }
     }
 
     override func awakeFromNib() {

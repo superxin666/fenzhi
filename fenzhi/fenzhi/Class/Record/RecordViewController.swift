@@ -162,7 +162,19 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                 cell.selectionStyle = .none
                 cell.setUpUIWithModelAndType(model: model)
                 weak var weakSelf = self
-                cell.delViewBlock = {(delmodel) in
+
+                cell.fileBlock = {(click_model,indexNum) in
+                    let fileModel = click_model.coursewares[indexNum]
+                    let vc = pdfViewController()
+                    vc.urlStr = fileModel.file
+                    vc.fileName = fileModel.name.removingPercentEncoding!
+                    vc.pdftype = .url
+                    weakSelf?.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+
+                }
+
+                cell.delViewBlock = {(delmodel,indexNum) in
                     KFBLog(message: "删除block")
                     weakSelf?.alertController  = UIAlertController(title: "提示", message: "是否要删除本条分享", preferredStyle: .alert)
                     let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in

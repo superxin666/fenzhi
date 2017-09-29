@@ -121,6 +121,9 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
+            let vc : XiaoxiViewController = XiaoxiViewController()
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
             
         } else if indexPath.row == 1 {
             //shoucang

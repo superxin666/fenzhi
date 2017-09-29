@@ -21,6 +21,8 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
 
     let nsetBtn : UIButton = UIButton()
     var keybodHeight : CGFloat = 0.0
+    let viewHeight = ip7(730/2)
+    let btnViewHeight =  ip7(55)
     
     var isHaveBackView = false//中间背景
     var isHaveBtnBackView = false//是否已经有了 按钮栏
@@ -28,6 +30,9 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     var isHaveDingweiBackView = false//是否已经有了 定位
     var colletionView : UICollectionView!//图片浏览
     var dingweiLabel : UILabel = UILabel()//定位显示
+    let dingweiBackView = UIView()//定位背景
+    var isHaveFiles = false//是否有文件
+    var isHaveDingwei = false//是否有定位
     
     var txtStr : String = ""
     let dataVC = HomeDataMangerController()
@@ -129,7 +134,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
             var frame = self.btnBackView.frame
             frame.origin.y = KSCREEN_HEIGHT - height - ip7(55)
             self.btnBackView.frame = frame
-            self.keybodHeight = height
+//            self.keybodHeight = height
         })
         print("keybordShow:\(height)")
     }
@@ -151,8 +156,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         textField.backgroundColor = .clear
         textField.font =  fzFont_Thin(ip7(18))
         self.view.addSubview(textField)
-
-
+        self.creatBackView()
 
     }
 
@@ -160,10 +164,20 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     func creatBackView() {
         isHaveBackView = true
         //中间打背景
-        imageBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - keybodHeight , width: KSCREEN_WIDTH, height: keybodHeight)
+        imageBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT - viewHeight , width: KSCREEN_WIDTH, height: viewHeight)
         imageBackView.backgroundColor = .white
+        let lineView : UIView = UIView(frame: CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: 0, width: ip7(480), height: 0.5))
+        lineView.backgroundColor = lineView_thin_COLOUR
+        imageBackView.addSubview(lineView)
         self.view.addSubview(imageBackView)
         self.view.bringSubview(toFront: self.btnBackView)
+        //课时定位
+        self.creaDingweiBackView()
+        //图片背景
+        self.creatImageView()
+
+        self.dingweiBackView.isHidden = true
+//        self.imageBackView.isHidden = true
     }
     
         //MARK:按钮
@@ -204,11 +218,8 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     }
     //MARK:课时定位
     func creaDingweiBackView() {
-        if !isHaveBackView {
-            self.creatBackView()
-        }
-        isHaveDingweiBackView = true
-        let dingweiBackView = UIView(frame: CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: ip7(6), width: ip7(480), height: ip7(70)))
+
+        dingweiBackView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: ip7(13), width: ip7(480), height: ip7(70))
         dingweiBackView.backgroundColor = backView_COLOUR
         imageBackView.addSubview(dingweiBackView)
         
@@ -227,17 +238,14 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     }
         //MARK:展示图片
     func creatImageView() {
-        if !isHaveBackView {
-            self.creatBackView()
-        }
-        self.isHaveImageViewBackView = true
+
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = ip7(6)
         layout.sectionInset = UIEdgeInsetsMake(0, ip7(3), 0, ip7(3))
 
-        colletionView = UICollectionView(frame: CGRect(x: 15, y: ip7(165/2), width: KSCREEN_WIDTH-30, height: itemHeight), collectionViewLayout: layout)
+        colletionView = UICollectionView(frame: CGRect(x: 15, y: ip7(13), width: KSCREEN_WIDTH-30, height: itemHeight), collectionViewLayout: layout)
         colletionView.register(ActionCollectionViewCell.self, forCellWithReuseIdentifier: "actioncollectioncell_id")
         colletionView.backgroundColor = .clear
         colletionView.delegate = self
@@ -274,12 +282,19 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         KFBLog(message: "退出键盘")
         nsetBtn.isSelected = !nsetBtn.isSelected
         if  nsetBtn.isSelected {
+            //键盘收回 显示背景
+            self.imageBackView.isHidden = false
+            self.imageBackView.frame.origin.y = self.imageBackView.frame.origin.y -  btnViewHeight
             if textField.isFirstResponder {
                 textField.resignFirstResponder()
             }
             self.view.bringSubview(toFront: btnBackView)
             btnBackView.frame.origin.y =  KSCREEN_HEIGHT  - btnBackView.frame.size.height
         } else {
+            //键盘弹起 隐藏背景
+            self.imageBackView.frame.origin.y = self.imageBackView.frame.origin.y +  btnViewHeight
+            self.imageBackView.isHidden = true
+
             textField.becomeFirstResponder()
             self.view.bringSubview(toFront: btnBackView)
             btnBackView.frame.origin.y =  KSCREEN_HEIGHT - keybodHeight - LNAVIGATION_HEIGHT
@@ -290,13 +305,16 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
      //MARK:课时定位
     func dingwei_click() {
         KfbShowWithInfo(titleString: "定位")
+        if !nsetBtn.isSelected {
+            self.nestBtnClik()
+        }
         let vc = DingweiViewController()
         vc.sureBlock = {(name : String) in
-            if self.isHaveDingweiBackView {
-                self.dingweiLabel.text = name
-            } else {
-                self.dingweiLabel.text = name
-                self.creaDingweiBackView()
+            self.isHaveDingwei = true
+            self.imageBackView.isHidden = false
+            self.dingweiBackView.isHidden = false
+            if self.isHaveFiles {
+                self.colletionView.frame.origin.y = self.dingweiBackView.frame.maxY + ip7(15)
             }
         }
         self.navigationController?.pushViewController(vc, animated: true)
@@ -310,6 +328,9 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
         let AlbumAction = UIAlertAction(title: "从相册选择", style: .default, handler: {
             (action: UIAlertAction) -> Void in
+            if !self.nsetBtn.isSelected {
+                self.nestBtnClik()
+            }
             self.openAlbum()
         })
         alertController.addAction(cancelAction)
@@ -320,6 +341,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
 
 
     func openAlbum() {
+
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             //初始化图片控制器
             let picker = UIImagePickerController()
@@ -351,13 +373,9 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         //图片控制器退出
         picker.dismiss(animated: true, completion: {
             () -> Void in
-
-            //显示图片
-            if self.isHaveImageViewBackView {
-                self.colletionView.reloadData()
-            } else {
-                self.creatImageView()
-            }
+             //显示图片
+            self.isHaveFiles = true
+            self.colletionView.reloadData()
         })
     }
 
@@ -374,7 +392,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            textView.resignFirstResponder()
+            self.nestBtnClik()
         }
         return true
     }

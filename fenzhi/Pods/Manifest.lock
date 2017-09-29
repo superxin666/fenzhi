@@ -7,6 +7,15 @@ PODS:
   - Spring (1.0.3)
   - SVProgressHUD (2.2)
   - SwiftyJSON (3.1.4)
+  - UMengUShare/Core (6.4.5):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.4.5)
+  - UMengUShare/Social/ReducedQQ (6.4.5):
+    - UMengUShare/Core
+  - UMengUShare/Social/ReducedWeChat (6.4.5):
+    - UMengUShare/Core
+  - UMengUShare/UI (6.4.5):
+    - UMengUShare/Core
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -17,6 +26,9 @@ DEPENDENCIES:
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - SVProgressHUD
   - SwiftyJSON
+  - UMengUShare/Social/ReducedQQ
+  - UMengUShare/Social/ReducedWeChat
+  - UMengUShare/UI
 
 EXTERNAL SOURCES:
   Spring:
@@ -37,7 +49,8 @@ SPEC CHECKSUMS:
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SVProgressHUD: 3f37f3409ddb15f35c99315ae7dc33c474aa3256
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  UMengUShare: a5711c54e640b04e3048e931d2b88d50f9cfa55c
 
-PODFILE CHECKSUM: a2b9d597345112507700821bbbc1b67f971baf79
+PODFILE CHECKSUM: 8184c721452e59e23aa96ffc1251aa36dbc953d8
 
 COCOAPODS: 1.2.1

@@ -10,4 +10,6 @@
 #define Bridging_Header_h
 #import "RSA.h"
 #import <MJRefresh/MJRefresh.h>
+#import <UMSocialCore/UMSocialCore.h>
+#import <UShareUI/UShareUI.h>
 #endif /* Bridging_Header_h */

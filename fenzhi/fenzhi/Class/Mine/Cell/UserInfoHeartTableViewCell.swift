@@ -57,7 +57,7 @@ class UserInfoHeartTableViewCell: UITableViewCell {
         
         
         //文字底部 时间
-        timeLabel.frame = CGRect(x: viewW - ip7(31) - ip7(300), y: txtLabel.frame.origin.y + ip7(17), width: ip7(300), height: ip7(20))
+        timeLabel.frame = CGRect(x: viewW - ip7(31) - ip7(300), y: lastFream.maxY + ip7(17), width: ip7(300), height: ip7(20))
         timeLabel.text = "分享时间：" + String.getDate_userinfo_cell(dateStr: model.createTime)
         timeLabel.font = fzFont_Thin(ip7(15))
         timeLabel.textColor  = dark_6_COLOUR
@@ -119,28 +119,24 @@ class UserInfoHeartTableViewCell: UITableViewCell {
         for i in 0...2 {
             let btn : UIButton = UIButton(type: .custom)
             btn.tag = i
-            //            if i == 0 {
-            //                dianzanBtn = btn
-            //                //点赞
-            //                if model.data.isLike == 1 {
-            //                    btn.isSelected = true
-            //                } else {
-            //                    btn.isSelected = false
-            //                }
-            //            } else if i == 1 {
-            //                //收藏
-            //                shoucangBtn = btn
-            //                if model.data.isFavorite == 1 {
-            //                    btn.isSelected = true
-            //                } else {
-            //                    btn.isSelected = false
-            //                }
-            //
-            //            } else {
-            //                //分享
-            //                fenxinagBtn = btn
-            //
-            //            }
+//            if i == 0 {
+//                dianzanBtn = btn
+//                //点赞
+//                if model.isLike == 1 {
+//                    btn.isSelected = true
+//                } else {
+//                    btn.isSelected = false
+//                }
+//            } else if i == 1 {
+//                //评论
+//                shoucangBtn = btn
+//
+//
+//            } else {
+//                //赞赏
+//                fenxinagBtn = btn
+//
+//            }
             btn.frame = CGRect(x: appadWidth + CGFloat(i) * btnW , y: lastFream.maxY + ip7(45), width: btnW, height: ip7(60))
             btn.titleLabel?.font = fzFont_Thin(18)
             btn.tag = i

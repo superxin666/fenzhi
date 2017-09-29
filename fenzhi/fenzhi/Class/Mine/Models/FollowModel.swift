@@ -19,6 +19,8 @@ class FollowModel_data_list: Mappable {
     var subjectName : String = ""
     var gradeName : String = ""
     var createTime : String = ""
+    var userId : Int = 0
+    
     init() {}
     required init?(map: Map){
         mapping(map: map)
@@ -27,6 +29,7 @@ class FollowModel_data_list: Mappable {
     func mapping(map: Map) {
 
         name <- map["name"]
+        userId <- map["userId"]
         avatar <- map["avatar"]
         provinceName <- map["provinceName"]
         cityName <- map["cityName"]

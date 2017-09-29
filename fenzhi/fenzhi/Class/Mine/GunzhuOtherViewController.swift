@@ -172,15 +172,19 @@ class GunzhuOtherViewController: BaseViewController ,UITableViewDelegate,UITable
         if indexPath.row < self.dataArr.count {
             cell.setUpUIWithModel_cellType(type: .guanzhu,model:self.dataArr[indexPath.row])
         }
-        //        weak var weakself = self
-        //        cell.IconImageViewBlock = { () in
-        //            print("头像点击")
-        //            let vc = UserInfoViewController()
-        //            vc.hidesBottomBarWhenPushed = true
-        //            weakself?.navigationController?.pushViewController(vc, animated: true)
-        //        }
         return cell;
         
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row < self.dataArr.count {
+            let model = self.dataArr[indexPath.row]
+            let vc = UserInfoViewController()
+            vc.hidesBottomBarWhenPushed = true
+            vc.userId = model.userId
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{

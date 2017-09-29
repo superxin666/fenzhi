@@ -43,8 +43,6 @@ class RecordHeartTableViewCell: UITableViewCell {
         iconImageView.isUserInteractionEnabled = true
         backView.addSubview(iconImageView)
 
-        //        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
-        //        iconImageView.addGestureRecognizer(iconImageViewTap)
 
         //更多
         moreImageView.frame = CGRect(x: viewW - ip7(5) - ip7(37), y: ip7(25), width: ip7(5), height: ip7(20))
@@ -64,8 +62,6 @@ class RecordHeartTableViewCell: UITableViewCell {
         nameLabel.adjustsFontSizeToFitWidth = true
         backView.addSubview(nameLabel)
 
-        //        let nameLabelTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
-        //        nameLabel.addGestureRecognizer(nameLabelTap)
 
         //用户信息
         infoLabel.frame = CGRect(x: iconImageView.frame.maxX + ip7(19), y: nameLabel.frame.maxY + ip7(14), width: viewW - ip7(19) - iconImageView.frame.maxX, height: ip7(21))

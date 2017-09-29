@@ -231,9 +231,22 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.selectionStyle = .none
                 cell.setUpUIWithModelAndType(model: model)
                 weak var weakSelf = self
-                cell.IconImageViewBlock = {(click_model) in
+                cell.iconImageViewBlock = {(click_model) in
                     let vc = UserInfoViewController()
                     vc.userId  = click_model.userId
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                }
+                cell.detailBlock = {click_model in
+                    let vc = TeachDetailViewController()
+                    vc.fenxId = click_model.id
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
+                cell.zanshangBlock = {click_model in
+                    let vc = TeachDetailViewController()
+                    vc.fenxId = click_model.id
                     vc.hidesBottomBarWhenPushed = true
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
                 }
@@ -258,6 +271,19 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                     vc.hidesBottomBarWhenPushed = true
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
                     
+                }
+                cell.detailBlock = {click_model in
+                    let vc = TeachDetailViewController()
+                    vc.fenxId = click_model.id
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
+                cell.zanshangBlock = {click_model in
+                    let vc = TeachDetailViewController()
+                    vc.fenxId = click_model.id
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
                 }
                 return cell;
                 

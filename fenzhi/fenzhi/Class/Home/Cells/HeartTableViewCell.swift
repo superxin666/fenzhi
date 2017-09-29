@@ -14,7 +14,10 @@ enum CellType {
     case record
 }
 class HeartTableViewCell: UITableViewCell {
-    var IconImageViewBlock : HeartCellViewBlock!
+    var IconImageViewBlock : HeartCellViewBlock!//头像 名字点击
+    var detailBlock : HeartCellViewBlock!//评论点击
+    var zanshangBlock : HeartCellViewBlock!//赞赏点击
+    
     var dataModel : GetmyfeedlistModel_data_fenxList = GetmyfeedlistModel_data_fenxList()
     var dataVC : HomeDataMangerController = HomeDataMangerController()
     var comVC : CommonDataMangerViewController = CommonDataMangerViewController()
@@ -22,7 +25,7 @@ class HeartTableViewCell: UITableViewCell {
     var shoucangBtn : UIButton = UIButton()
     var fenxinagBtn : UIButton = UIButton()
     var baseVC : BaseViewController = BaseViewController()
-    var docBlock : TeachDetailHeadViewBlock!
+   
     
     let iconImageView:UIImageView = UIImageView()
     let moreImageView:UIImageView = UIImageView()
@@ -223,10 +226,16 @@ class HeartTableViewCell: UITableViewCell {
             }
             
         } else if sender.tag == 1 {
-            
+            //评论 跳转详情
+            if let _ =  detailBlock {
+                detailBlock(self.dataModel)
+            }
+    
         } else {
-            //赞赏
-            
+            //赞赏  跳转详情
+            if let _ =  zanshangBlock {
+                zanshangBlock(self.dataModel)
+            }
         }
         
     }

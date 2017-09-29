@@ -21,8 +21,12 @@ class TeachTableViewCell: UITableViewCell {
     var dianzanBtn : UIButton = UIButton()
     var shoucangBtn : UIButton = UIButton()
     var fenxinagBtn : UIButton = UIButton()
+    
     var baseVC : BaseViewController = BaseViewController()
-    var docBlock : TeachDetailHeadViewBlock!
+    
+    var iconImageViewBlock : TeachTableViewBlock!//头像
+    var detailBlock : TeachTableViewBlock!//评论点击
+    var zanshangBlock : TeachTableViewBlock!//赞赏点击
     
     let iconImageView:UIImageView = UIImageView()
     let moreImageView:UIImageView = UIImageView()
@@ -235,21 +239,27 @@ class TeachTableViewCell: UITableViewCell {
                     
                 }
                 
-                
             }
             
         } else if sender.tag == 1 {
+            //评论 跳转详情
+            if let _ =  detailBlock {
+                detailBlock(self.dataModel)
+            }
             
         } else {
-            //赞赏
+            //赞赏  跳转详情
+            if let _ =  zanshangBlock {
+                zanshangBlock(self.dataModel)
+            }
             
         }
         
     }
     
     func iconImageClick(){
-        if let _ =  IconImageViewBlock {
-            IconImageViewBlock(self.dataModel)
+        if let _ =  iconImageViewBlock {
+            iconImageViewBlock(self.dataModel)
         }
     }
 

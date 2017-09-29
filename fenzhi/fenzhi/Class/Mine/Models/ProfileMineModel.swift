@@ -47,7 +47,7 @@ class ProfileMineModel_data: Mappable {
     
     //看其他用户信息时 有以下数据
     var myfeedList:GetmyfeedlistModel_data = GetmyfeedlistModel_data()
-
+    var isFollow:Int = 0
 
     init() {}
     required init?(map: Map){
@@ -85,6 +85,8 @@ class ProfileMineModel_data: Mappable {
         favoriteNum <- map["favoriteNum"]
         
         myfeedList <- map["myfeedList"]
+        isFollow <- map["isFollow"]
+
 
     }
 }

@@ -21,7 +21,9 @@ class UserInfoHeadView: UIView {
         // Drawing code
     }
     */
-
+    let dataVC = MineDataManger()
+    var baseVC : BaseViewController = BaseViewController()
+    
     var guanzhuViewBlock : UserInfoHeadViewBlock!
     var fensiViewBlock : UserInfoHeadViewBlock!
 
@@ -34,9 +36,10 @@ class UserInfoHeadView: UIView {
     var fensiLabel :UILabel!
     var zanLabel :UILabel!
     var shoucangLabel :UILabel!
-    var guanzhuBtn :UIButton!
+    var guanzhuBtn :UIButton = UIButton()
 
-
+    var dataModel = ProfileMineModel_data()
+    
 
     func creatHeadView(type : viewType) {
         self.backgroundColor = .white
@@ -79,13 +82,14 @@ class UserInfoHeadView: UIView {
         self.addSubview(infoLabel)
         if type == .other {
             // 关注
-            guanzhuBtn = UIButton(frame: CGRect(x: (KSCREEN_WIDTH - ip7(125))/2, y: infoLabel.frame.maxY + ip7(20), width: ip7(125), height: ip7(40)))
+            guanzhuBtn.frame = CGRect(x: (KSCREEN_WIDTH - ip7(125))/2, y: infoLabel.frame.maxY + ip7(20), width: ip7(125), height: ip7(40))
             guanzhuBtn.setTitle("关注", for: .normal)
+            guanzhuBtn.setTitle("已关注", for: .selected)
             guanzhuBtn.backgroundColor = blue_COLOUR
             guanzhuBtn.setTitleColor( .white, for: .normal)
             guanzhuBtn.titleLabel?.font = fzFont_Medium(ip7(21))
             guanzhuBtn.kfb_makeRadius(radius: 4)
-            guanzhuBtn.addTarget(self, action:#selector(UserInfoHeadView.gunzhuClick), for: .touchUpInside)
+            guanzhuBtn.addTarget(self, action:#selector(UserInfoHeadView.gunzhuClick(sender:)), for: .touchUpInside)
             self.addSubview(guanzhuBtn)
         }
 
@@ -138,15 +142,24 @@ class UserInfoHeadView: UIView {
     }
 
     func setUpData(model : ProfileMineModel_data) {
+        dataModel = model
+        
         iconImageView.kf.setImage(with: URL(string: model.avatar))
         nameLabel.text = model.name
         dressLabel.text = model.cityName+" "+model.districtName+" "+model.schoolName+" "+model.gradeName
         infoLabel.text = model.subjectName+" "+model.versionName
-
         guanzhuLabel.text = "\(model.followNum!)"
         fensiLabel.text = "\(model.fansNum!)"
         zanLabel.text = "\(model.likeNum!)"
         shoucangLabel.text = "\(model.favoriteNum!)"
+        
+        
+        if (model.isFollow) == 1 {
+            //已关注
+            self.guanzhuBtn.isSelected = true
+        } else {
+            self.guanzhuBtn.isSelected = false
+        }
 
     }
     
@@ -170,8 +183,39 @@ class UserInfoHeadView: UIView {
 
     }
 
-    func gunzhuClick()  {
-
+    //关注点击
+    func gunzhuClick(sender:UIButton)  {
+           weak var weakSelf = self
+        if sender.isSelected {
+            //已经关注了 现在取消关注
+            dataVC.unfollow(userId: dataModel.id, completion: { (data) in
+                let model : SmsModel = data as! SmsModel
+                if model.errno == 0 {
+                    weakSelf?.baseVC.SVshowSucess(infoStr: "取消关注成功")
+                    weakSelf?.guanzhuBtn.isSelected = false
+                } else {
+                    weakSelf?.baseVC.SVshowErro(infoStr: model.errmsg)
+                }
+            }, failure: { (erro) in
+                
+            })
+    
+            
+        } else {
+            //没关注 现在关注
+            dataVC.follow(userId: dataModel.id, completion: { (data) in
+                let model : SmsModel = data as! SmsModel
+                if model.errno == 0 {
+                    weakSelf?.baseVC.SVshowSucess(infoStr: "关注成功")
+                    weakSelf?.guanzhuBtn.isSelected = true
+                } else {
+                    weakSelf?.baseVC.SVshowErro(infoStr: model.errmsg)
+                }
+            }, failure: { (erro) in
+                
+            })
+        }
+        
     }
 
 

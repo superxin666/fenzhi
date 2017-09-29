@@ -18,10 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         // Override point for customization after application launch.
         self.window?.backgroundColor = .white
         self.mainMenu()
+        self.setupUM()
+ 
 //        self.showLogin()
 //        self.showMain()
 //        self.showInfo()
         return true
+    }
+    
+    func setupUM() {
+         UMSocialManager.default().openLog(true)
+         UMSocialManager.default().umSocialAppkey = "59ce05e265b6d66f26000235"
+         UMSocialManager.default().setPlaform(.wechatSession, appKey: "", appSecret: "", redirectURL: nil)
+         UMSocialManager.default().setPlaform(.QQ, appKey: "", appSecret: "", redirectURL: nil)
     }
     
     func mainMenu() {

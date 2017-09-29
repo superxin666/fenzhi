@@ -2,6 +2,50 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>timapiV1</string>
+		<string>wtlogintimV1</string>
+		<string>timopensdkdataline</string>
+		<string>timgamebindinggroup</string>
+		<string>timopensdkapiV4</string>
+		<string>timopensdkgrouptribeshare</string>
+		<string>wtlogintim</string>
+		<string>timOpensdkSSoLogin</string>
+		<string>timapiwallet</string>
+		<string>timgamebindinggroup</string>
+		<string>timwpa</string>
+		<string>timopensdkfriend</string>
+		<string>timapi</string>
+		<string>tim</string>
+		<string>mttbrowser</string>
+		<string>mqqbrowser</string>
+		<string>mqzoneopensdkapi</string>
+		<string>mqzoneopensdkapi19</string>
+		<string>mqzoneopensdkapiV2</string>
+		<string>mqzonewx</string>
+		<string>wtloginqzone</string>
+		<string>mqzoneshare</string>
+		<string>mqzonev2</string>
+		<string>mqzone</string>
+		<string>mqqwpa</string>
+		<string>wtloginmqq2</string>
+		<string>wtloginmqq</string>
+		<string>mqzoneopensdk</string>
+		<string>mqqopensdkapiV4</string>
+		<string>mqqopensdkapiV3</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqopensdkapi</string>
+		<string>mqqopensdkfriend</string>
+		<string>mqqopensdkgrouptribeshare</string>
+		<string>mqqopensdkdataline</string>
+		<string>mqqconnect</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>mqq</string>
+		<string>mqqapi</string>
+		<string>weixin</string>
+		<string>wechat</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

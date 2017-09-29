@@ -188,7 +188,16 @@ class ShoucangViewController: BaseViewController ,UITableViewDelegate,UITableVie
 
     }
 
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row < self.dataArr.count {
+            let model : GetzanlistModel_data_list = self.dataArr[indexPath.row]
+            let vc = TeachDetailViewController()
+            vc.fenxId = model.fenxId
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+    }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         if vctype == .shoucang_vc {

@@ -131,7 +131,17 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         view.setUpUIWithModel_cellType()
         return view
     }
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row < self.dataArr.count {
+            let model : GetincomelistModl_data_incomeList = self.dataArr[indexPath.row]
+            let vc = TeachDetailViewController()
+            vc.fenxId = model.fenxId
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
             return ip7(155)
     }

@@ -40,6 +40,25 @@ class MineDataManger: FZRequestViewController {
         }
         
     }
+    
+    
+    func getfollowlist_other(userId : Int,pageNum : Int, count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        let urlStr = BASER_API + getfollowlist_api + "userId="+"\(userId)" + "&pageNum="+"\(pageNum)"+"&count="+"\(count)"+last_pra
+        var model:FollowModel = FollowModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<FollowModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+            
+        }
+        
+    }
 
 
     /// 获取粉丝列表接口
@@ -65,6 +84,26 @@ class MineDataManger: FZRequestViewController {
                 failure("请求失败")
             }
 
+        }
+        
+    }
+    
+    func getfanslist_other(userId : Int, pageNum : Int, count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        
+        
+        let urlStr = BASER_API + getfanslist_api + "userId="+"\(userId)" + "&pageNum="+"\(pageNum)"+"&count="+"\(count)"+last_pra+token_pra
+        var model:FollowModel = FollowModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<FollowModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+            
         }
         
     }

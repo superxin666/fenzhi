@@ -95,17 +95,19 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
         topBackView.creatHeadView(type: .other)
 
         topBackView.guanzhuViewBlock = { () in
-            let vc :GunzhuViewController = GunzhuViewController()
+            let vc :GunzhuOtherViewController = GunzhuOtherViewController()
             vc.hidesBottomBarWhenPushed = true
             vc.vctype = .guanzhu_vc
+            vc.userId = self.userId
             self.navigationController?.pushViewController(vc, animated: true)
             
         }
         topBackView.fensiViewBlock = { () in
             KFBLog(message: "点击")
-            let vc :GunzhuViewController = GunzhuViewController()
+            let vc :GunzhuOtherViewController = GunzhuOtherViewController()
             vc.hidesBottomBarWhenPushed = true
             vc.vctype = .fensi_vc
+            vc.userId = self.userId
             self.navigationController?.pushViewController(vc, animated: true)
             
         }

@@ -62,6 +62,7 @@
 		21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */; };
 		21BBF7FF1F6BC385008D654D /* GuanzhuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF7FE1F6BC385008D654D /* GuanzhuTableViewCell.swift */; };
 		21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD78761F618C1600539E8D /* BaseViewController.swift */; };
+		21C370921F7E276F003A7220 /* GunzhuOtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C370911F7E276F003A7220 /* GunzhuOtherViewController.swift */; };
 		21CB58C51F726D5A00F41448 /* TeachDetailHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58C41F726D5A00F41448 /* TeachDetailHeadView.swift */; };
 		21CB58C71F726D7500F41448 /* TeachDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */; };
 		21CB58C91F726DB100F41448 /* HomeDataMangerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58C81F726DB100F41448 /* HomeDataMangerController.swift */; };
@@ -169,6 +170,7 @@
 		21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GunzhuViewController.swift; sourceTree = "<group>"; };
 		21BBF7FE1F6BC385008D654D /* GuanzhuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuanzhuTableViewCell.swift; sourceTree = "<group>"; };
 		21BD78761F618C1600539E8D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		21C370911F7E276F003A7220 /* GunzhuOtherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunzhuOtherViewController.swift; sourceTree = "<group>"; };
 		21CB58C41F726D5A00F41448 /* TeachDetailHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachDetailHeadView.swift; sourceTree = "<group>"; };
 		21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachDetailViewController.swift; sourceTree = "<group>"; };
 		21CB58C81F726DB100F41448 /* HomeDataMangerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataMangerController.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				21FB3EAB1F66367500656B74 /* SettingViewController.swift */,
 				21570C911F6579ED003C7D38 /* UserInfoViewController.swift */,
 				21BBF7FC1F6BC0E4008D654D /* GunzhuViewController.swift */,
+				21C370911F7E276F003A7220 /* GunzhuOtherViewController.swift */,
 				21B084F01F6D42B500D9F3A0 /* ShoucangViewController.swift */,
 				214448CD1F7002880073EA06 /* ShouruViewController.swift */,
 				21CB58CB1F726E7A00F41448 /* ShezhiViewController.swift */,
@@ -819,6 +822,7 @@
 				21570C921F6579ED003C7D38 /* UserInfoViewController.swift in Sources */,
 				2176597B1F74BBB600A54A1D /* LikeModel.swift in Sources */,
 				21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */,
+				21C370921F7E276F003A7220 /* GunzhuOtherViewController.swift in Sources */,
 				21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */,
 				215822201F6C2012002BC6E6 /* MineDataManger.swift in Sources */,
 				21570C8F1F653CB2003C7D38 /* fzStr.swift in Sources */,

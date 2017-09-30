@@ -16,7 +16,8 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     let btnBackView :UIView = UIView()
     let imageBackView :UIView = UIView()
     var imageArr :[UIImage]  = Array()
-
+    var imageNameArr : [String] = Array()
+    
 
 
     let nsetBtn : UIButton = UIButton()
@@ -65,8 +66,8 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     override func navigationRightBtnClick() {
         //weak
          weak var weakSelf = self
-        if textField.isFirstResponder {
-            textField.resignFirstResponder()
+        if !nsetBtn.isSelected {
+            self.nestBtnClik()
         }
         if !(txtStr.characters.count > 0) {
             self.SVshowErro(infoStr: "请输入文字")
@@ -75,22 +76,36 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
 
         if imageArr.count>0 {
             //有图片
-            let image = imageArr[0]
+            if imageArr.count > 4{
+                self.SVshowErro(infoStr: "最多上传四张图片")
+                return
+            }
+            
             self.SVshowLoad()
-            loadVC.upLoadImage(uploadimg: image, type: "normal", completion: { (data) in
-                let model :UploadimgModel = data as! UploadimgModel
-                if model.errno == 0 {
-                    KFBLog(message: model.data)
-                    self.subTxt(imageStr: model.data)
-                } else {
-                    weakSelf?.SVshowErro(infoStr: model.errmsg)
-                }
-
-
-            }, failure: { (erro) in
-                 weakSelf?.SVdismiss()
-            })
-
+            var num = 0
+            for i in 0..<imageArr.count{
+                let image = imageArr[i]
+                loadVC.upLoadImage(uploadimg: image, type: "normal", completion: { (data) in
+                    let model :UploadimgModel = data as! UploadimgModel
+                    if model.errno == 0 {
+                        KFBLog(message: model.data)
+                        num = num + 1
+                        self.imageNameArr.append(model.data)
+                        if num == self.imageArr.count {
+                            self.subTxt(imageStr: model.data)
+                        }
+                       
+                    } else {
+                        weakSelf?.SVshowErro(infoStr: model.errmsg)
+                    }
+                    
+                    
+                }, failure: { (erro) in
+                    weakSelf?.SVdismiss()
+                })
+                
+                
+            }
         }
 
     }
@@ -98,9 +113,9 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     func subTxt(imageStr : String)  {
          weak var weakSelf = self
 
-        let arr = [imageStr]
+//        let arr = [imageStr]
 
-        dataVC.submitfenx_heart(content: txtStr, catalog_id: 0, images: arr, completion: { (data) in
+        dataVC.submitfenx_heart(content: txtStr, catalog_id: 0, images: self.imageNameArr, completion: { (data) in
             let model :SmsModel = data as! SmsModel
             if model.errno == 0{
                 weakSelf?.SVdismiss()

@@ -93,9 +93,15 @@ class UserInfoShareTableViewCell: UITableViewCell {
                 
                 
                 //图片
-                let imageView = UIImageView(image: #imageLiteral(resourceName: "pdf"))
-                imageView.frame = CGRect(x: 0, y: 0, width: ip7(65), height: ip7(65))
-                view.addSubview(imageView)
+                let imageView = UIImageView()
+                if model.type.contains("pdf") {
+                    imageView.image = #imageLiteral(resourceName: "pdf")
+                    
+                } else if model.type.contains("ppt") {
+                    imageView.image = #imageLiteral(resourceName: "pptx")
+                } else {
+                    imageView.image = #imageLiteral(resourceName: "word")
+                }
                 
                 //描述
                 let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (imageHeight - ip7(21))/2, width: imageWidth - imageView.frame.maxX - ip7(10), height: ip7(21)))

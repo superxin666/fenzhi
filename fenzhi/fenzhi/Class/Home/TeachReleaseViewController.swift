@@ -15,7 +15,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     let dingweiBackView:UIView = UIView()
     
     var fileArr :[String]  = Array()
-    
+    var fileNameArr :Array<Dictionary<String,String>> = Array()
     
     
     let nsetBtn : UIButton = UIButton()
@@ -78,32 +78,51 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     override func navigationRightBtnClick() {
         //weak
         weak var weakSelf = self
-        if textField.isFirstResponder {
-            textField.resignFirstResponder()
+        if !nsetBtn.isSelected {
+            self.nestBtnClik()
         }
-//        if !(txtStr.characters.count > 0) {
-//            self.SVshowErro(infoStr: "请输入文字")
-//            return
-//        }
+        if !(txtStr.characters.count > 0) {
+            self.SVshowErro(infoStr: "请输入文字")
+            return
+        }
 
 
-        
         if fileArr.count>0 {
+            if fileArr.count > 10 {
+                self.SVshowErro(infoStr: "最多上传10个文件")
+            }
             //有图片
-            let file : String = fileArr[0]
-            self.SVshowLoad()
-            self.loadVC.uploadfile(fileName: file, completion: { (data) in
-                let model :UpFileDataModel = data as! UpFileDataModel
-                if model.errno == 0 {
-                    KFBLog(message: model.data)
-                    self.subTxt(fileData: model.data)
-                } else {
-                    weakSelf?.SVshowErro(infoStr: model.errmsg)
-                }
-            }, failure: { (erro) in
-
-            })
-
+            var num = 0
+            for i in 0..<fileArr.count{
+                let file : String = fileArr[i]
+                self.SVshowLoad()
+                self.loadVC.uploadfile(fileName: file, completion: { (data) in
+                    let model :UpFileDataModel = data as! UpFileDataModel
+                    if model.errno == 0 {
+                        KFBLog(message: model.data)
+                        num = num + 1
+                        let dict :Dictionary = [
+                            "name":model.data.name,
+                            "type":model.data.type,
+                            "file":model.data.file,
+                            ]
+                        self.fileNameArr.append(dict)
+                        if num == self.fileArr.count{
+                           self.subTxt(fileData: model.data)
+                        }
+                      
+                    } else {
+                        weakSelf?.SVshowErro(infoStr: model.errmsg)
+                    }
+                }, failure: { (erro) in
+                    
+                })
+                
+                
+            }
+            
+        } else {
+            self.SVshowErro(infoStr: "请选择要发布的文件")
         }
 
 
@@ -112,16 +131,16 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     func subTxt(fileData : UpFileDataModel_data)  {
         weak var weakSelf = self
 
-        let dict :Dictionary = [
-            "name":fileData.name,
-            "type":fileData.type,
-            "file":fileData.file,
-        ]
-
+//        let dict :Dictionary = [
+//            "name":fileData.name,
+//            "type":fileData.type,
+//            "file":fileData.file,
+//        ]
+//
+//
+//        let arr = [dict]
         
-        let arr = [dict]
-        
-        dataVC.submitfenx_teach(content: txtStr, catalog_id: 0, file: arr, completion: { (data) in
+        dataVC.submitfenx_teach(content: txtStr, catalog_id: 0, file: self.fileNameArr, completion: { (data) in
             let model :SmsModel = data as! SmsModel
             if model.errno == 0{
                 weakSelf?.SVdismiss()

@@ -305,7 +305,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     //MARK:留言页面
     func creatTxtUI() {
         KFBLog(message: "键盘高度---\(headViewHeight)")
-        let backView : UIView  = UIView(frame: CGRect(x: 0, y:KSCREEN_HEIGHT - headViewHeight - ip7(260) +  LNAVIGATION_HEIGHT, width: KSCREEN_WIDTH, height: ip7(260)))
+        let backView : UIView  = UIView(frame: CGRect(x: 0, y:  LNAVIGATION_HEIGHT + ip7(100), width: KSCREEN_WIDTH, height: ip7(260)))
         backView.backgroundColor = .white
         self.maskView.addSubview(backView)
         txtTextView.delegate = self
@@ -362,9 +362,20 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
         dataVC.submitcomment(content: txt, fenxId: self.fenxId!, toUserId: toUserId, toCommentId: toCommentId, completion: { (data) in
             weakSelf?.SVdismiss()
-            let model :SmsModel = data as! SmsModel
+            let model :SubmitcommentModel = data as! SubmitcommentModel
             if model.errno == 0 {
                 weakSelf?.SVshowSucess(infoStr: "评论成功")
+                //刷新列表
+//                if weakSelf?.sectionNum == 2 {
+//                    //最新列表里
+//                    weakSelf?.otherArr.insert(model.data, at: 0)
+//
+//                } else {
+//                    //其他列表里加入
+//                    weakSelf?.newArr.insert(model.data, at: 0)
+//                }
+//                weakSelf?.mainTabelView.reloadData()
+//                  weakSelf?.getcommentlistData()
             } else {
                 weakSelf?.SVshowErro(infoStr: model.errmsg)
             }

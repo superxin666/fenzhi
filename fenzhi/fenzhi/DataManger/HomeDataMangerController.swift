@@ -113,12 +113,12 @@ class HomeDataMangerController: FZRequestViewController {
 
         }
 
-        var model:SmsModel = SmsModel()
+        var model:SubmitcommentModel = SubmitcommentModel()
         KFBLog(message: urlStr)
         Alamofire.request(urlStr, method: .post).responseJSON { (returnResult) in
             print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
             if let json = returnResult.result.value {
-                model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
+                model = Mapper<SubmitcommentModel>().map(JSON: json as! [String : Any])!
                 completion(model)
             } else {
                 failure("请求失败")

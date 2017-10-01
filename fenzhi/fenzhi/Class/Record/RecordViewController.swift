@@ -169,7 +169,7 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                     vc.urlStr = fileModel.file
                     vc.fileName = fileModel.name.removingPercentEncoding!
                     vc.pdftype = .url
-                    weakSelf?.hidesBottomBarWhenPushed = true
+                    vc.hidesBottomBarWhenPushed = true
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
 
                 }

@@ -360,7 +360,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
         KFBLog(message: "\(toUserId)==\((toCommentId))")
 
-        dataVC.submitcomment(content: txt, fenxId: 1, toUserId: toUserId, toCommentId: toCommentId, completion: { (data) in
+        dataVC.submitcomment(content: txt, fenxId: self.fenxId!, toUserId: toUserId, toCommentId: toCommentId, completion: { (data) in
             weakSelf?.SVdismiss()
             let model :SmsModel = data as! SmsModel
             if model.errno == 0 {

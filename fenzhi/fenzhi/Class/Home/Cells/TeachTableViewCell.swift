@@ -7,7 +7,7 @@
 //
 
 import UIKit
-typealias TeachTableViewBlock = (_ model : GetmyfeedlistModel_data_fenxList)->()
+typealias TeachTableViewBlock = (_ model : GetmyfeedlistModel_data_fenxList,_ indexFile : Int)->()
 enum TeachCellType {
     case home_Teach
     case record_Teach
@@ -27,6 +27,8 @@ class TeachTableViewCell: UITableViewCell {
     var iconImageViewBlock : TeachTableViewBlock!//头像
     var detailBlock : TeachTableViewBlock!//评论点击
     var zanshangBlock : TeachTableViewBlock!//赞赏点击
+    var fileBlock : TeachTableViewBlock!//文件点击
+    
     
     let iconImageView:UIImageView = UIImageView()
     let moreImageView:UIImageView = UIImageView()
@@ -253,13 +255,13 @@ class TeachTableViewCell: UITableViewCell {
         } else if sender.tag == 1 {
             //评论 跳转详情
             if let _ =  detailBlock {
-                detailBlock(self.dataModel)
+                detailBlock(self.dataModel,0)
             }
             
         } else {
             //赞赏  跳转详情
             if let _ =  zanshangBlock {
-                zanshangBlock(self.dataModel)
+                zanshangBlock(self.dataModel,0)
             }
             
         }
@@ -268,7 +270,15 @@ class TeachTableViewCell: UITableViewCell {
     
     func iconImageClick(){
         if let _ =  iconImageViewBlock {
-            iconImageViewBlock(self.dataModel)
+            iconImageViewBlock(self.dataModel,0)
+        }
+    }
+    
+    
+    func ppt_click(tap:UITapGestureRecognizer)  {
+        let tagNum : Int = (tap.view?.tag)!
+        if let _ =  fileBlock {
+            fileBlock(self.dataModel,tagNum)
         }
     }
 

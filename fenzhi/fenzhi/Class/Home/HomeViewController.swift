@@ -231,24 +231,34 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.selectionStyle = .none
                 cell.setUpUIWithModelAndType(model: model)
                 weak var weakSelf = self
-                cell.iconImageViewBlock = {(click_model) in
+                cell.iconImageViewBlock = {(click_model,indexFile) in
                     let vc = UserInfoViewController()
                     vc.userId  = click_model.userId
                     vc.hidesBottomBarWhenPushed = true
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
                 }
-                cell.detailBlock = {click_model in
+                cell.detailBlock = {(click_model,indexFile )in
                     let vc = TeachDetailViewController()
                     vc.fenxId = click_model.id
                     vc.hidesBottomBarWhenPushed = true
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
                     
                 }
-                cell.zanshangBlock = {click_model in
+                cell.zanshangBlock = {(click_model,indexFile) in
                     let vc = TeachDetailViewController()
                     vc.fenxId = click_model.id
                     vc.hidesBottomBarWhenPushed = true
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                }
+                cell.fileBlock = {click_model,indexFile in
+                    let fileModel = click_model.coursewares[indexFile]
+                    let vc = pdfViewController()
+                    vc.urlStr = fileModel.file
+                    vc.fileName = fileModel.name.removingPercentEncoding!
+                    vc.pdftype = .url
+                    weakSelf?.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                    
                 }
                 return cell;
                 

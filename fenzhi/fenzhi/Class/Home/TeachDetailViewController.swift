@@ -61,6 +61,20 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         page = page + 1
         self.getcommentlistData()
     }
+    
+    func reflishData() {
+        if self.newArr.count > 0 {
+            self.newArr.removeAll()
+        }
+        if self.hotArr.count > 0 {
+            self.hotArr.removeAll()
+        }
+        if self.otherArr.count > 0 {
+            self.otherArr.removeAll()
+        }
+        page = 1
+        self.getcommentlistData()
+    }
 
     //MARK:获取分享头部数据
     func getHeadData() {
@@ -213,7 +227,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
                 }
                 
-
+                KFBLog(message: self.newArr.count)
+                KFBLog(message: self.hotArr.count)
+                KFBLog(message: self.otherArr.count)
 
             } else {
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.headData.errmsg)!)
@@ -368,14 +384,20 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                 //刷新列表
                 if weakSelf?.sectionNum == 2 {
                     //最新列表里
-                    weakSelf?.otherArr.insert(model.data, at: 0)
+                    weakSelf?.otherArr.append(model.data)
 
                 } else {
                     //其他列表里加入
-                    weakSelf?.newArr.insert(model.data, at: 0)
+                    weakSelf?.newArr.append(model.data)
                 }
+                KFBLog(message: self.newArr.count)
+                KFBLog(message: self.hotArr.count)
+                KFBLog(message: self.otherArr.count)
+                
                 weakSelf?.mainTabelView.reloadData()
-//                  weakSelf?.getcommentlistData()
+//                  weakSelf?.reflishData()
+
+
             } else {
                 weakSelf?.SVshowErro(infoStr: model.errmsg)
             }
@@ -387,7 +409,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
 
 
-    func delcomment(model : GetcommentlistModel_data_list_commentList)  {
+    func delcomment(delModel : GetcommentlistModel_data_list_commentList)  {
       weak var weakSelf = self
         alertController  = UIAlertController(title: "提示", message: "是否要删除本条评论", preferredStyle: .alert)
         let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
@@ -399,11 +421,15 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
             //删除
             self.SVshowLoad()
-            weakSelf?.dataVC.delcomment(commentId: model.id, completion: { (data) in
+            weakSelf?.dataVC.delcomment(commentId: delModel.id, completion: { (data) in
                 weakSelf?.SVdismiss()
                 let model :SmsModel = data as! SmsModel
                 if model.errno == 0 {
                     weakSelf?.SVshowSucess(infoStr: "删除成功")
+                    //去除本地数据模型
+           
+                    
+                    
                 } else {
                     weakSelf?.SVshowErro(infoStr: model.errmsg)
                 }
@@ -426,7 +452,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     
     //MARK:tableView
     func creatTableView() {
-        mainTabelView.frame = CGRect(x: 0, y:headView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20) - LNAVIGATION_HEIGHT - ip7(80))
+        mainTabelView.frame = CGRect(x: 0, y:headView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20)  - ip7(80) - LNAVIGATION_HEIGHT)
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -435,8 +461,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         mainTabelView.register(commentTableViewCell.self, forCellReuseIdentifier: COMMONTELLID)
-        mainTabelView.mj_footer = footer
-        footer.setRefreshingTarget(self, refreshingAction: #selector(TeachDetailViewController.loadMoreData))
+//        mainTabelView.mj_footer = footer
+//        footer.setRefreshingTarget(self, refreshingAction: #selector(TeachDetailViewController.loadMoreData))
         mainScrollow.addSubview(mainTabelView)
 
 //        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight + mainTabelView.contentSize.height)
@@ -467,18 +493,20 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
             }
         } else {
+            KFBLog(message:  self.newArr.count)
             return self.newArr.count
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : commentTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: COMMONTELLID, for: indexPath) as! commentTableViewCell
+//        var cell : commentTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: COMMONTELLID, for: indexPath) as! commentTableViewCell
+//
+//        if (cell == nil)  {
+//            cell = commentTableViewCell(style: .default, reuseIdentifier: COMMONTELLID)
+//        }
+        let cell = commentTableViewCell(style: .default, reuseIdentifier: COMMONTELLID)
         cell.backgroundColor = .white
         cell.selectionStyle = .none
-        if (cell == nil)  {
-            cell = commentTableViewCell(style: .default, reuseIdentifier: COMMONTELLID)
-        }
-     
         var model : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()
         if sectionNum == 2 {
             if  indexPath.section == 0{

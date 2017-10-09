@@ -113,7 +113,7 @@ class ShezhiViewController: BaseViewController {
             weakSelf?.SVdismiss()
             weakSelf?.dataModel = data as! SmsModel
             print(String(describing: weakSelf?.dataModel.errno))
-            if weakSelf?.dataModel.errno == 0{
+            if weakSelf?.dataModel.errno == 0 || weakSelf?.dataModel.errno == 2006{
                 //
                 KFBLog(message: "退出成功")
                 LoginModelMapper.setLogout(complate: { (data2) in
@@ -127,8 +127,8 @@ class ShezhiViewController: BaseViewController {
                     }
 
                 })
-            } else {
-
+            } else  {
+     
 
             }
 

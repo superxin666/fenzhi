@@ -366,15 +366,15 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             if model.errno == 0 {
                 weakSelf?.SVshowSucess(infoStr: "评论成功")
                 //刷新列表
-//                if weakSelf?.sectionNum == 2 {
-//                    //最新列表里
-//                    weakSelf?.otherArr.insert(model.data, at: 0)
-//
-//                } else {
-//                    //其他列表里加入
-//                    weakSelf?.newArr.insert(model.data, at: 0)
-//                }
-//                weakSelf?.mainTabelView.reloadData()
+                if weakSelf?.sectionNum == 2 {
+                    //最新列表里
+                    weakSelf?.otherArr.insert(model.data, at: 0)
+
+                } else {
+                    //其他列表里加入
+                    weakSelf?.newArr.insert(model.data, at: 0)
+                }
+                weakSelf?.mainTabelView.reloadData()
 //                  weakSelf?.getcommentlistData()
             } else {
                 weakSelf?.SVshowErro(infoStr: model.errmsg)

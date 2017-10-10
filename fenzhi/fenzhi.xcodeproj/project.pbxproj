@@ -54,6 +54,7 @@
 		215822291F6C3D7A002BC6E6 /* UIView+clipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */; };
 		2158222B1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2158222A1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift */; };
 		2162A07F1F7DE3BB00915F4C /* UpFileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2162A07E1F7DE3BB00915F4C /* UpFileDataModel.swift */; };
+		21668B1B1F8C9FF100174EF4 /* GetCommentMessagelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21668B1A1F8C9FF100174EF4 /* GetCommentMessagelistModel.swift */; };
 		2176597B1F74BBB600A54A1D /* LikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176597A1F74BBB600A54A1D /* LikeModel.swift */; };
 		2178823B1F67E43D00365735 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2178823A1F67E43D00365735 /* RSA.m */; };
 		21B084F11F6D42B500D9F3A0 /* ShoucangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B084F01F6D42B500D9F3A0 /* ShoucangViewController.swift */; };
@@ -164,6 +165,7 @@
 		215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+clipping.swift"; sourceTree = "<group>"; };
 		2158222A1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDataMangerViewController.swift; sourceTree = "<group>"; };
 		2162A07E1F7DE3BB00915F4C /* UpFileDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpFileDataModel.swift; sourceTree = "<group>"; };
+		21668B1A1F8C9FF100174EF4 /* GetCommentMessagelistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCommentMessagelistModel.swift; sourceTree = "<group>"; };
 		2176597A1F74BBB600A54A1D /* LikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeModel.swift; sourceTree = "<group>"; };
 		217882381F67E39C00365735 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		217882391F67E43D00365735 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				214448D11F7007F60073EA06 /* GetincomelistModl.swift */,
 				21FEA6061F77F988009B1FBC /* ProfileMineModel.swift */,
 				214DC5101F7E85C4002CD41F /* GetmessagelistLikeModel.swift */,
+				21668B1A1F8C9FF100174EF4 /* GetCommentMessagelistModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -850,6 +853,7 @@
 				21EE65B51F6A7C2600806B62 /* InfoTableViewCell.swift in Sources */,
 				21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */,
 				2142298C1F78DC88000565F4 /* UserInfoHeartTableViewCell.swift in Sources */,
+				21668B1B1F8C9FF100174EF4 /* GetCommentMessagelistModel.swift in Sources */,
 				215592311F66D2800091A822 /* LoginViewController.swift in Sources */,
 				2142298A1F78D983000565F4 /* UserInfoShareTableViewCell.swift in Sources */,
 				214AF5901F61881900CA786A /* HeartReleaseViewController.swift in Sources */,

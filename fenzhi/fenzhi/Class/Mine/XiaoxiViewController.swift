@@ -13,12 +13,19 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     let rightBtn : UIButton = UIButton()
 
     var dataModel : GetmessagelistLikeModel = GetmessagelistLikeModel()//
+    var dataModel_Comment : GetCommentMessagelistModel = GetCommentMessagelistModel()//
+    
     let requestVC = MineDataManger()
     var dataArr : [GetmessagelistLikeModel_data_messageList] = []
+    var dataArr_Comment : [GetcommentlistModel_data_list_commentList] = []
     let mainTabelView : UITableView = UITableView()
     let topBaclView : UIView = UIView()
     var page :Int = 1
+    var page_com :Int = 1
     let count : Int = 10
+    var isLeft = true
+    
+    var netType : String = ""
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -34,44 +41,12 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         self.navigation_title_fontsize(name: "我的消息", fontsize: 27)
         self.creatTopView()
         self.creatTableView()
+        netType = "like"
         self.getData()
-
+        self.getData_comment()
     }
 
-    func getData()  {
-        weak var weakSelf = self
-                self.SVshowLoad()
-        requestVC.getmessagelist(typeStr : "like",pageNum: page, count: 10, completion: { (data) in
-                        weakSelf?.SVdismiss()
-            weakSelf?.dataModel = data as! GetmessagelistLikeModel
-            if weakSelf?.dataModel.errno == 0 {
-                //修改成功
-                if (weakSelf?.dataModel.data.messageList.count)! > 0{
-                    KFBLog(message: "数组")
-                    weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.messageList)!
-                    weakSelf?.mainTabelView.reloadData()
-                } else {
-                    if weakSelf?.dataArr.count == 0 {
-                        weakSelf?.mainTabelView.removeFromSuperview()
-                        weakSelf?.view.addSubview(self.showNoData())
-                    } else {
-                        weakSelf?.SVshowErro(infoStr: "没有数据了")
-                    }
 
-                }
-
-
-            } else {
-                weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
-
-            }
-            weakSelf?.mainTabelView.mj_footer.endRefreshing()
-
-        }) { (erro) in
-            weakSelf?.SVshowErro(infoStr: "请求失败")
-
-        }
-    }
 
     //MARK:头部
     func creatTopView() {
@@ -85,7 +60,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         leftBtn.titleLabel?.font = fzFont_Thin(ip7(24))
         leftBtn.backgroundColor = .clear
         topBaclView.addSubview(leftBtn)
-//        leftBtn.addTarget(self, action:#selector(HomeViewController.teachBtnClik), for: .touchUpInside)
+        leftBtn.addTarget(self, action:#selector(XiaoxiViewController.leftbtnClick), for: .touchUpInside)
 
         rightBtn.frame = CGRect(x:  KSCREEN_WIDTH/2, y: 0, width: KSCREEN_WIDTH/2, height: ip7(65))
         rightBtn.setTitle("评论", for: .normal)
@@ -93,9 +68,24 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         rightBtn.titleLabel?.font = fzFont_Thin(ip7(24))
         rightBtn.backgroundColor = .clear
         topBaclView.addSubview(rightBtn)
-        //        leftBtn.addTarget(self, action:#selector(HomeViewController.teachBtnClik), for: .touchUpInside)
+        rightBtn.addTarget(self, action:#selector(XiaoxiViewController.rightbtnClick), for: .touchUpInside)
 
     }
+    
+    //MARK:头部按钮点击
+    func leftbtnClick() {
+        KFBLog(message: "点赞")
+        isLeft = true
+        self.mainTabelView.reloadData()
+    }
+    
+    func rightbtnClick() {
+        KFBLog(message: "评论")
+        isLeft = false
+        self.mainTabelView.reloadData()
+    }
+    
+    //MARK:tableview
     func creatTableView() {
         mainTabelView.frame = CGRect(x: 0, y: topBaclView.frame.maxY + ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15))
         mainTabelView.backgroundColor = UIColor.white
@@ -111,12 +101,88 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         self.view.addSubview(mainTabelView)
 
     }
-
+    // MARK: 点赞加载更多
     func loadMoreData() {
         page = page + 1
         self.getData()
-
-
+    }
+    
+    
+    func getData()  {
+        weak var weakSelf = self
+        self.SVshowLoad()
+        requestVC.getmessagelist(typeStr : netType,pageNum: page, count: 10, completion: { (data) in
+            weakSelf?.SVdismiss()
+            weakSelf?.dataModel = data as! GetmessagelistLikeModel
+            if weakSelf?.dataModel.errno == 0 {
+                //修改成功
+                if (weakSelf?.dataModel.data.messageList.count)! > 0{
+                    KFBLog(message: "数组")
+                    weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.messageList)!
+                    weakSelf?.mainTabelView.reloadData()
+                } else {
+                    if weakSelf?.dataArr.count == 0 {
+                        weakSelf?.mainTabelView.removeFromSuperview()
+                        weakSelf?.view.addSubview(self.showNoData())
+                    } else {
+                        weakSelf?.SVshowErro(infoStr: "没有数据了")
+                    }
+                    
+                }
+                
+                
+            } else {
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
+                
+            }
+            weakSelf?.mainTabelView.mj_footer.endRefreshing()
+            
+        }) { (erro) in
+            weakSelf?.SVshowErro(infoStr: "请求失败")
+            
+        }
+    }
+    
+    
+    // MARK: 评论加载更多
+    func loadMoreData_comment() {
+        page_com = page_com + 1
+        self.getData_comment()
+    }
+    func getData_comment() {
+        weak var weakSelf = self
+        self.SVshowLoad()
+        requestVC.getmessagelist_comment(typeStr : "comment",pageNum: page, count: 10, completion: { (data) in
+            weakSelf?.SVdismiss()
+            weakSelf?.dataModel_Comment = data as! GetCommentMessagelistModel
+            if weakSelf?.dataModel_Comment.errno == 0 {
+                //修改成功
+                if (weakSelf?.dataModel_Comment.data.messageList.count)! > 0{
+                    KFBLog(message: "数组")
+                    weakSelf?.dataArr_Comment = (weakSelf?.dataArr_Comment)! + (weakSelf?.dataModel_Comment.data.messageList)!
+                    weakSelf?.mainTabelView.reloadData()
+                } else {
+                    if weakSelf?.dataArr_Comment.count == 0 {
+                        weakSelf?.mainTabelView.removeFromSuperview()
+                        weakSelf?.view.addSubview(self.showNoData())
+                    } else {
+                        weakSelf?.SVshowErro(infoStr: "没有数据了")
+                    }
+                    
+                }
+                
+                
+            } else {
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel_Comment.errmsg)!)
+                
+            }
+            weakSelf?.mainTabelView.mj_footer.endRefreshing()
+            
+        }) { (erro) in
+            weakSelf?.SVshowErro(infoStr: "请求失败")
+            
+        }
+        
     }
 
     // MARK: tableView 代理
@@ -125,7 +191,12 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataArr.count
+        if isLeft {
+            return self.dataArr.count
+        } else {
+            return self.dataArr_Comment.count
+        }
+        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

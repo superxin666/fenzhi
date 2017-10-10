@@ -8,7 +8,24 @@
 
 import UIKit
 import ObjectMapper
+class GetcommentlistModel_data_list_commentList_commentInfo: Mappable {
+    var commentId: Int!
+    var content: String = ""
 
+    
+    
+    init() {}
+    required init?(map: Map){
+        mapping(map: map)
+    }
+    // Mappable
+    func mapping(map: Map) {
+        
+        commentId <- map["commentId"]
+        content <- map["content"]
+        
+    }
+}
 class GetcommentlistModel_data_list_commentList_toCommentInfo: Mappable {
     var id: Int!
     var toCommentId : Int!
@@ -72,7 +89,11 @@ class GetcommentlistModel_data_list_commentList: Mappable {
     var userInfo : GetcommentlistModel_data_list_commentList_userInfo = GetcommentlistModel_data_list_commentList_userInfo()
     var toUserInfo : GetcommentlistModel_data_list_commentList_userInfo = GetcommentlistModel_data_list_commentList_userInfo()
     var toCommentInfo : GetcommentlistModel_data_list_commentList_toCommentInfo = GetcommentlistModel_data_list_commentList_toCommentInfo()
+
     var cellHeight: CGFloat = 0.0
+    
+    //消息列表中的评论独有的
+    var commentInfo : GetcommentlistModel_data_list_commentList_commentInfo = GetcommentlistModel_data_list_commentList_commentInfo()
 
 
     init() {}
@@ -96,6 +117,8 @@ class GetcommentlistModel_data_list_commentList: Mappable {
         isLike <- map["isLike"]
         toUserInfo <- map["toUserInfo"]
         toCommentInfo <- map["toCommentInfo"]
+        
+        commentInfo <- map["commentInfo"]
     }
 }
 

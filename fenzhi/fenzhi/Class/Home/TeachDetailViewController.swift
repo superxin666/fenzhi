@@ -28,7 +28,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     var hotTitle = ""
     var otherTitle = ""
     var newTitle = ""
-
+    var isFresh = false
+    
     let txtTextView : UITextView = UITextView()
     var keybodHeight : CGFloat = 0.0
     var txt : String = ""
@@ -73,6 +74,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             self.otherArr.removeAll()
         }
         page = 1
+        self.isFresh = true
         self.getcommentlistData()
     }
 
@@ -210,11 +212,11 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                             weakSelf?.getCommentCellHeight(model: model)
                         }
                     }
-                    if weakSelf?.page == 1{
+                    if (weakSelf?.page == 1) && (weakSelf?.isFresh == false){
                          weakSelf?.creatTableView()
                     } else {
                         weakSelf?.mainTabelView.reloadData()
-                        weakSelf?.mainTabelView.mj_footer.endRefreshing()
+//                        weakSelf?.mainTabelView.mj_footer.endRefreshing()
                     }
                     
            
@@ -381,21 +383,21 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             let model :SubmitcommentModel = data as! SubmitcommentModel
             if model.errno == 0 {
                 weakSelf?.SVshowSucess(infoStr: "评论成功")
-                //刷新列表
-                if weakSelf?.sectionNum == 2 {
-                    //最新列表里
-                    weakSelf?.otherArr.append(model.data)
-
-                } else {
-                    //其他列表里加入
-                    weakSelf?.newArr.append(model.data)
-                }
+//                //刷新列表
+//                if weakSelf?.sectionNum == 2 {
+//                    //最新列表里
+//                    weakSelf?.otherArr.append(model.data)
+//
+//                } else {
+//                    //其他列表里加入
+//                    weakSelf?.newArr.append(model.data)
+//                }
                 KFBLog(message: self.newArr.count)
                 KFBLog(message: self.hotArr.count)
                 KFBLog(message: self.otherArr.count)
                 
-                weakSelf?.mainTabelView.reloadData()
-//                  weakSelf?.reflishData()
+//                weakSelf?.mainTabelView.reloadData()
+                  weakSelf?.reflishData()
 
 
             } else {
@@ -427,9 +429,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                 if model.errno == 0 {
                     weakSelf?.SVshowSucess(infoStr: "删除成功")
                     //去除本地数据模型
-           
-                    
-                    
+                    self.reflishData()
                 } else {
                     weakSelf?.SVshowErro(infoStr: model.errmsg)
                 }
@@ -499,12 +499,12 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        var cell : commentTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: COMMONTELLID, for: indexPath) as! commentTableViewCell
-//
-//        if (cell == nil)  {
-//            cell = commentTableViewCell(style: .default, reuseIdentifier: COMMONTELLID)
-//        }
-        let cell = commentTableViewCell(style: .default, reuseIdentifier: COMMONTELLID)
+        var cell : commentTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: COMMONTELLID, for: indexPath) as! commentTableViewCell
+
+        if (cell == nil)  {
+            cell = commentTableViewCell(style: .default, reuseIdentifier: COMMONTELLID)
+        }
+//        let cell = commentTableViewCell(style: .default, reuseIdentifier: COMMONTELLID)
         cell.backgroundColor = .white
         cell.selectionStyle = .none
         var model : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()
@@ -525,7 +525,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             weakSelf?.showTxt_click()
         }
         cell.delViewBlock = {(data) in
-            weakSelf?.delcomment(model: data)
+            weakSelf?.delcomment(delModel: data)
         }
         return cell;
 

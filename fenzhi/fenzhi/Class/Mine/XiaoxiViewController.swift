@@ -41,7 +41,6 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         self.navigation_title_fontsize(name: "我的消息", fontsize: 27)
         self.creatTopView()
         self.creatTableView()
-        netType = "like"
         self.getData()
         self.getData_comment()
     }

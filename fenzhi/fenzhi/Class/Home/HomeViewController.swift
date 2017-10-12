@@ -258,10 +258,11 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.fileBlock = {click_model,indexFile in
                     weakSelf?.qucikModel = click_model;
                     let url = NSURL(string: click_model.coursewares[indexFile].file)
-                    KFBLog(message: url)
+                    KFBLog(message: url!)
                     if QLPreviewController.canPreview(url!){
                         weakSelf?.quickLookController.currentPreviewItemIndex = indexFile
                         weakSelf?.quickLookController.dataSource = self
+                        weakSelf?.quickLookController.view.frame = self.view.bounds
 //                        weakSelf?.quickLookController.transitioningDelegate = self
                         weakSelf?.quickLookController.modalPresentationStyle = .custom
                         weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
@@ -388,11 +389,18 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
     
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-        let str  = self.qucikModel.coursewares[index].file
+        
+        let fileModel =  self.qucikModel.coursewares[index]
+        let fileName = fileModel.name.removingPercentEncoding!
+        let str  = fileModel.file
         let url : NSURL =  NSURL(string: str)!
         KFBLog(message: url)
+//        let iteam : QLPreviewItem = QLPreviewItem()
+//        iteam.previewItemURL = url
+//        iteam.previewItemTitle = fileName
         return url
     }
+    
     
 
     override func didReceiveMemoryWarning() {

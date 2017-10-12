@@ -19,7 +19,7 @@ class PdfListViewController: BaseViewController {
         self.navigationBar_leftBtn()
     }
     override func navigationLeftBtnClick() {
-
+        self.navigationController?.popViewController(animated: true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

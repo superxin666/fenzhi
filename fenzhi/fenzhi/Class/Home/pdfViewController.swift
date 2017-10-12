@@ -7,11 +7,13 @@
 //
 
 import UIKit
+
+
 enum pdfType {
     case url
     case path
 }
-class pdfViewController: BaseViewController,UIWebViewDelegate {
+class pdfViewController: BaseViewController,UIWebViewDelegate,UIDocumentInteractionControllerDelegate {
     var model :TeachDetailModel_data_coursewares = TeachDetailModel_data_coursewares()
     var urlStr: String = String()
 
@@ -21,19 +23,37 @@ class pdfViewController: BaseViewController,UIWebViewDelegate {
     var webView:UIWebView?
     var pdftype :pdfType!
     
+    let documentVC = UIDocumentInteractionController()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 
         self.navigationBar_leftBtn()
-        self.createWebView()
+//        self.createWebView()
+//        documentVC.url = URL(fileURLWithPath: path) as URL!
+        documentVC.url = NSURL(string: urlStr) as URL!
+        documentVC.delegate = self
 
+    }
+    
+    func documentInteractionControllerViewForPreview(_ controller: UIDocumentInteractionController) -> UIView? {
+        return self.view
+    }
+    
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
+    }
+    func documentInteractionControllerRectForPreview(_ controller: UIDocumentInteractionController) -> CGRect {
+        return self.view.frame
     }
 
     func createWebView(){
         self.webView = UIWebView(frame:self.view.frame)
         self.webView?.delegate = self
+        self.webView?.sizeToFit()
         self.loadData()
         self.view.addSubview(self.webView!)
     }

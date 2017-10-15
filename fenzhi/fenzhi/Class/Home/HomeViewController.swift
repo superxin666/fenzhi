@@ -256,30 +256,30 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
                 }
                 cell.fileBlock = {click_model,indexFile in
-                    weakSelf?.qucikModel = click_model;
-                    let url = NSURL(string: click_model.coursewares[indexFile].file)
-                    KFBLog(message: url!)
-                    if QLPreviewController.canPreview(url!){
-                        weakSelf?.quickLookController.currentPreviewItemIndex = indexFile
-                        weakSelf?.quickLookController.dataSource = self
-                        weakSelf?.quickLookController.view.frame = self.view.bounds
-//                        weakSelf?.quickLookController.transitioningDelegate = self
-                        weakSelf?.quickLookController.modalPresentationStyle = .custom
-                        weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
-
-                        weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
-                    } else {
-                        KFBLog(message: "不能解析该文件")
-                    }
+//                    weakSelf?.qucikModel = click_model;
+//                    let url = NSURL(string: click_model.coursewares[indexFile].file)
+//                    KFBLog(message: url!)
+//                    if QLPreviewController.canPreview(url!){
+//                        weakSelf?.quickLookController.currentPreviewItemIndex = indexFile
+//                        weakSelf?.quickLookController.dataSource = self
+//                        weakSelf?.quickLookController.view.frame = self.view.bounds
+////                        weakSelf?.quickLookController.transitioningDelegate = self
+//                        weakSelf?.quickLookController.modalPresentationStyle = .custom
+//                        weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
+//
+//                        weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
+//                    } else {
+//                        KFBLog(message: "不能解析该文件")
+//                    }
 
 //
-//                    let fileModel = click_model.coursewares[indexFile]
-//                    let vc = pdfViewController()
-//                    vc.urlStr = fileModel.file
-//                    vc.fileName = fileModel.name.removingPercentEncoding!
-//                    vc.pdftype = .url
-//                    vc.hidesBottomBarWhenPushed = true
-//                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                    let fileModel = click_model.coursewares[indexFile]
+                    let vc = pdfViewController()
+                    vc.urlStr = fileModel.file
+                    vc.fileName = fileModel.name.removingPercentEncoding!
+                    vc.pdftype = .url
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
                     
                 }
                 return cell;

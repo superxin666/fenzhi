@@ -29,6 +29,10 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     var otherTitle = ""
     var newTitle = ""
     var isFresh = false
+    var isNoData = false
+    let nodataImageViewBackView = UIView()
+    let nodataImageView = UIImageView()
+
     
     let txtTextView : UITextView = UITextView()
     var keybodHeight : CGFloat = 0.0
@@ -212,11 +216,19 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                             weakSelf?.getCommentCellHeight(model: model)
                         }
                     }
-                    if (weakSelf?.page == 1) && (weakSelf?.isFresh == false){
+
+                    if (weakSelf?.page == 1) && (weakSelf?.isFresh == false) {
                          weakSelf?.creatTableView()
                     } else {
-                        weakSelf?.mainTabelView.reloadData()
-//                        weakSelf?.mainTabelView.mj_footer.endRefreshing()
+                        if weakSelf?.isNoData == true {
+                            weakSelf?.nodataImageViewBackView.removeFromSuperview()
+                            weakSelf?.mainScrollow.contentSize = CGSize(width: 0, height: (weakSelf?.headViewHeight)!  + KSCREEN_HEIGHT - ip7(20) - ip7(80))
+                            weakSelf?.creatTableView()
+                        } else {
+                            weakSelf?.mainTabelView.reloadData()
+                            weakSelf?.mainTabelView.mj_footer.endRefreshing()
+                        }
+
                     }
                     
            
@@ -224,6 +236,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                     //没有评论
                     if (weakSelf?.hotArr.count)! == 0 && (weakSelf?.newArr.count)! == 0 {
                         KFBLog(message: "没有评论")
+                        weakSelf?.mainTabelView.removeFromSuperview()
                         weakSelf?.noCommendData()
                     }
 
@@ -452,6 +465,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     
     //MARK:tableView
     func creatTableView() {
+        isNoData = false
         mainTabelView.frame = CGRect(x: 0, y:headView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20)  - ip7(80) - LNAVIGATION_HEIGHT)
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
@@ -461,22 +475,25 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         mainTabelView.register(commentTableViewCell.self, forCellReuseIdentifier: COMMONTELLID)
-//        mainTabelView.mj_footer = footer
-//        footer.setRefreshingTarget(self, refreshingAction: #selector(TeachDetailViewController.loadMoreData))
+        mainTabelView.mj_footer = footer
+        footer.setRefreshingTarget(self, refreshingAction: #selector(TeachDetailViewController.loadMoreData))
         mainScrollow.addSubview(mainTabelView)
 
 //        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight + mainTabelView.contentSize.height)
     }
     //MARK:没有数据
     func noCommendData()  {
+        isNoData = true
         mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight  + ip7(190))
-        let backView : UIView = UIView(frame: CGRect(x: 0, y: headView.frame.maxY + ip7(11/2), width: KSCREEN_WIDTH, height: ip7(190)))
-        backView.backgroundColor = .white
-        mainScrollow.addSubview(backView)
-        let imageView : UIImageView = UIImageView(frame: CGRect(x: (KSCREEN_WIDTH - ip7(230/2))/2, y: ip7(78/2), width: ip7(230/2), height: ip7(158/2)))
-        imageView.image = #imageLiteral(resourceName: "icon_zwpl")
-        backView.addSubview(imageView)
-        mainScrollow.addSubview(backView)
+
+        nodataImageViewBackView.frame =  CGRect(x: 0, y: headView.frame.maxY + ip7(11/2), width: KSCREEN_WIDTH, height: ip7(190))
+        nodataImageViewBackView.backgroundColor = .white
+        mainScrollow.addSubview(nodataImageViewBackView)
+
+        nodataImageView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(230/2))/2, y: ip7(78/2), width: ip7(230/2), height: ip7(158/2))
+        nodataImageView.image = #imageLiteral(resourceName: "icon_zwpl")
+        nodataImageViewBackView.addSubview(nodataImageView)
+        mainScrollow.addSubview(nodataImageViewBackView)
         
     }
 

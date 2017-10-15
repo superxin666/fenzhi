@@ -32,10 +32,10 @@ class pdfViewController: BaseViewController,UIWebViewDelegate,UIDocumentInteract
         // Do any additional setup after loading the view.
 
         self.navigationBar_leftBtn()
-//        self.createWebView()
+        self.createWebView()
 //        documentVC.url = URL(fileURLWithPath: path) as URL!
-        documentVC.url = NSURL(string: urlStr) as URL!
-        documentVC.delegate = self
+//        documentVC.url = NSURL(string: urlStr) as URL!
+//        documentVC.delegate = self
 
     }
     

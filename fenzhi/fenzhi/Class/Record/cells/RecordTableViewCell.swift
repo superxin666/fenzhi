@@ -138,6 +138,8 @@ class RecordTableViewCell: UITableViewCell {
                 } else {
                     imageView.image = #imageLiteral(resourceName: "word")
                 }
+                imageView.frame = CGRect(x: 0, y: 0, width: ip7(65), height: ip7(65))
+                view.addSubview(imageView)
 
                 //描述
                 let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (imageHeight - ip7(21))/2, width: imageWidth - imageView.frame.maxX - ip7(10), height: ip7(21)))

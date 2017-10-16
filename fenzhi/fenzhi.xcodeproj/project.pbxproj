@@ -89,6 +89,9 @@
 		21FB3EAE1F66392200656B74 /* TeachTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB3EAD1F66392200656B74 /* TeachTableViewCell.swift */; };
 		21FC9EB81F8DBE8D00DA81F4 /* PinglunTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC9EB71F8DBE8D00DA81F4 /* PinglunTableViewCell.swift */; };
 		21FC9EBA1F8DED1700DA81F4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21FC9EB91F8DED1700DA81F4 /* Images.xcassets */; };
+		21FE2F051F94915300DCB6A2 /* SwiftJavaScriptDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FE2F041F94915300DCB6A2 /* SwiftJavaScriptDelegate.swift */; };
+		21FE2F071F9491F300DCB6A2 /* SwiftJavaScriptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FE2F061F9491F300DCB6A2 /* SwiftJavaScriptModel.swift */; };
+		21FE2F0A1F949B6900DCB6A2 /* DingweiViewControlleroc.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FE2F091F949B6900DCB6A2 /* DingweiViewControlleroc.m */; };
 		21FEA6071F77F988009B1FBC /* ProfileMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FEA6061F77F988009B1FBC /* ProfileMineModel.swift */; };
 		85AC0AA241E550BCCE81BA92 /* Pods_fenzhi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */; };
 		9F1B36B82E4579C0E1ED8A93 /* Pods_fenzhiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A415FB4CE0E9595F86C656D9 /* Pods_fenzhiUITests.framework */; };
@@ -205,6 +208,10 @@
 		21FC9EB71F8DBE8D00DA81F4 /* PinglunTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinglunTableViewCell.swift; sourceTree = "<group>"; };
 		21FC9EB91F8DED1700DA81F4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		21FE2F031F944B9800DCB6A2 /* 纷知PRD.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "纷知PRD.docx"; sourceTree = "<group>"; };
+		21FE2F041F94915300DCB6A2 /* SwiftJavaScriptDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJavaScriptDelegate.swift; sourceTree = "<group>"; };
+		21FE2F061F9491F300DCB6A2 /* SwiftJavaScriptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJavaScriptModel.swift; sourceTree = "<group>"; };
+		21FE2F081F949B6900DCB6A2 /* DingweiViewControlleroc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DingweiViewControlleroc.h; sourceTree = "<group>"; };
+		21FE2F091F949B6900DCB6A2 /* DingweiViewControlleroc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DingweiViewControlleroc.m; sourceTree = "<group>"; };
 		21FEA6061F77F988009B1FBC /* ProfileMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMineModel.swift; sourceTree = "<group>"; };
 		3BF53C885381150890BD1D77 /* Pods-fenzhi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi.debug.xcconfig"; sourceTree = "<group>"; };
 		5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fenzhi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,9 +285,13 @@
 				214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */,
 				214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */,
 				215043621F6AC16B009546D2 /* DingweiViewController.swift */,
+				21FE2F041F94915300DCB6A2 /* SwiftJavaScriptDelegate.swift */,
+				21FE2F061F9491F300DCB6A2 /* SwiftJavaScriptModel.swift */,
 				215043641F6AD179009546D2 /* pdfViewController.swift */,
 				210862531F7A24F2000936B9 /* PdfListViewController.swift */,
 				21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */,
+				21FE2F081F949B6900DCB6A2 /* DingweiViewControlleroc.h */,
+				21FE2F091F949B6900DCB6A2 /* DingweiViewControlleroc.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -822,6 +833,7 @@
 				21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */,
 				2112E91A1F6C434F0066CF5B /* CommonModel.swift in Sources */,
 				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
+				21FE2F071F9491F300DCB6A2 /* SwiftJavaScriptModel.swift in Sources */,
 				2112E9221F6C4C8D0066CF5B /* GetbooklistModel.swift in Sources */,
 				214448D21F7007F60073EA06 /* GetincomelistModl.swift in Sources */,
 				21F5563B1F7272F00017C701 /* TeachDetailModel.swift in Sources */,
@@ -841,6 +853,7 @@
 				21B084F11F6D42B500D9F3A0 /* ShoucangViewController.swift in Sources */,
 				215822291F6C3D7A002BC6E6 /* UIView+clipping.swift in Sources */,
 				21B084F31F6D4BCA00D9F3A0 /* GetzanlistModel.swift in Sources */,
+				21FE2F0A1F949B6900DCB6A2 /* DingweiViewControlleroc.m in Sources */,
 				212D28501F7359BD004DD669 /* commentTableViewCell.swift in Sources */,
 				2162A07F1F7DE3BB00915F4C /* UpFileDataModel.swift in Sources */,
 				21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */,
@@ -849,6 +862,7 @@
 				2176597B1F74BBB600A54A1D /* LikeModel.swift in Sources */,
 				21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */,
 				214DC5111F7E85C4002CD41F /* GetmessagelistLikeModel.swift in Sources */,
+				21FE2F051F94915300DCB6A2 /* SwiftJavaScriptDelegate.swift in Sources */,
 				21C370921F7E276F003A7220 /* GunzhuOtherViewController.swift in Sources */,
 				21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */,
 				215822201F6C2012002BC6E6 /* MineDataManger.swift in Sources */,

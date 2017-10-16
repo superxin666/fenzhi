@@ -8,12 +8,17 @@
 
 import UIKit
 import JavaScriptCore
+
+
 typealias DingweiViewControllerBloke = (_ name:String) -> ()
 class DingweiViewController: BaseViewController,UIWebViewDelegate {
     var webView:UIWebView?
     var context: JSContext = JSContext()
-    
+
     var sureBlock : DingweiViewControllerBloke!
+    let bridge = "bridge"
+    
+    
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
@@ -39,15 +44,26 @@ class DingweiViewController: BaseViewController,UIWebViewDelegate {
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.context = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as! JSContext
-        self.context.exceptionHandler = {(context : JSContext, exceptionValue : JSValue) in
-            
-            
-            } as! (JSContext?, JSValue?) -> Void
+        let model = SwiftJavaScriptModel()
+        model.controller = self
+        model.jsContext = self.context
+        self.context.setObject(model, forKeyedSubscript: bridge as NSCopying & NSObjectProtocol)
         
-        let save  = self.context.objectForKeyedSubscript("save_click")
-        KFBLog(message: save)
-        let cancle  = self.context.objectForKeyedSubscript("cancle_click")
-        KFBLog(message: cancle)
+        
+        let curUrl = self.webView?.request?.url?.absoluteString
+        self.context.evaluateScript(curUrl)
+        
+
+        
+//        self.context.exceptionHandler = {(context : JSContext, exceptionValue : JSValue) in
+//
+//
+//            } as! (JSContext?, JSValue?) -> Void
+        
+//        let save  = self.context.objectForKeyedSubscript("save_click")
+//        KFBLog(message: save)
+//        var cancle  = self.context.objectForKeyedSubscript("cancle_click")
+//        KFBLog(message: cancle)
         
         
     }

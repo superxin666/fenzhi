@@ -9,6 +9,7 @@
 #ifndef Bridging_Header_h
 #define Bridging_Header_h
 #import "RSA.h"
+#import "DingweiViewControlleroc.h"
 #import <MJRefresh/MJRefresh.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>

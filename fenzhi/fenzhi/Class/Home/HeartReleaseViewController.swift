@@ -323,15 +323,24 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         if !nsetBtn.isSelected {
             self.nestBtnClik()
         }
-        let vc = DingweiViewController()
-        vc.sureBlock = {(name : String) in
-            self.isHaveDingwei = true
-            self.imageBackView.isHidden = false
-            self.dingweiBackView.isHidden = false
-            if self.isHaveFiles {
-                self.colletionView.frame.origin.y = self.dingweiBackView.frame.maxY + ip7(15)
-            }
-        }
+        
+        let vc = DingweiViewControlleroc()
+        let urlStr = BASER_API + selectCouse_api + "token=" + "".getToken_RSA()
+        vc.mainUrl =  urlStr
+        
+        
+        
+        
+        
+//        let vc = DingweiViewController()
+//        vc.sureBlock = {(name : String) in
+//            self.isHaveDingwei = true
+//            self.imageBackView.isHidden = false
+//            self.dingweiBackView.isHidden = false
+//            if self.isHaveFiles {
+//                self.colletionView.frame.origin.y = self.dingweiBackView.frame.maxY + ip7(15)
+//            }
+//        }
         self.navigationController?.pushViewController(vc, animated: true)
     
     }

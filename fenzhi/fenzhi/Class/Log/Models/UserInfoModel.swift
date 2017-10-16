@@ -8,6 +8,9 @@
 
 import UIKit
 import ObjectMapper
+let COUSENAME = "setSelectCouse_name"
+let COUSEID = "setSelectCouse_id"
+let ISHAVECOUSEINFO = "isHaveSelectCouseinfo"
 class UserInfoModel: Mappable {
     var avatar: String = ""
     var book: Int = 0
@@ -69,6 +72,36 @@ class UserInfoModel: Mappable {
         bookName <- map["bookName"]
         versionName <- map["versionName"]
 
+    }
+    class func setSelectCouse_name_id(name : String , id : String, ishaveinfo : String, complate:(_ data : Any) ->() ){
+        UserDefaults.standard.set("1", forKey: ISHAVECOUSEINFO)
+        UserDefaults.standard.set(name, forKey: COUSENAME)
+        UserDefaults.standard.set(id, forKey: COUSEID)
+        let ok = UserDefaults.standard.synchronize()
+        if ok {
+            print("存储成功")
+            complate("1")
+        } else {
+            print("存储失败")
+            complate("0")
+        }
+    }
+    
+    
+    class func getSelectCouse_name_id() -> (ishaveCouse : String,name : String, id:String) {
+        var isHaveCouse :String? = UserDefaults.standard.value(forKey: ISHAVECOUSEINFO) as! String?
+        if isHaveCouse == nil {
+            isHaveCouse = "0"
+        }
+        var nameStr :String? = UserDefaults.standard.value(forKey: COUSENAME) as! String?
+        if nameStr == nil {
+            nameStr = ""
+        }
+        var idStr :String? = UserDefaults.standard.value(forKey: COUSEID) as! String?
+        if idStr == nil {
+            idStr = ""
+        }
+        return (isHaveCouse!,nameStr!,idStr!)
     }
 
 

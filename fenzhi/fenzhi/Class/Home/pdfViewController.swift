@@ -31,12 +31,15 @@ class pdfViewController: BaseViewController,UIWebViewDelegate,UIDocumentInteract
 
         // Do any additional setup after loading the view.
 
-        self.navigationBar_leftBtn()
-        self.createWebView()
-//        documentVC.url = URL(fileURLWithPath: path) as URL!
+//        self.navigationBar_leftBtn()
+//        self.createWebView()
+//        let urlste = URL(fileURLWithPath: "")
+        
+        //
+        documentVC.url = URL(fileURLWithPath: "/Users/lvxin/fenzhi/fenzhi/fenzhi/纷知PRD.docx") as URL!
 //        documentVC.url = NSURL(string: urlStr) as URL!
-//        documentVC.delegate = self
-
+        documentVC.delegate = self
+        documentVC.presentPreview(animated: true)
     }
     
     func documentInteractionControllerViewForPreview(_ controller: UIDocumentInteractionController) -> UIView? {
@@ -49,6 +52,7 @@ class pdfViewController: BaseViewController,UIWebViewDelegate,UIDocumentInteract
     func documentInteractionControllerRectForPreview(_ controller: UIDocumentInteractionController) -> CGRect {
         return self.view.frame
     }
+    
 
     func createWebView(){
         self.webView = UIWebView(frame:self.view.frame)

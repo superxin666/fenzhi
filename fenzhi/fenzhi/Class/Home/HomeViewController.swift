@@ -260,26 +260,26 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 //                    let url = NSURL(string: click_model.coursewares[indexFile].file)
 //                    KFBLog(message: url!)
 //                    if QLPreviewController.canPreview(url!){
-//                        weakSelf?.quickLookController.currentPreviewItemIndex = indexFile
-//                        weakSelf?.quickLookController.dataSource = self
-//                        weakSelf?.quickLookController.view.frame = self.view.bounds
-////                        weakSelf?.quickLookController.transitioningDelegate = self
-//                        weakSelf?.quickLookController.modalPresentationStyle = .custom
-//                        weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
-//
-//                        weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
+                        weakSelf?.quickLookController.currentPreviewItemIndex = 0
+                        weakSelf?.quickLookController.dataSource = self
+                        weakSelf?.quickLookController.view.frame = self.view.bounds
+//                        weakSelf?.quickLookController.transitioningDelegate = self
+                        weakSelf?.quickLookController.modalPresentationStyle = .custom
+                        weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
+
+                        weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
 //                    } else {
 //                        KFBLog(message: "不能解析该文件")
 //                    }
 
 //
-                    let fileModel = click_model.coursewares[indexFile]
-                    let vc = pdfViewController()
-                    vc.urlStr = fileModel.file
-                    vc.fileName = fileModel.name.removingPercentEncoding!
-                    vc.pdftype = .url
-                    vc.hidesBottomBarWhenPushed = true
-                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+//                    let fileModel = click_model.coursewares[indexFile]
+//                    let vc = pdfViewController()
+//                    vc.urlStr = fileModel.file
+//                    vc.fileName = fileModel.name.removingPercentEncoding!
+//                    vc.pdftype = .url
+//                    vc.hidesBottomBarWhenPushed = true
+//                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
                     
                 }
                 return cell;
@@ -395,11 +395,13 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         let str  = fileModel.file
         let url : NSURL =  NSURL(string: str)!
         KFBLog(message: url)
+        
 //        let iteam : QLPreviewItem = QLPreviewItem()
 //        iteam.previewItemURL = url
 //        iteam.previewItemTitle = fileName
-        return url
-    }
+        return URL(fileURLWithPath: "/Users/lvxin/fenzhi/fenzhi/fenzhi/纷知PRD.docx") as QLPreviewItem
+//        return url
+    } 
     
     
 

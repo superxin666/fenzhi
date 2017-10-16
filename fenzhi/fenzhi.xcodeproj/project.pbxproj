@@ -204,6 +204,7 @@
 		21FB3EAD1F66392200656B74 /* TeachTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachTableViewCell.swift; sourceTree = "<group>"; };
 		21FC9EB71F8DBE8D00DA81F4 /* PinglunTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinglunTableViewCell.swift; sourceTree = "<group>"; };
 		21FC9EB91F8DED1700DA81F4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		21FE2F031F944B9800DCB6A2 /* 纷知PRD.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "纷知PRD.docx"; sourceTree = "<group>"; };
 		21FEA6061F77F988009B1FBC /* ProfileMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMineModel.swift; sourceTree = "<group>"; };
 		3BF53C885381150890BD1D77 /* Pods-fenzhi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fenzhi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fenzhi/Pods-fenzhi.debug.xcconfig"; sourceTree = "<group>"; };
 		5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fenzhi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,6 +351,7 @@
 		213BF84C1F60317300D60AE5 /* fenzhi */ = {
 			isa = PBXGroup;
 			children = (
+				21FE2F031F944B9800DCB6A2 /* 纷知PRD.docx */,
 				21FA059D1F677CDD0083EFD4 /* DataManger */,
 				21062ADF1F603E9E0003C7C4 /* Tool */,
 				21062AD51F6038CD0003C7C4 /* Class */,
@@ -1033,6 +1035,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9F3W6D3BQ5;
 				INFOPLIST_FILE = fenzhi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1052,6 +1055,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9F3W6D3BQ5;
 				INFOPLIST_FILE = fenzhi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

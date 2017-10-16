@@ -16,6 +16,11 @@ let BASER_API = "http://fenzhi.wchao.org"//线上域名
 
 //let last_par = "&client=iphone&version="+St
 
+
+//h5
+let selectCouse_api = "/h5/selectCouse.html?"
+
+
 //-------------------通用接口
 let common_api = "/api/common?"
 let getregionlist_api = "/api/getregionlist?"

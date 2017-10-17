@@ -10,7 +10,9 @@ import UIKit
 import Alamofire
 import ObjectMapper
 import SwiftyJSON
-
+let COUSENAME = "setSelectCouse_name"
+let COUSEID = "setSelectCouse_id"
+let ISHAVECOUSEINFO = "isHaveSelectCouseinfo"
 class LogDataMangerViewController: FZRequestViewController {
 
     func login(phoneNum : String, paseWord : String, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
@@ -149,7 +151,37 @@ class LogDataMangerViewController: FZRequestViewController {
             }
         }
         
-        
+    }
+    
+    class func setSelectCouse_name_id(name : String , couseid : String, ishaveinfo : String){
+        UserDefaults.standard.set("1", forKey: ISHAVECOUSEINFO)
+        UserDefaults.standard.set(name, forKey: COUSENAME)
+        UserDefaults.standard.set(couseid, forKey: COUSEID)
+        let ok = UserDefaults.standard.synchronize()
+//        if ok {
+//            print("存储成功")
+//            complate("1")
+//        } else {
+//            print("存储失败")
+//            complate("0")
+//        }
+    }
+    
+    
+    class func getSelectCouse_name_id() -> (ishaveCouse : String,name : String, couseid:String) {
+        var isHaveCouse :String? = UserDefaults.standard.value(forKey: ISHAVECOUSEINFO) as! String?
+        if isHaveCouse == nil {
+            isHaveCouse = "0"
+        }
+        var nameStr :String? = UserDefaults.standard.value(forKey: COUSENAME) as! String?
+        if nameStr == nil {
+            nameStr = ""
+        }
+        var idStr :String? = UserDefaults.standard.value(forKey: COUSEID) as! String?
+        if idStr == nil {
+            idStr = ""
+        }
+        return (isHaveCouse!,nameStr!,idStr!)
     }
 
 

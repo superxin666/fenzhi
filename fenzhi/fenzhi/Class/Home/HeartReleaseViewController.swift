@@ -36,6 +36,8 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     var isHaveDingwei = false//是否有定位
     
     var txtStr : String = ""
+    var couseId : String = ""
+    
     let dataVC = HomeDataMangerController()
     let loadVC = CommonDataMangerViewController()
 
@@ -51,15 +53,13 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-
         self.navigation_title_fontsize(name: "心得分享", fontsize: 27)
         self.view.backgroundColor = .white
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")
         self.creatUI()
-
+        
     }
 
     //MARK:发布
@@ -188,11 +188,9 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         self.view.bringSubview(toFront: self.btnBackView)
         //课时定位
         self.creaDingweiBackView()
+
         //图片背景
         self.creatImageView()
-
-        self.dingweiBackView.isHidden = true
-//        self.imageBackView.isHidden = true
     }
     
         //MARK:按钮
@@ -249,6 +247,13 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         dingweiLabel.textAlignment = .left
         dingweiLabel.adjustsFontSizeToFitWidth = true
         dingweiBackView.addSubview(dingweiLabel)
+        if LogDataMangerViewController.getSelectCouse_name_id().ishaveCouse == "1" {
+            self.dingweiBackView.isHidden = false
+            dingweiLabel.text =  LogDataMangerViewController.getSelectCouse_name_id().name
+            couseId =  LogDataMangerViewController.getSelectCouse_name_id().couseid
+        } else {
+            self.dingweiBackView.isHidden = true
+        }
 
     }
         //MARK:展示图片
@@ -259,8 +264,12 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = ip7(6)
         layout.sectionInset = UIEdgeInsetsMake(0, ip7(3), 0, ip7(3))
+        if LogDataMangerViewController.getSelectCouse_name_id().ishaveCouse == "1" {
+            colletionView = UICollectionView(frame: CGRect(x: 15, y: ip7(15) + dingweiBackView.frame.maxY, width: KSCREEN_WIDTH-30, height: itemHeight), collectionViewLayout: layout)
+        } else {
+            colletionView = UICollectionView(frame: CGRect(x: 15, y: ip7(13), width: KSCREEN_WIDTH-30, height: itemHeight), collectionViewLayout: layout)
+        }
 
-        colletionView = UICollectionView(frame: CGRect(x: 15, y: ip7(13), width: KSCREEN_WIDTH-30, height: itemHeight), collectionViewLayout: layout)
         colletionView.register(ActionCollectionViewCell.self, forCellWithReuseIdentifier: "actioncollectioncell_id")
         colletionView.backgroundColor = .clear
         colletionView.delegate = self
@@ -323,24 +332,16 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         if !nsetBtn.isSelected {
             self.nestBtnClik()
         }
-        
         let vc = DingweiViewControlleroc()
         let urlStr = BASER_API + selectCouse_api + "token=" + "".getToken_RSA()
         vc.mainUrl =  urlStr
-        
-        
-        
-        
-        
-//        let vc = DingweiViewController()
-//        vc.sureBlock = {(name : String) in
-//            self.isHaveDingwei = true
-//            self.imageBackView.isHidden = false
-//            self.dingweiBackView.isHidden = false
-//            if self.isHaveFiles {
-//                self.colletionView.frame.origin.y = self.dingweiBackView.frame.maxY + ip7(15)
-//            }
-//        }
+        weak var weakSelf = self
+        vc.sureBlock = {
+            weakSelf?.dingweiLabel.text = LogDataMangerViewController.getSelectCouse_name_id().name
+            weakSelf?.couseId = LogDataMangerViewController.getSelectCouse_name_id().couseid
+            weakSelf?.dingweiBackView.isHidden = false
+            weakSelf?.colletionView.frame.origin.y = ip7(15) + (weakSelf?.dingweiBackView.frame.maxY)!
+            } as DingweiViewControllerocblock
         self.navigationController?.pushViewController(vc, animated: true)
     
     }

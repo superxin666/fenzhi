@@ -149,7 +149,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     func getData_comment() {
         weak var weakSelf = self
         self.SVshowLoad()
-        requestVC.getmessagelist_comment(typeStr : "comment",pageNum: page, count: 10, completion: { (data) in
+        requestVC.getmessagelist_comment(typeStr : "comment",pageNum: page_com, count: 10, completion: { (data) in
             weakSelf?.SVdismiss()
             weakSelf?.dataModel_Comment = data as! GetCommentMessagelistModel
             if weakSelf?.dataModel_Comment.errno == 0 {

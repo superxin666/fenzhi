@@ -64,6 +64,7 @@ let lineView_thin_COLOUR = FZColorFromRGB(rgbValue: 0xdfdfdf)
 let dark_a_COLOUR = FZColorFromRGB(rgbValue: 0xaaaaaa)
 let dark_6_COLOUR = FZColorFromRGB(rgbValue: 0x666666)
 let dark_3_COLOUR = FZColorFromRGB(rgbValue: 0x333333)
+let dark_f7f7f7_COLOUR = FZColorFromRGB(rgbValue: 0xf7f7f7)
 
 let dark_105_COLOUR = FZColor(red: 105, green: 105, blue: 105, alpha: 1.0)
 //自定义调试信息打印

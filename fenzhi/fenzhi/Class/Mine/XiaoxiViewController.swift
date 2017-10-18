@@ -10,7 +10,10 @@ import UIKit
 
 class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
     let leftBtn : UIButton = UIButton()
+    let leftView = UIView()
+    
     let rightBtn : UIButton = UIButton()
+    let rightView = UIView()
 
     var dataModel : GetmessagelistLikeModel = GetmessagelistLikeModel()//
     var dataModel_Comment : GetCommentMessagelistModel = GetCommentMessagelistModel()//
@@ -60,6 +63,10 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         leftBtn.backgroundColor = .clear
         topBaclView.addSubview(leftBtn)
         leftBtn.addTarget(self, action:#selector(XiaoxiViewController.leftbtnClick), for: .touchUpInside)
+        
+        leftView.frame = CGRect(x: (KSCREEN_WIDTH/2 - ip7(60))/2, y: ip7(65) - 4, width: ip7(60), height: 4)
+        leftView.backgroundColor = blue_COLOUR
+        leftBtn.addSubview(leftView)
 
         rightBtn.frame = CGRect(x:  KSCREEN_WIDTH/2, y: 0, width: KSCREEN_WIDTH/2, height: ip7(65))
         rightBtn.setTitle("评论", for: .normal)
@@ -68,6 +75,11 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         rightBtn.backgroundColor = .clear
         topBaclView.addSubview(rightBtn)
         rightBtn.addTarget(self, action:#selector(XiaoxiViewController.rightbtnClick), for: .touchUpInside)
+        
+        rightView.frame = CGRect(x: (KSCREEN_WIDTH/2 - ip7(60))/2, y: ip7(65) - 4, width: ip7(60), height: 4)
+        rightView.backgroundColor = blue_COLOUR
+        rightView.isHidden = true
+        rightBtn.addSubview(rightView)
 
     }
     
@@ -75,12 +87,16 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     func leftbtnClick() {
         KFBLog(message: "点赞")
         isLeft = true
+        leftView.isHidden = false
+        rightView.isHidden  = true
         self.mainTabelView.reloadData()
     }
     
     func rightbtnClick() {
         KFBLog(message: "评论")
         isLeft = false
+        rightView.isHidden = false
+        leftView.isHidden = true
         self.mainTabelView.reloadData()
     }
     
@@ -248,13 +264,16 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             if indexPath.row < self.dataArr_Comment.count {
                 cell.setUpUI(model: self.dataArr_Comment[indexPath.row])
             }
-//            weak var weakSelf = self
-//            cell.iconImageViewBlock = {(click_model) in
-//                let vc = UserInfoViewController()
-//                vc.userId  = click_model.userInfo.userId
-//                vc.hidesBottomBarWhenPushed = true
-//                weakSelf?.navigationController?.pushViewController(vc, animated: true)
-//            }
+            weak var weakSelf = self
+            cell.iconImageBlock = {(click_model) in
+                let vc = UserInfoViewController()
+                vc.userId  = click_model.userInfo.userId
+                vc.hidesBottomBarWhenPushed = true
+                weakSelf?.navigationController?.pushViewController(vc, animated: true)
+            }
+            cell.returnClickBlock =  {(click_model) in
+                KFBLog(message: "回复")
+            }
             return cell;
             
         }
@@ -262,6 +281,26 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
 
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        if isLeft {
+            let model : GetmessagelistLikeModel_data_messageList = self.dataArr[indexPath.row]
+            let vc = TeachDetailViewController()
+            vc.fenxId = model.fenxInfo.fenxId
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let model : GetcommentlistModel_data_list_commentList = self.dataArr_Comment[indexPath.row]
+            let vc = TeachDetailViewController()
+            vc.fenxId = model.fenxInfo.fenxId
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+       
+
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         if isLeft {
            return ip7(188/2)

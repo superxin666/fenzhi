@@ -7,8 +7,14 @@
 //
 
 import UIKit
+typealias PinglunTableViewBlock = (_ model : GetcommentlistModel_data_list_commentList)->()
+
 
 class PinglunTableViewCell: UITableViewCell {
+    
+    var iconImageBlock : PinglunTableViewBlock!//头像点击
+    var returnClickBlock : PinglunTableViewBlock!//回复评论
+    
     var dataModel : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()
     let icoinImageView : UIImageView = UIImageView()//头像
     let nameLabel : UILabel  = UILabel()//名字
@@ -18,6 +24,9 @@ class PinglunTableViewCell: UITableViewCell {
     let content : UILabel = UILabel()//评论内容
     let dingweiLabel :UILabel = UILabel()//课时定位
     let timeLabel : UILabel = UILabel()//时间
+    
+
+//
     
     func setUpUI(model : GetcommentlistModel_data_list_commentList)  {
         dataModel = model
@@ -30,8 +39,8 @@ class PinglunTableViewCell: UITableViewCell {
         icoinImageView.isUserInteractionEnabled = true
         self.addSubview(icoinImageView)
         
-//        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(commentTableViewCell.image_Click))
-//        iconImageView.addGestureRecognizer(iconImageViewTap)
+        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PinglunTableViewCell.image_Click))
+        icoinImageView.addGestureRecognizer(iconImageViewTap)
         
         //名字
         let nameWidth = viewW  - icoinImageView.frame.maxX - ip7(25) - ip7(56) - ip7(27)
@@ -47,8 +56,8 @@ class PinglunTableViewCell: UITableViewCell {
         nameLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(nameLabel)
         
-//        let nameTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(commentTableViewCell.image_Click))
-//        nameLabel.addGestureRecognizer(nameTap)
+        let nameTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PinglunTableViewCell.image_Click))
+        nameLabel.addGestureRecognizer(nameTap)
         
         
         returnBtn.frame = CGRect(x: viewW - ip7(56) - ip7(27), y: ip7(23), width: ip7(56), height: ip7(31))
@@ -57,7 +66,7 @@ class PinglunTableViewCell: UITableViewCell {
         returnBtn.titleLabel?.font = fzFont_Thin(ip7(18))
         returnBtn.backgroundColor = FZColorFromRGB(rgbValue: 0x8cd851)
         returnBtn.kfb_makeRadius(radius: 4)
-//        returnBtn.addTarget(self, action:#selector(HomeViewController.teachBtnClik), for: .touchUpInside)
+        returnBtn.addTarget(self, action:#selector(PinglunTableViewCell.return_click), for: .touchUpInside)
         returnBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: ip7(20))
         self.addSubview(returnBtn)
         
@@ -81,7 +90,7 @@ class PinglunTableViewCell: UITableViewCell {
             content.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  returnContent.frame.maxY + ip7(15), width: labelW, height: ip7(53))
             content.isUserInteractionEnabled = true
             content.text =  model.toCommentInfo.content
-            content.backgroundColor = dark_3_COLOUR
+            content.backgroundColor = dark_f7f7f7_COLOUR
             content.textColor = dark_6_COLOUR
             content.font = fzFont_Thin(ip7(18))
             content.textAlignment = .left
@@ -118,6 +127,18 @@ class PinglunTableViewCell: UITableViewCell {
         lineView.backgroundColor = lineView_thin_COLOUR
         self.addSubview(lineView)
         
+    }
+    
+    func image_Click() {
+        if let _ =  iconImageBlock {
+            iconImageBlock(self.dataModel)
+        }
+    }
+    
+    func return_click() {
+        if let _ =  returnClickBlock {
+            returnClickBlock(self.dataModel)
+        }
     }
 
     override func awakeFromNib() {

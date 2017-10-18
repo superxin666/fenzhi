@@ -200,7 +200,7 @@ class MineDataManger: FZRequestViewController {
 
     func getmessagelist(typeStr : String, pageNum : Int, count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
-        let urlStr = BASER_API + getmessagelist_api +  "type=" + typeStr + "&pageNum=\(pageNum)"+"&count=\(count)"+last_pra+token_pra
+        let urlStr = BASER_API + getmessagelist_api +  "type=" + "like" + "&pageNum=\(pageNum)"+"&count=\(count)"+last_pra+token_pra
         var model:GetmessagelistLikeModel = GetmessagelistLikeModel()
         KFBLog(message: urlStr)
         Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
@@ -219,7 +219,7 @@ class MineDataManger: FZRequestViewController {
     
     func getmessagelist_comment(typeStr : String, pageNum : Int, count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
-        let urlStr = BASER_API + getmessagelist_api +  "type=" + typeStr + "&pageNum=\(pageNum)"+"&count=\(count)"+last_pra+token_pra
+        let urlStr = BASER_API + getmessagelist_api +  "type=" + "comment" + "&pageNum=\(pageNum)"+"&count=\(count)"+last_pra+token_pra
         var model:GetCommentMessagelistModel = GetCommentMessagelistModel()
         KFBLog(message: urlStr)
         Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in

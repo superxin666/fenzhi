@@ -126,13 +126,11 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                     } else {
                         weakSelf?.SVshowErro(infoStr: "没有数据了")
                     }
-                    
                 }
                 
                 
             } else {
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
-                
             }
             weakSelf?.mainTabelView.mj_footer.endRefreshing()
             
@@ -158,6 +156,9 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                 //修改成功
                 if (weakSelf?.dataModel_Comment.data.messageList.count)! > 0{
                     KFBLog(message: "数组")
+                    for model in (weakSelf?.dataModel_Comment.data.messageList)!{
+                        weakSelf?.getCellHeight(model: model)
+                    }
                     weakSelf?.dataArr_Comment = (weakSelf?.dataArr_Comment)! + (weakSelf?.dataModel_Comment.data.messageList)!
                     weakSelf?.mainTabelView.reloadData()
                 } else {
@@ -183,6 +184,26 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         }
         
     }
+    
+    func getCellHeight(model : GetcommentlistModel_data_list_commentList) {
+        //头像 + 评论文字
+        let returnContentStr = model.commentInfo.content
+        let labelW = KSCREEN_WIDTH  - ip7(85) - ip7(25) - ip7(27)
+        let returnContentH :CGFloat = returnContentStr.getLabHeight(font: fzFont_Thin(ip7(18)), LabelWidth: labelW)
+        var height = ip7(83) + returnContentH
+        //被评论内容
+        if model.toCommentInfo.content.characters.count > 0 {
+            height = height + ip7(15) + ip7(53)
+        }
+        //定位
+        if model.fenxInfo.catalog.characters.count > 0 {
+            height = height + ip7(25) + ip7(21)
+        }
+        //时间
+        height = height + ip7(15) + ip7(18)
+        height = height + ip7(43)
+        model.cellHeight = height
+    }
 
     // MARK: tableView 代理
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -205,25 +226,50 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
 //        if (cell == nil)  {
 //            cell = ShouruTableViewCell(style: .default, reuseIdentifier: SHOURUELLID)
 //        }
-        let cell = DianzanTableViewCell(style: .default, reuseIdentifier: "DIANZANCELLIS")
-        cell.backgroundColor = .clear
-        cell.selectionStyle = .none
-        if indexPath.row < self.dataArr.count {
-            cell.setUpUIWithModel_cellType(model: self.dataArr[indexPath.row])
+        if isLeft {
+            let cell = DianzanTableViewCell(style: .default, reuseIdentifier: "DIANZANCELLIS")
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            if indexPath.row < self.dataArr.count {
+                cell.setUpUIWithModel_cellType(model: self.dataArr[indexPath.row])
+            }
+            weak var weakSelf = self
+            cell.iconImageViewBlock = {(click_model) in
+                let vc = UserInfoViewController()
+                vc.userId  = click_model.userInfo.userId
+                vc.hidesBottomBarWhenPushed = true
+                weakSelf?.navigationController?.pushViewController(vc, animated: true)
+            }
+            return cell;
+        } else {
+            let cell = PinglunTableViewCell(style: .default, reuseIdentifier: "PINGLUNCELLIS")
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            if indexPath.row < self.dataArr_Comment.count {
+                cell.setUpUI(model: self.dataArr_Comment[indexPath.row])
+            }
+//            weak var weakSelf = self
+//            cell.iconImageViewBlock = {(click_model) in
+//                let vc = UserInfoViewController()
+//                vc.userId  = click_model.userInfo.userId
+//                vc.hidesBottomBarWhenPushed = true
+//                weakSelf?.navigationController?.pushViewController(vc, animated: true)
+//            }
+            return cell;
+            
         }
-        weak var weakSelf = self
-        cell.iconImageViewBlock = {(click_model) in
-            let vc = UserInfoViewController()
-            vc.userId  = click_model.userInfo.userId
-            vc.hidesBottomBarWhenPushed = true
-            weakSelf?.navigationController?.pushViewController(vc, animated: true)
-        }
-        return cell;
+
 
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return ip7(188/2)
+        if isLeft {
+           return ip7(188/2)
+        } else {
+            let model = self.dataArr_Comment[indexPath.row]
+           return model.cellHeight
+        }
+       
     }
 
     override func navigationLeftBtnClick() {

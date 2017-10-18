@@ -8,6 +8,27 @@
 
 import UIKit
 import ObjectMapper
+class GetcommentlistModel_data_list_commentList_fenxInfo: Mappable {
+    var fenxId: Int!
+    var type: Int!
+    var catalog: String = ""
+    
+    
+    
+    init() {}
+    required init?(map: Map){
+        mapping(map: map)
+    }
+    // Mappable
+    func mapping(map: Map) {
+        
+        fenxId <- map["fenxId"]
+        type <- map["type"]
+        catalog <- map["catalog"]
+        
+    }
+}
+
 class GetcommentlistModel_data_list_commentList_commentInfo: Mappable {
     var commentId: Int!
     var content: String = ""
@@ -94,6 +115,8 @@ class GetcommentlistModel_data_list_commentList: Mappable {
     
     //消息列表中的评论独有的
     var commentInfo : GetcommentlistModel_data_list_commentList_commentInfo = GetcommentlistModel_data_list_commentList_commentInfo()
+    var fenxInfo:GetcommentlistModel_data_list_commentList_fenxInfo = GetcommentlistModel_data_list_commentList_fenxInfo()
+    
 
 
     init() {}
@@ -119,6 +142,7 @@ class GetcommentlistModel_data_list_commentList: Mappable {
         toCommentInfo <- map["toCommentInfo"]
         
         commentInfo <- map["commentInfo"]
+        fenxInfo <- map["fenxInfo"]
     }
 }
 

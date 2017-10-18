@@ -21,12 +21,12 @@ class PinglunTableViewCell: UITableViewCell {
     
     func setUpUI(model : GetcommentlistModel_data_list_commentList)  {
         dataModel = model
-        let viewH  = ip7(275)
         let viewW = KSCREEN_WIDTH
         
         //头像
         icoinImageView.frame = CGRect(x: ip7(25), y: ip7(23), width: ip7(60), height: ip7(60))
         icoinImageView.kfb_makeRound()
+        icoinImageView.kf.setImage(with: URL(string: model.userInfo.avatar))
         icoinImageView.isUserInteractionEnabled = true
         self.addSubview(icoinImageView)
         
@@ -38,6 +38,11 @@ class PinglunTableViewCell: UITableViewCell {
         nameLabel.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  ip7(23), width: nameWidth, height: ip7(24))
         nameLabel.isUserInteractionEnabled = true
         nameLabel.textColor = dark_3_COLOUR
+        if model.fenxInfo.type == 0 {
+            nameLabel.text = model.userInfo.name + "   点赞了您的教学分享"
+        } else {
+            nameLabel.text = model.userInfo.name + "   点赞了您的心得分享"
+        }
         nameLabel.font = fzFont_Medium(ip7(24))
         nameLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(nameLabel)
@@ -48,51 +53,70 @@ class PinglunTableViewCell: UITableViewCell {
         
         returnBtn.frame = CGRect(x: viewW - ip7(56) - ip7(27), y: ip7(23), width: ip7(56), height: ip7(31))
         returnBtn.setTitle("回复", for: .normal)
-        returnBtn.setTitleColor(dark_6_COLOUR, for: .normal)
+        returnBtn.setTitleColor(.white, for: .normal)
         returnBtn.titleLabel?.font = fzFont_Thin(ip7(18))
         returnBtn.backgroundColor = FZColorFromRGB(rgbValue: 0x8cd851)
-        returnBtn.kfb_makeRadius(radius: 8)
-        returnBtn.addTarget(self, action:#selector(HomeViewController.teachBtnClik), for: .touchUpInside)
+        returnBtn.kfb_makeRadius(radius: 4)
+//        returnBtn.addTarget(self, action:#selector(HomeViewController.teachBtnClik), for: .touchUpInside)
         returnBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: ip7(20))
         self.addSubview(returnBtn)
         
-       let labelW = viewW  - icoinImageView.frame.maxX - ip7(25) - ip7(27)
-        returnContent.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  icoinImageView.frame.maxY + ip7(8), width: labelW, height: ip7(18))
+        
+        //评论
+        let returnContentStr = model.commentInfo.content
+        let labelW = viewW  - icoinImageView.frame.maxX - ip7(25) - ip7(27)
+        let returnContentH :CGFloat = returnContentStr.getLabHeight(font: fzFont_Thin(ip7(18)), LabelWidth: labelW)
+        
+        returnContent.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  icoinImageView.frame.maxY + ip7(8), width: labelW, height: returnContentH)
+        returnContent.text = returnContentStr
         returnContent.isUserInteractionEnabled = true
         returnContent.textColor = dark_6_COLOUR
         returnContent.font = fzFont_Thin(ip7(18))
-        returnContent.adjustsFontSizeToFitWidth = true
         self.addSubview(returnContent)
         
-        content.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  returnContent.frame.maxY + ip7(15), width: labelW, height: ip7(53))
-        content.isUserInteractionEnabled = true
-        content.backgroundColor = dark_3_COLOUR
-        content.textColor = dark_6_COLOUR
-        content.font = fzFont_Thin(ip7(18))
-        content.textAlignment = .left
-        content.adjustsFontSizeToFitWidth = true
-        self.addSubview(content)
+        var lastFream = returnContent.frame
         
-        dingweiLabel.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  content.frame.maxY + ip7(25), width: labelW, height: ip7(21))
-        dingweiLabel.isUserInteractionEnabled = true
-        dingweiLabel.textColor = blue_COLOUR
-        dingweiLabel.font = fzFont_Thin(ip7(21))
-        dingweiLabel.adjustsFontSizeToFitWidth = true
-        self.addSubview(dingweiLabel)
+        //如果有被评论内容 则是回复我的评论 没有则是评论的分享
+        if model.toCommentInfo.content.characters.count > 0 {
+            content.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  returnContent.frame.maxY + ip7(15), width: labelW, height: ip7(53))
+            content.isUserInteractionEnabled = true
+            content.text =  model.toCommentInfo.content
+            content.backgroundColor = dark_3_COLOUR
+            content.textColor = dark_6_COLOUR
+            content.font = fzFont_Thin(ip7(18))
+            content.textAlignment = .left
+            content.adjustsFontSizeToFitWidth = true
+            self.addSubview(content)
+            
+            lastFream = content.frame
+        }
+
         
+        //定位 有定位显示定位 没有定位显示 内容
+        if model.fenxInfo.catalog.characters.count > 0 {
+            dingweiLabel.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  lastFream.maxY + ip7(25), width: labelW, height: ip7(21))
+            dingweiLabel.isUserInteractionEnabled = true
+            dingweiLabel.textColor = blue_COLOUR
+            dingweiLabel.font = fzFont_Thin(ip7(21))
+            dingweiLabel.adjustsFontSizeToFitWidth = true
+            dingweiLabel.text = model.fenxInfo.catalog
+            self.addSubview(dingweiLabel)
+            lastFream = dingweiLabel.frame
+        }
         
-        timeLabel.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  dingweiLabel.frame.maxY + ip7(15), width: labelW, height: ip7(18))
+        //时间
+        timeLabel.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  lastFream.maxY + ip7(15), width: labelW, height: ip7(18))
         timeLabel.isUserInteractionEnabled = true
         timeLabel.textColor = dark_a_COLOUR
         timeLabel.font = fzFont_Thin(ip7(18))
+        timeLabel.text = String.getDate_detail(dateStr: model.createTime)
         timeLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(timeLabel)
         
         
-        let lineView : UIView = UIView(frame: CGRect(x: ip7(25), y:viewH - 0.5 , width: viewW - ip7(25), height: 0.5))
+        let lineView : UIView = UIView(frame: CGRect(x: ip7(25), y:model.cellHeight - 0.5 , width: viewW - ip7(25), height: 0.5))
         lineView.backgroundColor = lineView_thin_COLOUR
         self.addSubview(lineView)
-        
         
     }
 

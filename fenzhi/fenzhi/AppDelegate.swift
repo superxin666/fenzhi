@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate ,WXApiDelegate{
 
     var window: UIWindow?
     var fileManager = FileManager.default

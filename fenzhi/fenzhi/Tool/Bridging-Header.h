@@ -13,4 +13,5 @@
 #import <MJRefresh/MJRefresh.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
+#import "WXApi.h"
 #endif /* Bridging_Header_h */

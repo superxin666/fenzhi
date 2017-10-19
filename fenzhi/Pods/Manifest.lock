@@ -16,6 +16,7 @@ PODS:
     - UMengUShare/Core
   - UMengUShare/UI (6.4.5):
     - UMengUShare/Core
+  - WechatOpenSDK (1.8.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - UMengUShare/Social/ReducedQQ
   - UMengUShare/Social/ReducedWeChat
   - UMengUShare/UI
+  - WechatOpenSDK
 
 EXTERNAL SOURCES:
   Spring:
@@ -50,7 +52,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: 3f37f3409ddb15f35c99315ae7dc33c474aa3256
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   UMengUShare: a5711c54e640b04e3048e931d2b88d50f9cfa55c
+  WechatOpenSDK: 0ee07a8d492299d3e47372a33da5af26524a7576
 
-PODFILE CHECKSUM: 8184c721452e59e23aa96ffc1251aa36dbc953d8
+PODFILE CHECKSUM: 81cd6bbdaa33ba0510a389a0d0583204df592c8f
 
 COCOAPODS: 1.2.1

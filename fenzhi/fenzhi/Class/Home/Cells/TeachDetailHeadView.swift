@@ -8,6 +8,7 @@
 
 import UIKit
 typealias TeachDetailHeadViewBlock = (_ model:TeachDetailModel_data_coursewares)->()
+typealias TeachDetailHeadViewZANSHANGBlock = (_ model:TeachDetailModel)->()
 class TeachDetailHeadView: UIView {
 
     var dataModel : TeachDetailModel = TeachDetailModel()
@@ -18,6 +19,8 @@ class TeachDetailHeadView: UIView {
     var fenxinagBtn : UIButton = UIButton()
     var baseVC : BaseViewController = BaseViewController()
     var docBlock : TeachDetailHeadViewBlock!
+    var zanshangBlock  : TeachDetailHeadViewZANSHANGBlock!
+    
 
 
     func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat,type : Int) {
@@ -203,7 +206,7 @@ class TeachDetailHeadView: UIView {
         zanBtn.backgroundColor = FZColorFromRGB(rgbValue: 0xfd7acf)
         zanBtn.setTitleColor( .white, for: .normal)
         zanBtn.titleLabel?.font = fzFont_Medium(ip7(21))
-//        zanBtn.addTarget(self, action:#selector(HomeViewController.heartBtnClick), for: .touchUpInside)
+        zanBtn.addTarget(self, action:#selector(TeachDetailHeadView.zanshang_click), for: .touchUpInside)
         backView.addSubview(zanBtn)
 
 
@@ -377,6 +380,12 @@ class TeachDetailHeadView: UIView {
             }
         }
 
+    }
+    
+    func zanshang_click() {
+        if let _ = zanshangBlock {
+            zanshangBlock(self.dataModel)
+        }
     }
 
 }

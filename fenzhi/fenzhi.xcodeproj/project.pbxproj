@@ -17,6 +17,7 @@
 		2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E91D1F6C4A3E0066CF5B /* GetschoollistModel.swift */; };
 		2112E9221F6C4C8D0066CF5B /* GetbooklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E9211F6C4C8D0066CF5B /* GetbooklistModel.swift */; };
 		2119946B1F7745EF00FB8016 /* RecordHeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2119946A1F7745EF00FB8016 /* RecordHeartTableViewCell.swift */; };
+		2124A0651F983AAD008BC63F /* PayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2124A0641F983AAD008BC63F /* PayView.swift */; };
 		212D284E1F7359A1004DD669 /* GetcommentlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D284D1F7359A1004DD669 /* GetcommentlistModel.swift */; };
 		212D28501F7359BD004DD669 /* commentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D284F1F7359BC004DD669 /* commentTableViewCell.swift */; };
 		213015E11F768D060029EFD1 /* GetmyfeedlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213015E01F768D060029EFD1 /* GetmyfeedlistModel.swift */; };
@@ -127,6 +128,7 @@
 		2112E91D1F6C4A3E0066CF5B /* GetschoollistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetschoollistModel.swift; sourceTree = "<group>"; };
 		2112E9211F6C4C8D0066CF5B /* GetbooklistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetbooklistModel.swift; sourceTree = "<group>"; };
 		2119946A1F7745EF00FB8016 /* RecordHeartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeartTableViewCell.swift; sourceTree = "<group>"; };
+		2124A0641F983AAD008BC63F /* PayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayView.swift; sourceTree = "<group>"; };
 		212D284D1F7359A1004DD669 /* GetcommentlistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetcommentlistModel.swift; sourceTree = "<group>"; };
 		212D284F1F7359BC004DD669 /* commentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentTableViewCell.swift; sourceTree = "<group>"; };
 		213015E01F768D060029EFD1 /* GetmyfeedlistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetmyfeedlistModel.swift; sourceTree = "<group>"; };
@@ -337,6 +339,14 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
+		2124A0631F983A51008BC63F /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				2124A0641F983AAD008BC63F /* PayView.swift */,
+			);
+			path = Pay;
+			sourceTree = "<group>";
+		};
 		213BF8411F60317300D60AE5 = {
 			isa = PBXGroup;
 			children = (
@@ -398,6 +408,7 @@
 		214AF58A1F61791C00CA786A /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				2124A0631F983A51008BC63F /* Pay */,
 				2162A07E1F7DE3BB00915F4C /* UpFileDataModel.swift */,
 				21BD78761F618C1600539E8D /* BaseViewController.swift */,
 				215822261F6C3033002BC6E6 /* NoWifiView.swift */,
@@ -819,6 +830,7 @@
 				210862541F7A24F2000936B9 /* PdfListViewController.swift in Sources */,
 				21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */,
 				21F1C5981F68E002002FC28A /* UserInfoModel.swift in Sources */,
+				2124A0651F983AAD008BC63F /* PayView.swift in Sources */,
 				2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */,
 				2178823B1F67E43D00365735 /* RSA.m in Sources */,
 				214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */,

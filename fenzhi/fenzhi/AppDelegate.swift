@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func setupUM() {
          UMSocialManager.default().openLog(true)
          UMSocialManager.default().umSocialAppkey = "59ce05e265b6d66f26000235"
-         UMSocialManager.default().setPlaform(.wechatSession, appKey: "", appSecret: "", redirectURL: nil)
+         UMSocialManager.default().setPlaform(.wechatSession, appKey: "wx62e8de46fa3ca72c", appSecret: "3514a03fffff6336853162c87e2665b5", redirectURL: nil)
          UMSocialManager.default().setPlaform(.QQ, appKey: "", appSecret: "", redirectURL: nil)
     }
     

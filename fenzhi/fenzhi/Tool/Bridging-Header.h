@@ -14,4 +14,5 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
 #import "WXApi.h"
+#import "WXApiObject.h"
 #endif /* Bridging_Header_h */

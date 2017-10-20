@@ -18,9 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         // Override point for customization after application launch.
         self.window?.backgroundColor = .white
         self.mainMenu()
-        self.setupUM()
+//        self.setupUM()
         //微信支付
-        WXApi.registerApp("wx62e8de46fa3ca72c")
+        WXApi.registerApp("wx62e8de46fa3ca72c", enableMTA: true)
+//        WXApi.registerApp("wx62e8de46fa3ca72c")
 //        self.showLogin()
 //        self.showMain()
 //        self.showInfo()
@@ -109,11 +110,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
         KFBLog(message: url)
         KFBLog(message: url.host)
-        if url.host == "pay" {
-            //微信支付
-            //发送通知
-            
-        }
         return WXApi.handleOpen(url, delegate: self)
     }
     
@@ -121,15 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         KFBLog(message: application)
         KFBLog(message: annotation)
         KFBLog(message: sourceApplication)
-        
         KFBLog(message: url)
 
-        KFBLog(message: url.host)
-        if url.host == "pay" {
-            //微信支付
-            //发送通知
-            
-        }
 //        let str2 = url.absoluteString
 ////        KFBLog(message: str2.removingPercentEncoding)
 //        let str3 :String = str2.removingPercentEncoding!
@@ -172,25 +161,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         KFBLog(message: url)
         KFBLog(message: url.host)
-        if url.host == "pay" {
-            //微信支付
-            //发送通知
-            
-        }
         return WXApi.handleOpen(url, delegate: self)
     }
-    
-    
-    //MARK:微信回调
-    func onReq(_ req: BaseReq!) {
+
+    func onResp(_ resp: BaseResp!) {
         KFBLog(message: "微信回调")
-        if req.isKind(of: PayResp.self) {
-            let response = req as! PayResp!
-            KFBLog(message: (response?.errCode.description)! + (response?.errStr)!)
+        if resp is PayResp {
+            switch resp.errCode {
+                case 0 :
+                KFBLog(message: "成功")
+                default:
+                KFBLog(message: resp.errCode)
+                KFBLog(message: resp.errStr)
+            }
         }
     }
-    
-
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

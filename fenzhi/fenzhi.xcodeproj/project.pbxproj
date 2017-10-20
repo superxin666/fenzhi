@@ -28,6 +28,7 @@
 		213BF8581F60317300D60AE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213BF8561F60317300D60AE5 /* LaunchScreen.storyboard */; };
 		213BF8631F60317300D60AE5 /* fenzhiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF8621F60317300D60AE5 /* fenzhiTests.swift */; };
 		213BF86E1F60317300D60AE5 /* fenzhiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */; };
+		214196871F99CC0000F5C659 /* createorderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214196861F99CC0000F5C659 /* createorderModel.swift */; };
 		2142298A1F78D983000565F4 /* UserInfoShareTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214229891F78D982000565F4 /* UserInfoShareTableViewCell.swift */; };
 		2142298C1F78DC88000565F4 /* UserInfoHeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142298B1F78DC88000565F4 /* UserInfoHeartTableViewCell.swift */; };
 		214448CE1F7002880073EA06 /* ShouruViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214448CD1F7002880073EA06 /* ShouruViewController.swift */; };
@@ -145,6 +146,7 @@
 		213BF8691F60317300D60AE5 /* fenzhiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fenzhiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		213BF86D1F60317300D60AE5 /* fenzhiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fenzhiUITests.swift; sourceTree = "<group>"; };
 		213BF86F1F60317300D60AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		214196861F99CC0000F5C659 /* createorderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createorderModel.swift; sourceTree = "<group>"; };
 		214229891F78D982000565F4 /* UserInfoShareTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoShareTableViewCell.swift; sourceTree = "<group>"; };
 		2142298B1F78DC88000565F4 /* UserInfoHeartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeartTableViewCell.swift; sourceTree = "<group>"; };
 		214448CD1F7002880073EA06 /* ShouruViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouruViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				2124A0641F983AAD008BC63F /* PayView.swift */,
+				214196861F99CC0000F5C659 /* createorderModel.swift */,
 			);
 			path = Pay;
 			sourceTree = "<group>";
@@ -870,6 +873,7 @@
 				2162A07F1F7DE3BB00915F4C /* UpFileDataModel.swift in Sources */,
 				21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */,
 				21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */,
+				214196871F99CC0000F5C659 /* createorderModel.swift in Sources */,
 				21570C921F6579ED003C7D38 /* UserInfoViewController.swift in Sources */,
 				2176597B1F74BBB600A54A1D /* LikeModel.swift in Sources */,
 				21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */,

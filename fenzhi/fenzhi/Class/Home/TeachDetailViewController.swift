@@ -126,6 +126,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             KFBLog(message: "赞赏点击")
             let view = PayView(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(554), width: KSCREEN_WIDTH, height: ip7(554)))
             view.setUpData(name: (weakSelf?.headData.data.userInfo.name)!, iconStr: (weakSelf?.headData.data.userInfo.avatar)!)
+            view.fenxID = (weakSelf?.fenxId)!
             weakSelf?.view.window?.addSubview(self.maskView)
             weakSelf?.maskView.addSubview(view)
         }

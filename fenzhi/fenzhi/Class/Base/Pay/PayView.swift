@@ -25,8 +25,10 @@ class PayView: UIView {
     let sureBtn : UIButton = UIButton()//赞赏
     let noticeBtn_bottom : UIButton = UIButton()//底部提示语
     var btnArr = Array<UIButton>()//按钮数组
+    var fenxID : Int = 0
     
     
+    let requestVC = CommonDataMangerViewController()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -113,6 +115,7 @@ class PayView: UIView {
         sureBtn.setTitleColor(.white, for: .normal)
         sureBtn.titleLabel?.font = fzFont_Thin(ip7(21))
         sureBtn.backgroundColor = blue_COLOUR
+        sureBtn.addTarget(self, action: #selector(self.pay_click), for: .touchUpInside)
         self.addSubview(sureBtn)
         
         //提示2
@@ -139,6 +142,53 @@ class PayView: UIView {
                 btn.setTitleColor(.black, for: .normal)
                 btn.backgroundColor = .white
             }
+        }
+    }
+    
+    func pay_click()  {
+
+        weak var weakSelf = self
+        requestVC.createorder(fenxId: fenxID, price: 1, completion: { (data) in
+            let model = data as! createorderModel
+            
+            if model.errno == 0 {
+                let wxModel = model.data.wxpay
+                
+                
+                let request = PayReq()
+                /** 商家向财付通申请的商家id */
+                request.partnerId = wxModel.partnerid
+                
+                /** 预支付订单 */
+                request.prepayId = wxModel.prepayid
+                
+                /** 商家根据微信开放平台文档对数据做的签名 */
+                request.sign = wxModel.sign
+                
+                /** 商家根据财付通文档填写的数据和签名 */
+                request.package = "Sign=WXPay";
+                
+                /** 随机串，防重发 */
+                request.nonceStr = wxModel.noncestr
+                
+                /** 时间戳，防重发 */
+                
+                request.timeStamp = UInt32(Int(wxModel.timestamp)!);
+                
+                /*! @brief 发送请求到微信，等待微信返回onResp
+                 *
+                 * 函数调用后，会切换到微信的界面。第三方应用程序等待微信返回onResp。微信在异步处理完成后一定会调用onResp。支持以下类型
+                 * SendAuthReq、SendMessageToWXReq、PayReq等。
+                 * @param req 具体的发送请求，在调用函数后，请自己释放。
+                 * @return 成功返回YES，失败返回NO。
+                 */
+                WXApi.send(request)
+            } else {
+                  KFBLog(message: model.errmsg)
+            }
+            
+        }) { (error) in
+            
         }
     }
 }

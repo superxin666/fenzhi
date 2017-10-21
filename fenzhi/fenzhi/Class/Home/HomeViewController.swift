@@ -252,6 +252,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.zanshangBlock = {(click_model,indexFile) in
                     let vc = TeachDetailViewController()
                     vc.fenxId = click_model.id
+                    vc.isshowzanshang = true
                     vc.hidesBottomBarWhenPushed = true
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
                 }
@@ -314,6 +315,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.zanshangBlock = {click_model in
                     let vc = TeachDetailViewController()
                     vc.fenxId = click_model.id
+                    vc.isshowzanshang = true
                     vc.hidesBottomBarWhenPushed = true
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
                 }

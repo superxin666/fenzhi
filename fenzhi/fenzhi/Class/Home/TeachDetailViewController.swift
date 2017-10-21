@@ -10,6 +10,8 @@ import UIKit
 let COMMONTELLID = "COMMONTELL_ID"//
 class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
     var fenxId :Int!
+    var isshowzanshang : Bool = false
+
 
     let mainScrollow : UIScrollView = UIScrollView()
     let mainTabelView : UITableView = UITableView()
@@ -124,17 +126,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
         headView.zanshangBlock = {(model) in
             KFBLog(message: "赞赏点击")
-            let view = PayView(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(554), width: KSCREEN_WIDTH, height: ip7(554)))
-            view.setUpData(name: (weakSelf?.headData.data.userInfo.name)!, iconStr: (weakSelf?.headData.data.userInfo.avatar)!)
-            view.fenxID = (weakSelf?.fenxId)!
-            view.cancleBlock = {
-                view.removeFromSuperview()
-                weakSelf?.maskView.removeFromSuperview()
-            }
-            weakSelf?.view.window?.addSubview(self.maskView)
-            weakSelf?.maskView.addSubview(view)
+            weakSelf?.showZanShang()
         }
-
         self.creatTxtView()
     }
     //MARK:获取分享头部尺寸
@@ -179,6 +172,19 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             let imageWidth = (viewWidth - ip7(10) * 7)/8
             headViewHeight = headViewHeight + ip7(29) + (imageWidth * CGFloat(backViewNum))
         }
+    }
+
+    func showZanShang()  {
+        weak var weakSelf = self
+        let view = PayView(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(554), width: KSCREEN_WIDTH, height: ip7(554)))
+        view.setUpData(name: (weakSelf?.headData.data.userInfo.name)!, iconStr: (weakSelf?.headData.data.userInfo.avatar)!)
+        view.fenxID = (weakSelf?.fenxId)!
+        view.cancleBlock = {
+            view.removeFromSuperview()
+            weakSelf?.maskView.removeFromSuperview()
+        }
+        weakSelf?.view.window?.addSubview(self.maskView)
+        weakSelf?.maskView.addSubview(view)
     }
 
     //MARK:获取评论列表数据
@@ -265,10 +271,12 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }) { (erro) in
                weakSelf?.SVshowErro(infoStr: "请求失败")
         }
-
+        if isshowzanshang {
+            isshowzanshang = false
+            //展示赞赏列表
+            self.showZanShang()
+        }
     }
-    
-
 
     func getTabelViewSectionNum() {
         var num = 0

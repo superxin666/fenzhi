@@ -173,6 +173,13 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
 
                 }
+                cell.zanshangBlock = {(click_model,indexNum) in
+                    let vc = TeachDetailViewController()
+                    vc.fenxId = click_model.id
+                    vc.isshowzanshang = true
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                }
 
                 cell.delViewBlock = {(delmodel,indexNum) in
                     KFBLog(message: "删除block")

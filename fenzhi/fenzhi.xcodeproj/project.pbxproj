@@ -621,7 +621,7 @@
 				TargetAttributes = {
 					213BF8491F60317300D60AE5 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 9F3W6D3BQ5;
+						DevelopmentTeam = HCQNBJR33C;
 						ProvisioningStyle = Automatic;
 					};
 					213BF85D1F60317300D60AE5 = {
@@ -1066,11 +1066,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9F3W6D3BQ5;
+				DEVELOPMENT_TEAM = HCQNBJR33C;
 				INFOPLIST_FILE = fenzhi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.huizhixingchen.fenzhi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hzxc.fenzhi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/lvxin/fenzhi/fenzhi/fenzhi/Tool/Bridging-Header.h";
@@ -1086,11 +1086,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9F3W6D3BQ5;
+				DEVELOPMENT_TEAM = HCQNBJR33C;
 				INFOPLIST_FILE = fenzhi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.huizhixingchen.fenzhi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hzxc.fenzhi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/lvxin/fenzhi/fenzhi/fenzhi/Tool/Bridging-Header.h";

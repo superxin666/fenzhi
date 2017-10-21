@@ -224,15 +224,25 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                                 }
                             } else {
                                  weakSelf?.SVshowErro(infoStr: "没有数据了")
+                                 weakSelf?.mainTabelView.mj_footer.endRefreshing()
+
                             }
                         }
 
                     } else  {
                         //1 最新评论
-                        weakSelf?.newArr = (weakSelf?.newArr)! + (weakSelf?.commentlistData.data.list[0].commentList)!
-                        for model in (weakSelf?.newArr)! {
-                            weakSelf?.getCommentCellHeight(model: model)
+                        let subarr = (weakSelf?.commentlistData.data.list[0].commentList)!
+                        if subarr.count > 0 {
+                            weakSelf?.newArr = (weakSelf?.newArr)! + (weakSelf?.commentlistData.data.list[0].commentList)!
+                            for model in (weakSelf?.newArr)! {
+                                weakSelf?.getCommentCellHeight(model: model)
+                            }
+                        } else {
+                            weakSelf?.SVshowErro(infoStr: "没有更多数据了")
+                            weakSelf?.mainTabelView.mj_footer.endRefreshing()
+
                         }
+
                     }
 
                     if (weakSelf?.page == 1) && (weakSelf?.isFresh == false) {
@@ -256,6 +266,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                         KFBLog(message: "没有评论")
                         weakSelf?.mainTabelView.removeFromSuperview()
                         weakSelf?.noCommendData()
+                    } else {
+                        weakSelf?.mainTabelView.mj_footer.endRefreshing()
+
                     }
 
                 }

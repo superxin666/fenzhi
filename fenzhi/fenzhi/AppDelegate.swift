@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         // Override point for customization after application launch.
         self.window?.backgroundColor = .white
         self.mainMenu()
-//        self.setupUM()
+        self.setupUM()
         //微信支付
         WXApi.registerApp("wx62e8de46fa3ca72c", enableMTA: true)
 //        WXApi.registerApp("wx62e8de46fa3ca72c")
@@ -29,10 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     }
     //MARK:友盟
     func setupUM() {
-         UMSocialManager.default().openLog(true)
-         UMSocialManager.default().umSocialAppkey = "59ce05e265b6d66f26000235"
-         UMSocialManager.default().setPlaform(.wechatSession, appKey: "wx62e8de46fa3ca72c", appSecret: "3514a03fffff6336853162c87e2665b5", redirectURL: nil)
-         UMSocialManager.default().setPlaform(.QQ, appKey: "", appSecret: "", redirectURL: nil)
+        UMUntil.setUpUM()
     }
     //MARK:vc展示
     func mainMenu() {
@@ -110,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
         KFBLog(message: url)
         KFBLog(message: url.host)
-        return WXApi.handleOpen(url, delegate: self)
+        return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -155,13 +152,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
 //            }
 //
 //        }
-        return WXApi.handleOpen(url, delegate: self)
+        return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         KFBLog(message: url)
         KFBLog(message: url.host)
-        return WXApi.handleOpen(url, delegate: self)
+        return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
     }
 
     func onResp(_ resp: BaseResp!) {

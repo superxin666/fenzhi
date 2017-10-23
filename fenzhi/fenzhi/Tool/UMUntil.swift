@@ -40,8 +40,10 @@ class UMUntil: NSObject {
     func shareWebUrlToPlatformWithUrl(webUlr : String,controller:UIViewController,thumbUrl : String,title : String,des : String)  {
         let messageObject :UMSocialMessageObject = UMSocialMessageObject()
         let shareObject : UMShareWebpageObject = UMShareWebpageObject()
-        let imageData = NSData(contentsOf: URL(string: thumbUrl)!)
-        let image = UIImage(data: imageData! as Data)
+//        let imageData = NSData(contentsOf: URL(string: thumbUrl)!)
+//        let image = UIImage(data: imageData! as Data)
+        let image = #imageLiteral(resourceName: "logo512")
+        
         shareObject.thumbImage = image
         shareObject.title = title
         shareObject.descr = des

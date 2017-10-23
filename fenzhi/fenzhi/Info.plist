@@ -46,11 +46,32 @@
 				<string>wx62e8de46fa3ca72c</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>tencent</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tencent1106494994</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>qq</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>QQ41f3c612</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>tim</string>
 		<string>timapiV1</string>
 		<string>wtlogintimV1</string>
 		<string>timopensdkdataline</string>
@@ -64,7 +85,6 @@
 		<string>timwpa</string>
 		<string>timopensdkfriend</string>
 		<string>timapi</string>
-		<string>tim</string>
 		<string>mttbrowser</string>
 		<string>mqqbrowser</string>
 		<string>mqzoneopensdkapi</string>
@@ -122,7 +142,7 @@
 	<array>
 		<dict>
 			<key>UTTypeIdentifier</key>
-			<string>com.huizhixingchen.fenzhi</string>
+			<string>com.hzxc.fenzhi</string>
 		</dict>
 	</array>
 </dict>

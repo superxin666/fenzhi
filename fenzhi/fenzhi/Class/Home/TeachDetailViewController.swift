@@ -128,6 +128,19 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             KFBLog(message: "赞赏点击")
             weakSelf?.showZanShang()
         }
+
+        headView.fenxiangBlock = {(model) in
+            let umeng = UMUntil()
+            let url = "https://www.irongbei.com/Common/appdown"
+            let thunUrlStr = "https://www.irongbei.com/images_app/fenxiang.png"
+            let titleStr = "标题"
+            let desStr = "描述"
+            
+            umeng.sharClick(share: { (type) in
+                umeng.shareWebUrlToPlatformWithUrl(webUlr: url, controller: self, thumbUrl: thunUrlStr, title: titleStr, des: desStr)
+                
+            })
+        }
         self.creatTxtView()
     }
     //MARK:获取分享头部尺寸

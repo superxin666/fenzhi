@@ -20,6 +20,7 @@ class TeachDetailHeadView: UIView {
     var baseVC : BaseViewController = BaseViewController()
     var docBlock : TeachDetailHeadViewBlock!
     var zanshangBlock  : TeachDetailHeadViewZANSHANGBlock!
+    var fenxiangBlock : TeachDetailHeadViewZANSHANGBlock!
     
 
 
@@ -364,7 +365,9 @@ class TeachDetailHeadView: UIView {
 
         } else {
             //分享
-
+            if let _ = fenxiangBlock {
+                fenxiangBlock(self.dataModel)
+            }
         }
 
     }

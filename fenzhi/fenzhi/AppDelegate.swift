@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.window?.backgroundColor = .white
-        self.mainMenu()
         self.setupUM()
+        self.mainMenu()
+
         //微信支付
         WXApi.registerApp("wx62e8de46fa3ca72c", enableMTA: true)
-//        WXApi.registerApp("wx62e8de46fa3ca72c")
 //        self.showLogin()
 //        self.showMain()
 //        self.showInfo()

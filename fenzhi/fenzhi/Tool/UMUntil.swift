@@ -10,7 +10,7 @@ import UIKit
 let UMKEY = "59ce05e265b6d66f26000235"
 let WECHATKEY = "wx62e8de46fa3ca72c"
 let WECHASECRET = "3514a03fffff6336853162c87e2665b5"
-
+let QQAPPID = "1106494994"
 typealias SHAREBLOCK = (_ type: UMSocialPlatformType)->()
 
 class UMUntil: NSObject {
@@ -18,20 +18,22 @@ class UMUntil: NSObject {
     
     
     func getShareUI_BottomAndIconAndBGRadius() {
-        UMSocialUIManager.removeAllCustomPlatformWithoutFilted()
+//        UMSocialUIManager.removeAllCustomPlatformWithoutFilted()
+        UMSocialShareUIConfig.shareInstance().shareTitleViewConfig.isShow = true
         UMSocialShareUIConfig.shareInstance().sharePageGroupViewConfig.sharePageGroupViewPostionType = .bottom
         UMSocialShareUIConfig.shareInstance().sharePageScrollViewConfig.shareScrollViewPageItemStyleType = .iconAndBGRadius
     }
     
     func setPreDefinePlatforms() {
-        UMSocialUIManager.setPreDefinePlatforms([UMSocialPlatformType.QQ,UMSocialPlatformType.qzone,UMSocialPlatformType.wechatTimeLine,UMSocialPlatformType.wechatSession])
+        UMSocialUIManager.setPreDefinePlatforms([2,1,4,5])
+//        UMSocialUIManager.setPreDefinePlatforms([(UMSocialPlatformType.QQ),(UMSocialPlatformType.qzone),(UMSocialPlatformType.wechatTimeLine),(UMSocialPlatformType.wechatSession)])
     }
     
    static func setUpUM() {
         UMSocialManager.default().openLog(true)
         UMSocialManager.default().umSocialAppkey = UMKEY
         UMSocialManager.default().setPlaform(.wechatSession, appKey: WECHATKEY, appSecret: WECHASECRET, redirectURL: nil)
-        UMSocialManager.default().setPlaform(.QQ, appKey: "", appSecret: "", redirectURL: nil)
+        UMSocialManager.default().setPlaform(.QQ, appKey: QQAPPID, appSecret: nil, redirectURL: nil)
     }
     
     

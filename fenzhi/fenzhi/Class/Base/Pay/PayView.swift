@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+typealias PayViewBclock = ()->()
 class PayView: UIView {
 
     /*
@@ -26,9 +26,12 @@ class PayView: UIView {
     let noticeBtn_bottom : UIButton = UIButton()//底部提示语
     var btnArr = Array<UIButton>()//按钮数组
     var fenxID : Int = 0
-    
-    
+    var payMonery : Int = 0//分位单位
+
+    var cancleBlock : PayViewBclock!//
+
     let requestVC = CommonDataMangerViewController()
+    var baseVC : BaseViewController = BaseViewController()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,10 +44,17 @@ class PayView: UIView {
     
     
     func creatUI()  {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pay_result_sucess), name:  NSNotification.Name(rawValue: "pay_sucess"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pay_result_fail), name:  NSNotification.Name(rawValue: "pay_err"), object: nil)
+
+
 //        let viewH = ip7(554)
 //        let viewW = KSCREEN_WIDTH
         self.backgroundColor = .white
-        
+        self.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.removeSelf))
+        self.addGestureRecognizer(tap)
+
         //头像
         icoinImageView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(48))/2, y: ip7(50), width: ip7(48), height: ip7(48))
         icoinImageView.kfb_makeRound()
@@ -108,6 +118,7 @@ class PayView: UIView {
         cancleBtn.setTitleColor(.white, for: .normal)
         cancleBtn.titleLabel?.font = fzFont_Thin(ip7(21))
         cancleBtn.backgroundColor = FZColorFromRGB(rgbValue: 0x8cd851)
+        cancleBtn.addTarget(self, action: #selector(self.removeSelf), for: .touchUpInside)
         self.addSubview(cancleBtn)
 
         sureBtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(68) - ip7(180), y:lineView.frame.maxY + ip7(32), width: ip7(180), height: ip7(51))
@@ -143,11 +154,28 @@ class PayView: UIView {
                 btn.backgroundColor = .white
             }
         }
+//        let nameArr = ["2","5","10","20","30","50",]
+        switch tagNum {
+        case 0:
+            payMonery = 2 * 100
+        case 1:
+            payMonery = 5 * 100
+        case 2:
+            payMonery = 10 * 100
+        case 3:
+            payMonery = 20 * 100
+        case 4:
+            payMonery = 30 * 100
+        case 5:
+            payMonery = 50 * 100
+        default:
+            payMonery = 2 * 100
+        }
     }
     
     func pay_click()  {
-
         weak var weakSelf = self
+        //payMonery
         requestVC.createorder(fenxId: fenxID, price: 1, completion: { (data) in
             let model = data as! createorderModel
             
@@ -190,5 +218,21 @@ class PayView: UIView {
         }) { (error) in
             
         }
+    }
+
+    func pay_result_sucess() {
+        //支付成功
+        baseVC.SVshowSucess(infoStr: "支付成功")
+        self.cancleBlock()
+    }
+    func pay_result_fail() {
+        //支付失败
+        baseVC.SVshowErro(infoStr: "支付失败，请重新尝试")
+    }
+    func removeSelf()  {
+        if let _ = cancleBlock {
+            self.cancleBlock()
+        }
+//        self.removeFromSuperview()
     }
 }

@@ -30,7 +30,7 @@ class RecordTableViewCell: UITableViewCell {
 
     var delViewBlock : RecordTableViewCellBlock!
     var fileBlock : RecordTableViewCellBlock!
-
+    var zanshangBlock : RecordTableViewCellBlock!
     func setUpUIWithModelAndType(model : GetmyfeedlistModel_data_fenxList) {
         self.dataModel = model
         let viewW = KSCREEN_WIDTH
@@ -251,7 +251,9 @@ class RecordTableViewCell: UITableViewCell {
 
         } else {
             //赞赏
-
+            if let _ =  zanshangBlock {
+                zanshangBlock(self.dataModel,0)
+            }
         }
 
     }

@@ -10,6 +10,8 @@ import UIKit
 let COMMONTELLID = "COMMONTELL_ID"//
 class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
     var fenxId :Int!
+    var isshowzanshang : Bool = false
+
 
     let mainScrollow : UIScrollView = UIScrollView()
     let mainTabelView : UITableView = UITableView()
@@ -124,11 +126,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
         headView.zanshangBlock = {(model) in
             KFBLog(message: "赞赏点击")
-            let view = PayView(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(554), width: KSCREEN_WIDTH, height: ip7(554)))
-            view.setUpData(name: (weakSelf?.headData.data.userInfo.name)!, iconStr: (weakSelf?.headData.data.userInfo.avatar)!)
-            view.fenxID = (weakSelf?.fenxId)!
-            weakSelf?.view.window?.addSubview(self.maskView)
-            weakSelf?.maskView.addSubview(view)
+            weakSelf?.showZanShang()
         }
         self.creatTxtView()
     }
@@ -176,6 +174,19 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
     }
 
+    func showZanShang()  {
+        weak var weakSelf = self
+        let view = PayView(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(554), width: KSCREEN_WIDTH, height: ip7(554)))
+        view.setUpData(name: (weakSelf?.headData.data.userInfo.name)!, iconStr: (weakSelf?.headData.data.userInfo.avatar)!)
+        view.fenxID = (weakSelf?.fenxId)!
+        view.cancleBlock = {
+            view.removeFromSuperview()
+            weakSelf?.maskView.removeFromSuperview()
+        }
+        weakSelf?.view.window?.addSubview(self.maskView)
+        weakSelf?.maskView.addSubview(view)
+    }
+
     //MARK:获取评论列表数据
     func getcommentlistData() {
         weak var weakSelf = self
@@ -213,15 +224,25 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                                 }
                             } else {
                                  weakSelf?.SVshowErro(infoStr: "没有数据了")
+                                 weakSelf?.mainTabelView.mj_footer.endRefreshing()
+
                             }
                         }
 
                     } else  {
                         //1 最新评论
-                        weakSelf?.newArr = (weakSelf?.newArr)! + (weakSelf?.commentlistData.data.list[0].commentList)!
-                        for model in (weakSelf?.newArr)! {
-                            weakSelf?.getCommentCellHeight(model: model)
+                        let subarr = (weakSelf?.commentlistData.data.list[0].commentList)!
+                        if subarr.count > 0 {
+                            weakSelf?.newArr = (weakSelf?.newArr)! + (weakSelf?.commentlistData.data.list[0].commentList)!
+                            for model in (weakSelf?.newArr)! {
+                                weakSelf?.getCommentCellHeight(model: model)
+                            }
+                        } else {
+                            weakSelf?.SVshowErro(infoStr: "没有更多数据了")
+                            weakSelf?.mainTabelView.mj_footer.endRefreshing()
+
                         }
+
                     }
 
                     if (weakSelf?.page == 1) && (weakSelf?.isFresh == false) {
@@ -245,6 +266,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                         KFBLog(message: "没有评论")
                         weakSelf?.mainTabelView.removeFromSuperview()
                         weakSelf?.noCommendData()
+                    } else {
+                        weakSelf?.mainTabelView.mj_footer.endRefreshing()
+
                     }
 
                 }
@@ -260,10 +284,12 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }) { (erro) in
                weakSelf?.SVshowErro(infoStr: "请求失败")
         }
-
+        if isshowzanshang {
+            isshowzanshang = false
+            //展示赞赏列表
+            self.showZanShang()
+        }
     }
-    
-
 
     func getTabelViewSectionNum() {
         var num = 0

@@ -116,42 +116,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         KFBLog(message: sourceApplication)
         KFBLog(message: url)
 
-//        let str2 = url.absoluteString
-////        KFBLog(message: str2.removingPercentEncoding)
-//        let str3 :String = str2.removingPercentEncoding!
-//        let arr = str3.components(separatedBy: "/")
-//        let nameStr = arr.last
-//        KFBLog(message: nameStr!)
-//
-//        if (self.window != nil) {
-//            if fileManager.fileExists(atPath: filePath) {
-//                KFBLog(message: "文件夹已存在")
-//            } else {
-//                KFBLog(message: "创建文件夹")
-//                do {
-//                    try fileManager.createDirectory(atPath: filePath, withIntermediateDirectories: true, attributes: nil)
-//                } catch _ {
-//                    KFBLog(message: "创建文件夹失败")
-//                }
-//            }
-//            let fileData = NSData(contentsOf: url)
-//            let filePathStr : String = filePath + "/" + nameStr!
-//            let isok =  fileData?.write(toFile: filePathStr, atomically: true)
-//            if let _ = isok {
-//                 KFBLog(message: "文件保存成功")
-//
-//            } else {
-//                KFBLog(message: "文件保存失败")
-//            }
-//
-//            do {
-//                try fileManager.removeItem(at: url)
-//                 KFBLog(message: "源文件删除成功")
-//            } catch _ {
-//                KFBLog(message: "源文件删除失败")
-//            }
-//
-//        }
+
+        let str2 = url.absoluteString
+//        KFBLog(message: str2.removingPercentEncoding)
+        let str3 :String = str2.removingPercentEncoding!
+        let arr = str3.components(separatedBy: "/")
+        let nameStr = arr.last
+        KFBLog(message: nameStr!)
+
+        if (self.window != nil) {
+            if fileManager.fileExists(atPath: filePath) {
+                KFBLog(message: "文件夹已存在")
+            } else {
+                KFBLog(message: "创建文件夹")
+                do {
+                    try fileManager.createDirectory(atPath: filePath, withIntermediateDirectories: true, attributes: nil)
+                } catch _ {
+                    KFBLog(message: "创建文件夹失败")
+                }
+            }
+            let fileData = NSData(contentsOf: url)
+            let filePathStr : String = filePath + "/" + nameStr!
+            let isok =  fileData?.write(toFile: filePathStr, atomically: true)
+            if let _ = isok {
+                 KFBLog(message: "文件保存成功")
+
+            } else {
+                KFBLog(message: "文件保存失败")
+            }
+
+            do {
+                try fileManager.removeItem(at: url)
+                 KFBLog(message: "源文件删除成功")
+            } catch _ {
+                KFBLog(message: "源文件删除失败")
+            }
+
+        }
         return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
     }
     
@@ -167,7 +168,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             switch resp.errCode {
                 case 0 :
                 KFBLog(message: "成功")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pay_sucess"), object: nil)
                 default:
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pay_err"), object: nil)
                 KFBLog(message: resp.errCode)
                 KFBLog(message: resp.errStr)
             }

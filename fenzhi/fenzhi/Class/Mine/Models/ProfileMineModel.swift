@@ -59,6 +59,7 @@ class ProfileMineModel_data: Mappable {
         book <- map["book"]
         city <- map["city"]
         createTime <- map["createTime"]
+        district <- map["district"]
         grade <- map["grade"]
         id <- map["id"]
         name <- map["name"]

@@ -17,6 +17,7 @@
 		2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E91D1F6C4A3E0066CF5B /* GetschoollistModel.swift */; };
 		2112E9221F6C4C8D0066CF5B /* GetbooklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E9211F6C4C8D0066CF5B /* GetbooklistModel.swift */; };
 		2119946B1F7745EF00FB8016 /* RecordHeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2119946A1F7745EF00FB8016 /* RecordHeartTableViewCell.swift */; };
+		212319581F9F45ED00014CB0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212319571F9F45ED00014CB0 /* AboutViewController.swift */; };
 		2124A0651F983AAD008BC63F /* PayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2124A0641F983AAD008BC63F /* PayView.swift */; };
 		212D284E1F7359A1004DD669 /* GetcommentlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D284D1F7359A1004DD669 /* GetcommentlistModel.swift */; };
 		212D28501F7359BD004DD669 /* commentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D284F1F7359BC004DD669 /* commentTableViewCell.swift */; };
@@ -130,6 +131,7 @@
 		2112E91D1F6C4A3E0066CF5B /* GetschoollistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetschoollistModel.swift; sourceTree = "<group>"; };
 		2112E9211F6C4C8D0066CF5B /* GetbooklistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetbooklistModel.swift; sourceTree = "<group>"; };
 		2119946A1F7745EF00FB8016 /* RecordHeartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeartTableViewCell.swift; sourceTree = "<group>"; };
+		212319571F9F45ED00014CB0 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		2124A0641F983AAD008BC63F /* PayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayView.swift; sourceTree = "<group>"; };
 		212D284D1F7359A1004DD669 /* GetcommentlistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetcommentlistModel.swift; sourceTree = "<group>"; };
 		212D284F1F7359BC004DD669 /* commentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentTableViewCell.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				214448CD1F7002880073EA06 /* ShouruViewController.swift */,
 				21CB58CB1F726E7A00F41448 /* ShezhiViewController.swift */,
 				214DC50E1F7E826E002CD41F /* XiaoxiViewController.swift */,
+				212319571F9F45ED00014CB0 /* AboutViewController.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -896,6 +899,7 @@
 				214448D41F700A2B0073EA06 /* ShouruTableViewCell.swift in Sources */,
 				21EE65B51F6A7C2600806B62 /* InfoTableViewCell.swift in Sources */,
 				21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */,
+				212319581F9F45ED00014CB0 /* AboutViewController.swift in Sources */,
 				2142298C1F78DC88000565F4 /* UserInfoHeartTableViewCell.swift in Sources */,
 				21668B1B1F8C9FF100174EF4 /* GetCommentMessagelistModel.swift in Sources */,
 				215592311F66D2800091A822 /* LoginViewController.swift in Sources */,

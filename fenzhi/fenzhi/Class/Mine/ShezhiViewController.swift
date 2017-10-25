@@ -48,9 +48,11 @@ class ShezhiViewController: BaseViewController {
 
         //意见反馈
         let backView2 = UIView(frame: CGRect(x: 0, y:backView1.frame.maxY + ip7(15), width: KSCREEN_WIDTH, height: ip7(90)))
+        backView2.isUserInteractionEnabled = true
         backView2.backgroundColor = .white
         self.view.addSubview(backView2)
-
+        let tap2 : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.yijian_click))
+        backView2.addGestureRecognizer(tap2)
 
         let iconImageView2:UIImageView = UIImageView(frame: CGRect(x: ip7(31), y:  (ip7(90) - ip7(40))/2, width: ip7(40), height: ip7(40) ))
         iconImageView2.image = #imageLiteral(resourceName: "icon_yjfk")
@@ -146,6 +148,13 @@ class ShezhiViewController: BaseViewController {
     
     func about_click()  {
         let vc : AboutViewController = AboutViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    func yijian_click() {
+        let vc : YIjianfankuiViewController = YIjianfankuiViewController()
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
         

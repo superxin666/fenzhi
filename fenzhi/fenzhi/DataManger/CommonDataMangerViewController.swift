@@ -285,7 +285,26 @@ class CommonDataMangerViewController: FZRequestViewController {
         }
     }
     
-
-    
+    func feedback(content : String,contact : String, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        let contentStr : String  = RSA.encodeParameter(content)
+        let contactStr : String  = RSA.encodeParameter(contact)
+        let url = BASER_API + feedback_api + "content="+contentStr+"&contact="+contactStr+last_pra+token_pra
+        KFBLog(message: url)
+        
+        var model:SmsModel = SmsModel()
+        Alamofire.request(url, method: .get).responseJSON { (returnResult) in
+            
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            
+            if let json = returnResult.result.value {
+                model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+            
+        }
+    }
 
 }

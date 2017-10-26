@@ -19,6 +19,7 @@ let BASER_API = "http://fenzhi.wchao.org"//线上域名
 
 //h5
 let selectCouse_api = "/h5/selectCouse.html?"
+let share_api = "/h5/share.html?"
 
 
 //-------------------通用接口

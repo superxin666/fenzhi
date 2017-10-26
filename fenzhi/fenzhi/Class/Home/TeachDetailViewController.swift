@@ -131,14 +131,22 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
         headView.fenxiangBlock = {(model) in
             let umeng = UMUntil()
-            let url = "https://www.irongbei.com/Common/appdown"
+            let url = BASER_API + share_api + "shareID=\(self.fenxId!)"
             let thunUrlStr = "https://www.irongbei.com/images_app/fenxiang.png"
-            let titleStr = "标题"
-            let desStr = "描述"
-            
+            var titleStr = ""
+            KFBLog(message: model.data.type)
+            if model.data.type! == 1 {
+                titleStr = "心得分享"
+                
+            } else {
+                titleStr = "教学分享"
+            }
+
+            let desStr = model.data.content
+            KFBLog(message: url)
             umeng.sharClick(share: { (type) in
                 umeng.shareWebUrlToPlatformWithUrl(webUlr: url, controller: self, thumbUrl: thunUrlStr, title: titleStr, des: desStr)
-                
+
             })
         }
         self.creatTxtView()

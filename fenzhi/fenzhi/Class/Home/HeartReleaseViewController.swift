@@ -226,18 +226,19 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         tdBtn.backgroundColor = .clear
         tdBtn.addTarget(self, action:#selector(HeartReleaseViewController.dingwei_click), for: .touchUpInside)
         btnBackView.addSubview(tdBtn)
+
+        dingweiLabel_btn.frame = CGRect(x: tdBtn.frame.maxX + ip7(10), y: 0, width: KSCREEN_WIDTH - tdBtn.frame.maxX - ip7(100), height: ip7(55))
+        dingweiLabel_btn.font = fzFont_Thin(ip7(18))
+        dingweiLabel_btn.textAlignment = .left
+        dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id().name
+        dingweiLabel_btn.textColor = .white
+        btnBackView.addSubview(dingweiLabel_btn)
         let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id().name
-        
         if nameStr.characters.count > 0  {
             //有课时定位
             tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
-            dingweiLabel_btn.frame = CGRect(x: tdBtn.frame.maxX + ip7(10), y: 0, width: KSCREEN_WIDTH - tdBtn.frame.maxX - ip7(100), height: ip7(55))
-            dingweiLabel_btn.font = fzFont_Thin(ip7(18))
-            dingweiLabel_btn.textAlignment = .left
-            dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id().name
-            dingweiLabel_btn.textColor = .white
-            btnBackView.addSubview(dingweiLabel_btn)
         } else {
+            dingweiLabel_btn.isHidden = true
             //没有课时定位
             tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))
         }
@@ -258,7 +259,11 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
 
         dingweiBackView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: ip7(13), width: ip7(480), height: ip7(70))
         dingweiBackView.backgroundColor = backView_COLOUR
+        dingweiBackView.isUserInteractionEnabled =  true
         imageBackView.addSubview(dingweiBackView)
+        
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.removedingwei_click))
+        dingweiBackView.addGestureRecognizer(tap)
         
         let iconImageView = UIImageView(frame: CGRect(x: 0, y: ip7(35)/2, width: ip7(35), height: ip7(35)))
         iconImageView.image = #imageLiteral(resourceName: "icon_dingwei")
@@ -351,6 +356,13 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     }
 
      //MARK:课时定位
+    func removedingwei_click() {
+        LogDataMangerViewController.setSelectCouse_name_id(name: "", couseid: "", ishaveinfo: "0")
+        self.dingweiBackView.isHidden = true
+        self.dingweiLabel_btn.isHidden = true
+        tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))
+    }
+    
     func dingwei_click() {
         KfbShowWithInfo(titleString: "定位")
         if !nsetBtn.isSelected {
@@ -371,7 +383,11 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         dingweiLabel_btn.text = nameStr
         self.couseId = LogDataMangerViewController.getSelectCouse_name_id().couseid
         self.dingweiBackView.isHidden = false
+        self.dingweiLabel_btn.isHidden = false
+        tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
+        dingweiLabel_btn.frame = CGRect(x: tdBtn.frame.maxX + ip7(10), y: 0, width: KSCREEN_WIDTH - tdBtn.frame.maxX - ip7(100), height: ip7(55))
         self.colletionView.frame.origin.y = ip7(15) + (self.dingweiBackView.frame.maxY)
+        
     }
        //MARK:选择照片
     func pic_click() {

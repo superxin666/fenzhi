@@ -11,7 +11,7 @@ import UIKit
 let itemWidth :CGFloat = ip7(240)
 let itemHeight :CGFloat = ip7(180)
 
-class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource  {
+class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,sureDelegate  {
     let textField: UITextView = UITextView()
     let btnBackView :UIView = UIView()
     let imageBackView :UIView = UIView()
@@ -34,6 +34,10 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     let dingweiBackView = UIView()//定位背景
     var isHaveFiles = false//是否有文件
     var isHaveDingwei = false//是否有定位
+    
+    let tdBtn : UIButton = UIButton()//定位按钮
+    let dingweiLabel_btn : UILabel = UILabel()//定位标题
+    
     
     var txtStr : String = ""
     var couseId : String = ""
@@ -212,19 +216,29 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         btnBackView.addSubview(nsetBtn)
 
 
+//        let tdBtn : UIButton = UIButton(frame: CGRect(x: picBtn.frame.origin.x - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35)))
+        tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
+        tdBtn.setImage(#imageLiteral(resourceName: "icon_dw2"), for: .normal)
+        tdBtn.backgroundColor = .clear
+        tdBtn.addTarget(self, action:#selector(HeartReleaseViewController.dingwei_click), for: .touchUpInside)
+        btnBackView.addSubview(tdBtn)
+        
+        dingweiLabel_btn.frame = CGRect(x: tdBtn.frame.maxX + ip7(10), y: 0, width: KSCREEN_WIDTH - tdBtn.frame.maxX - ip7(100), height: ip7(55))
+        dingweiLabel_btn.font = fzFont_Thin(ip7(18))
+        dingweiLabel_btn.textAlignment = .left
+        dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id().name
+        dingweiLabel_btn.textColor = .white
+        btnBackView.addSubview(dingweiLabel_btn)
+        
+        
         let picBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55)))
         picBtn.setImage(#imageLiteral(resourceName: "icon_tp"), for: .normal)
         picBtn.backgroundColor = .clear
         picBtn.addTarget(self, action:#selector(HeartReleaseViewController.pic_click), for: .touchUpInside)
         btnBackView.addSubview(picBtn)
+        
 
-        let tdBtn : UIButton = UIButton(frame: CGRect(x: picBtn.frame.origin.x - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35)))
-        tdBtn.setImage(#imageLiteral(resourceName: "icon_dw2"), for: .normal)
-        tdBtn.backgroundColor = .clear
-        tdBtn.addTarget(self, action:#selector(HeartReleaseViewController.dingwei_click), for: .touchUpInside)
-        btnBackView.addSubview(tdBtn)
-
-        let lineView = UIView(frame: CGRect(x: tdBtn.frame.maxX + ip7(12), y: (ip7(55) - ip7(35))/2, width: 0.5, height: ip7(35)))
+        let lineView = UIView(frame: CGRect(x: picBtn.frame.origin.x - ip7(12), y: (ip7(55) - ip7(35))/2, width: 0.5, height: ip7(35)))
         lineView.backgroundColor = .white
         btnBackView.addSubview(lineView)
 
@@ -335,15 +349,19 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         let vc = DingweiViewControlleroc()
         let urlStr = BASER_API + selectCouse_api + "token=" + "".getToken_RSA()
         vc.mainUrl =  urlStr
-        weak var weakSelf = self
-        vc.sureBlock = {
-            weakSelf?.dingweiLabel.text = LogDataMangerViewController.getSelectCouse_name_id().name
-            weakSelf?.couseId = LogDataMangerViewController.getSelectCouse_name_id().couseid
-            weakSelf?.dingweiBackView.isHidden = false
-            weakSelf?.colletionView.frame.origin.y = ip7(15) + (weakSelf?.dingweiBackView.frame.maxY)!
-            } as DingweiViewControllerocblock
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     
+    }
+       //MARK:定位代理
+    func sure_click() {
+        KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id().name)
+        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id().name
+        self.dingweiLabel.text = nameStr
+        dingweiLabel_btn.text = nameStr
+        self.couseId = LogDataMangerViewController.getSelectCouse_name_id().couseid
+        self.dingweiBackView.isHidden = false
+        self.colletionView.frame.origin.y = ip7(15) + (self.dingweiBackView.frame.maxY)
     }
        //MARK:选择照片
     func pic_click() {

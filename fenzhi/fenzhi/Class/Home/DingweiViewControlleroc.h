@@ -10,7 +10,14 @@
 //NSString * name,NSString * couseid
 typedef void (^DingweiViewControllerocblock)();
 
+@protocol sureDelegate <NSObject>
+- (void)sure_click;
+@end
+
+
+
 @interface DingweiViewControlleroc : UIViewController
 @property (nonatomic,copy) NSString *mainUrl;
 @property (nonatomic,assign)DingweiViewControllerocblock sureBlock;
+@property (nonatomic,assign) id<sureDelegate> delegate;
 @end

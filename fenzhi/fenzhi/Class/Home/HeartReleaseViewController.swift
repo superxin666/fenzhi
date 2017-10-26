@@ -110,6 +110,9 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
                 
                 
             }
+        } else {
+            //没有图片
+            self.subTxt(imageStr: "")
         }
 
     }
@@ -118,8 +121,9 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
          weak var weakSelf = self
 
 //        let arr = [imageStr]
-
-        dataVC.submitfenx_heart(content: txtStr, catalog_id: 0, images: self.imageNameArr, completion: { (data) in
+        KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id().couseid)
+        KFBLog(message: self.couseId)
+        dataVC.submitfenx_heart(content: txtStr, catalog_id: self.couseId, images: self.imageNameArr, completion: { (data) in
             let model :SmsModel = data as! SmsModel
             if model.errno == 0{
                 weakSelf?.SVdismiss()
@@ -222,22 +226,28 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         tdBtn.backgroundColor = .clear
         tdBtn.addTarget(self, action:#selector(HeartReleaseViewController.dingwei_click), for: .touchUpInside)
         btnBackView.addSubview(tdBtn)
+        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id().name
         
-        dingweiLabel_btn.frame = CGRect(x: tdBtn.frame.maxX + ip7(10), y: 0, width: KSCREEN_WIDTH - tdBtn.frame.maxX - ip7(100), height: ip7(55))
-        dingweiLabel_btn.font = fzFont_Thin(ip7(18))
-        dingweiLabel_btn.textAlignment = .left
-        dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id().name
-        dingweiLabel_btn.textColor = .white
-        btnBackView.addSubview(dingweiLabel_btn)
-        
-        
+        if nameStr.characters.count > 0  {
+            //有课时定位
+            tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
+            dingweiLabel_btn.frame = CGRect(x: tdBtn.frame.maxX + ip7(10), y: 0, width: KSCREEN_WIDTH - tdBtn.frame.maxX - ip7(100), height: ip7(55))
+            dingweiLabel_btn.font = fzFont_Thin(ip7(18))
+            dingweiLabel_btn.textAlignment = .left
+            dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id().name
+            dingweiLabel_btn.textColor = .white
+            btnBackView.addSubview(dingweiLabel_btn)
+        } else {
+            //没有课时定位
+            tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))
+        }
+        //图片按钮
         let picBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55)))
         picBtn.setImage(#imageLiteral(resourceName: "icon_tp"), for: .normal)
         picBtn.backgroundColor = .clear
         picBtn.addTarget(self, action:#selector(HeartReleaseViewController.pic_click), for: .touchUpInside)
         btnBackView.addSubview(picBtn)
         
-
         let lineView = UIView(frame: CGRect(x: picBtn.frame.origin.x - ip7(12), y: (ip7(55) - ip7(35))/2, width: 0.5, height: ip7(35)))
         lineView.backgroundColor = .white
         btnBackView.addSubview(lineView)

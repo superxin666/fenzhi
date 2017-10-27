@@ -290,9 +290,9 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         }
         //图片按钮
         let picBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55)))
-        picBtn.setImage(#imageLiteral(resourceName: "icon_tp"), for: .normal)
+        picBtn.setImage(#imageLiteral(resourceName: "button_fj"), for: .normal)
         picBtn.backgroundColor = .clear
-        picBtn.addTarget(self, action:#selector(HeartReleaseViewController.pic_click), for: .touchUpInside)
+        picBtn.addTarget(self, action:#selector(self.pdf_click), for: .touchUpInside)
         btnBackView.addSubview(picBtn)
         
         let lineView = UIView(frame: CGRect(x: picBtn.frame.origin.x - ip7(12), y: (ip7(55) - ip7(35))/2, width: 0.5, height: ip7(35)))

@@ -102,28 +102,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         self.window?.rootViewController = tab
         
     }
-    //MARK:文件导入
     
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-        KFBLog(message: url)
-        KFBLog(message: url.host)
+        KFBLog(message: application)
+        self.getfile(url: url)
         return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         KFBLog(message: application)
-        KFBLog(message: annotation)
-        KFBLog(message: sourceApplication)
+        self.getfile(url: url)
+        return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        KFBLog(message: app)
+        self.getfile(url: url)
+        return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
+    }
+
+    //MARK: 微信支付回调
+    func onResp(_ resp: BaseResp!) {
+        KFBLog(message: "微信回调")
+        if resp is PayResp {
+            switch resp.errCode {
+                case 0 :
+                KFBLog(message: "成功")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pay_sucess"), object: nil)
+                default:
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pay_err"), object: nil)
+                KFBLog(message: resp.errCode)
+                KFBLog(message: resp.errStr)
+            }
+        }
+    }
+     //MARK:文件导入
+    func getfile(url : URL)  {
+
         KFBLog(message: url)
-
-
         let str2 = url.absoluteString
-//        KFBLog(message: str2.removingPercentEncoding)
+        //        KFBLog(message: str2.removingPercentEncoding)
         let str3 :String = str2.removingPercentEncoding!
         let arr = str3.components(separatedBy: "/")
         let nameStr = arr.last
         KFBLog(message: nameStr!)
-
+        
         if (self.window != nil) {
             if fileManager.fileExists(atPath: filePath) {
                 KFBLog(message: "文件夹已存在")
@@ -139,43 +162,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             let filePathStr : String = filePath + "/" + nameStr!
             let isok =  fileData?.write(toFile: filePathStr, atomically: true)
             if let _ = isok {
-                 KFBLog(message: "文件保存成功")
-
+                KFBLog(message: "文件保存成功")
+                
             } else {
                 KFBLog(message: "文件保存失败")
             }
-
+            
             do {
                 try fileManager.removeItem(at: url)
-                 KFBLog(message: "源文件删除成功")
+                KFBLog(message: "源文件删除成功")
             } catch _ {
                 KFBLog(message: "源文件删除失败")
             }
-
+            
         }
-        return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        KFBLog(message: url)
-        KFBLog(message: url.host)
-        return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
-    }
-
-    func onResp(_ resp: BaseResp!) {
-        KFBLog(message: "微信回调")
-        if resp is PayResp {
-            switch resp.errCode {
-                case 0 :
-                KFBLog(message: "成功")
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pay_sucess"), object: nil)
-                default:
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pay_err"), object: nil)
-                KFBLog(message: resp.errCode)
-                KFBLog(message: resp.errStr)
-            }
-        }
-    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

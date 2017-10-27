@@ -44,7 +44,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     
     let dataVC = HomeDataMangerController()
     let loadVC = CommonDataMangerViewController()
-
+    var alertController : UIAlertController!
     
 //    deinit {
 //        NotificationCenter.removeObserver(NSNotification.Name.UIKeyboardWillShow)
@@ -329,6 +329,25 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
             return UIView() as! UICollectionViewCell
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row < imageArr.count {
+            alertController  = UIAlertController(title: "提示", message: "是否要删除该图片", preferredStyle: .alert)
+            let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+                //取消
+                self.alertController.dismiss(animated: true, completion: {
+                    
+                })
+            }
+            let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
+                self.imageArr.remove(at: indexPath.row)
+                self.colletionView.reloadData()
+            }
+            alertController.addAction(cancleAction)
+            alertController.addAction(sureAction)
+            self.present((alertController)!, animated: true, completion: nil)
+        }
+    }
 
     //MARK:退出键盘
     func nestBtnClik()  {
@@ -357,10 +376,24 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
 
      //MARK:课时定位
     func removedingwei_click() {
-        LogDataMangerViewController.setSelectCouse_name_id(name: "", couseid: "", ishaveinfo: "0")
-        self.dingweiBackView.isHidden = true
-        self.dingweiLabel_btn.isHidden = true
-        tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))
+        
+        alertController  = UIAlertController(title: "提示", message: "是否要删除定时定位", preferredStyle: .alert)
+        let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            //取消
+            self.alertController.dismiss(animated: true, completion: {
+                
+            })
+        }
+        let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
+            LogDataMangerViewController.setSelectCouse_name_id(name: "", couseid: "", ishaveinfo: "0")
+            self.dingweiBackView.isHidden = true
+            self.dingweiLabel_btn.isHidden = true
+            self.tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))
+        }
+        alertController.addAction(cancleAction)
+        alertController.addAction(sureAction)
+        self.present((alertController)!, animated: true, completion: nil)
+        
     }
     
     func dingwei_click() {

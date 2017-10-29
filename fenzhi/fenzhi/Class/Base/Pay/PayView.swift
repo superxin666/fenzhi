@@ -26,7 +26,7 @@ class PayView: UIView {
     let noticeBtn_bottom : UIButton = UIButton()//底部提示语
     var btnArr = Array<UIButton>()//按钮数组
     var fenxID : Int = 0
-    var payMonery : Int = 0//分位单位
+    var payMonery : Int = 2 * 100//分位单位 默认是2元
 
     var cancleBlock : PayViewBclock!//
 
@@ -176,7 +176,7 @@ class PayView: UIView {
     func pay_click()  {
         weak var weakSelf = self
         //payMonery
-        requestVC.createorder(fenxId: fenxID, price: 1, completion: { (data) in
+        requestVC.createorder(fenxId: fenxID, price: payMonery, completion: { (data) in
             let model = data as! createorderModel
             
             if model.errno == 0 {

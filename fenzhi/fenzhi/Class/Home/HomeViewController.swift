@@ -380,6 +380,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     func showTop() {
         topBackView.alpha = 1.0
         mainTabelView.frame = CGRect(x: 0, y: topBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY)
+//        self.view.frame.origin.y = topBackView.frame.maxY,
     }
     func hidTop() {
         topBackView.alpha = 0.0

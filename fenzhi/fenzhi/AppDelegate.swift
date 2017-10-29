@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.window?.backgroundColor = .white
-        self.mainMenu()
         self.setupUM()
+        self.mainMenu()
+
         //微信支付
         WXApi.registerApp("wx62e8de46fa3ca72c", enableMTA: true)
-//        WXApi.registerApp("wx62e8de46fa3ca72c")
 //        self.showLogin()
 //        self.showMain()
 //        self.showInfo()
@@ -29,10 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     }
     //MARK:友盟
     func setupUM() {
-         UMSocialManager.default().openLog(true)
-         UMSocialManager.default().umSocialAppkey = "59ce05e265b6d66f26000235"
-         UMSocialManager.default().setPlaform(.wechatSession, appKey: "wx62e8de46fa3ca72c", appSecret: "3514a03fffff6336853162c87e2665b5", redirectURL: nil)
-         UMSocialManager.default().setPlaform(.QQ, appKey: "", appSecret: "", redirectURL: nil)
+        UMUntil.setUpUM()
     }
     //MARK:vc展示
     func mainMenu() {
@@ -105,27 +102,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         self.window?.rootViewController = tab
         
     }
-    //MARK:文件导入
     
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-        KFBLog(message: url)
-        KFBLog(message: url.host)
-        return WXApi.handleOpen(url, delegate: self)
+        KFBLog(message: application)
+        self.getfile(url: url)
+        return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         KFBLog(message: application)
-        KFBLog(message: annotation)
-        KFBLog(message: sourceApplication)
-        KFBLog(message: url)
+        self.getfile(url: url)
+        return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        KFBLog(message: app)
+        self.getfile(url: url)
+        return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
+    }
 
+    //MARK: 微信支付回调
+    func onResp(_ resp: BaseResp!) {
+        KFBLog(message: "微信回调")
+        if resp is PayResp {
+            switch resp.errCode {
+                case 0 :
+                KFBLog(message: "成功")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pay_sucess"), object: nil)
+                default:
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pay_err"), object: nil)
+                KFBLog(message: resp.errCode)
+                KFBLog(message: resp.errStr)
+            }
+        }
+    }
+     //MARK:文件导入
+    func getfile(url : URL)  {
+
+        KFBLog(message: url)
         let str2 = url.absoluteString
-//        KFBLog(message: str2.removingPercentEncoding)
+        //        KFBLog(message: str2.removingPercentEncoding)
         let str3 :String = str2.removingPercentEncoding!
         let arr = str3.components(separatedBy: "/")
         let nameStr = arr.last
         KFBLog(message: nameStr!)
-
+        
         if (self.window != nil) {
             if fileManager.fileExists(atPath: filePath) {
                 KFBLog(message: "文件夹已存在")
@@ -141,43 +162,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             let filePathStr : String = filePath + "/" + nameStr!
             let isok =  fileData?.write(toFile: filePathStr, atomically: true)
             if let _ = isok {
-                 KFBLog(message: "文件保存成功")
-
+                KFBLog(message: "文件保存成功")
+                
             } else {
                 KFBLog(message: "文件保存失败")
             }
-
+            
             do {
                 try fileManager.removeItem(at: url)
-                 KFBLog(message: "源文件删除成功")
+                KFBLog(message: "源文件删除成功")
             } catch _ {
                 KFBLog(message: "源文件删除失败")
             }
-
+            
         }
-        return WXApi.handleOpen(url, delegate: self)
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        KFBLog(message: url)
-        KFBLog(message: url.host)
-        return WXApi.handleOpen(url, delegate: self)
-    }
-
-    func onResp(_ resp: BaseResp!) {
-        KFBLog(message: "微信回调")
-        if resp is PayResp {
-            switch resp.errCode {
-                case 0 :
-                KFBLog(message: "成功")
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pay_sucess"), object: nil)
-                default:
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pay_err"), object: nil)
-                KFBLog(message: resp.errCode)
-                KFBLog(message: resp.errStr)
-            }
-        }
-    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

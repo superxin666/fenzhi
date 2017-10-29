@@ -128,6 +128,27 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             KFBLog(message: "赞赏点击")
             weakSelf?.showZanShang()
         }
+
+        headView.fenxiangBlock = {(model) in
+            let umeng = UMUntil()
+            let url = BASER_API + share_api + "shareID=\(self.fenxId!)"
+            let thunUrlStr = "https://www.irongbei.com/images_app/fenxiang.png"
+            var titleStr = ""
+            KFBLog(message: model.data.type)
+            if model.data.type! == 1 {
+                titleStr = "心得分享"
+                
+            } else {
+                titleStr = "教学分享"
+            }
+
+            let desStr = model.data.content
+            KFBLog(message: url)
+            umeng.sharClick(share: { (type) in
+                umeng.shareWebUrlToPlatformWithUrl(webUlr: url, controller: self, thumbUrl: thunUrlStr, title: titleStr, des: desStr)
+
+            })
+        }
         self.creatTxtView()
     }
     //MARK:获取分享头部尺寸

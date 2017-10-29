@@ -200,23 +200,18 @@ class HomeDataMangerController: FZRequestViewController {
     }
 
 
-    func submitfenx_heart(content : String,catalog_id : Int, images : Array<String>, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+    func submitfenx_heart(content : String,catalog_id : String, images : Array<String>, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
 
-
+        KFBLog(message: catalog_id)
         let contentStr : String  = RSA.encodeParameter(content)
-        var urlStr = BASER_API + submitfenx_api + "content="+contentStr + "&type=" + "\(1)" + last_pra + token_pra
-        
+        var urlStr = BASER_API + submitfenx_api + "content="+contentStr + "&type=" + "\(1)" + "&catalog_id=" + catalog_id + last_pra + token_pra
 
         if images.count > 0 {
-//            let imageStr :String = JSON.init(images)
             let data = try? JSONSerialization.data(withJSONObject: images, options: [])
             let jsonStr :String = String(data: data!, encoding: String.Encoding.utf8)!
             let imageUncode : String = RSA.encodeParameter(jsonStr)
-            urlStr = BASER_API + submitfenx_api + "content=" + contentStr + "&type=" + "\(1)" + "&images=" + imageUncode + last_pra + token_pra
-        } else {
-            urlStr = BASER_API + submitfenx_api + "content="+contentStr + "&type=" + "\(1)" + last_pra + token_pra
-
+            urlStr = BASER_API + submitfenx_api + "content=" + contentStr + "&type=" + "\(1)" + "&catalog_id=" + catalog_id + "&images=" + imageUncode + last_pra + token_pra
         }
 
         var model:SmsModel = SmsModel()
@@ -232,14 +227,14 @@ class HomeDataMangerController: FZRequestViewController {
         }
     }
 
-    func submitfenx_teach(content : String,catalog_id : Int, file : Array<Dictionary<String,String>>, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+    func submitfenx_teach(content : String,catalog_id : String, file : Array<Dictionary<String,String>>, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
 
         let contentStr : String  = RSA.encodeParameter(content)
         let data = try? JSONSerialization.data(withJSONObject: file, options: [])
         let jsonStr :String = String(data: data!, encoding: String.Encoding.utf8)!
         let filesUncode : String = RSA.encodeParameter(jsonStr)
-        let  urlStr = BASER_API + submitfenx_api + "content=" + contentStr + "&type=" + "\(0)" + "&coursewares=" + filesUncode + last_pra + token_pra
+        let  urlStr = BASER_API + submitfenx_api + "content=" + contentStr + "&type=" + "\(0)" + "&catalog_id=" + catalog_id + "&coursewares=" + filesUncode + last_pra + token_pra
         var model:SmsModel = SmsModel()
         KFBLog(message: urlStr)
         Alamofire.request(urlStr, method: .post).responseJSON { (returnResult) in

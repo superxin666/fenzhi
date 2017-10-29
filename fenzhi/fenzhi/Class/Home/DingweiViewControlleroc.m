@@ -75,11 +75,11 @@
 
     
             dispatch_async(dispatch_get_main_queue(), ^{
-//                [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"setSelectCouse_name"];
-//                [[NSUserDefaults standardUserDefaults] setObject:catid forKey:@"setSelectCouse_id"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isHaveSelectCouseinfo"];
-//                BOOL isok =  [NSUserDefaults.standardUserDefaults synchronize];
-                weakself.sureBlock();
+                [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"setSelectCouse_name"];
+                [[NSUserDefaults standardUserDefaults] setObject:catid forKey:@"setSelectCouse_id"];
+                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isHaveSelectCouseinfo"];
+                BOOL isok =  [NSUserDefaults.standardUserDefaults synchronize];
+                [weakself.delegate sure_click];
                 [weakself  back_click];
             });
 

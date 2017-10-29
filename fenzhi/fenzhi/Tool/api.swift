@@ -19,6 +19,7 @@ let BASER_API = "http://fenzhi.wchao.org"//线上域名
 
 //h5
 let selectCouse_api = "/h5/selectCouse.html?"
+let share_api = "/h5/share.html?"
 
 
 //-------------------通用接口
@@ -28,6 +29,7 @@ let getschoollist_api = "/api/getschoollist?"//获取学校列表接口
 let getbooklist_api = "/api/getbooklist?"//获取教材列表接口
 let getfanslist_api = "/api/user/getfanslist?"//获取区域列表接口
 let uploadimg_api = "/api/uploadimg?"//上传图片接口
+let feedback_api = "/api/feedback?"//反馈
 //----------------支付
 let createorder_api = "/api/zan/createorder?"//创建订单
 let queryorder_api = "/api/zan/queryorder?"//查询支付结果

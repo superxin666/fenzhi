@@ -54,7 +54,11 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     func creatTopView() {
         topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(382))
         topBackView.creatHeadView(type: .main)
-
+        topBackView.isUserInteractionEnabled = true
+        
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.top_click))
+        topBackView.addGestureRecognizer(tap)
+        
         topBackView.guanzhuViewBlock = { () in
             let vc :GunzhuViewController = GunzhuViewController()
             vc.hidesBottomBarWhenPushed = true
@@ -72,6 +76,14 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         }
 
         self.view.addSubview(topBackView)
+        
+    }
+    
+    func top_click() {
+        let vc = SettingViewController()
+        vc.dataModel = self.dataModel
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
    

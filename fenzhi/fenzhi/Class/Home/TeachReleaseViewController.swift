@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource {
+class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,sureDelegate {
     let textField: UITextView = UITextView()
     let btnBackView :UIView = UIView()
     let imageBackView :UIView = UIView()
@@ -35,11 +35,18 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     var tableView : UITableView = UITableView()//文件浏览
     var dingweiLabel : UILabel = UILabel()//定位显示
     
+    let tdBtn : UIButton = UIButton()//定位按钮
+    let dingweiLabel_btn : UILabel = UILabel()//定位标题
+    
     var txtStr : String = ""
+    var couseId : String = ""
+    
     let dataVC = HomeDataMangerController()
     let loadVC = CommonDataMangerViewController()
     
     var fileManager = FileManager.default
+    var alertController : UIAlertController!
+    
     deinit {
         //记得移除通知监听
         NotificationCenter.default.removeObserver(self)
@@ -54,7 +61,12 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         self.view.backgroundColor = .white
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")
-
+        if LogDataMangerViewController.getSelectCouse_name_id().name.characters.count > 0 {
+            isHaveDingwei = true
+            self.couseId = LogDataMangerViewController.getSelectCouse_name_id().couseid
+        } else {
+            isHaveDingwei = false
+        }
         self.getFileData()
         self.creatUI()
         
@@ -141,7 +153,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
 //
 //        let arr = [dict]
         
-        dataVC.submitfenx_teach(content: txtStr, catalog_id: 0, file: self.fileNameArr, completion: { (data) in
+        dataVC.submitfenx_teach(content: txtStr, catalog_id: self.couseId, file: self.fileNameArr, completion: { (data) in
             let model :SmsModel = data as! SmsModel
             if model.errno == 0{
                 weakSelf?.SVdismiss()
@@ -255,19 +267,35 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         btnBackView.addSubview(nsetBtn)
         
         
-        let picBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55)))
-        picBtn.setImage(#imageLiteral(resourceName: "icon_tp"), for: .normal)
-        picBtn.backgroundColor = .clear
-        picBtn.addTarget(self, action:#selector(TeachReleaseViewController.pdf_click), for: .touchUpInside)
-        btnBackView.addSubview(picBtn)
-        
-        let tdBtn : UIButton = UIButton(frame: CGRect(x: picBtn.frame.origin.x - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35)))
+        tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
         tdBtn.setImage(#imageLiteral(resourceName: "icon_dw2"), for: .normal)
         tdBtn.backgroundColor = .clear
-        tdBtn.addTarget(self, action:#selector(TeachReleaseViewController.dingwei_click), for: .touchUpInside)
+        tdBtn.addTarget(self, action:#selector(HeartReleaseViewController.dingwei_click), for: .touchUpInside)
         btnBackView.addSubview(tdBtn)
         
-        let lineView = UIView(frame: CGRect(x: tdBtn.frame.maxX + ip7(12), y: (ip7(55) - ip7(35))/2, width: 0.5, height: ip7(35)))
+        dingweiLabel_btn.frame = CGRect(x: tdBtn.frame.maxX + ip7(10), y: 0, width: KSCREEN_WIDTH - tdBtn.frame.maxX - ip7(100), height: ip7(55))
+        dingweiLabel_btn.font = fzFont_Thin(ip7(18))
+        dingweiLabel_btn.textAlignment = .left
+        dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id().name
+        dingweiLabel_btn.textColor = .white
+        btnBackView.addSubview(dingweiLabel_btn)
+        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id().name
+        if nameStr.characters.count > 0  {
+            //有课时定位
+            tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
+        } else {
+            dingweiLabel_btn.isHidden = true
+            //没有课时定位
+            tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))
+        }
+        //图片按钮
+        let picBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55)))
+        picBtn.setImage(#imageLiteral(resourceName: "button_fj"), for: .normal)
+        picBtn.backgroundColor = .clear
+        picBtn.addTarget(self, action:#selector(self.pdf_click), for: .touchUpInside)
+        btnBackView.addSubview(picBtn)
+        
+        let lineView = UIView(frame: CGRect(x: picBtn.frame.origin.x - ip7(12), y: (ip7(55) - ip7(35))/2, width: 0.5, height: ip7(35)))
         lineView.backgroundColor = .white
         btnBackView.addSubview(lineView)
         
@@ -276,7 +304,11 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     func creaDingweiBackView() {
         dingweiBackView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: ip7(13), width: ip7(480), height: ip7(70))
         dingweiBackView.backgroundColor = backView_COLOUR
+        dingweiBackView.isUserInteractionEnabled = true
         imageBackView.addSubview(dingweiBackView)
+        
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.removedingwei_click))
+        dingweiBackView.addGestureRecognizer(tap)
         
         let iconImageView = UIImageView(frame: CGRect(x: 0, y: ip7(35)/2, width: ip7(35), height: ip7(35)))
         iconImageView.image = #imageLiteral(resourceName: "icon_dingwei")
@@ -288,7 +320,11 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         dingweiLabel.backgroundColor = .clear
         dingweiLabel.textAlignment = .left
         dingweiLabel.adjustsFontSizeToFitWidth = true
+        if isHaveDingwei {
+            dingweiLabel.text = LogDataMangerViewController.getSelectCouse_name_id().name
+        }
         dingweiBackView.addSubview(dingweiLabel)
+        
     
     }
     //MARK:展示文件
@@ -328,6 +364,11 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         view.backgroundColor = backView_COLOUR
         view.isUserInteractionEnabled = true
         view.backgroundColor = backView_COLOUR
+        view.tag = indexPath.row
+        
+        let longTap = UILongPressGestureRecognizer(target: self, action: #selector(self.delfile_click(tap:)))
+        view.addGestureRecognizer(longTap)
+        
         //图片
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pdf"))
         imageView.frame = CGRect(x: 0, y: 0, width: ip7(65), height: ip7(65))
@@ -358,13 +399,43 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         return ip7(80);
     }
     
+    
+    
     //MARK:文件点击
     func pdf_click() {
         let vc :PdfListViewController = PdfListViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
+    func delfile_click(tap : UITapGestureRecognizer) {
+        
+        alertController  = UIAlertController(title: "提示", message: "是否要删除该文件", preferredStyle: .alert)
+        let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            //取消
+            self.alertController.dismiss(animated: true, completion: {
+                
+            })
+        }
+        let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
+            let tagNum = tap.view?.tag
+            let str = self.fileArr[tagNum!]
+            let filePathStr : String = filePath + "/" + str
+            if self.fileManager.fileExists(atPath: filePathStr){
+                do {
+                    try self.fileManager.removeItem(at: URL(fileURLWithPath: filePathStr))
+                    self.fileArr.remove(at: tagNum!)
+                    self.tableView.reloadData()
+                    KFBLog(message: "文件删除成功")
+                } catch _ {
+                    KFBLog(message: "文件删除失败")
+                }
+            }
+        }
+        alertController.addAction(cancleAction)
+        alertController.addAction(sureAction)
+        self.present((alertController)!, animated: true, completion: nil)
+        
+    }
 
     
     //MARK:退出键盘
@@ -404,21 +475,44 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         let vc = DingweiViewControlleroc()
         let urlStr = BASER_API + selectCouse_api + "token=" + "".getToken_RSA()
         vc.mainUrl =  urlStr
-//        let vc = DingweiViewController()
-//        vc.sureBlock = {(name : String) in
-//            self.isHaveDingwei = true
-//            self.imageBackView.isHidden = false
-//            self.dingweiBackView.isHidden = false
-//            if self.isHaveFiles {
-//               self.tableView.frame.origin.y = self.dingweiBackView.frame.maxY + ip7(15)
-//            }
-//        }
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    //MARK:定位代理
+    func sure_click() {
+        KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id().name)
+        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id().name
+        self.dingweiLabel.text = nameStr
+        dingweiLabel_btn.text = nameStr
+        self.couseId = LogDataMangerViewController.getSelectCouse_name_id().couseid
+        self.dingweiBackView.isHidden = false
+        self.dingweiLabel_btn.isHidden = false
+        tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
+        dingweiLabel_btn.frame = CGRect(x: tdBtn.frame.maxX + ip7(10), y: 0, width: KSCREEN_WIDTH - tdBtn.frame.maxX - ip7(100), height: ip7(55))
+        self.tableView.frame.origin.y = ip7(15) + (self.dingweiBackView.frame.maxY)
         
     }
-    //MARK:选择文件
     
-    
+    func removedingwei_click() {
+        
+        alertController  = UIAlertController(title: "提示", message: "是否要删除定时定位", preferredStyle: .alert)
+        let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            //取消
+            self.alertController.dismiss(animated: true, completion: {
+                
+            })
+        }
+        let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
+            LogDataMangerViewController.setSelectCouse_name_id(name: "", couseid: "", ishaveinfo: "0")
+            self.dingweiBackView.isHidden = true
+            self.dingweiLabel_btn.isHidden = true
+            self.tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))
+        }
+        alertController.addAction(cancleAction)
+        alertController.addAction(sureAction)
+        self.present((alertController)!, animated: true, completion: nil)
+        
+    }
     
     //MARK:textView
     func textViewDidEndEditing(_ textView: UITextView) {

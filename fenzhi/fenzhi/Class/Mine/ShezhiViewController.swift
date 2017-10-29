@@ -48,9 +48,11 @@ class ShezhiViewController: BaseViewController {
 
         //意见反馈
         let backView2 = UIView(frame: CGRect(x: 0, y:backView1.frame.maxY + ip7(15), width: KSCREEN_WIDTH, height: ip7(90)))
+        backView2.isUserInteractionEnabled = true
         backView2.backgroundColor = .white
         self.view.addSubview(backView2)
-
+        let tap2 : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.yijian_click))
+        backView2.addGestureRecognizer(tap2)
 
         let iconImageView2:UIImageView = UIImageView(frame: CGRect(x: ip7(31), y:  (ip7(90) - ip7(40))/2, width: ip7(40), height: ip7(40) ))
         iconImageView2.image = #imageLiteral(resourceName: "icon_yjfk")
@@ -68,7 +70,12 @@ class ShezhiViewController: BaseViewController {
         //意见反馈
         let backView3 = UIView(frame: CGRect(x: 0, y: backView2.frame.maxY + 2, width: KSCREEN_WIDTH, height: ip7(90)))
         backView3.backgroundColor = .white
+        backView3.isUserInteractionEnabled = true
         self.view.addSubview(backView3)
+        
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.about_click))
+        backView3.addGestureRecognizer(tap)
+        
 
         let iconImageView3:UIImageView = UIImageView(frame: CGRect(x: ip7(31), y:  (ip7(90) - ip7(40))/2, width: ip7(40), height: ip7(40) ))
         iconImageView3.image = #imageLiteral(resourceName: "icon_gywm")
@@ -76,7 +83,7 @@ class ShezhiViewController: BaseViewController {
         backView3.addSubview(iconImageView3)
 
         let monyLabel3 : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(27), y:   (ip7(90) - ip7(24))/2, width: ip7(200), height: ip7(24)))
-        monyLabel3.text = "意见反馈"
+        monyLabel3.text = "关于我们"
         monyLabel3.isUserInteractionEnabled = true
         monyLabel3.textColor = dark_3_COLOUR
         monyLabel3.font = fzFont_Thin(ip7(24))
@@ -137,6 +144,20 @@ class ShezhiViewController: BaseViewController {
         }
 
 
+    }
+    
+    func about_click()  {
+        let vc : AboutViewController = AboutViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    func yijian_click() {
+        let vc : YIjianfankuiViewController = YIjianfankuiViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     override func navigationLeftBtnClick() {
          self.SVdismiss()

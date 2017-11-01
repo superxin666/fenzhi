@@ -232,7 +232,12 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         dingweiLabel_btn.textAlignment = .left
         dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id_heart().name
         dingweiLabel_btn.textColor = .white
+        dingweiLabel_btn.isUserInteractionEnabled = true
         btnBackView.addSubview(dingweiLabel_btn)
+    
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dingwei_click))
+        dingweiLabel_btn.addGestureRecognizer(tap)
+    
         let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id_heart().name
         if nameStr.characters.count > 0  {
             //有课时定位
@@ -374,7 +379,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         }
     }
 
-    //MARK:定位代理
+    //MARK:课时定位
     func removedingwei_click() {
         
         alertController  = UIAlertController(title: "提示", message: "是否要删除定时定位", preferredStyle: .alert)
@@ -395,7 +400,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         self.present((alertController)!, animated: true, completion: nil)
         
     }
-       //MARK:课时定位
+    
     func dingwei_click() {
         KfbShowWithInfo(titleString: "定位")
         if !nsetBtn.isSelected {
@@ -409,7 +414,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         self.navigationController?.pushViewController(vc, animated: true)
     
     }
-    
+       //MARK:定位代理
     func sure_click() {
         KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id_heart().name)
         let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id_heart().name

@@ -278,7 +278,13 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         dingweiLabel_btn.textAlignment = .left
         dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id_teach().name
         dingweiLabel_btn.textColor = .white
+        dingweiLabel_btn.isUserInteractionEnabled = true
         btnBackView.addSubview(dingweiLabel_btn)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dingwei_click))
+        dingweiLabel_btn.addGestureRecognizer(tap)
+        
+        
         let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id_teach().name
         if nameStr.characters.count > 0  {
             //有课时定位

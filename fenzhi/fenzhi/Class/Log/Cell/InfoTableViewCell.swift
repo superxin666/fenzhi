@@ -73,10 +73,20 @@ class InfoTableViewCell: UITableViewCell,UITextFieldDelegate {
         _nameTextField.textColor = dark_6_COLOUR
         _nameTextField.adjustsFontSizeToFitWidth = true
         _nameTextField.textAlignment = .left
-        _nameTextField.returnKeyType = .next
+        _nameTextField.returnKeyType = .done
         _nameTextField.delegate = self
         _nameTextField.tag = 101
         _nameTextField.adjustsFontSizeToFitWidth = true
+      
+
+        let inputView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: 45))
+        inputView.backgroundColor = backView_COLOUR
+        let rightBtn = UIButton(frame: CGRect(x: KSCREEN_WIDTH - 60, y: 0, width: 45, height: 45))
+        rightBtn.setTitle("完成", for: .normal)
+        rightBtn.setTitleColor(dark_3_COLOUR, for: .normal)
+        inputView.addSubview(rightBtn)
+        rightBtn.addTarget(self, action: #selector(self.textFieldShouldReturn(_:)), for: .touchUpInside)
+        _nameTextField.inputAccessoryView = inputView
         self.addSubview(_nameTextField)
         
         let lineView2 = UIView()
@@ -91,9 +101,10 @@ class InfoTableViewCell: UITableViewCell,UITextFieldDelegate {
     }
     
     
+    
     // MARK: textFieldDelegate
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("手机号：\(String(describing: textField.text))")
+        print("名字：\(String(describing: textField.text))")
         nameStr = textField.text!
         
     }

@@ -499,6 +499,10 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          currectNum = indexPath.row
         if indexPath.row == 1 {
+//            let cell : InfoTableViewCell = mainTabelView.cellForRow(at: IndexPath(row: 0, section: 1)) as! InfoTableViewCell
+//            if cell._nameTextField.isFirstResponder {
+//
+//            }
             if regionListArr.count > 0 {
                 provinceNum = dataModel.data.province
                 self.getRegsionData(type: 0, parentId: self.dataModel.data.province)

@@ -180,7 +180,7 @@ class TeachTableViewCell: UITableViewCell {
 
         //横线
         let lineView : UIView = UIView(frame: CGRect(x: appadWidth, y: lastFream.maxY + ip7(27), width: viewW - appadWidth * 2, height: 0.5))
-        lineView.backgroundColor = FZColor(red: 102, green: 102, blue: 102, alpha: 1.0)
+        lineView.backgroundColor = lineView_thin_COLOUR
         backView.addSubview(lineView)
 
         //三个按钮

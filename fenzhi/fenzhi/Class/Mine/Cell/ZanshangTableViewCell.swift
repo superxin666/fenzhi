@@ -36,10 +36,10 @@ class ZanshangTableViewCell: UITableViewCell {
         nameLabel.font = fzFont_Medium(ip7(21))
         nameLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(nameLabel)
-
+//model.price = 200
         let monyWidth = KSCREEN_WIDTH - ip7(40) - ip7(120)
         let monyLabel : UILabel = UILabel(frame: CGRect(x: monyWidth, y:  ip7(25), width: ip7(120), height: ip7(21)))
-        monyLabel.text = "\(model.price)元"
+        monyLabel.text = "\(model.price/100)元"
         monyLabel.isUserInteractionEnabled = true
         monyLabel.textColor = dark_3_COLOUR
         monyLabel.font = fzFont_Medium(ip7(21))

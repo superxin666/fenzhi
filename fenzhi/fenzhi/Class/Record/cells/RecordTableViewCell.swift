@@ -36,7 +36,7 @@ class RecordTableViewCell: UITableViewCell {
         let viewW = KSCREEN_WIDTH
         let viewH = model.cellHeight
 
-        let backView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH - ip7(10)))
+        let backView : UIView = UIView(frame: CGRect(x: 0, y: ip7(20), width: viewW, height: viewH - ip7(10)))
         backView.backgroundColor = .white
         backView.isUserInteractionEnabled = true
         self.addSubview(backView)

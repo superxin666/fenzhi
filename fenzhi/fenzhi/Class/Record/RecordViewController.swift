@@ -35,7 +35,7 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
 
     func creatTableView() {
-        mainTabelView.frame = CGRect(x: 0, y: ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20))
+        mainTabelView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20))
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;

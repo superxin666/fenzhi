@@ -211,7 +211,9 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         btnBackView.frame =  CGRect(x: 0, y: KSCREEN_HEIGHT , width: KSCREEN_WIDTH, height: ip7(55))
         btnBackView.backgroundColor = blue_COLOUR
         //
-        nsetBtn.frame = CGRect(x: ip7(25), y: (ip7(55) - ip7(14))/2, width: ip7(25), height: ip7(14))
+        nsetBtn.frame = CGRect(x: 0, y: 0, width: ip7(50), height: btnViewHeight)
+        nsetBtn.imageEdgeInsets = UIEdgeInsets(top: -ip7(10), left: 0, bottom: 0, right: 0)
+        nsetBtn.imageRect(forContentRect: CGRect(x: 0, y: 0, width: ip7(25), height: ip7(14)))
         nsetBtn.setImage(#imageLiteral(resourceName: "button_jt_x"), for: .normal)
         nsetBtn.setImage(#imageLiteral(resourceName: "button_jt_s"), for: .selected)
         nsetBtn.isSelected = false

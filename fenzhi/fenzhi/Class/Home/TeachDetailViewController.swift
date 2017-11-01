@@ -37,6 +37,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     
     let txtTextView : UITextView = UITextView()
+    let returnLabel : UILabel = UILabel()//回复人
+    
     var keybodHeight : CGFloat = 0.0
     var txt : String = ""
     var ispinglun :String = "1"//0 是回复用户评论 1 是评论该分享
@@ -400,6 +402,19 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         txtTextView.kfb_makeBorderWithBorderWidth(width: 1, color: lineView_thin_COLOUR)
         txtTextView.kfb_makeRadius(radius: 7)
         backView.addSubview(txtTextView)
+        
+        if ispinglun == "0" {
+//            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged) name:UITextViewTextDidChangeNotification object:nil];
+            NotificationCenter.default.addObserver(self, selector: #selector(self.textChanged), name: NSNotification.Name.UITextViewTextDidChange, object: nil)
+            
+            //评论用户 需要添加用户名字
+            returnLabel.frame = CGRect(x: ip7(5), y: ip7(5), width: KSCREEN_WIDTH - ip7(45), height: ip7(18))
+            returnLabel.font = fzFont_Thin(ip7(18))
+            returnLabel.textColor = dark_6_COLOUR
+            returnLabel.text = "回复：" + self.pinglunUserModel.userInfo.name
+            txtTextView.addSubview(returnLabel)
+            
+        }
 
         //取消按钮
         let cancleBtn : UIButton = UIButton(frame: CGRect(x: ip7(20),y: txtTextView.frame.maxY + ip7(14), width: ip7(189/2),height: ip7(50)))
@@ -423,7 +438,15 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     }
 
-
+    func textChanged() {
+        if txtTextView.text.characters.count == 0 {
+            returnLabel.isHidden = false
+        } else {
+            returnLabel.isHidden = true
+            returnLabel.text = "回复：" + self.pinglunUserModel.userInfo.name
+        }
+    }
+    
     func sure_submitcomment() {
         self.dismissTxtView()
         self.submitcomment()

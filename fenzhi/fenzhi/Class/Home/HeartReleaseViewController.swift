@@ -153,12 +153,12 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         } else {
             
         }
-        UIView.animate(withDuration: 1, animations: {
+//        UIView.animate(withDuration: 1, animations: {
             var frame = self.btnBackView.frame
             frame.origin.y = KSCREEN_HEIGHT - height - ip7(55)
             self.btnBackView.frame = frame
 //            self.keybodHeight = height
-        })
+//        })
         print("keybordShow:\(height)")
     }
 

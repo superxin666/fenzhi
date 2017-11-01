@@ -265,7 +265,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     func creaDingweiBackView() {
 
         dingweiBackView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(480))/2, y: ip7(13), width: ip7(480), height: ip7(70))
-        dingweiBackView.backgroundColor = backView_COLOUR
+        dingweiBackView.backgroundColor = .clear
         dingweiBackView.isUserInteractionEnabled =  true
         imageBackView.addSubview(dingweiBackView)
         

@@ -13,6 +13,10 @@ import SwiftyJSON
 let COUSENAME = "setSelectCouse_name"
 let COUSEID = "setSelectCouse_id"
 let ISHAVECOUSEINFO = "isHaveSelectCouseinfo"
+
+let COUSENAME_TEACH = "setSelectCouse_name_TEACH"
+let COUSEID_TEACH = "setSelectCouse_id_TEACH"
+let ISHAVECOUSEINFO_TEACH = "isHaveSelectCouseinfo_TEACH"
 class LogDataMangerViewController: FZRequestViewController {
 
     func login(phoneNum : String, paseWord : String, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
@@ -153,22 +157,14 @@ class LogDataMangerViewController: FZRequestViewController {
         
     }
     
-    class func setSelectCouse_name_id(name : String , couseid : String, ishaveinfo : String){
+    class func setSelectCouse_name_id_heart(name : String , couseid : String, ishaveinfo : String){
         UserDefaults.standard.set("1", forKey: ISHAVECOUSEINFO)
         UserDefaults.standard.set(name, forKey: COUSENAME)
         UserDefaults.standard.set(couseid, forKey: COUSEID)
-        let ok = UserDefaults.standard.synchronize()
-//        if ok {
-//            print("存储成功")
-//            complate("1")
-//        } else {
-//            print("存储失败")
-//            complate("0")
-//        }
+        UserDefaults.standard.synchronize()
+
     }
-    
-    
-    class func getSelectCouse_name_id() -> (ishaveCouse : String,name : String, couseid:String) {
+    class func getSelectCouse_name_id_heart() -> (ishaveCouse : String,name : String, couseid:String) {
         var isHaveCouse :String? = UserDefaults.standard.value(forKey: ISHAVECOUSEINFO) as! String?
         if isHaveCouse == nil {
             isHaveCouse = "0"
@@ -178,6 +174,30 @@ class LogDataMangerViewController: FZRequestViewController {
             nameStr = ""
         }
         var idStr :String? = UserDefaults.standard.value(forKey: COUSEID) as! String?
+        if idStr == nil {
+            idStr = ""
+        }
+        return (isHaveCouse!,nameStr!,idStr!)
+    }
+    
+    class func setSelectCouse_name_id_teach(name : String , couseid : String, ishaveinfo : String){
+        UserDefaults.standard.set("1", forKey: ISHAVECOUSEINFO_TEACH)
+        UserDefaults.standard.set(name, forKey: COUSENAME_TEACH)
+        UserDefaults.standard.set(couseid, forKey: COUSEID_TEACH)
+       UserDefaults.standard.synchronize()
+
+    }
+    
+    class func getSelectCouse_name_id_teach() -> (ishaveCouse : String,name : String, couseid:String) {
+        var isHaveCouse :String? = UserDefaults.standard.value(forKey: ISHAVECOUSEINFO_TEACH) as! String?
+        if isHaveCouse == nil {
+            isHaveCouse = "0"
+        }
+        var nameStr :String? = UserDefaults.standard.value(forKey: COUSENAME_TEACH) as! String?
+        if nameStr == nil {
+            nameStr = ""
+        }
+        var idStr :String? = UserDefaults.standard.value(forKey: COUSEID_TEACH) as! String?
         if idStr == nil {
             idStr = ""
         }

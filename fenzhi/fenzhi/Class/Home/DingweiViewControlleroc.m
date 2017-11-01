@@ -72,13 +72,20 @@
     self.context[@"save_click"] =^(NSString * catid, NSString * name){
         NSLog(@"id%@",catid);
         NSLog(@"名字%@",name);
-
-    
+        
+ 
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"setSelectCouse_name"];
-                [[NSUserDefaults standardUserDefaults] setObject:catid forKey:@"setSelectCouse_id"];
-                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isHaveSelectCouseinfo"];
-                BOOL isok =  [NSUserDefaults.standardUserDefaults synchronize];
+//                [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"setSelectCouse_name"];
+//                [[NSUserDefaults standardUserDefaults] setObject:catid forKey:@"setSelectCouse_id"];
+//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isHaveSelectCouseinfo"];
+//                BOOL isok =  [NSUserDefaults.standardUserDefaults synchronize];
+                if (weakself.isHeart) {
+                    //心得
+                    [LogDataMangerViewController setSelectCouse_name_id_heartWithName:name couseid:catid ishaveinfo:@"1"];
+                } else {
+                    //教学
+                    [LogDataMangerViewController setSelectCouse_name_id_teachWithName:name couseid:catid ishaveinfo:@"1"];
+                }
                 [weakself.delegate sure_click];
                 [weakself  back_click];
             });

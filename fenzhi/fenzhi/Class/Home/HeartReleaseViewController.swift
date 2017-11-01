@@ -121,7 +121,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
          weak var weakSelf = self
 
 //        let arr = [imageStr]
-        KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id().couseid)
+        KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id_heart().couseid)
         KFBLog(message: self.couseId)
         dataVC.submitfenx_heart(content: txtStr, catalog_id: self.couseId, images: self.imageNameArr, completion: { (data) in
             let model :SmsModel = data as! SmsModel
@@ -230,10 +230,10 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         dingweiLabel_btn.frame = CGRect(x: tdBtn.frame.maxX + ip7(10), y: 0, width: KSCREEN_WIDTH - tdBtn.frame.maxX - ip7(100), height: ip7(55))
         dingweiLabel_btn.font = fzFont_Thin(ip7(18))
         dingweiLabel_btn.textAlignment = .left
-        dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id().name
+        dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id_heart().name
         dingweiLabel_btn.textColor = .white
         btnBackView.addSubview(dingweiLabel_btn)
-        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id().name
+        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id_heart().name
         if nameStr.characters.count > 0  {
             //有课时定位
             tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
@@ -276,10 +276,10 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         dingweiLabel.textAlignment = .left
         dingweiLabel.adjustsFontSizeToFitWidth = true
         dingweiBackView.addSubview(dingweiLabel)
-        if LogDataMangerViewController.getSelectCouse_name_id().ishaveCouse == "1" {
+        if (LogDataMangerViewController.getSelectCouse_name_id_heart().name.characters.count > 0) {
             self.dingweiBackView.isHidden = false
-            dingweiLabel.text =  LogDataMangerViewController.getSelectCouse_name_id().name
-            couseId =  LogDataMangerViewController.getSelectCouse_name_id().couseid
+            dingweiLabel.text =  LogDataMangerViewController.getSelectCouse_name_id_heart().name
+            couseId =  LogDataMangerViewController.getSelectCouse_name_id_heart().couseid
         } else {
             self.dingweiBackView.isHidden = true
         }
@@ -293,7 +293,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = ip7(6)
         layout.sectionInset = UIEdgeInsetsMake(0, ip7(3), 0, ip7(3))
-        if LogDataMangerViewController.getSelectCouse_name_id().ishaveCouse == "1" {
+        if LogDataMangerViewController.getSelectCouse_name_id_heart().ishaveCouse == "1" {
             colletionView = UICollectionView(frame: CGRect(x: 15, y: ip7(15) + dingweiBackView.frame.maxY, width: KSCREEN_WIDTH-30, height: itemHeight), collectionViewLayout: layout)
         } else {
             colletionView = UICollectionView(frame: CGRect(x: 15, y: ip7(13), width: KSCREEN_WIDTH-30, height: itemHeight), collectionViewLayout: layout)
@@ -374,7 +374,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         }
     }
 
-     //MARK:课时定位
+    //MARK:定位代理
     func removedingwei_click() {
         
         alertController  = UIAlertController(title: "提示", message: "是否要删除定时定位", preferredStyle: .alert)
@@ -385,7 +385,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
             })
         }
         let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
-            LogDataMangerViewController.setSelectCouse_name_id(name: "", couseid: "", ishaveinfo: "0")
+            LogDataMangerViewController.setSelectCouse_name_id_heart(name: "", couseid: "", ishaveinfo: "0")
             self.dingweiBackView.isHidden = true
             self.dingweiLabel_btn.isHidden = true
             self.tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))
@@ -395,7 +395,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         self.present((alertController)!, animated: true, completion: nil)
         
     }
-    
+       //MARK:课时定位
     func dingwei_click() {
         KfbShowWithInfo(titleString: "定位")
         if !nsetBtn.isSelected {
@@ -405,16 +405,17 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         let urlStr = BASER_API + selectCouse_api + "token=" + "".getToken_RSA()
         vc.mainUrl =  urlStr
         vc.delegate = self
+        vc.isHeart = true
         self.navigationController?.pushViewController(vc, animated: true)
     
     }
-       //MARK:定位代理
+    
     func sure_click() {
-        KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id().name)
-        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id().name
+        KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id_heart().name)
+        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id_heart().name
         self.dingweiLabel.text = nameStr
         dingweiLabel_btn.text = nameStr
-        self.couseId = LogDataMangerViewController.getSelectCouse_name_id().couseid
+        self.couseId = LogDataMangerViewController.getSelectCouse_name_id_heart().couseid
         self.dingweiBackView.isHidden = false
         self.dingweiLabel_btn.isHidden = false
         tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))

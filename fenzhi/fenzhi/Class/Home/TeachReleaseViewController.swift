@@ -61,9 +61,9 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         self.view.backgroundColor = .white
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")
-        if LogDataMangerViewController.getSelectCouse_name_id().name.characters.count > 0 {
+        if LogDataMangerViewController.getSelectCouse_name_id_teach().name.characters.count > 0 {
             isHaveDingwei = true
-            self.couseId = LogDataMangerViewController.getSelectCouse_name_id().couseid
+            self.couseId = LogDataMangerViewController.getSelectCouse_name_id_teach().couseid
         } else {
             isHaveDingwei = false
         }
@@ -276,10 +276,10 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         dingweiLabel_btn.frame = CGRect(x: tdBtn.frame.maxX + ip7(10), y: 0, width: KSCREEN_WIDTH - tdBtn.frame.maxX - ip7(100), height: ip7(55))
         dingweiLabel_btn.font = fzFont_Thin(ip7(18))
         dingweiLabel_btn.textAlignment = .left
-        dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id().name
+        dingweiLabel_btn.text =  LogDataMangerViewController.getSelectCouse_name_id_teach().name
         dingweiLabel_btn.textColor = .white
         btnBackView.addSubview(dingweiLabel_btn)
-        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id().name
+        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id_teach().name
         if nameStr.characters.count > 0  {
             //有课时定位
             tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
@@ -321,7 +321,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         dingweiLabel.textAlignment = .left
         dingweiLabel.adjustsFontSizeToFitWidth = true
         if isHaveDingwei {
-            dingweiLabel.text = LogDataMangerViewController.getSelectCouse_name_id().name
+            dingweiLabel.text = LogDataMangerViewController.getSelectCouse_name_id_teach().name
         }
         dingweiBackView.addSubview(dingweiLabel)
         
@@ -476,15 +476,16 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         let urlStr = BASER_API + selectCouse_api + "token=" + "".getToken_RSA()
         vc.mainUrl =  urlStr
         vc.delegate = self
+        vc.isHeart = false
         self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK:定位代理
     func sure_click() {
-        KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id().name)
-        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id().name
+        KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id_teach().name)
+        let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id_teach().name
         self.dingweiLabel.text = nameStr
         dingweiLabel_btn.text = nameStr
-        self.couseId = LogDataMangerViewController.getSelectCouse_name_id().couseid
+        self.couseId = LogDataMangerViewController.getSelectCouse_name_id_teach().couseid
         self.dingweiBackView.isHidden = false
         self.dingweiLabel_btn.isHidden = false
         tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
@@ -503,7 +504,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
             })
         }
         let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
-            LogDataMangerViewController.setSelectCouse_name_id(name: "", couseid: "", ishaveinfo: "0")
+            LogDataMangerViewController.setSelectCouse_name_id_teach(name: "", couseid: "", ishaveinfo: "0")
             self.dingweiBackView.isHidden = true
             self.dingweiLabel_btn.isHidden = true
             self.tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))

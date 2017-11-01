@@ -38,7 +38,7 @@ class MainTableViewCell: UITableViewCell {
         let lineViewY = height - 0.5
         lineView.frame = CGRect(x: 0, y: lineViewY, width: KSCREEN_WIDTH, height: 0.5)
         lineView.backgroundColor = lineView_thin_COLOUR
-        if index == 1 || index == 4{
+        if  index == 4{
             lineView.isHidden = true
         } else if index == 3 {
             height = ip7(95)

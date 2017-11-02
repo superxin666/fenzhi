@@ -73,10 +73,9 @@ class InfoTableViewCell: UITableViewCell,UITextFieldDelegate {
         _nameTextField.textColor = dark_6_COLOUR
         _nameTextField.adjustsFontSizeToFitWidth = true
         _nameTextField.textAlignment = .left
-        _nameTextField.returnKeyType = .done
+//        _nameTextField.returnKeyType = .done
         _nameTextField.delegate = self
         _nameTextField.tag = 101
-        _nameTextField.adjustsFontSizeToFitWidth = true
       
 
         let inputView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: 45))

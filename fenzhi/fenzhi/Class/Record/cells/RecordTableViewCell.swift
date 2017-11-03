@@ -20,7 +20,7 @@ class RecordTableViewCell: UITableViewCell {
     var docBlock : TeachDetailHeadViewBlock!
 
     let iconImageView:UIImageView = UIImageView()
-    let moreImageView:UIImageView = UIImageView()
+    let moreImageView:UIButton = UIButton()
     let timeLabel : UILabel = UILabel()
     let nameLabel : UILabel = UILabel()
     let infoLabel : UILabel = UILabel()
@@ -47,15 +47,15 @@ class RecordTableViewCell: UITableViewCell {
         backView.addSubview(iconImageView)
 
         //更多
-        moreImageView.frame = CGRect(x: viewW - ip7(5) - ip7(37), y: ip7(25), width: ip7(5), height: ip7(20))
-        moreImageView.image = #imageLiteral(resourceName: "button_more")
-        moreImageView.isUserInteractionEnabled = true
+
+        moreImageView.frame = CGRect(x: viewW - ip7(40), y: ip7(25), width: ip7(30), height: ip7(20))
+        moreImageView.setImage(#imageLiteral(resourceName: "button_more"), for: .normal)
+        moreImageView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        moreImageView.imageRect(forContentRect: CGRect(x: 0, y: 0, width: ip7(5), height: ip7(20)))
+        moreImageView.backgroundColor = .clear
+        moreImageView.addTarget(self, action:#selector(self.del_click), for: .touchUpInside)
         backView.addSubview(moreImageView)
-
-        let moreImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RecordTableViewCell.del_click))
-        moreImageView.addGestureRecognizer(moreImageViewTap)
-
-
+ 
 
         //105105105
         //名字 viewW - ip7(19) - iconImageView.frame.maxX - ip7(31) - ip7(90)

@@ -148,6 +148,8 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < self.dataArr.count {
+            weak var weakSelf = self
+
             let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
             model.indexRow = indexPath.row
             if model.type == 0 {
@@ -161,8 +163,7 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
                 cell.setUpUIWithModelAndType(model: model)
-                weak var weakSelf = self
-
+                
                 cell.fileBlock = {(click_model,indexNum) in
                     let fileModel = click_model.coursewares[indexNum]
                     let vc = pdfViewController()
@@ -183,39 +184,9 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
 
                 cell.delViewBlock = {(delmodel,indexNum) in
                     KFBLog(message: "删除block")
-                    weakSelf?.alertController  = UIAlertController(title: "提示", message: "是否要删除本条分享", preferredStyle: .alert)
-                    let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
-                        //取消
-                        weakSelf?.alertController.dismiss(animated: true, completion: {
-
-                        })
-                    }
-                    let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
-                        //删除
-                        self.SVshowLoad()
-                        weakSelf?.dataVC.delfenx(fenxId: delmodel.id, completion: { (data) in
-                            weakSelf?.SVdismiss()
-                            let model :SmsModel = data as! SmsModel
-                            if model.errno == 0 {
-                                weakSelf?.SVshowSucess(infoStr: "删除成功")
-                                weakSelf?.dataArr.remove(at: delmodel.indexRow)
-                                weakSelf?.mainTabelView.reloadData()
-                            } else {
-                                weakSelf?.SVshowErro(infoStr: model.errmsg)
-                            }
-                        }, failure: { (erro) in
-                            weakSelf?.SVshowErro(infoStr: "网络请求失败")
-                        })
-
-                    }
-
-                    weakSelf?.alertController.addAction(cancleAction)
-                    weakSelf?.alertController.addAction(sureAction)
-                    self.present((weakSelf?.alertController)!, animated: true, completion: nil)
-                    
-
+                    weakSelf?.del(delmodel: delmodel)
                 }
-                return cell;
+                return cell
             } else {
                 //心得
 //                var cell : RecordHeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID_RECORD, for: indexPath) as! RecordHeartTableViewCell
@@ -226,13 +197,52 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
                 cell.setUpUIWithModelAndType(model: model)
-                return cell;
+                cell.delViewBlock = {(model) in
+                    KFBLog(message: "删除block")
+                    weakSelf?.del(delmodel: model)
+                }
+                return cell
             }
         } else {
             return UITableViewCell()
         }
     }
 
+    func del(delmodel : GetmyfeedlistModel_data_fenxList)  {
+
+        alertController  = UIAlertController(title: "提示", message: "是否要删除本条分享", preferredStyle: .alert)
+        let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            //取消
+            self.alertController.dismiss(animated: true, completion: {
+
+            })
+        }
+        let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
+            //删除
+            self.SVshowLoad()
+            self.dataVC.delfenx(fenxId: delmodel.id, completion: { (data) in
+                self.SVdismiss()
+                let model :SmsModel = data as! SmsModel
+                if model.errno == 0 {
+                    self.SVshowSucess(infoStr: "删除成功")
+                    self.dataArr.remove(at: delmodel.indexRow)
+                    self.mainTabelView.reloadData()
+                } else {
+                    self.SVshowErro(infoStr: model.errmsg)
+                }
+            }, failure: { (erro) in
+                self.SVshowErro(infoStr: "网络请求失败")
+            })
+
+        }
+
+        alertController.addAction(cancleAction)
+        alertController.addAction(sureAction)
+        self.present((alertController)!, animated: true, completion: nil)
+
+    }
+
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < self.dataArr.count {
             let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]

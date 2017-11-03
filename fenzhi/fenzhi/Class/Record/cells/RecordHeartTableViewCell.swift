@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+typealias  RecordHeartTableViewCellBlock = (_ model:GetmyfeedlistModel_data_fenxList)->()
 class RecordHeartTableViewCell: UITableViewCell {
 
     var dataModel : GetmyfeedlistModel_data_fenxList = GetmyfeedlistModel_data_fenxList()
@@ -18,9 +18,10 @@ class RecordHeartTableViewCell: UITableViewCell {
     var fenxinagBtn : UIButton = UIButton()
     var baseVC : BaseViewController = BaseViewController()
     var docBlock : TeachDetailHeadViewBlock!
-
+    var delViewBlock : RecordHeartTableViewCellBlock!
+    
     let iconImageView:UIImageView = UIImageView()
-    let moreImageView:UIImageView = UIImageView()
+    let moreImageView:UIButton = UIButton()
     let timeLabel : UILabel = UILabel()
     let nameLabel : UILabel = UILabel()
     let infoLabel : UILabel = UILabel()
@@ -45,9 +46,13 @@ class RecordHeartTableViewCell: UITableViewCell {
 
 
         //更多
-        moreImageView.frame = CGRect(x: viewW - ip7(5) - ip7(37), y: ip7(25), width: ip7(5), height: ip7(20))
-        moreImageView.image = #imageLiteral(resourceName: "button_more")
-        moreImageView.isUserInteractionEnabled = true
+        
+        moreImageView.frame = CGRect(x: viewW - ip7(40), y: ip7(25), width: ip7(30), height: ip7(20))
+        moreImageView.setImage(#imageLiteral(resourceName: "button_more"), for: .normal)
+        moreImageView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        moreImageView.imageRect(forContentRect: CGRect(x: 0, y: 0, width: ip7(5), height: ip7(20)))
+        moreImageView.backgroundColor = .clear
+        moreImageView.addTarget(self, action:#selector(self.del_click), for: .touchUpInside)
         backView.addSubview(moreImageView)
 
 
@@ -227,7 +232,12 @@ class RecordHeartTableViewCell: UITableViewCell {
         }
         
     }
-
+    func del_click() {
+        KFBLog(message: "删除")
+        if let _ =  delViewBlock {
+            delViewBlock(self.dataModel)
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

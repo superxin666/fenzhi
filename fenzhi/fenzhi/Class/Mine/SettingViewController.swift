@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource {
+class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     let topBackImageView : UIImageView = UIImageView()
     let iconImageView : UIImageView = UIImageView()
@@ -53,7 +53,14 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     var versionNum : Int? = Int()
     var versionStr = ""
-
+    
+    
+    var iconImage = UIImage()
+    var uploadImageModel: UploadimgModel!
+    var avatarStr = ""
+    var isLoadIcon :Bool = false
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -102,6 +109,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
         if nameStr.characters.count > 0 {
             self.dataModel.data.name = nameStr
+        }
+        if isLoadIcon {
+            self.SVshowErro(infoStr: "稍等，正在上传头像")
         }
         KFBLog(message: self.dataModel.data.name)
         
@@ -197,12 +207,18 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     func crearUI() {
         topBackImageView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(234))
         topBackImageView.image = #imageLiteral(resourceName: "bg1")
+        topBackImageView.isUserInteractionEnabled = true
         self.view.addSubview(topBackImageView)
         
         iconImageView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(63))/2, y: LNAVIGATION_HEIGHT, width: ip7(63), height: ip7(63))
         iconImageView.kf.setImage(with: URL(string: dataModel.data.avatar))
         iconImageView.kfb_makeRound()
+        iconImageView.isUserInteractionEnabled = true
         topBackImageView.addSubview(iconImageView)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.icon_click))
+        iconImageView.addGestureRecognizer(tap)
+        
         
         mainTabelView.frame = CGRect(x: 0, y: topBackImageView.frame.maxY + ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20) - topBackImageView.frame.maxY )
         mainTabelView.backgroundColor = UIColor.white
@@ -216,6 +232,78 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         mainTabelView.register(InfoTableViewCell.self, forCellReuseIdentifier: INFOCELLID)
         self.view.addSubview(mainTabelView)
         
+    }
+     //MARK:icon
+    func icon_click() {
+        KFBLog(message: "照片点击")
+        let alertController = UIAlertController(title: "提示", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
+        let AlbumAction = UIAlertAction(title: "从相册选择", style: .default, handler: {
+            (action: UIAlertAction) -> Void in
+            self.openAlbum()
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(AlbumAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func openAlbum() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            //初始化图片控制器
+            let picker = UIImagePickerController()
+            //设置代理
+            picker.delegate = self
+            //指定图片控制器类型
+            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            //设置是否允许编辑
+            picker.allowsEditing = true
+            
+            //弹出控制器，显示界面
+            self.present(picker, animated: true, completion: {
+                () -> Void in
+            })
+        }else{
+            KFBLog(message: "读取相册错误")
+        }
+        
+    }
+    //选择图片成功后代理
+    func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : Any]) {
+        //查看info对象
+        KFBLog(message: info)
+        
+        //获取选择的编辑后的
+        let  image = info[UIImagePickerControllerEditedImage] as! UIImage
+        iconImage = image
+        
+        //图片控制器退出
+        picker.dismiss(animated: true, completion: {
+            () -> Void in
+            
+            //显示图片
+            self.iconImageView.image = image
+            self.upLoadIcon()
+        })
+    }
+    func upLoadIcon(){
+        isLoadIcon = true
+        weak var weakSelf = self
+        dataVC.upLoadImage(uploadimg: iconImage, type: "avatar", completion: { (data) in
+            
+            weakSelf?.uploadImageModel = data as! UploadimgModel
+            if weakSelf!.uploadImageModel.errno == 0 {
+                weakSelf!.isLoadIcon = false
+                KFBLog(message: "图片地址"+weakSelf!.uploadImageModel.data)
+                weakSelf!.avatarStr = weakSelf!.uploadImageModel.data
+                weakSelf?.dataModel.data.avatar = (weakSelf?.avatarStr)!
+            } else {
+                
+                
+            }
+            
+        }) { (erro) in
+            
+        }
     }
     //MARK:PickerView
     func cgreatPickerView()  {

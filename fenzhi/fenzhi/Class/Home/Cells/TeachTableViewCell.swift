@@ -276,7 +276,35 @@ class TeachTableViewCell: UITableViewCell {
     
     
     func ppt_click(tap:UITapGestureRecognizer)  {
+        
+//
         let tagNum : Int = (tap.view?.tag)!
+//        let urlStr : String = self.dataModel.coursewares[tagNum].file
+//        let name : String = self.dataModel.coursewares[tagNum].name
+//
+//        let vc = BaseViewController()
+//        let dataVC = HomeDataMangerController()
+//
+//        vc.SVshowLoad()
+//        var openFileUrl = ""
+//
+//        DispatchQueue.global().async {
+//                 dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
+//                vc.SVdismiss()
+//                openFileUrl = data as! String
+//            }, failure: { (erro) in
+//
+//            })
+//        }
+//        DispatchQueue.main.async {
+//            vc.SVdismiss()
+//            if  (openFileUrl.characters.count > 0) {
+//                vc.SVshowSucess(infoStr: "加载成功")
+//            } else {
+//                KFBLog(message: "加载失败")
+//                vc.SVshowErro(infoStr: "加载失败")
+//            }
+//        }
         if let _ =  fileBlock {
             fileBlock(self.dataModel,tagNum)
         }

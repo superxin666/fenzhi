@@ -276,20 +276,35 @@ class HomeDataMangerController: FZRequestViewController {
             
         } else {
             //需要下载
+            
+            let vc = BaseViewController()
+            
+            
             let url  = URL(string: path)
             let fileData = NSData(contentsOf: url!)
             KFBLog(message: "下载文件")
             KFBLog(message: fileData?.length)
             let filePathStr : String = filePath_downLoad + "/" + name
-            let isok =  fileData?.write(toFile: filePathStr, atomically: true)
-            if let _ = isok {
-                KFBLog(message: "文件保存成功")
-
-                completion(filePathStr)
-            } else {
-      
-                KFBLog(message: "文件保存失败")
+          
+//                                DispatchQueue.main.async {
+                                       vc.SVshowLoad()
+//                                }
+            
+            
+            DispatchQueue.global().async {
+                let isok =  fileData?.write(toFile: filePathStr, atomically: true)
+                DispatchQueue.main.async{
+                    vc.SVdismiss()
+                    if let _ = isok {
+                        KFBLog(message: "文件保存成功")
+                        completion(filePathStr)
+                    } else {
+                        
+                        KFBLog(message: "文件保存失败")
+                    }
+                }
             }
+      
         }
        
     }

@@ -71,4 +71,5 @@ let getfeedlist_api = "/api/user/getfeedlist?"
 //------------文件本地地址
 let documentPaths : String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!
 let filePath = documentPaths + "/filesDocument"
+let filePath_downLoad = documentPaths + "/downLoadfilesDocument"
 

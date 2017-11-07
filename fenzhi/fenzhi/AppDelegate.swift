@@ -141,7 +141,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
 
         KFBLog(message: url)
         let str2 = url.absoluteString
-        //        KFBLog(message: str2.removingPercentEncoding)
         let str3 :String = str2.removingPercentEncoding!
         let arr = str3.components(separatedBy: "/")
         let nameStr = arr.last

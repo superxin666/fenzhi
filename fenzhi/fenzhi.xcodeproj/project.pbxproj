@@ -43,7 +43,6 @@
 		214DC5131F7E8A46002CD41F /* DianzanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214DC5121F7E8A46002CD41F /* DianzanTableViewCell.swift */; };
 		214EEC8E1F76AFAA00B5F38A /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EEC8D1F76AFAA00B5F38A /* RecordTableViewCell.swift */; };
 		215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043601F6AADBD009546D2 /* ForgetViewController.swift */; };
-		215043631F6AC16B009546D2 /* DingweiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043621F6AC16B009546D2 /* DingweiViewController.swift */; };
 		215043651F6AD179009546D2 /* pdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043641F6AD179009546D2 /* pdfViewController.swift */; };
 		215043671F6AD550009546D2 /* ActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043661F6AD550009546D2 /* ActionCollectionViewCell.swift */; };
 		215592311F66D2800091A822 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215592301F66D2800091A822 /* LoginViewController.swift */; };
@@ -56,6 +55,7 @@
 		215822271F6C3033002BC6E6 /* NoWifiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822261F6C3033002BC6E6 /* NoWifiView.swift */; };
 		215822291F6C3D7A002BC6E6 /* UIView+clipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */; };
 		2158222B1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2158222A1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift */; };
+		215C4EE81FB1895F00ABFEF0 /* SelectImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C4EE71FB1895F00ABFEF0 /* SelectImageViewController.swift */; };
 		2162A07F1F7DE3BB00915F4C /* UpFileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2162A07E1F7DE3BB00915F4C /* UpFileDataModel.swift */; };
 		21668B1B1F8C9FF100174EF4 /* GetCommentMessagelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21668B1A1F8C9FF100174EF4 /* GetCommentMessagelistModel.swift */; };
 		2176597B1F74BBB600A54A1D /* LikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176597A1F74BBB600A54A1D /* LikeModel.swift */; };
@@ -94,8 +94,6 @@
 		21FB3EAE1F66392200656B74 /* TeachTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB3EAD1F66392200656B74 /* TeachTableViewCell.swift */; };
 		21FC9EB81F8DBE8D00DA81F4 /* PinglunTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC9EB71F8DBE8D00DA81F4 /* PinglunTableViewCell.swift */; };
 		21FC9EBA1F8DED1700DA81F4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21FC9EB91F8DED1700DA81F4 /* Images.xcassets */; };
-		21FE2F051F94915300DCB6A2 /* SwiftJavaScriptDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FE2F041F94915300DCB6A2 /* SwiftJavaScriptDelegate.swift */; };
-		21FE2F071F9491F300DCB6A2 /* SwiftJavaScriptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FE2F061F9491F300DCB6A2 /* SwiftJavaScriptModel.swift */; };
 		21FE2F0A1F949B6900DCB6A2 /* DingweiViewControlleroc.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FE2F091F949B6900DCB6A2 /* DingweiViewControlleroc.m */; };
 		21FEA6071F77F988009B1FBC /* ProfileMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FEA6061F77F988009B1FBC /* ProfileMineModel.swift */; };
 		85AC0AA241E550BCCE81BA92 /* Pods_fenzhi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDF4B2D362E84A0445C1765 /* Pods_fenzhi.framework */; };
@@ -164,7 +162,6 @@
 		214DC5121F7E8A46002CD41F /* DianzanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DianzanTableViewCell.swift; sourceTree = "<group>"; };
 		214EEC8D1F76AFAA00B5F38A /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		215043601F6AADBD009546D2 /* ForgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetViewController.swift; sourceTree = "<group>"; };
-		215043621F6AC16B009546D2 /* DingweiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DingweiViewController.swift; sourceTree = "<group>"; };
 		215043641F6AD179009546D2 /* pdfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pdfViewController.swift; sourceTree = "<group>"; };
 		215043661F6AD550009546D2 /* ActionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCollectionViewCell.swift; sourceTree = "<group>"; };
 		215592301F66D2800091A822 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +174,7 @@
 		215822261F6C3033002BC6E6 /* NoWifiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoWifiView.swift; sourceTree = "<group>"; };
 		215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+clipping.swift"; sourceTree = "<group>"; };
 		2158222A1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDataMangerViewController.swift; sourceTree = "<group>"; };
+		215C4EE71FB1895F00ABFEF0 /* SelectImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageViewController.swift; sourceTree = "<group>"; };
 		2162A07E1F7DE3BB00915F4C /* UpFileDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpFileDataModel.swift; sourceTree = "<group>"; };
 		21668B1A1F8C9FF100174EF4 /* GetCommentMessagelistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCommentMessagelistModel.swift; sourceTree = "<group>"; };
 		2176597A1F74BBB600A54A1D /* LikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeModel.swift; sourceTree = "<group>"; };
@@ -218,8 +216,6 @@
 		21FC9EB71F8DBE8D00DA81F4 /* PinglunTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinglunTableViewCell.swift; sourceTree = "<group>"; };
 		21FC9EB91F8DED1700DA81F4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		21FE2F031F944B9800DCB6A2 /* 纷知PRD.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "纷知PRD.docx"; sourceTree = "<group>"; };
-		21FE2F041F94915300DCB6A2 /* SwiftJavaScriptDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJavaScriptDelegate.swift; sourceTree = "<group>"; };
-		21FE2F061F9491F300DCB6A2 /* SwiftJavaScriptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJavaScriptModel.swift; sourceTree = "<group>"; };
 		21FE2F081F949B6900DCB6A2 /* DingweiViewControlleroc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DingweiViewControlleroc.h; sourceTree = "<group>"; };
 		21FE2F091F949B6900DCB6A2 /* DingweiViewControlleroc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DingweiViewControlleroc.m; sourceTree = "<group>"; };
 		21FEA6061F77F988009B1FBC /* ProfileMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMineModel.swift; sourceTree = "<group>"; };
@@ -294,9 +290,7 @@
 				21062AD91F6039570003C7C4 /* HomeViewController.swift */,
 				214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */,
 				214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */,
-				215043621F6AC16B009546D2 /* DingweiViewController.swift */,
-				21FE2F041F94915300DCB6A2 /* SwiftJavaScriptDelegate.swift */,
-				21FE2F061F9491F300DCB6A2 /* SwiftJavaScriptModel.swift */,
+				215C4EE71FB1895F00ABFEF0 /* SelectImageViewController.swift */,
 				215043641F6AD179009546D2 /* pdfViewController.swift */,
 				210862531F7A24F2000936B9 /* PdfListViewController.swift */,
 				21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */,
@@ -845,6 +839,7 @@
 				2124A0651F983AAD008BC63F /* PayView.swift in Sources */,
 				21F7427F1F9D87190016E399 /* UMUntil.swift in Sources */,
 				2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */,
+				215C4EE81FB1895F00ABFEF0 /* SelectImageViewController.swift in Sources */,
 				21F5D3F91FA02FB40032EF72 /* YIjianfankuiViewController.swift in Sources */,
 				2178823B1F67E43D00365735 /* RSA.m in Sources */,
 				214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */,
@@ -859,7 +854,6 @@
 				21F1C59C1F6906B8002FC28A /* RegisterViewController.swift in Sources */,
 				2112E91A1F6C434F0066CF5B /* CommonModel.swift in Sources */,
 				213BF8501F60317300D60AE5 /* ViewController.swift in Sources */,
-				21FE2F071F9491F300DCB6A2 /* SwiftJavaScriptModel.swift in Sources */,
 				2112E9221F6C4C8D0066CF5B /* GetbooklistModel.swift in Sources */,
 				214448D21F7007F60073EA06 /* GetincomelistModl.swift in Sources */,
 				21F5563B1F7272F00017C701 /* TeachDetailModel.swift in Sources */,
@@ -889,7 +883,6 @@
 				2176597B1F74BBB600A54A1D /* LikeModel.swift in Sources */,
 				21BD78771F618C1600539E8D /* BaseViewController.swift in Sources */,
 				214DC5111F7E85C4002CD41F /* GetmessagelistLikeModel.swift in Sources */,
-				21FE2F051F94915300DCB6A2 /* SwiftJavaScriptDelegate.swift in Sources */,
 				21C370921F7E276F003A7220 /* GunzhuOtherViewController.swift in Sources */,
 				21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */,
 				215822201F6C2012002BC6E6 /* MineDataManger.swift in Sources */,
@@ -914,7 +907,6 @@
 				21F1C5A01F6924EB002FC28A /* InfoViewController.swift in Sources */,
 				21570C8D1F653572003C7D38 /* api.swift in Sources */,
 				215043651F6AD179009546D2 /* pdfViewController.swift in Sources */,
-				215043631F6AC16B009546D2 /* DingweiViewController.swift in Sources */,
 				21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */,
 				214DC5131F7E8A46002CD41F /* DianzanTableViewCell.swift in Sources */,
 				2158222B1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift in Sources */,

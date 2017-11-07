@@ -11,7 +11,8 @@ import Alamofire
 import ObjectMapper
 import SwiftyJSON
 class CommonDataMangerViewController: FZRequestViewController {
-
+    var fileManager = FileManager.default
+    
 //    通用
     func getCommon(completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
@@ -306,5 +307,5 @@ class CommonDataMangerViewController: FZRequestViewController {
             
         }
     }
-
+    
 }

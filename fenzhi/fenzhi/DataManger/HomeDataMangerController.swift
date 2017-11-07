@@ -12,7 +12,8 @@ import ObjectMapper
 import SwiftyJSON
 class HomeDataMangerController: FZRequestViewController {
     
-    
+    var fileManager = FileManager.default
+    var downloadRequest: DownloadRequest!
     /// 首页feed接口
     ///
     /// - Parameters:
@@ -248,5 +249,78 @@ class HomeDataMangerController: FZRequestViewController {
         }
     }
 
+    func downLoadFile(path : String,name : String, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
 
+        
+        if fileManager.fileExists(atPath: filePath_downLoad) {
+            KFBLog(message: "文件夹已存在")
+        } else {
+            KFBLog(message: "创建文件夹")
+            do {
+                try fileManager.createDirectory(atPath: filePath_downLoad, withIntermediateDirectories: true, attributes: nil)
+            } catch _ {
+                KFBLog(message: "创建文件夹失败")
+            }
+        }
+        
+        //检查文件是否下载过
+        KFBLog(message: path)
+        KFBLog(message: name)
+        let filePathStr : String = filePath_downLoad + "/" + name
+        KFBLog(message: filePathStr)
+        if fileManager.fileExists(atPath: filePathStr) {
+            KFBLog(message: "文件已存在")
+
+            completion(filePathStr)
+            
+        } else {
+            //需要下载
+            let url  = URL(string: path)
+            let fileData = NSData(contentsOf: url!)
+            KFBLog(message: "下载文件")
+            KFBLog(message: fileData?.length)
+            let filePathStr : String = filePath_downLoad + "/" + name
+            let isok =  fileData?.write(toFile: filePathStr, atomically: true)
+            if let _ = isok {
+                KFBLog(message: "文件保存成功")
+
+                completion(filePathStr)
+            } else {
+      
+                KFBLog(message: "文件保存失败")
+            }
+        }
+       
+    }
+    
+    func downLoadRequest(ulrStr : String,downUrl : String){
+        let destination:DownloadRequest.DownloadFileDestination =  { _, response in
+            let fileUrl = URL(fileURLWithPath: ulrStr)
+            //两个参数表示如果有同名文件则会覆盖，如果路径中文件夹不存在则会自动创建
+            return (fileUrl, [.removePreviousFile, .createIntermediateDirectories])
+        }
+        downloadRequest = Alamofire.download(downUrl, to: destination)
+        self.downloadRequest.downloadProgress(queue: DispatchQueue.main,
+                                              closure: downloadProgress) //下载进度
+        self.downloadRequest.responseData(completionHandler: downloadResponse)
+    }
+    
+    func downloadProgress(progress: Progress) {
+        //进度条更新
+
+    }
+    func downloadResponse(response: DownloadResponse<Data>) {
+        switch response.result {
+        case .success(let data):
+            //self.image = UIImage(data: data)
+            print("文件下载完毕: \(response)")
+        case .failure:
+//            self.cancelledData = response.resumeData //意外终止的话，把已下载的数据储存起来
+             print("文件下载失败: \(response)")
+        }
+    }
+    
+ 
+    
 }

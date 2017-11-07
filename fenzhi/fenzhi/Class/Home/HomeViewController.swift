@@ -10,7 +10,7 @@ import UIKit
 import QuickLook
 let HEARTCELLID = "HEARTCELL_ID"//
 let TEACHCELLID = "TEACHCELL_ID"//
-class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource {
+class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
     let topBackView : UIView = UIView()//头部view背景图
     let mainTabelView : UITableView = UITableView()
 
@@ -27,7 +27,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     
     let quickLookController = QLPreviewController()
     var qucikModel = GetmyfeedlistModel_data_fenxList()
-    
+     var openFileUrl :String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -257,31 +257,35 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                     weakSelf?.navigationController?.pushViewController(vc, animated: true)
                 }
                 cell.fileBlock = {click_model,indexFile in
-//                    weakSelf?.qucikModel = click_model;
-//                    let url = NSURL(string: click_model.coursewares[indexFile].file)
-//                    KFBLog(message: url!)
-//                    if QLPreviewController.canPreview(url!){
-                        weakSelf?.quickLookController.currentPreviewItemIndex = 0
-                        weakSelf?.quickLookController.dataSource = self
-                        weakSelf?.quickLookController.view.frame = self.view.bounds
-//                        weakSelf?.quickLookController.transitioningDelegate = self
-                        weakSelf?.quickLookController.modalPresentationStyle = .custom
-                        weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
-
-                        weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
-//                    } else {
-//                        KFBLog(message: "不能解析该文件")
+                    let urlStr : String = click_model.coursewares[indexFile].file
+                    let name : String = click_model.coursewares[indexFile].name
+                    DispatchQueue.global().async {
+                        weakSelf?.SVshowLoad()
+                    }
+//                    DispatchQueue.main.async {
+                    
+                        weakSelf?.dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
+                            weakSelf?.SVdismiss()
+                            weakSelf?.openFileUrl = data as! String
+                            if  (self.openFileUrl.characters.count > 0) {
+                                KFBLog(message: "下载成功"+self.openFileUrl)
+                                weakSelf?.quickLookController.dataSource = self
+                                weakSelf?.quickLookController.delegate = self
+                                weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
+                                weakSelf?.quickLookController.reloadData()
+                                weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
+                            } else {
+                                KFBLog(message: "加载失败")
+                                weakSelf?.SVshowErro(infoStr: "加载失败")
+                            }
+                            
+                            
+                        }, failure: { (erro) in
+                            
+                        })
 //                    }
 
-//
-//                    let fileModel = click_model.coursewares[indexFile]
-//                    let vc = pdfViewController()
-//                    vc.urlStr = fileModel.file
-//                    vc.fileName = fileModel.name.removingPercentEncoding!
-//                    vc.pdftype = .url
-//                    vc.hidesBottomBarWhenPushed = true
-//                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
-                    
+        
                 }
                 return cell;
                 
@@ -388,24 +392,14 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
     
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
-        return self.qucikModel.coursewares.count
+        return 1
     }
     
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-        
-        let fileModel =  self.qucikModel.coursewares[index]
-        let fileName = fileModel.name.removingPercentEncoding!
-        let str  = fileModel.file
-        let url : NSURL =  NSURL(string: str)!
+        let url : NSURL =  NSURL(fileURLWithPath: openFileUrl)
         KFBLog(message: url)
-        
-//        let iteam : QLPreviewItem = QLPreviewItem()
-//        iteam.previewItemURL = url
-//        iteam.previewItemTitle = fileName
-        return URL(fileURLWithPath: "/Users/lvxin/fenzhi/fenzhi/fenzhi/纷知PRD.docx") as QLPreviewItem
-//        return url
+        return url
     } 
-    
     
 
     override func didReceiveMemoryWarning() {

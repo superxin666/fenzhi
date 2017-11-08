@@ -18,7 +18,10 @@
 				<string>com.microsoft.word.doc</string>
 				<string>com.microsoft.powerpoint.ppt</string>
 				<string>com.adobe.pdf</string>
-				<string>com.microsoft.word.docx</string>
+				<string>org.openxmlformats.wordprocessingml.document</string>
+				<string>org.openxmlformats.presentationml.presentation</string>
+				<string>org.openxmlformats.spreadsheetml.sheet</string>
+				<string>com.microsoft.excel.xls</string>
 			</array>
 		</dict>
 	</array>
@@ -34,6 +37,10 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleTypeName</key>
+	<string>Microsoft Word 2003 XML document</string>
+	<key>CFBundleTypeRole</key>
+	<string>Viewer</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -112,6 +119,12 @@
 		<string>mqqapi</string>
 		<string>weixin</string>
 		<string>wechat</string>
+	</array>
+	<key>LSHandlerRank</key>
+	<string>Alternate</string>
+	<key>LSItemContentTypes</key>
+	<array>
+		<string></string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

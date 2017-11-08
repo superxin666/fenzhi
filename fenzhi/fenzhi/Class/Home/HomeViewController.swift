@@ -278,7 +278,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                         }, failure: { (erro) in
 
                         })
-//                        self.SVdismiss()
+
                 }
                 return cell;
                 

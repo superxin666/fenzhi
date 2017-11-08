@@ -7,18 +7,21 @@
 //
 
 import UIKit
+import QuickLook
 let HEARTCELLID_RECORD = "HEARTCELL_RECORD_ID"//
 let TEACHCELLID_RECORD = "TEACHCELL__RECORD_ID"//
-class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
     let mainTabelView : UITableView = UITableView()
     let dataVC : CommonDataMangerViewController = CommonDataMangerViewController()
+    let homedataVC = HomeDataMangerController()
     var dataModel : GetmyfeedlistModel = GetmyfeedlistModel()
     var dataArr : [GetmyfeedlistModel_data_fenxList] = []
-
+    let quickLookController = QLPreviewController()
     var alertController : UIAlertController!
 
     var page :Int = 1
     let count : Int = 10
+    var openFileUrl :String!
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.SVdismiss()
@@ -165,13 +168,27 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                 cell.setUpUIWithModelAndType(model: model)
                 
                 cell.fileBlock = {(click_model,indexNum) in
-                    let fileModel = click_model.coursewares[indexNum]
-                    let vc = pdfViewController()
-                    vc.urlStr = fileModel.file
-                    vc.fileName = fileModel.name.removingPercentEncoding!
-                    vc.pdftype = .url
-                    vc.hidesBottomBarWhenPushed = true
-                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                    let urlStr : String = click_model.coursewares[indexNum].file
+                    let name : String = click_model.coursewares[indexNum].name.removingPercentEncoding!
+                    
+                    weakSelf?.homedataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
+                        
+                        weakSelf?.openFileUrl = data as! String
+                        if  (self.openFileUrl.characters.count > 0) {
+                            KFBLog(message: "下载成功"+self.openFileUrl)
+                            
+                            weakSelf?.quickLookController.dataSource = self
+                            weakSelf?.quickLookController.delegate = self
+                            weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
+                            weakSelf?.quickLookController.reloadData()
+                            weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
+                        } else {
+                            KFBLog(message: "加载失败")
+                            weakSelf?.SVshowErro(infoStr: "加载失败")
+                        }
+                    }, failure: { (erro) in
+                        
+                    })
 
                 }
                 cell.zanshangBlock = {(click_model,indexNum) in
@@ -258,7 +275,15 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         let model = self.dataArr[indexPath.row]
         return model.cellHeight;
     }
-
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        let url : NSURL =  NSURL(fileURLWithPath: openFileUrl)
+        KFBLog(message: url)
+        return url
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

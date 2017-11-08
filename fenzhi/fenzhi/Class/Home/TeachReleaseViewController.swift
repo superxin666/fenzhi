@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,sureDelegate {
+import QuickLook
+class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,sureDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
     let textField: UITextView = UITextView()
     let btnBackView :UIView = UIView()
     let imageBackView :UIView = UIView()
@@ -47,6 +47,9 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     var fileManager = FileManager.default
     var alertController : UIAlertController!
     
+    let quickLookController = QLPreviewController()
+    var openFileUrl :String!
+    let homedataVC = HomeDataMangerController()
     deinit {
         //记得移除通知监听
         NotificationCenter.default.removeObserver(self)
@@ -394,13 +397,20 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let str = self.fileArr[indexPath.row]
-        let filePathStr : String = filePath + "/" + str
-        let vc = pdfViewController()
-        vc.pdftype = .path
-        vc.path = filePathStr
-        vc.fileName = str
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
+
+        let name : String = self.fileArr[indexPath.row]
+        let urlStr : String = filePath + "/" + name
+        self.openFileUrl = urlStr
+        
+        self.quickLookController.dataSource = self
+        self.quickLookController.delegate = self
+        self.quickLookController.hidesBottomBarWhenPushed =  true
+        self.quickLookController.reloadData()
+        self.navigationController?.pushViewController((self.quickLookController), animated: true)
+
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
@@ -558,7 +568,15 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         // Dispose of any resources that can be recreated.
     }
     
-
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        let url : NSURL =  NSURL(fileURLWithPath: openFileUrl)
+        KFBLog(message: url)
+        return url
+    }
     /*
     // MARK: - Navigation
 

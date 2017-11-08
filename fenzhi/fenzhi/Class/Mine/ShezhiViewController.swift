@@ -9,7 +9,7 @@
 import UIKit
 
 class ShezhiViewController: BaseViewController {
-
+    var fileManager = FileManager.default
     let dataVC : LogDataMangerViewController = LogDataMangerViewController()
     var dataModel : SmsModel = SmsModel()
 
@@ -31,6 +31,7 @@ class ShezhiViewController: BaseViewController {
         //清除换存
         let backView1 = UIView(frame: CGRect(x: 0, y:LNAVIGATION_HEIGHT +  ip7(15), width: KSCREEN_WIDTH, height: ip7(90)))
         backView1.backgroundColor = .white
+        backView1.isUserInteractionEnabled = true
         self.view.addSubview(backView1)
 
         let iconImageView:UIImageView = UIImageView(frame: CGRect(x: ip7(31), y:  (ip7(90) - ip7(40))/2, width: ip7(40), height: ip7(40) ))
@@ -45,6 +46,9 @@ class ShezhiViewController: BaseViewController {
         monyLabel.font = fzFont_Thin(ip7(24))
         monyLabel.textAlignment = .left
         backView1.addSubview(monyLabel)
+        
+        let cleantap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.clen_click))
+        backView1.addGestureRecognizer(cleantap)
 
         //意见反馈
         let backView2 = UIView(frame: CGRect(x: 0, y:backView1.frame.maxY + ip7(15), width: KSCREEN_WIDTH, height: ip7(90)))
@@ -158,6 +162,19 @@ class ShezhiViewController: BaseViewController {
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
         
+    }
+    
+    func clen_click()  {
+        if fileManager.fileExists(atPath: filePath_downLoad) {
+            KFBLog(message: "文件夹已存在")
+            do {
+                try self.fileManager.removeItem(at: URL(fileURLWithPath: filePath_downLoad))
+                self.SVshowSucess(infoStr: "清除成功")
+            } catch _ {
+                KFBLog(message: "文件删除失败")
+            }
+        
+        }
     }
     override func navigationLeftBtnClick() {
          self.SVdismiss()

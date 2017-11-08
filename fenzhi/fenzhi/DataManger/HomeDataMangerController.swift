@@ -10,10 +10,14 @@ import UIKit
 import Alamofire
 import ObjectMapper
 import SwiftyJSON
+
+typealias DOWNLOADDPROBLOCK = (_ pro : Int) ->()
 class HomeDataMangerController: FZRequestViewController {
     
     var fileManager = FileManager.default
     var downloadRequest: DownloadRequest!
+    var downProBlock : DOWNLOADDPROBLOCK!
+    
     /// 首页feed接口
     ///
     /// - Parameters:
@@ -278,23 +282,20 @@ class HomeDataMangerController: FZRequestViewController {
             //需要下载
             
             let vc = BaseViewController()
-            
-            
-            let url  = URL(string: path)
-            let fileData = NSData(contentsOf: url!)
-            KFBLog(message: "下载文件")
-            KFBLog(message: fileData?.length)
+//            self.downLoadFileRequest(ulrStr: filePathStr, downUrl: path)
+      
+            vc.SVshowLoad()
+
             let filePathStr : String = filePath_downLoad + "/" + name
-          
-//            DispatchQueue.main.async {
-//                vc.SVshow(infoStr: "加载中")
-//            }
-        
-            
+            let url  = URL(string: path)
+           
             DispatchQueue.global().async {
+                let fileData = NSData(contentsOf: url!)
+                KFBLog(message: "下载文件")
+                KFBLog(message: fileData?.length)
                 let isok =  fileData?.write(toFile: filePathStr, atomically: true)
                 DispatchQueue.main.async{
-//                    vc.SVdismiss()
+                    vc.SVdismiss()
                     if let _ = isok {
                         KFBLog(message: "文件保存成功")
                         completion(filePathStr)
@@ -304,12 +305,12 @@ class HomeDataMangerController: FZRequestViewController {
                     }
                 }
             }
-      
+            //
         }
        
     }
     
-    func downLoadRequest(ulrStr : String,downUrl : String){
+    func downLoadFileRequest(ulrStr : String,downUrl : String){
         let destination:DownloadRequest.DownloadFileDestination =  { _, response in
             let fileUrl = URL(fileURLWithPath: ulrStr)
             //两个参数表示如果有同名文件则会覆盖，如果路径中文件夹不存在则会自动创建
@@ -323,13 +324,16 @@ class HomeDataMangerController: FZRequestViewController {
     
     func downloadProgress(progress: Progress) {
         //进度条更新
+        KFBLog(message: progress)
 
     }
+        
     func downloadResponse(response: DownloadResponse<Data>) {
         switch response.result {
         case .success(let data):
             //self.image = UIImage(data: data)
             print("文件下载完毕: \(response)")
+            
         case .failure:
 //            self.cancelledData = response.resumeData //意外终止的话，把已下载的数据储存起来
              print("文件下载失败: \(response)")

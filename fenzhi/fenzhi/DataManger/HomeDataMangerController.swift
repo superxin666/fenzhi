@@ -286,15 +286,15 @@ class HomeDataMangerController: FZRequestViewController {
             KFBLog(message: fileData?.length)
             let filePathStr : String = filePath_downLoad + "/" + name
           
-//                                DispatchQueue.main.async {
-                                       vc.SVshowLoad()
-//                                }
-            
+//            DispatchQueue.main.async {
+//                vc.SVshow(infoStr: "加载中")
+//            }
+        
             
             DispatchQueue.global().async {
                 let isok =  fileData?.write(toFile: filePathStr, atomically: true)
                 DispatchQueue.main.async{
-                    vc.SVdismiss()
+//                    vc.SVdismiss()
                     if let _ = isok {
                         KFBLog(message: "文件保存成功")
                         completion(filePathStr)

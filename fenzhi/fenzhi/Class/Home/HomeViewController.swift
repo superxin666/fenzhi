@@ -259,17 +259,19 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.fileBlock = {click_model,indexFile in
                     let urlStr : String = click_model.coursewares[indexFile].file
                     let name : String = click_model.coursewares[indexFile].name
-                   
+                       self.SVshowLoad()
 
                         weakSelf?.dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
+                            self.SVdismiss()
                             weakSelf?.openFileUrl = data as! String
                             if  (self.openFileUrl.characters.count > 0) {
                                 KFBLog(message: "下载成功"+self.openFileUrl)
-                                weakSelf?.quickLookController.dataSource = self
-                                weakSelf?.quickLookController.delegate = self
-                                weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
-                                weakSelf?.quickLookController.reloadData()
-                                weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
+                                
+//                                weakSelf?.quickLookController.dataSource = self
+//                                weakSelf?.quickLookController.delegate = self
+//                                weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
+//                                weakSelf?.quickLookController.reloadData()
+//                                weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
                             } else {
                                 KFBLog(message: "加载失败")
                                 weakSelf?.SVshowErro(infoStr: "加载失败")
@@ -277,7 +279,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                         }, failure: { (erro) in
 
                         })
-
+//                        self.SVdismiss()
                 }
                 return cell;
                 

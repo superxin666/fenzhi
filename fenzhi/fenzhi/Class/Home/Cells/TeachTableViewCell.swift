@@ -284,27 +284,27 @@ class TeachTableViewCell: UITableViewCell {
 //
 //        let vc = BaseViewController()
 //        let dataVC = HomeDataMangerController()
-//
+////
 //        vc.SVshowLoad()
-//        var openFileUrl = ""
 //
-//        DispatchQueue.global().async {
-//                 dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
-//                vc.SVdismiss()
-//                openFileUrl = data as! String
-//            }, failure: { (erro) in
-//
-//            })
-//        }
-//        DispatchQueue.main.async {
+//         dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
 //            vc.SVdismiss()
+//             let openFileUrl = data as! String
 //            if  (openFileUrl.characters.count > 0) {
-//                vc.SVshowSucess(infoStr: "加载成功")
+//                KFBLog(message: "下载成功"+openFileUrl)
+////                weakSelf?.quickLookController.dataSource = self
+////                weakSelf?.quickLookController.delegate = self
+////                weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
+////                weakSelf?.quickLookController.reloadData()
+////                weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
 //            } else {
 //                KFBLog(message: "加载失败")
 //                vc.SVshowErro(infoStr: "加载失败")
 //            }
-//        }
+//        }, failure: { (erro) in
+//
+//        })
+
         if let _ =  fileBlock {
             fileBlock(self.dataModel,tagNum)
         }

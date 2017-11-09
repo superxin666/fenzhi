@@ -187,6 +187,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
             
         }
 //        UIView.animate(withDuration: 1, animations: {
+             self.nsetBtn.isSelected = false
             var frame = self.btnBackView.frame
             frame.origin.y = KSCREEN_HEIGHT - height - ip7(55)
             self.btnBackView.frame = frame

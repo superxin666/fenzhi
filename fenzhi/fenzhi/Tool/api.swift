@@ -12,7 +12,7 @@ import Foundation
 
 let pubkey = "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCs/AKBw1GMHK+0JS6MP+6UJ2WM\nUU1yX4qKhkKvn1vzTQjzIEf1X92+4kH51wkrWVnWy8dObblMu6CERDs+lqzkmkp5\np3Yv9wMHnNhxwZYr+qMr73X5Pkn41Qsdbe+rxGO7dWSuhmcgY2EbZle6N8bXssZk\n8yK+gz6ReGr7k2lgHwIDAQAB\n-----END PUBLIC KEY-----\n";
 
-let BASER_API = "http://www.fenzhi-edu.com/"//线上域名
+let BASER_API = "http://www.fenzhi-edu.com"//线上域名
 
 //let last_par = "&client=iphone&version="+St
 

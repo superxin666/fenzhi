@@ -11,6 +11,13 @@
 		21062ADC1F6039640003C7C4 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062ADB1F6039640003C7C4 /* MineViewController.swift */; };
 		21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062ADD1F60396F0003C7C4 /* RecordViewController.swift */; };
 		21062AE11F603EA90003C7C4 /* pch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062AE01F603EA90003C7C4 /* pch.swift */; };
+		21066EBF1FB3FA2D001DA2F3 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21066EBE1FB3FA2D001DA2F3 /* ImageModel.swift */; };
+		21066EE31FB40546001DA2F3 /* HGImageCompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21066EDE1FB40545001DA2F3 /* HGImageCompleteButton.swift */; };
+		21066EE41FB40546001DA2F3 /* HGImagePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21066EDF1FB40545001DA2F3 /* HGImagePickerCell.swift */; };
+		21066EE51FB40546001DA2F3 /* HGImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21066EE01FB40545001DA2F3 /* HGImagePickerController.swift */; };
+		21066EE61FB40546001DA2F3 /* HGImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21066EE11FB40546001DA2F3 /* HGImageCollectionViewController.swift */; };
+		21066EE71FB40546001DA2F3 /* HGImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21066EE21FB40546001DA2F3 /* HGImageCollectionViewCell.swift */; };
+		21066EE91FB40551001DA2F3 /* HGImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21066EE81FB40551001DA2F3 /* HGImage.storyboard */; };
 		210862541F7A24F2000936B9 /* PdfListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210862531F7A24F2000936B9 /* PdfListViewController.swift */; };
 		2112E91A1F6C434F0066CF5B /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E9191F6C434F0066CF5B /* CommonModel.swift */; };
 		2112E91C1F6C47360066CF5B /* GetregionlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */; };
@@ -124,6 +131,13 @@
 		21062ADB1F6039640003C7C4 /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		21062ADD1F60396F0003C7C4 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		21062AE01F603EA90003C7C4 /* pch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pch.swift; sourceTree = "<group>"; };
+		21066EBE1FB3FA2D001DA2F3 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		21066EDE1FB40545001DA2F3 /* HGImageCompleteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCompleteButton.swift; sourceTree = "<group>"; };
+		21066EDF1FB40545001DA2F3 /* HGImagePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImagePickerCell.swift; sourceTree = "<group>"; };
+		21066EE01FB40545001DA2F3 /* HGImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImagePickerController.swift; sourceTree = "<group>"; };
+		21066EE11FB40546001DA2F3 /* HGImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCollectionViewController.swift; sourceTree = "<group>"; };
+		21066EE21FB40546001DA2F3 /* HGImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		21066EE81FB40551001DA2F3 /* HGImage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HGImage.storyboard; sourceTree = "<group>"; };
 		210862531F7A24F2000936B9 /* PdfListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfListViewController.swift; sourceTree = "<group>"; };
 		2112E9191F6C434F0066CF5B /* CommonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
 		2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetregionlistModel.swift; sourceTree = "<group>"; };
@@ -285,6 +299,7 @@
 		21062AD61F6038DA0003C7C4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				21066EDD1FB40509001DA2F3 /* Image */,
 				21570C901F653EAA003C7D38 /* Model */,
 				21F8421F1F6267DC00A54D68 /* Cells */,
 				21062AD91F6039570003C7C4 /* HomeViewController.swift */,
@@ -342,6 +357,19 @@
 				21F7427E1F9D87190016E399 /* UMUntil.swift */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		21066EDD1FB40509001DA2F3 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				21066EE81FB40551001DA2F3 /* HGImage.storyboard */,
+				21066EE21FB40546001DA2F3 /* HGImageCollectionViewCell.swift */,
+				21066EE11FB40546001DA2F3 /* HGImageCollectionViewController.swift */,
+				21066EDE1FB40545001DA2F3 /* HGImageCompleteButton.swift */,
+				21066EDF1FB40545001DA2F3 /* HGImagePickerCell.swift */,
+				21066EE01FB40545001DA2F3 /* HGImagePickerController.swift */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 		2124A0631F983A51008BC63F /* Pay */ = {
@@ -457,6 +485,7 @@
 				21F7D5F51F8B4C2900371596 /* SubmitcommentModel.swift */,
 				212D284D1F7359A1004DD669 /* GetcommentlistModel.swift */,
 				21F5563A1F72726B0017C701 /* TeachDetailModel.swift */,
+				21066EBE1FB3FA2D001DA2F3 /* ImageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -664,6 +693,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21066EE91FB40551001DA2F3 /* HGImage.storyboard in Resources */,
 				213BF8581F60317300D60AE5 /* LaunchScreen.storyboard in Resources */,
 				21FC9EBA1F8DED1700DA81F4 /* Images.xcassets in Resources */,
 				213BF8551F60317300D60AE5 /* Assets.xcassets in Resources */,
@@ -835,6 +865,7 @@
 				215822231F6C2122002BC6E6 /* FollowModel.swift in Sources */,
 				210862541F7A24F2000936B9 /* PdfListViewController.swift in Sources */,
 				21BBF7FD1F6BC0E4008D654D /* GunzhuViewController.swift in Sources */,
+				21066EE31FB40546001DA2F3 /* HGImageCompleteButton.swift in Sources */,
 				21F1C5981F68E002002FC28A /* UserInfoModel.swift in Sources */,
 				2124A0651F983AAD008BC63F /* PayView.swift in Sources */,
 				21F7427F1F9D87190016E399 /* UMUntil.swift in Sources */,
@@ -842,6 +873,7 @@
 				215C4EE81FB1895F00ABFEF0 /* SelectImageViewController.swift in Sources */,
 				21F5D3F91FA02FB40032EF72 /* YIjianfankuiViewController.swift in Sources */,
 				2178823B1F67E43D00365735 /* RSA.m in Sources */,
+				21066EE61FB40546001DA2F3 /* HGImageCollectionViewController.swift in Sources */,
 				214AF58E1F6187F400CA786A /* TeachReleaseViewController.swift in Sources */,
 				21F7D5F61F8B4C2900371596 /* SubmitcommentModel.swift in Sources */,
 				21FEA6071F77F988009B1FBC /* ProfileMineModel.swift in Sources */,
@@ -867,6 +899,7 @@
 				21EE65B31F6A7C1900806B62 /* UpIconTableViewCell.swift in Sources */,
 				214448D01F7003A30073EA06 /* ShouruHeadView.swift in Sources */,
 				213BF84E1F60317300D60AE5 /* AppDelegate.swift in Sources */,
+				21066EE41FB40546001DA2F3 /* HGImagePickerCell.swift in Sources */,
 				21062ADE1F60396F0003C7C4 /* RecordViewController.swift in Sources */,
 				21FB3EAC1F66367500656B74 /* SettingViewController.swift in Sources */,
 				21CB58CC1F726E7A00F41448 /* ShezhiViewController.swift in Sources */,
@@ -885,6 +918,8 @@
 				214DC5111F7E85C4002CD41F /* GetmessagelistLikeModel.swift in Sources */,
 				21C370921F7E276F003A7220 /* GunzhuOtherViewController.swift in Sources */,
 				21FA05A11F6784DF0083EFD4 /* FZRequestViewController.swift in Sources */,
+				21066EBF1FB3FA2D001DA2F3 /* ImageModel.swift in Sources */,
+				21066EE51FB40546001DA2F3 /* HGImagePickerController.swift in Sources */,
 				215822201F6C2012002BC6E6 /* MineDataManger.swift in Sources */,
 				21570C8F1F653CB2003C7D38 /* fzStr.swift in Sources */,
 				2119946B1F7745EF00FB8016 /* RecordHeartTableViewCell.swift in Sources */,
@@ -895,6 +930,7 @@
 				21CB58C91F726DB100F41448 /* HomeDataMangerController.swift in Sources */,
 				214448D41F700A2B0073EA06 /* ShouruTableViewCell.swift in Sources */,
 				21EE65B51F6A7C2600806B62 /* InfoTableViewCell.swift in Sources */,
+				21066EE71FB40546001DA2F3 /* HGImageCollectionViewCell.swift in Sources */,
 				21F1C59A1F68E103002FC28A /* LoginModelMapper.swift in Sources */,
 				212319581F9F45ED00014CB0 /* AboutViewController.swift in Sources */,
 				2142298C1F78DC88000565F4 /* UserInfoHeartTableViewCell.swift in Sources */,

@@ -146,16 +146,6 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     func subTxt(fileData : UpFileDataModel_data)  {
         weak var weakSelf = self
-
-//        let dict :Dictionary = [
-//            "name":fileData.name,
-//            "type":fileData.type,
-//            "file":fileData.file,
-//        ]
-//
-//
-//        let arr = [dict]
-        
         dataVC.submitfenx_teach(content: txtStr, catalog_id: self.couseId, file: self.fileNameArr, completion: { (data) in
             let model :SmsModel = data as! SmsModel
             if model.errno == 0{
@@ -465,6 +455,18 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         self.present((alertController)!, animated: true, completion: nil)
         
     }
+    
+    func delAllFiles() {
+        if self.fileManager.fileExists(atPath: filePath){
+            do {
+                try self.fileManager.removeItem(at: URL(fileURLWithPath: filePath))
+                self.tableView.reloadData()
+                KFBLog(message: "文件夹删除成功")
+            } catch _ {
+                KFBLog(message: "文件夹删除成功")
+            }
+        }
+    }
 
     
     //MARK:退出键盘
@@ -565,8 +567,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     override func navigationLeftBtnClick() {
 
         self.dismiss(animated: true) {
-            
-            
+            self.delAllFiles()
             if self.textField.isFirstResponder {
                 self.SVdismiss()
                 self.textField.resignFirstResponder()

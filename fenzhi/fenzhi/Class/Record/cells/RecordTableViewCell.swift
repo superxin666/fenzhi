@@ -153,7 +153,7 @@ class RecordTableViewCell: UITableViewCell {
         }
         //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 + // ip(35)+ip(21)//课时定位 +
 
-        if model.catalog.characters.count > 0 {
+        if (model.catalog.characters.count > 0) {
             //课时定位
             dingweiImageView.image = #imageLiteral(resourceName: "icon_dingwei")
             dingweiImageView.frame = CGRect(x: appadWidth, y: lastFream.maxY + ip7(35), width: ip7(20), height: ip7(20))

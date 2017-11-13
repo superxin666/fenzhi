@@ -382,8 +382,18 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         view.addGestureRecognizer(longTap)
         
         //图片
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "pdf"))
+        let arr = name.components(separatedBy: ".")
+        let nameStr : String = arr.last!
+
+        let imageView = UIImageView()
         imageView.frame = CGRect(x: 0, y: 0, width: ip7(65), height: ip7(65))
+        if nameStr.contains("pdf") {
+            imageView.image = #imageLiteral(resourceName: "pdf")
+        } else if nameStr.contains("ppt") {
+            imageView.image = #imageLiteral(resourceName: "pptx")
+        } else {
+            imageView.image = #imageLiteral(resourceName: "word")
+        }
         view.addSubview(imageView)
         //描述
         let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (ip7(65) - ip7(21))/2, width: view.frame.width - imageView.frame.maxX - ip7(10), height: ip7(21)))

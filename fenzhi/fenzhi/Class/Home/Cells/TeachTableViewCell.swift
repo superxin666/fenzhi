@@ -151,7 +151,7 @@ class TeachTableViewCell: UITableViewCell {
                 
                 //描述
                 let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (imageHeight - ip7(21))/2, width: imageWidth - imageView.frame.maxX - ip7(10), height: ip7(21)))
-                label.text = model.name
+                label.text = model.name.removingPercentEncoding!
                 label.font = fzFont_Thin(ip7(21))
                 label.textColor  = dark_3_COLOUR
                 label.textAlignment = .left

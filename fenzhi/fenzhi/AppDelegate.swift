@@ -162,7 +162,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             let isok =  fileData?.write(toFile: filePathStr, atomically: true)
             if let _ = isok {
                 KFBLog(message: "文件保存成功")
-                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadFile"), object: nil)
             } else {
                 KFBLog(message: "文件保存失败")
             }

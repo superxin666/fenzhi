@@ -55,11 +55,13 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         NotificationCenter.default.removeObserver(self)
     }
     
+    
     override func viewDidLoad() {
 
         // Do any additional setup after loading the view
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView), name: NSNotification.Name(rawValue: "reloadFile"), object: nil)
         self.navigation_title_fontsize(name: "教学分享", fontsize: 27)
         self.view.backgroundColor = .white
         self.navigationBar_leftBtn()
@@ -75,7 +77,18 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         
 
     }
-
+    func reloadTableView(){
+        KFBLog(message: "检测到文件")
+        self.getFileData()
+        if self.isHaveFiles {
+            if !self.nsetBtn.isSelected {
+                self.nestBtnClik()
+            }
+             tableView.isHidden = false
+            self.tableView.reloadData()
+        }
+    }
+    
     func getFileData() {
         
         if fileManager.fileExists(atPath: filePath) {
@@ -205,10 +218,8 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         self.creatBackView()
         if isHaveFiles {
             self.creatBtnView()
-//            btnBackView.frame.origin.y =  KSCREEN_HEIGHT  - btnBackView.frame.size.height
             self.view.addSubview(btnBackView)
             self.nestBtnClik()
-//            self.view.bringSubview(toFront: btnBackView)
            self.imageBackView.isHidden = false
         } else {
           self.imageBackView.isHidden = true

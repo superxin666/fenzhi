@@ -53,6 +53,7 @@ class HeartTableViewCell: UITableViewCell {
         iconImageView.frame = CGRect(x: ip7(25), y: ip7(25), width: ip7(60), height: ip7(60))
         iconImageView.kf.setImage(with: URL(string: model.userInfo.avatar))
         iconImageView.isUserInteractionEnabled = true
+        iconImageView.kfb_makeRound()
         backView.addSubview(iconImageView)
         
         let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))

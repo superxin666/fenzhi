@@ -130,7 +130,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             KFBLog(message: "赞赏点击")
             weakSelf?.showZanShang()
         }
-
+        
         headView.fenxiangBlock = {(model) in
             let umeng = UMUntil()
             let url = BASER_API + share_api + "shareID=\(self.fenxId!)"
@@ -150,6 +150,11 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                 umeng.shareWebUrlToPlatformWithUrl(webUlr: url, controller: self, thumbUrl: thunUrlStr, title: titleStr, des: desStr)
 
             })
+        }
+        headView.iconImageBlock = {(model) in
+            let vc = UserInfoViewController()
+            vc.userId  = model.data.userId
+            weakSelf?.navigationController?.pushViewController(vc, animated: true)
         }
         self.creatTxtView()
     }

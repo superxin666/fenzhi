@@ -21,7 +21,7 @@ class TeachDetailHeadView: UIView {
     var docBlock : TeachDetailHeadViewBlock!
     var zanshangBlock  : TeachDetailHeadViewZANSHANGBlock!
     var fenxiangBlock : TeachDetailHeadViewZANSHANGBlock!
-    
+    var iconImageBlock : TeachDetailHeadViewZANSHANGBlock!
 
 
     func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat,type : Int) {
@@ -37,10 +37,11 @@ class TeachDetailHeadView: UIView {
         let iconImageView:UIImageView = UIImageView(frame: CGRect(x: ip7(25), y: ip7(25), width: ip7(60), height: ip7(60)))
         iconImageView.kf.setImage(with: URL(string: model.data.userInfo.avatar))
         iconImageView.isUserInteractionEnabled = true
+        iconImageView.kfb_makeRound()
         backView.addSubview(iconImageView)
 
-//        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HeartTableViewCell.iconImageClick))
-//        iconImageView.addGestureRecognizer(iconImageViewTap)
+        let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.iconImageClick))
+        iconImageView.addGestureRecognizer(iconImageViewTap)
         //时间
         let timeLabel : UILabel = UILabel(frame: CGRect(x: viewW - ip7(31) - ip7(90), y: ip7(25), width: ip7(90), height: ip7(20)))
         timeLabel.text = String.getDate_detail(dateStr: model.data.createTime)
@@ -128,10 +129,11 @@ class TeachDetailHeadView: UIView {
                     } else {
                         imageView.image = #imageLiteral(resourceName: "word")
                     }
-
+                    imageView.frame = CGRect(x: 0, y: 0, width: ip7(65), height: ip7(65))
+                    view.addSubview(imageView)
                     //描述
                     let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (imageHeight - ip7(21))/2, width: imageWidth - imageView.frame.maxX - ip7(10), height: ip7(21)))
-                    label.text = model.name
+                    label.text = model.name.removingPercentEncoding!
                     label.font = fzFont_Thin(ip7(21))
                     label.textColor  = dark_3_COLOUR
                     label.textAlignment = .left
@@ -388,6 +390,12 @@ class TeachDetailHeadView: UIView {
     func zanshang_click() {
         if let _ = zanshangBlock {
             zanshangBlock(self.dataModel)
+        }
+    }
+    
+    func iconImageClick() {
+        if let _ = iconImageBlock {
+            iconImageBlock(self.dataModel)
         }
     }
 

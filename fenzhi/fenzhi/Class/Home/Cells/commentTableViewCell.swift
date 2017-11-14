@@ -30,7 +30,7 @@ class commentTableViewCell: UITableViewCell {
     var dataModel : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()
     var pinglunViewBlock : commentTableViewCellBlock!
     var delViewBlock : commentTableViewCellBlock!
-
+    var iconViewBlock : commentTableViewCellBlock!
     let delbtn : UIButton = UIButton()
     
 
@@ -218,6 +218,9 @@ class commentTableViewCell: UITableViewCell {
     }
     func image_Click() {
         KFBLog(message: "头像点击")
+        if let _ =  iconViewBlock {
+            iconViewBlock(self.dataModel)
+        }
     }
 
     func pinglun_Click() {

@@ -626,6 +626,13 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         cell.delViewBlock = {(data) in
             weakSelf?.delcomment(delModel: data)
         }
+        cell.iconViewBlock = {(data) in
+            let vc = UserInfoViewController()
+            vc.userId  = data.userId
+            vc.hidesBottomBarWhenPushed = true
+            weakSelf?.navigationController?.pushViewController(vc, animated: true)
+            
+        }
         return cell;
 
     }

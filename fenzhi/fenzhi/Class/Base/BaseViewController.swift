@@ -45,6 +45,12 @@ class BaseViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
+    func navigationbar_def() {
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: fzFont_Thin(ip7(27))]
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarPosition.any, barMetrics: UIBarMetrics.default)
+    }
+    
     //左边返回键
     func navigationBar_leftBtn(){
         let btn:UIButton = UIButton(type: UIButtonType.custom)

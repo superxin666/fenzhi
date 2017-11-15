@@ -434,14 +434,21 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     }
        //MARK:选择照片
     func pic_click() {
+        if self.imageArr.count == 4 {
+            self.SVshowErro(infoStr: "最多选择4张图片")
+            return
+        }
+        
+        let maxNum = 4 - self.imageArr.count
+        KFBLog(message: "最大选择张数\(maxNum)")
         if !self.nsetBtn.isSelected {
             self.nestBtnClik()
         }
-        _ = self.presentHGImagePicker(maxSelected:4) { (assets) in
+        _ = self.presentHGImagePicker(maxSelected:maxNum) { (assets) in
             //结果处理
             print("共选择了\(assets.count)张图片，分别如下：")
             for i in 0..<assets.count {
-              
+                
                 let asset = assets[i]
                 print(asset)
                 PHImageManager.default().requestImage(for: asset,
@@ -455,35 +462,10 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
                                                         }
                                                         
                 })
-//                self.imageManager = PHCachingImageManager()
-//                self.imageManager.requestImage(for: asset, targetSize: CGSize(width: ip7(80), height: ip7(80)), contentMode: PHImageContentMode.aspectFit, options: nil, resultHandler: { (image, nfo) in
-////                    KFBLog(message: image!)
-//                    self.imageArr.append(image!)
-//                    KFBLog(message: self.imageArr.count)
-//                    if i == assets.count - 1 {
-//                       self.colletionView.reloadData()
-//                    }
-//                })
+                
             }
-            }
-//        let vc = SelectImageViewController()
-//        self.navigationController?.pushViewController(vc, animated: true)
+        }
         
-//        KfbShowWithInfo(titleString: "图片")
-//        let alertController = UIAlertController(title: "提示", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-//
-//        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
-//        let AlbumAction = UIAlertAction(title: "从相册选择", style: .default, handler: {
-//            (action: UIAlertAction) -> Void in
-//            if !self.nsetBtn.isSelected {
-//                self.nestBtnClik()
-//            }
-//            self.openAlbum()
-//        })
-//        alertController.addAction(cancelAction)
-//        alertController.addAction(AlbumAction)
-//        self.present(alertController, animated: true, completion: nil)
-
     }
 
 

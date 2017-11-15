@@ -160,6 +160,13 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     }
     //MARK:获取分享头部尺寸
     func getSize() {
+        //创建 红包头像假数据
+//        for i in 0..<13 {
+//            let model : TeachDetailModel_data_zanUsers = TeachDetailModel_data_zanUsers()
+//            model.avatar = self.headData.data.userInfo.avatar
+//            self.headData.data.zanUsers.append(model)
+//        }
+        
         headViewHeight = ip7(380)
         //文字
         let str = self.headData.data.content
@@ -192,13 +199,12 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
         if self.headData.data.zanUsers.count > 0 {
             let userNum = self.headData.data.zanUsers.count
-            var backViewNum = userNum / 8
-            if (backViewNum % 8 > 0) {
-                backViewNum = userNum / 8 + 1
+            var backViewNum = userNum / showNum
+            if (backViewNum % showNum > 0) {
+                backViewNum = userNum / showNum + 1
             }
-            let viewWidth  = KSCREEN_WIDTH - ip7(30) * 2
-            let imageWidth = (viewWidth - ip7(10) * 7)/8
-            headViewHeight = headViewHeight + ip7(29) + (imageWidth * CGFloat(backViewNum))
+//            let imageWidth = (zanImageWidth - ip7(10) * CGFloat(showNum - 1))/CGFloat(showNum)
+            headViewHeight = headViewHeight + ip7(29) + (zanImageWidth * CGFloat(backViewNum))
         }
     }
 

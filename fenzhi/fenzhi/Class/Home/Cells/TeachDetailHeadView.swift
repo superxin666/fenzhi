@@ -9,6 +9,9 @@
 import UIKit
 typealias TeachDetailHeadViewBlock = (_ model:TeachDetailModel_data_coursewares)->()
 typealias TeachDetailHeadViewZANSHANGBlock = (_ model:TeachDetailModel)->()
+let showNum : Int = 5
+let zanImageWidth = ip7(48)
+
 class TeachDetailHeadView: UIView {
 
     var dataModel : TeachDetailModel = TeachDetailModel()
@@ -217,29 +220,40 @@ class TeachDetailHeadView: UIView {
         var lastfream_bottom = zanBtn.frame
 
         let userNum = model.data.zanUsers.count
+        let showNum : Int = 5
+        
         if userNum > 0{
-            var backViewNum = userNum / 8
-            if (backViewNum % 8 > 0) {
-                backViewNum = userNum / 8 + 1
+            var backViewNum = userNum / showNum
+            if (backViewNum % showNum > 0) {
+                backViewNum = userNum / showNum + 1
             }
 
             let viewWidth  = KSCREEN_WIDTH - appadWidth * 2
 
             let viewY = lastfream_bottom.maxY + ip7(29)
-            let imageWidth = (viewWidth - ip7(10) * 7)/8
+    
 
-            let zanshangBackView : UIView = UIView(frame: CGRect(x: appadWidth, y: viewY, width: viewWidth, height: imageWidth * CGFloat(backViewNum)))
-            zanshangBackView.backgroundColor = .red
+            let zanshangBackView : UIView = UIView(frame: CGRect(x: appadWidth, y: viewY, width: viewWidth, height: zanImageWidth * CGFloat(backViewNum)))
+//            zanshangBackView.backgroundColor = .red
             backView.addSubview(zanshangBackView)
-
             lastfream_bottom = zanshangBackView.frame
-
+        
+         
+            
             for i in 0..<userNum {
-                let X = ((ip7(10) + imageWidth) * CGFloat(i%8))
-                let Y = CGFloat((i/8)) * (imageWidth + ip7(10))
+                var X = ((ip7(10) + zanImageWidth) * CGFloat(i%showNum))
+                if userNum < showNum {
+                    let ap = (viewWidth - (zanImageWidth + ip7(10)) * CGFloat(userNum))/2
+                    X = X + ap
+                } else {
+                    let ap = (viewWidth - (zanImageWidth + ip7(10)) * CGFloat(5))/2
+                    X = X + ap
+                }
+                let Y = CGFloat((i/showNum)) * (zanImageWidth + ip7(10))
                 let model = model.data.zanUsers[i]
-                let iconImage : UIImageView = UIImageView(frame: CGRect(x: X, y: Y, width: imageWidth, height: imageWidth))
+                let iconImage : UIImageView = UIImageView(frame: CGRect(x: X, y: Y, width: zanImageWidth, height: zanImageWidth))
                 iconImage.kf.setImage(with: URL(string: model.avatar))
+                iconImage.kfb_makeRound()
                 zanshangBackView.addSubview(iconImage)
             }
         }

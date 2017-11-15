@@ -258,7 +258,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 }
                 cell.fileBlock = {click_model,indexFile in
                     let urlStr : String = click_model.coursewares[indexFile].file
-                    let name : String = click_model.coursewares[indexFile].name
+                    let name : String = click_model.coursewares[indexFile].name.removingPercentEncoding!
 
                         weakSelf?.dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
 

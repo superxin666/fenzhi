@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import QuickLook
+
 let HEARTCELLID_USERINFO = "HEARTCELL_USERINFO_ID"//
 let TEACHCELLID_USERINFO = "TEACHCELL__USERINFO_ID"//
-class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
     
     var userId:Int!
     
@@ -27,6 +29,9 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
     
     var page :Int = 1
     let count : Int = 10
+    var openFileUrl :String!
+    let homedataVC = HomeDataMangerController()
+    let quickLookController = QLPreviewController()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -225,6 +230,31 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
                 cell.setUpUIWithModelAndType(model: model)
+                 weak var weakSelf = self
+                cell.fileBlock = {click_model,indexFile in
+                    let urlStr : String = click_model.coursewares[indexFile].file
+                    let name : String = click_model.coursewares[indexFile].name
+                    
+                    weakSelf?.homedataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
+                        
+                        weakSelf?.openFileUrl = data as! String
+                        if  (self.openFileUrl.characters.count > 0) {
+                            KFBLog(message: "下载成功"+self.openFileUrl)
+                            
+                            weakSelf?.quickLookController.dataSource = self
+                            weakSelf?.quickLookController.delegate = self
+                            weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
+                            weakSelf?.quickLookController.reloadData()
+                            weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
+                        } else {
+                            KFBLog(message: "加载失败")
+                            weakSelf?.SVshowErro(infoStr: "加载失败")
+                        }
+                    }, failure: { (erro) in
+                        
+                    })
+                    
+                }
                 return cell;
             } else {
 //                //心得
@@ -262,6 +292,15 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         let model = self.dataArr[indexPath.row]
         return model.cellHeight;
+    }
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        let url : NSURL =  NSURL(fileURLWithPath: openFileUrl)
+        KFBLog(message: url)
+        return url
     }
     
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

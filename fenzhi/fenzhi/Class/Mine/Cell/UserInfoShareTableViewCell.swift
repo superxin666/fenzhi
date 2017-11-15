@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+typealias UserInfoShareBlock = (_ model : GetmyfeedlistModel_data_fenxList,_ indexFile : Int)->()
 class UserInfoShareTableViewCell: UITableViewCell {
     
     
@@ -27,6 +27,8 @@ class UserInfoShareTableViewCell: UITableViewCell {
     let infoLabel : UILabel = UILabel()
     let txtLabel : UILabel = UILabel()
     
+    
+     var fileBlock : UserInfoShareBlock!//文件点击
 //    var delViewBlock : RecordTableViewCellBlock!
     
     func setUpUIWithModelAndType(model : GetmyfeedlistModel_data_fenxList) {
@@ -88,7 +90,7 @@ class UserInfoShareTableViewCell: UITableViewCell {
                 view.isUserInteractionEnabled = true
                 lastFream = view.frame
                 
-                let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TeachDetailHeadView.ppt_click(tap:)))
+                let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserInfoShareTableViewCell.ppt_click(tap:)))
                 view.addGestureRecognizer(iconImageViewTap)
                 
                 
@@ -223,6 +225,15 @@ class UserInfoShareTableViewCell: UITableViewCell {
 //        }
 //
 //    }
+    
+    func ppt_click(tap:UITapGestureRecognizer)  {
+        
+        //
+        let tagNum : Int = (tap.view?.tag)!
+        if let _ =  fileBlock {
+            fileBlock(self.dataModel,tagNum)
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

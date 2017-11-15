@@ -280,32 +280,6 @@ class TeachTableViewCell: UITableViewCell {
         
 //
         let tagNum : Int = (tap.view?.tag)!
-//        let urlStr : String = self.dataModel.coursewares[tagNum].file
-//        let name : String = self.dataModel.coursewares[tagNum].name
-//
-//        let vc = BaseViewController()
-//        let dataVC = HomeDataMangerController()
-////
-//        vc.SVshowLoad()
-//
-//         dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
-//            vc.SVdismiss()
-//             let openFileUrl = data as! String
-//            if  (openFileUrl.characters.count > 0) {
-//                KFBLog(message: "下载成功"+openFileUrl)
-////                weakSelf?.quickLookController.dataSource = self
-////                weakSelf?.quickLookController.delegate = self
-////                weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
-////                weakSelf?.quickLookController.reloadData()
-////                weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
-//            } else {
-//                KFBLog(message: "加载失败")
-//                vc.SVshowErro(infoStr: "加载失败")
-//            }
-//        }, failure: { (erro) in
-//
-//        })
-
         if let _ =  fileBlock {
             fileBlock(self.dataModel,tagNum)
         }

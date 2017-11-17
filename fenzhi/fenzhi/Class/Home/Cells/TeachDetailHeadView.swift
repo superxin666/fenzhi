@@ -9,6 +9,7 @@
 import UIKit
 typealias TeachDetailHeadViewBlock = (_ model:TeachDetailModel_data_coursewares)->()
 typealias TeachDetailHeadViewZANSHANGBlock = (_ model:TeachDetailModel)->()
+typealias TeachDetailHeadViewImageViewBlock = (_ imageNum:Int)->()
 let showNum : Int = 5
 let zanImageWidth = ip7(48)
 
@@ -25,7 +26,7 @@ class TeachDetailHeadView: UIView {
     var zanshangBlock  : TeachDetailHeadViewZANSHANGBlock!
     var fenxiangBlock : TeachDetailHeadViewZANSHANGBlock!
     var iconImageBlock : TeachDetailHeadViewZANSHANGBlock!
-
+    var imageBlock : TeachDetailHeadViewImageViewBlock!
 
     func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat,type : Int) {
         self.dataModel = model
@@ -160,11 +161,15 @@ class TeachDetailHeadView: UIView {
                     let imageView = UIImageView()
                     imageView.kf.setImage(with: URL(string: imageStr))
                     imageView.tag = i
+                    imageView.isUserInteractionEnabled = true
                     let Y = CGFloat((i/2)) * (imageHeight + ip7(20))
                     let X = ((appad + imageWidth) * CGFloat(i%2))
                     imageView.frame =  CGRect(x: imageX + X, y: imageY + Y, width: imageWidth, height: imageHeight)
                     lastFream = imageView.frame;
                     backView.addSubview(imageView)
+                    
+                    let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.image_click(sender:)))
+                    imageView.addGestureRecognizer(tap)
                 }
 
                 
@@ -410,6 +415,13 @@ class TeachDetailHeadView: UIView {
     func iconImageClick() {
         if let _ = iconImageBlock {
             iconImageBlock(self.dataModel)
+        }
+    }
+    
+    func image_click(sender : UITapGestureRecognizer) {
+        let tagNum = sender.view?.tag
+        if let _ = imageBlock  {
+            imageBlock(tagNum!)
         }
     }
 

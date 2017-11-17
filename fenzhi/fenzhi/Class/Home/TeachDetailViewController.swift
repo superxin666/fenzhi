@@ -46,6 +46,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     var alertController : UIAlertController!
     var pinglunUserModel : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()//被回复人的数据模型
     
+    var showBigImageView : UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -130,11 +133,22 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             KFBLog(message: "赞赏点击")
             weakSelf?.showZanShang()
         }
+        headView.imageBlock = {(num) in
+            let imageStr = weakSelf?.headData.data.images[num]
+            weakSelf?.showBigImageView = UIImageView(frame: CGRect(x: 0, y: ip7(100), width: KSCREEN_WIDTH, height: ip7(200)))
+            weakSelf?.showBigImageView.kf.setImage(with: URL(string: imageStr!))
+            weakSelf?.maskView.addSubview((weakSelf?.showBigImageView)!)
+            weakSelf?.view.addSubview(self.maskView)
+            
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(weakSelf?.removeBigImageView))
+            weakSelf?.maskView.addGestureRecognizer(tap)
+            
+        }
         
         headView.fenxiangBlock = {(model) in
             let umeng = UMUntil()
             let url = BASER_API + share_api + "shareID=\(self.fenxId!)"
-            let thunUrlStr = "https://www.irongbei.com/images_app/fenxiang.png"
             var titleStr = ""
             KFBLog(message: model.data.type)
             if model.data.type! == 1 {
@@ -147,7 +161,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             let desStr = model.data.content
             KFBLog(message: url)
             umeng.sharClick(share: { (type) in
-                umeng.shareWebUrlToPlatformWithUrl(webUlr: url, controller: self, thumbUrl: thunUrlStr, title: titleStr, des: desStr)
+                umeng.shareWebUrlToPlatformWithUrl(webUlr: url, controller: self, thumbUrl: "", title: titleStr, des: desStr)
 
             })
         }
@@ -158,6 +172,12 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
         self.creatTxtView()
     }
+    //MARK:移除放大视图
+    func removeBigImageView() {
+        self.showBigImageView.removeFromSuperview()
+        self.maskView.removeFromSuperview()
+    }
+    
     //MARK:获取分享头部尺寸
     func getSize() {
         //创建 红包头像假数据

@@ -135,10 +135,15 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
         headView.imageBlock = {(num) in
             let imageStr = weakSelf?.headData.data.images[num]
-            weakSelf?.showBigImageView = UIImageView(frame: CGRect(x: 0, y: ip7(100), width: KSCREEN_WIDTH, height: ip7(200)))
+            weakSelf?.showBigImageView = UIImageView()
             weakSelf?.showBigImageView.kf.setImage(with: URL(string: imageStr!))
+            KFBLog(message: weakSelf?.showBigImageView.image?.size)
+            let size = weakSelf?.showBigImageView.image?.size
+            let W = CGFloat((size?.width)!)/2
+            let H = CGFloat((size?.height)!)/2
+            weakSelf?.showBigImageView.frame = CGRect(x: (KSCREEN_WIDTH - W)/2, y: (KSCREEN_HEIGHT - H)/2, width: W, height: H)
             weakSelf?.maskView.addSubview((weakSelf?.showBigImageView)!)
-            weakSelf?.view.addSubview(self.maskView)
+            weakSelf?.view.window?.addSubview(self.maskView)
             
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(weakSelf?.removeBigImageView))

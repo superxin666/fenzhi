@@ -68,6 +68,13 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                     KFBLog(message: "数组")
                     weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.fenxList)!
                     weakSelf?.mainTabelView.reloadData()
+                    NotificationCenter.default.addObserver(self, selector: #selector(self.teachBtnClik), name: NSNotification.Name(rawValue: "gorelease"), object: nil)
+//                    let ishaveFile :String? = UserDefaults.standard.value(forKey: "gorelease") as! String?
+//                    if ishaveFile != nil && ishaveFile == "1" {
+//                        KFBLog(message: "进去文件发布")
+//                        UserDefaults.standard.set("0", forKey: "gorelease")
+//                        weakSelf?.teachBtnClik()
+//                    }
                 } else {
                     if weakSelf?.dataArr.count == 0 {
                         weakSelf?.mainTabelView.removeFromSuperview()

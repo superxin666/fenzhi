@@ -163,6 +163,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             if let _ = isok {
                 KFBLog(message: "文件保存成功")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadFile"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "gorelease"), object: nil)
+
             } else {
                 KFBLog(message: "文件保存失败")
             }

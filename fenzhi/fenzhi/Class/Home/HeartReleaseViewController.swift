@@ -485,9 +485,10 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
                                                         (image, _: [AnyHashable : Any]?) in
                                                         self.imageArr.append(image!)
                                                         KFBLog(message: self.imageArr.count)
-                                                        if i == assets.count - 1 {
+//                                                        if i == assets.count - 1 {
+                                                            KFBLog(message: "刷新")
                                                             self.colletionView.reloadData()
-                                                        }
+//                                                        }
                                                         
                 })
                 

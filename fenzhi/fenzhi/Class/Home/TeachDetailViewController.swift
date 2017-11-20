@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import QuickLook
 let COMMONTELLID = "COMMONTELL_ID"//
-class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
+class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
     var fenxId :Int!
     var isshowzanshang : Bool = false
 
@@ -47,7 +48,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     var pinglunUserModel : GetcommentlistModel_data_list_commentList = GetcommentlistModel_data_list_commentList()//被回复人的数据模型
     
     var showBigImageView : UIImageView!
-    
+    let quickLookController = QLPreviewController()
+    var qucikModel = GetmyfeedlistModel_data_fenxList()
+    var openFileUrl :String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,12 +125,27 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainScrollow.addSubview(headView)
          weak var weakSelf = self
         headView.docBlock = {(model) in
-            KFBLog(message: "文档点击")
-            let vc = pdfViewController()
-            vc.urlStr =  model.file
-            vc.fileName = model.name
-            vc.pdftype = .url
-            weakSelf?.navigationController?.pushViewController(vc, animated: true)
+            let urlStr : String = model.file
+            let name : String = model.name.removingPercentEncoding!
+            
+            weakSelf?.dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
+                
+                weakSelf?.openFileUrl = data as! String
+                if  (self.openFileUrl.characters.count > 0) {
+                    KFBLog(message: "下载成功"+self.openFileUrl)
+                    
+                    weakSelf?.quickLookController.dataSource = self
+                    weakSelf?.quickLookController.delegate = self
+                    weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
+                    weakSelf?.quickLookController.reloadData()
+                    weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
+                } else {
+                    KFBLog(message: "加载失败")
+                    weakSelf?.SVshowErro(infoStr: "加载失败")
+                }
+            }, failure: { (erro) in
+                
+            })
         }
         headView.zanshangBlock = {(model) in
             KFBLog(message: "赞赏点击")
@@ -709,7 +727,15 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             return model.cellHeight
         }
     }
-
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        let url : NSURL =  NSURL(fileURLWithPath: openFileUrl)
+        KFBLog(message: url)
+        return url
+    }
     override func navigationLeftBtnClick() {
         self.SVdismiss()
         self.navigationController?.popViewController(animated: true)

@@ -270,6 +270,8 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                                 weakSelf?.quickLookController.delegate = self
                                 weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
                                 weakSelf?.quickLookController.reloadData()
+                                weakSelf?.quickLookController.navigationController?.navigationItem.leftBarButtonItem = self.getBarIteam()
+//                                weakSelf?.quickLookController.navigationItem.leftBarButtonItem = self.getBarIteam()
                                 weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
                             } else {
                                 KFBLog(message: "加载失败")

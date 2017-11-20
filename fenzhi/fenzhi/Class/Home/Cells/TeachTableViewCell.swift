@@ -143,6 +143,8 @@ class TeachTableViewCell: UITableViewCell {
                     
                 } else if model.type.contains("ppt") {
                     imageView.image = #imageLiteral(resourceName: "pptx")
+                } else if model.type.contains("xls") ||  model.type.contains("exc"){
+                    imageView.image = #imageLiteral(resourceName: "icon_ex")
                 } else {
                     imageView.image = #imageLiteral(resourceName: "word")
                 }

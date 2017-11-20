@@ -392,9 +392,15 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
             imageView.image = #imageLiteral(resourceName: "pdf")
         } else if nameStr.contains("ppt") {
             imageView.image = #imageLiteral(resourceName: "pptx")
+        } else if nameStr.contains("xls") ||  nameStr.contains("exc"){
+            imageView.image = #imageLiteral(resourceName: "icon_ex")
         } else {
             imageView.image = #imageLiteral(resourceName: "word")
         }
+        
+        
+ 
+        
         view.addSubview(imageView)
         //描述
         let label : UILabel = UILabel(frame: CGRect(x: imageView.frame.maxX + ip7(10), y: (ip7(65) - ip7(21))/2, width: view.frame.width - imageView.frame.maxX - ip7(10), height: ip7(21)))

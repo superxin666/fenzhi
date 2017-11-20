@@ -64,6 +64,14 @@ class BaseViewController: UIViewController {
         //        self.navigationItem.leftBarButtonItem = item
         self.navigationItem.leftBarButtonItems = [spacer,item]
     }
+    func getBarIteam() ->(UIBarButtonItem) {
+        let btn:UIButton = UIButton(type: UIButtonType.custom)
+        btn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        btn.setImage(UIImage(named:"button_back"), for:.normal)
+        btn.addTarget(self, action:#selector(BaseViewController.navigationLeftBtnClick), for: .touchUpInside)
+        let item:UIBarButtonItem = UIBarButtonItem(customView:btn)
+        return item
+    }
 
     func navigationBar_rightBtn_title(name:String, textColour:UIColor = .black){
         let btn:UIButton = UIButton(type: UIButtonType.custom)

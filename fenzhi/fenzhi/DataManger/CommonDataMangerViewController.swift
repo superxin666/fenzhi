@@ -180,6 +180,7 @@ class CommonDataMangerViewController: FZRequestViewController {
                         }
                     }
                 case .failure(let encodingError):
+                    failure("请求失败")
                     print(encodingError)
                 }
         }
@@ -263,6 +264,7 @@ class CommonDataMangerViewController: FZRequestViewController {
                         }
                     }
                 case .failure(let encodingError):
+                    failure("请求失败")
                     print(encodingError)
                 }
         }

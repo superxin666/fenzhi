@@ -45,6 +45,8 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     let dataVC = HomeDataMangerController()
     let loadVC = CommonDataMangerViewController()
     var alertController : UIAlertController!
+    
+    var isLoading = false
     /// 带缓存的图片管理对象
     var imageManager:PHCachingImageManager!
 //    deinit {
@@ -69,11 +71,13 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
 
     //MARK:发布
     override func navigationRightBtnClick() {
+        KFBLog(message: "发布")
         //weak
          weak var weakSelf = self
         if !nsetBtn.isSelected {
             self.nestBtnClik()
         }
+
         if !(txtStr.characters.count > 0) {
             self.SVshowErro(infoStr: "请输入文字")
             return
@@ -85,8 +89,10 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
                 self.SVshowErro(infoStr: "最多上传四张图片")
                 return
             }
-            
-            self.SVshowLoad()
+            DispatchQueue.main.async {
+                self.closeView()
+            }
+            self.SVshow(infoStr: "正在努力上传中")
             var num = 0
             for i in 0..<imageArr.count{
                 let image = imageArr[i]
@@ -102,11 +108,14 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
                        
                     } else {
                         weakSelf?.SVshowErro(infoStr: model.errmsg)
+                        weakSelf?.openView()
                     }
                     
                     
                 }, failure: { (erro) in
+                    weakSelf?.SVshowErro(infoStr: erro as! String)
                     weakSelf?.SVdismiss()
+                    weakSelf?.openView()
                 })
                 
                 
@@ -127,6 +136,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         dataVC.submitfenx_heart(content: txtStr, catalog_id: self.couseId, images: self.imageNameArr, completion: { (data) in
             let model :SmsModel = data as! SmsModel
             if model.errno == 0{
+                weakSelf?.openView()
                 weakSelf?.SVdismiss()
                 weakSelf?.SVshowSucess(infoStr: "发布成功")
                 weakSelf?.navigationLeftBtnClick()
@@ -134,11 +144,29 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
                 weakSelf?.SVshowErro(infoStr: model.errmsg)
             }
         }) { (erro) in
-             weakSelf?.SVdismiss()
+            weakSelf?.openView()
+            weakSelf?.SVdismiss()
             weakSelf?.SVshowErro(infoStr: "网络请求失败")
         }
     }
-
+    func closeView() {
+        KFBLog(message: "关闭")
+        isLoading = true
+        self.navigationItem.leftBarButtonItem?.isEnabled = false
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.btnBackView.isUserInteractionEnabled = false
+        self.imageBackView.isUserInteractionEnabled = false
+    }
+    func openView() {
+      
+         KFBLog(message: "打开")
+          isLoading = false
+        self.navigationItem.leftBarButtonItem?.isEnabled = true
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+        self.btnBackView.isUserInteractionEnabled = true
+        self.imageBackView.isUserInteractionEnabled = true
+        
+    }
     func keyboardWillShow(notification: NSNotification) {
         let userinfo: NSDictionary = notification.userInfo! as NSDictionary
 
@@ -528,6 +556,11 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
 
     
     override func navigationLeftBtnClick() {
+        
+        if isLoading {
+            return
+        }
+        KFBLog(message: "返回")
         self.dismiss(animated: true) { 
             self.SVdismiss()
             

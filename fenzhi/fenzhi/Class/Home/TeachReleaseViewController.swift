@@ -50,6 +50,9 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     let quickLookController = QLPreviewController()
     var openFileUrl :String!
     let homedataVC = HomeDataMangerController()
+    
+    var isLoading = false
+    
     deinit {
         //记得移除通知监听
         NotificationCenter.default.removeObserver(self)
@@ -105,6 +108,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
 
     //MARK:发布
     override func navigationRightBtnClick() {
+        KFBLog(message: "发布")
         //weak
         weak var weakSelf = self
         if !nsetBtn.isSelected {
@@ -120,11 +124,15 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
             if fileArr.count > 10 {
                 self.SVshowErro(infoStr: "最多上传10个文件")
             }
-            //有图片
+            DispatchQueue.main.async {
+                self.closeView()
+            }
+            //有文件
             var num = 0
+        
             for i in 0..<fileArr.count{
                 let file : String = fileArr[i]
-                self.SVshowLoad()
+                self.SVshow(infoStr: "正在努力上传中")
                 self.loadVC.uploadfile(fileName: file, completion: { (data) in
                     let model :UpFileDataModel = data as! UpFileDataModel
                     if model.errno == 0 {
@@ -141,10 +149,14 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
                         }
                       
                     } else {
+                        weakSelf?.SVdismiss()
+                        weakSelf?.openView()
                         weakSelf?.SVshowErro(infoStr: model.errmsg)
                     }
                 }, failure: { (erro) in
-                    
+                        weakSelf?.SVdismiss()
+                        weakSelf?.SVshowErro(infoStr: erro as! String)
+                        weakSelf?.openView()
                 })
                 
                 
@@ -164,14 +176,33 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
             if model.errno == 0{
                 weakSelf?.SVdismiss()
                 weakSelf?.SVshowSucess(infoStr: "发布成功")
+                weakSelf?.openView()
                 weakSelf?.navigationLeftBtnClick()
             } else {
+                weakSelf?.openView()
                 weakSelf?.SVshowErro(infoStr: model.errmsg)
             }
         }) { (erro) in
+            weakSelf?.openView()
             weakSelf?.SVdismiss()
             weakSelf?.SVshowErro(infoStr: "网络请求失败")
         }
+    }
+    
+    func closeView() {
+        isLoading = true
+        self.navigationItem.leftBarButtonItem?.isEnabled = false
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.btnBackView.isUserInteractionEnabled = false
+        self.imageBackView.isUserInteractionEnabled = false
+    }
+    func openView() {
+        isLoading = false
+        self.navigationItem.leftBarButtonItem?.isEnabled = true
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+        self.btnBackView.isUserInteractionEnabled = true
+        self.imageBackView.isUserInteractionEnabled = true
+        
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -415,20 +446,18 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-
-        let name : String = self.fileArr[indexPath.row]
-        let urlStr : String = filePath + "/" + name
-        self.openFileUrl = urlStr
-        
-        self.quickLookController.dataSource = self
-        self.quickLookController.delegate = self
-        self.quickLookController.hidesBottomBarWhenPushed =  true
-        self.quickLookController.reloadData()
-        self.navigationController?.pushViewController((self.quickLookController), animated: true)
-
-        
+        KFBLog(message: "文件点击")
+        if self.fileArr.count > 0 {
+            let name : String = self.fileArr[indexPath.row]
+            let urlStr : String = filePath + "/" + name
+            self.openFileUrl = urlStr
+            
+            self.quickLookController.dataSource = self
+            self.quickLookController.delegate = self
+            self.quickLookController.hidesBottomBarWhenPushed =  true
+            self.quickLookController.reloadData()
+            self.navigationController?.pushViewController((self.quickLookController), animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
@@ -582,7 +611,10 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     
     override func navigationLeftBtnClick() {
-
+        KFBLog(message: "返回")
+        if isLoading {
+            return
+        }
         self.dismiss(animated: true) {
             self.delAllFiles()
             if self.textField.isFirstResponder {

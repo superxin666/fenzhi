@@ -124,7 +124,8 @@ class BaseViewController: UIViewController {
     
     
     func SVshow(infoStr:String) {
-        SVProgressHUD.setDefaultStyle(.light)
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setMinimumDismissTimeInterval(1)
         SVProgressHUD.show(withStatus: infoStr)
     }
     

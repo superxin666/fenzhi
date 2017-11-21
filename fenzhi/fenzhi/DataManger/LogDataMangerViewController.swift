@@ -24,8 +24,9 @@ class LogDataMangerViewController: FZRequestViewController {
         let encWithPubKey = RSA.encryptString(paseWord, publicKey: pubkey)
         let urlBase : String =  RSA.encodeParameter(encWithPubKey)
         //15910901725
-        let url = BASER_API + login_api + "phone="+phoneNum+"&password="+urlBase+last_pra_log
-        print("编码"+url)
+        KFBLog(message: GeTuiSdk.clientId()!)
+        let url = BASER_API + login_api + "phone="+phoneNum+"&password="+urlBase+"&clientId="+GeTuiSdk.clientId()!+last_pra_log
+        print("编码"+url) 
         var model:LoginModelMapper = LoginModelMapper()
         Alamofire.request(url, method: .post).responseJSON { (returnResult) in
             print("secondMethod --> post 请求 --> returnResult = \(returnResult)")

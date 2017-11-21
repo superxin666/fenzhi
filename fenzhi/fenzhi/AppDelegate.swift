@@ -186,9 +186,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     
     //MARK:个推
     func setUpGeTui() {
+        
         // 通过个推平台分配的appId、 appKey 、appSecret 启动SDK，注：该方法需要在主线程中调用
-        GeTuiSdk.start(withAppId: "", appKey: "", appSecret: "", delegate: self )
-        if( Float(UIDevice.current.systemVersion)! > Float(10.0) ){
+        GeTuiSdk.start(withAppId: "rWeCzhRrSw8H5bMpXeWI88", appKey: "iPRWQzw8pZ7Y4g6RZ6Aqo6", appSecret: "NhJVBOk46RASpA7lA2ME66", delegate: self )
+        let systemVer = (UIDevice.current.systemVersion as NSString).floatValue
+        if systemVer > 10.0{
             if #available(iOS 10.0, *) {
                 let center:UNUserNotificationCenter = UNUserNotificationCenter.current()
                 center.delegate = self;
@@ -209,7 +211,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                     UIApplication.shared.registerForRemoteNotifications()
                 }
             }
-        } else if ( Float(UIDevice.current.systemVersion)! > Float(8.0) ){
+        } else if ( systemVer > 8.0) {
             if #available(iOS 8.0, *) {
                 let userSettings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil)
                 UIApplication.shared.registerUserNotificationSettings(userSettings)
@@ -302,6 +304,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     }
 
 
+    //MARK: 进入前台后台
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

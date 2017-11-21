@@ -188,7 +188,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func setUpGeTui() {
         
         // 通过个推平台分配的appId、 appKey 、appSecret 启动SDK，注：该方法需要在主线程中调用
+        GeTuiSdk.runBackgroundEnable(true)
         GeTuiSdk.start(withAppId: "rWeCzhRrSw8H5bMpXeWI88", appKey: "iPRWQzw8pZ7Y4g6RZ6Aqo6", appSecret: "NhJVBOk46RASpA7lA2ME66", delegate: self )
+       
         let systemVer = (UIDevice.current.systemVersion as NSString).floatValue
         if systemVer > 10.0{
             if #available(iOS 10.0, *) {
@@ -223,6 +225,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 UIApplication.shared.registerForRemoteNotifications(matching: [.alert, .sound, .badge])
             }
         }
+        
+       
         
     }
     
@@ -265,7 +269,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
          KFBLog(message: "willPresentNotification: \(notification.request.content.userInfo)")
-//        print("willPresentNotification: %@",notification.request.content.userInfo);
+        print("willPresentNotification: %@",notification.request.content.userInfo);
         
         completionHandler([.badge,.sound,.alert]);
     }
@@ -302,7 +306,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         let msg:String = "sendmessage=\(messageId),result=\(result)";
         KFBLog(message: msg)
     }
-
+    
+    func geTuiSdkDidReceivePayloadData(_ payloadData: Data!, andTaskId taskId: String!, andMsgId msgId: String!, andOffLine offLine: Bool, fromGtAppId appId: String!) {
+        
+        var payloadMsg = "";
+        if((payloadData) != nil) {
+            payloadMsg = String.init(data: payloadData, encoding: String.Encoding.utf8)!;
+        }
+        
+        let msg:String = "Receive Payload: \(payloadMsg), taskId:\(taskId), messageId:\(msgId)";
+        
+        NSLog("\n>>>[GeTuiSdk DidReceivePayload]:%@\n\n",msg);
+    }
 
     //MARK: 进入前台后台
     func applicationWillResignActive(_ application: UIApplication) {

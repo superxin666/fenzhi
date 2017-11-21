@@ -189,7 +189,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         
         // 通过个推平台分配的appId、 appKey 、appSecret 启动SDK，注：该方法需要在主线程中调用
         GeTuiSdk.runBackgroundEnable(true)
-        GeTuiSdk.start(withAppId: "rWeCzhRrSw8H5bMpXeWI88", appKey: "iPRWQzw8pZ7Y4g6RZ6Aqo6", appSecret: "NhJVBOk46RASpA7lA2ME66", delegate: self )
+        GeTuiSdk.start(withAppId: gettuiID, appKey: gettuiKEY, appSecret: gettuiSecret, delegate: self )
        
         let systemVer = (UIDevice.current.systemVersion as NSString).floatValue
         if systemVer > 10.0{

@@ -15,4 +15,6 @@
 #import <UShareUI/UShareUI.h>
 #import "WXApi.h"
 #import "WXApiObject.h"
+#import <GTSDK/GeTuiSdk.h>
+#import <UserNotifications/UserNotifications.h>
 #endif /* Bridging_Header_h */

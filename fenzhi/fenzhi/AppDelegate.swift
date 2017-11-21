@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate ,WXApiDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate ,WXApiDelegate,GeTuiSdkDelegate,UNUserNotificationCenterDelegate{
 
     var window: UIWindow?
     var fileManager = FileManager.default
@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         // Override point for customization after application launch.
         self.window?.backgroundColor = .white
         self.setupUM()
+        self.setUpGeTui()
         self.mainMenu()
 
         //微信支付
@@ -27,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
 //        self.showInfo()
         return true
     }
+
     //MARK:友盟
     func setupUM() {
         UMUntil.setUpUM()
@@ -120,6 +122,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         self.getfile(url: url)
         return WXApi.handleOpen(url, delegate: self)||UMSocialManager.default().handleOpen(url)
     }
+    
+    
+    
 
     //MARK: 微信支付回调
     func onResp(_ resp: BaseResp!) {
@@ -179,6 +184,123 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         }
     }
     
+    //MARK:个推
+    func setUpGeTui() {
+        // 通过个推平台分配的appId、 appKey 、appSecret 启动SDK，注：该方法需要在主线程中调用
+        GeTuiSdk.start(withAppId: "", appKey: "", appSecret: "", delegate: self )
+        if( Float(UIDevice.current.systemVersion)! > Float(10.0) ){
+            if #available(iOS 10.0, *) {
+                let center:UNUserNotificationCenter = UNUserNotificationCenter.current()
+                center.delegate = self;
+                center.requestAuthorization(options: [.alert,.badge,.sound], completionHandler: { (granted:Bool, error:Error?) -> Void in
+                    if (granted) {
+                        print("注册通知成功") //点击允许
+                    } else {
+                        print("注册通知失败") //点击不允许
+                    }
+                })
+                
+                UIApplication.shared.registerForRemoteNotifications()
+            } else {
+                if #available(iOS 8.0, *) {
+                    let userSettings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil)
+                    UIApplication.shared.registerUserNotificationSettings(userSettings)
+                    
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        } else if ( Float(UIDevice.current.systemVersion)! > Float(8.0) ){
+            if #available(iOS 8.0, *) {
+                let userSettings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil)
+                UIApplication.shared.registerUserNotificationSettings(userSettings)
+                
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        } else {
+            if #available(iOS 7.0, *) {
+                UIApplication.shared.registerForRemoteNotifications(matching: [.alert, .sound, .badge])
+            }
+        }
+        
+    }
+    
+    // MARK: - 远程通知(推送)回调
+    
+    /** 远程通知注册成功委托 */
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceToken_ns = NSData.init(data: deviceToken);    // 转换成NSData类型
+        var token = deviceToken_ns.description.trimmingCharacters(in: CharacterSet(charactersIn: "<>"));
+        token = token.replacingOccurrences(of: " ", with: "")
+        
+        // [ GTSdk ]：向个推服务器注册deviceToken
+        GeTuiSdk.registerDeviceToken(token);
+        KFBLog(message: "\n>>>[DeviceToken Success]:\(token)\n\n")
+
+    }
+
+    /** 远程通知注册失败委托 */
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("\n>>>[DeviceToken Error]:%@\n\n",error.localizedDescription);
+    }
+    // MARK: - APP运行中接收到通知(推送)处理 - iOS 10 以下
+    
+    /** APP已经接收到“远程”通知(推送) - (App运行在后台) */
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        application.applicationIconBadgeNumber = 0;        // 标签
+        KFBLog(message: "\n>>>[Receive RemoteNotification]:\(userInfo)\n\n")
+
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        // [ GTSdk ]：将收到的APNs信息传给个推统计
+        GeTuiSdk.handleRemoteNotification(userInfo);
+        KFBLog(message: "\n>>>[Receive RemoteNotification]:\(userInfo)\n\n")
+
+        completionHandler(UIBackgroundFetchResult.newData);
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+         KFBLog(message: "willPresentNotification: \(notification.request.content.userInfo)")
+//        print("willPresentNotification: %@",notification.request.content.userInfo);
+        
+        completionHandler([.badge,.sound,.alert]);
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print("didReceiveNotificationResponse: %@",response.notification.request.content.userInfo);
+        
+        // [ GTSdk ]：将收到的APNs信息传给个推统计
+        GeTuiSdk.handleRemoteNotification(response.notification.request.content.userInfo);
+        
+        completionHandler();
+    }
+    
+    // MARK: - GeTuiSdkDelegate
+    
+    /** SDK启动成功返回cid */
+    func geTuiSdkDidRegisterClient(_ clientId: String!) {
+        // [4-EXT-1]: 个推SDK已注册，返回clientId
+        KFBLog(message: "\n>>>[GeTuiSdk RegisterClient]:\(clientId)\n\n")
+
+    }
+    
+    /** SDK遇到错误回调 */
+    func geTuiSdkDidOccurError(_ error: Error!) {
+        // [EXT]:个推错误报告，集成步骤发生的任何错误都在这里通知，如果集成后，无法正常收到消息，查看这里的通知。
+        KFBLog(message: "\n>>>[GeTuiSdk error]:\(error.localizedDescription)\n\n")
+    }
+    
+    /** SDK收到sendMessage消息回调 */
+    func geTuiSdkDidSendMessage(_ messageId: String!, result: Int32) {
+        // [4-EXT]:发送上行消息结果反馈
+        let msg:String = "sendmessage=\(messageId),result=\(result)";
+        KFBLog(message: msg)
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

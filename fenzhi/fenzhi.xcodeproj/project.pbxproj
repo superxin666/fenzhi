@@ -223,6 +223,7 @@
 		21F7427E1F9D87190016E399 /* UMUntil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UMUntil.swift; sourceTree = "<group>"; };
 		21F7D5F51F8B4C2900371596 /* SubmitcommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitcommentModel.swift; sourceTree = "<group>"; };
 		21F842201F6267ED00A54D68 /* HeartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartTableViewCell.swift; sourceTree = "<group>"; };
+		21F9793D1FC3BD20001DD7E5 /* fenzhi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fenzhi.entitlements; sourceTree = "<group>"; };
 		21FA059E1F6783A20083EFD4 /* LogDataMangerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogDataMangerViewController.swift; sourceTree = "<group>"; };
 		21FA05A01F6784DF0083EFD4 /* FZRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FZRequestViewController.swift; sourceTree = "<group>"; };
 		21FB3EAB1F66367500656B74 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -405,6 +406,7 @@
 		213BF84C1F60317300D60AE5 /* fenzhi */ = {
 			isa = PBXGroup;
 			children = (
+				21F9793D1FC3BD20001DD7E5 /* fenzhi.entitlements */,
 				21FA059D1F677CDD0083EFD4 /* DataManger */,
 				21062ADF1F603E9E0003C7C4 /* Tool */,
 				21062AD51F6038CD0003C7C4 /* Class */,
@@ -653,6 +655,14 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = HCQNBJR33C;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					213BF85D1F60317300D60AE5 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -1102,6 +1112,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = fenzhi/fenzhi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HCQNBJR33C;
@@ -1122,6 +1133,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = fenzhi/fenzhi.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HCQNBJR33C;

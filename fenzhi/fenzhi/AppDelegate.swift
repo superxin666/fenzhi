@@ -252,7 +252,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     
     /** APP已经接收到“远程”通知(推送) - (App运行在后台) */
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        application.applicationIconBadgeNumber = 0;        // 标签
+        application.applicationIconBadgeNumber = 0        // 标签
         KFBLog(message: "\n>>>[Receive RemoteNotification]:\(userInfo)\n\n")
 
     }
@@ -332,6 +332,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        application.applicationIconBadgeNumber = 0 
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

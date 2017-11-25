@@ -112,16 +112,22 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
         if isLoadIcon {
             self.SVshowErro(infoStr: "稍等，正在上传头像")
+            return
         }
         KFBLog(message: self.dataModel.data.name)
-        
-        lodginDataVC.supplyinfo(name: self.dataModel.data.name, province: self.dataModel.data.province, city: self.dataModel.data.city, district: self.dataModel.data.district, school: self.dataModel.data.school, grade: self.dataModel.data.grade, subject: self.dataModel.data.subject, book: self.dataModel.data.book, avatar: self.dataModel.data.avatar, completion: { (data) in
+        if currectDisModel.type == 3 {
+            cityNum = provinceNum
+            districtNum = currectDisModel.id
+        }
+
+        lodginDataVC.supplyinfo(name: self.dataModel.data.name, province: provinceNum!, city: cityNum!, district: districtNum!, school: self.dataModel.data.school, grade: self.dataModel.data.grade, subject: self.dataModel.data.subject, book: self.dataModel.data.book, avatar: self.dataModel.data.avatar, completion: { (data) in
             self.SVdismiss()
             
             let smsdataModel = data as! SmsModel
             if  smsdataModel.errno == 0 {
                 //                提交信息成功
                 KFBLog(message: "提交成功")
+                weakSelf?.navigationLeftBtnClick()
             } else {
                 //
                 weakSelf?.SVshowErro(infoStr: (smsdataModel.errmsg))
@@ -182,7 +188,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             type = 1
         }
         
-        dataVC.getschoollist(regionId: self.dataModel.data.district, type: type, pageNum: 1, count: 20, completion: { (data) in
+        dataVC.getschoollist(regionId: districtNum!, type: type, pageNum: 1, count: 20, completion: { (data) in
             let model : GetschoollistModel = data as! GetschoollistModel
             weakSelf?.schoolArr = model.data.schoolList
             self.pickerView.reloadComponent(0)
@@ -487,13 +493,16 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                 cityNum = model.id
                 nameStr = model.name//city
                 currectDisModel = model
+                if model.type == 3 {
+                    districtNum = model.id
+                }
             } else {
                 var model : GetregionlistModel_regionList = GetregionlistModel_regionList()
                 model = districtArr[row]
                 districtNameStr = model.name
                 districtNum = model.id
                 nameStr = model.name//city
-                currectDisModel = model
+//                currectDisModel = model
             }
             
         case 2:
@@ -594,10 +603,12 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
         
         if indexPath.row == 1 {
-
+            //地区
             if regionListArr.count > 0 {
-                provinceNum = dataModel.data.province
-                self.getRegsionData(type: 0, parentId: self.dataModel.data.province)
+//                provinceNum = dataModel.data.province
+                let model = regionListArr[0]
+                provinceNum = model.id
+                self.getRegsionData(type: 0, parentId: provinceNum!)
                 self.cgreatPickerView()
             }
         } else if indexPath.row == 2 {

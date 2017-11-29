@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import AliyunOSSiOS
 let itemWidth :CGFloat = ip7(240)
 let itemHeight :CGFloat = ip7(180)
 
@@ -66,6 +67,28 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")
         self.creatUI()
+        
+    }
+    
+    
+    func aliupload()  {
+        let endpoint = "https://oss-cn-hangzhou.aliyuncs.com"
+        let credential :OSSCredentialProvider = OSSStsTokenCredentialProvider(accessKeyId: "", secretKeyId: "", securityToken: "")
+        
+        let conf = OSSClientConfiguration()
+        conf.maxRetryCount = 3
+        conf.timeoutIntervalForRequest = 30
+        conf.timeoutIntervalForResource = 44 * 60 * 60
+        
+        let client = OSSClient(endpoint: endpoint, credentialProvider: credential, clientConfiguration: conf)
+    
+        let put = OSSPutObjectRequest()
+        put.bucketName = "avatar/1/example.jpg"
+        let image = #imageLiteral(resourceName: "icon_sz")
+        let data = UIImageJPEGRepresentation(image, 1.0)
+        put.uploadingData = data
+        
+        let putTask : OSSTask = client.putObject(put)
         
     }
 

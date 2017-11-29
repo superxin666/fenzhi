@@ -17,4 +17,5 @@
 #import "WXApiObject.h"
 #import <GTSDK/GeTuiSdk.h>
 #import <UserNotifications/UserNotifications.h>
+#import <AliyunOSSiOS/OSSService.h>
 #endif /* Bridging_Header_h */

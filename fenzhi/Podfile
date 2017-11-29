@@ -18,7 +18,9 @@ target 'fenzhi' do
     pod 'UMengUShare/Social/ReducedWeChat'
     pod 'UMengUShare/Social/ReducedQQ'
     pod 'WechatOpenSDK'
-    	pod 'GTSDK'
+    pod 'AliyunOSSiOS'
+	pod 'GTSDK'
+
   target 'fenzhiTests' do
     inherit! :search_paths
     # Pods for testing

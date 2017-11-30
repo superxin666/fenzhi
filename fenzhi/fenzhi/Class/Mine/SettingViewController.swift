@@ -84,6 +84,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         plaNameArr.append(dataModel.data.gradeName)
         plaNameArr.append(dataModel.data.subjectName)
         plaNameArr.append(dataModel.data.versionName)
+        provinceNum = self.dataModel.data.province
+        cityNum = self.dataModel.data.city
+        districtNum = self.dataModel.data.district
         self.crearUI()
         self.getData()
        

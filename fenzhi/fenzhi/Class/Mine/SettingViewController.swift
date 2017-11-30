@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UpLoadFileDelegate{
     
     let topBackImageView : UIImageView = UIImageView()
     let iconImageView : UIImageView = UIImageView()
@@ -60,6 +60,8 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     var avatarStr = ""
     var isLoadIcon :Bool = false
     
+    let upfile = UpLoadFile()
+    var tokenModel : GetststokenModel = GetststokenModel()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -84,12 +86,35 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         plaNameArr.append(dataModel.data.versionName)
         self.crearUI()
         self.getData()
+       
     }
     
     override func navigationRightBtnClick() {
         self.getSupplyinfoData()
     }
-    
+    //MARK:获取阿里云token
+    func getToken() {
+        dataVC.getststoken(completion: { (data) in
+            self.tokenModel = data as! GetststokenModel
+            KFBLog(message: self.tokenModel.data.credentials.AccessKeyId)
+            let data = UIImageJPEGRepresentation(self.iconImage, 1.0)
+            let nameNum = arc4random()
+            let imageName = String.getTimeNow() +  "\(nameNum)"
+            KFBLog(message: "照片名字" + imageName)
+            self.upfile.initOSSClient(self.tokenModel.data.credentials.AccessKeyId, sec: self.tokenModel.data.credentials.AccessKeySecret, token: self.tokenModel.data.credentials.SecurityToken)
+            self.upfile.delegate = self
+            self.upfile.upLoadImage(data, imageName: imageName)
+        }) { (erro) in
+            
+        }
+    }
+    func complete(_ filename: String!) {
+        KFBLog(message:"上传成功" + filename)
+        isLoadIcon = false
+        self.avatarStr = filename
+        self.dataModel.data.avatar = filename
+        
+    }
     //MARK:上传数据
     func getSupplyinfoData() {
         self.SVshowLoad()
@@ -292,25 +317,12 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         })
     }
     func upLoadIcon(){
+        self.getToken()
         isLoadIcon = true
-        weak var weakSelf = self
-        dataVC.upLoadImage(uploadimg: iconImage, type: "avatar", completion: { (data) in
-            
-            weakSelf?.uploadImageModel = data as! UploadimgModel
-            if weakSelf!.uploadImageModel.errno == 0 {
-                weakSelf!.isLoadIcon = false
-                KFBLog(message: "图片地址"+weakSelf!.uploadImageModel.data)
-                weakSelf!.avatarStr = weakSelf!.uploadImageModel.data
-                weakSelf?.dataModel.data.avatar = (weakSelf?.avatarStr)!
-            } else {
-                
-                
-            }
-            
-        }) { (erro) in
-            
-        }
+
     }
+
+    
     //MARK:PickerView
     func cgreatPickerView()  {
         

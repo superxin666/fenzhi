@@ -15,7 +15,7 @@ enum InfoView_Type {
     case other
 }
 
-class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource{
+class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UpLoadFileDelegate{
     var type :InfoView_Type!
     let dataVC = CommonDataMangerViewController()
     let lodginDataVC = LogDataMangerViewController()
@@ -68,7 +68,9 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
     var pickerView:UIPickerView = UIPickerView()
     let pickerViewBackView:UIView = UIView()
-
+    let upfile = UpLoadFile()
+    var tokenModel : GetststokenModel = GetststokenModel()
+    var isLoadIcon :Bool = false
 //    lazy var maskView : UIView = {
 //        ()-> UIView in
 //        let maskView = UIView()
@@ -345,7 +347,28 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         }
 
     }
-
+    //MARK:获取阿里云token
+    func getToken() {
+        dataVC.getststoken(completion: { (data) in
+            self.tokenModel = data as! GetststokenModel
+            KFBLog(message: self.tokenModel.data.credentials.AccessKeyId)
+            let data = UIImageJPEGRepresentation(self.iconImage, 1.0)
+            let nameNum = arc4random()
+            let imageName = String.getTimeNow() +  "\(nameNum)"
+            KFBLog(message: "照片名字" + imageName)
+            self.upfile.initOSSClient(self.tokenModel.data.credentials.AccessKeyId, sec: self.tokenModel.data.credentials.AccessKeySecret, token: self.tokenModel.data.credentials.SecurityToken)
+            self.upfile.delegate = self
+            self.upfile.upLoadImage(data, imageName: imageName)
+        }) { (erro) in
+            
+        }
+    }
+    func complete(_ filename: String!) {
+        KFBLog(message:"上传成功" + filename)
+        isLoadIcon = false
+        self.avatarStr = filename
+        
+    }
     //MARK:获取公共数据
     func getData() {
         weak var weakSelf = self
@@ -552,7 +575,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             upIconcell.IconImageViewBlock = {() in
                 //
                 KFBLog(message: "上传头像")
-                
+                self.pic_click()
 
             }
             return upIconcell;
@@ -701,27 +724,9 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     }
 
     func upLoadIcon(){
-        weak var weakSelf = self
-        dataVC.upLoadImage(uploadimg: iconImage, type: "avatar", completion: { (data) in
-
-            weakSelf?.uploadImageModel = data as! UploadimgModel
-            if weakSelf!.uploadImageModel.errno == 0 {
-                KFBLog(message: "图片地址"+weakSelf!.uploadImageModel.data)
-                weakSelf!.avatarStr = weakSelf!.uploadImageModel.data
-            } else {
-
-
-            }
-
-        }) { (erro) in
-
-        }
+        isLoadIcon = true;
+        self.getToken()
     }
-    
-    
-    
-
-
     
     override func navigationLeftBtnClick() {
          self.SVdismiss()

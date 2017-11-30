@@ -310,4 +310,22 @@ class CommonDataMangerViewController: FZRequestViewController {
         }
     }
     
+    func getststoken(completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        let urlStr = BASER_API + getststoken_api
+        var model:GetststokenModel = GetststokenModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<GetststokenModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+            
+        }
+    }
+    
+    
 }

@@ -18,4 +18,5 @@
 #import <GTSDK/GeTuiSdk.h>
 #import <UserNotifications/UserNotifications.h>
 #import <AliyunOSSiOS/OSSService.h>
+#import "UpLoadFile.h"
 #endif /* Bridging_Header_h */

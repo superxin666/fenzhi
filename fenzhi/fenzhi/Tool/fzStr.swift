@@ -133,5 +133,13 @@ extension String {
         dfmatter2.dateFormat="yyyy.MM.dd HH:mm"
         return dfmatter2.string(from: date!)
     }
+    
+    
+    static func getTimeNow() -> (String)  {
+        let currentdate = Date()
+        let dfmatter = DateFormatter()
+        dfmatter.dateFormat="yyyyMMddHHmmss"
+        return dfmatter.string(from: currentdate)
+    }
 
 }

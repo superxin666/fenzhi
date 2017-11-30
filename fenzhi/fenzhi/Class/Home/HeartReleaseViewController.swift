@@ -12,7 +12,7 @@ import AliyunOSSiOS
 let itemWidth :CGFloat = ip7(240)
 let itemHeight :CGFloat = ip7(180)
 
-class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,sureDelegate  {
+class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,sureDelegate,UpLoadFileDelegate  {
     let textField: UITextView = UITextView()
     let btnBackView :UIView = UIView()
     let imageBackView :UIView = UIView()
@@ -50,6 +50,9 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     var isLoading = false
     /// 带缓存的图片管理对象
     var imageManager:PHCachingImageManager!
+    
+    var tokenModel : GetststokenModel = GetststokenModel()
+    let upfile = UpLoadFile()
 //    deinit {
 //        NotificationCenter.removeObserver(NSNotification.Name.UIKeyboardWillShow)
 //    }
@@ -67,32 +70,80 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")
         self.creatUI()
+        self.getToken()
         
     }
     
-    
-    func aliupload()  {
-        let endpoint = "https://oss-cn-hangzhou.aliyuncs.com"
-        let credential :OSSCredentialProvider = OSSStsTokenCredentialProvider(accessKeyId: "", secretKeyId: "", securityToken: "")
-        
-        let conf = OSSClientConfiguration()
-        conf.maxRetryCount = 3
-        conf.timeoutIntervalForRequest = 30
-        conf.timeoutIntervalForResource = 44 * 60 * 60
-        
-        let client = OSSClient(endpoint: endpoint, credentialProvider: credential, clientConfiguration: conf)
-    
-        let put = OSSPutObjectRequest()
-        put.bucketName = "avatar/1/example.jpg"
-        let image = #imageLiteral(resourceName: "icon_sz")
-        let data = UIImageJPEGRepresentation(image, 1.0)
-        put.uploadingData = data
-        
-        let putTask : OSSTask = client.putObject(put)
-        
+    func getToken() {
+        loadVC.getststoken(completion: { (data) in
+            self.tokenModel = data as! GetststokenModel
+            KFBLog(message: self.tokenModel.data.credentials.AccessKeyId)
+        }) { (erro) in
+            
+        }
     }
 
     //MARK:发布
+//    override func navigationRightBtnClick() {
+//        KFBLog(message: "发布")
+//
+//        //weak
+//        weak var weakSelf = self
+//        if !nsetBtn.isSelected {
+//            self.nestBtnClik()
+//        }
+//
+//        if !(txtStr.count > 0) {
+//            self.SVshowErro(infoStr: "请输入文字")
+//            return
+//        }
+//        
+//        if imageArr.count>0 {
+//            //有图片
+//            if imageArr.count > 4{
+//                self.SVshowErro(infoStr: "最多上传四张图片")
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                self.closeView()
+//            }
+//            self.SVshow(infoStr: "正在努力上传中")
+//            var num = 0
+//            for i in 0..<imageArr.count{
+//                let image = imageArr[i]
+//                loadVC.upLoadImage(uploadimg: image, type: "normal", completion: { (data) in
+//                    let model :UploadimgModel = data as! UploadimgModel
+//                    if model.errno == 0 {
+//                        KFBLog(message: model.data)
+//                        num = num + 1
+//                        self.imageNameArr.append(model.data)
+//                        if num == self.imageArr.count {
+//                            self.subTxt(imageStr: model.data)
+//                        }
+//                        
+//                    } else {
+//                        weakSelf?.SVshowErro(infoStr: model.errmsg)
+//                        weakSelf?.openView()
+//                    }
+//
+//                    
+//                }, failure: { (erro) in
+//                    weakSelf?.SVshowErro(infoStr: erro as! String)
+//                    weakSelf?.SVdismiss()
+//                    weakSelf?.openView()
+//                })
+//                
+//                
+//            }
+//        } else {
+//            //没有图片
+//            self.subTxt(imageStr: "")
+//        }
+//
+//    }
+//
+    
+    
     override func navigationRightBtnClick() {
         KFBLog(message: "发布")
         //weak
@@ -101,7 +152,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
             self.nestBtnClik()
         }
 
-        if !(txtStr.characters.count > 0) {
+        if !(txtStr.count > 0) {
             self.SVshowErro(infoStr: "请输入文字")
             return
         }
@@ -112,36 +163,20 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
                 self.SVshowErro(infoStr: "最多上传四张图片")
                 return
             }
+            upfile.initOSSClient(self.tokenModel.data.credentials.AccessKeyId, sec: self.tokenModel.data.credentials.AccessKeySecret, token: self.tokenModel.data.credentials.SecurityToken)
+           upfile.delegate = self
             DispatchQueue.main.async {
                 self.closeView()
             }
             self.SVshow(infoStr: "正在努力上传中")
-            var num = 0
             for i in 0..<imageArr.count{
                 let image = imageArr[i]
-                loadVC.upLoadImage(uploadimg: image, type: "normal", completion: { (data) in
-                    let model :UploadimgModel = data as! UploadimgModel
-                    if model.errno == 0 {
-                        KFBLog(message: model.data)
-                        num = num + 1
-                        self.imageNameArr.append(model.data)
-                        if num == self.imageArr.count {
-                            self.subTxt(imageStr: model.data)
-                        }
-                       
-                    } else {
-                        weakSelf?.SVshowErro(infoStr: model.errmsg)
-                        weakSelf?.openView()
-                    }
-                    
-                    
-                }, failure: { (erro) in
-                    weakSelf?.SVshowErro(infoStr: erro as! String)
-                    weakSelf?.SVdismiss()
-                    weakSelf?.openView()
-                })
+                let data = UIImageJPEGRepresentation(image, 1.0)
                 
-                
+                let nameNum = arc4random()
+                let imageName = String.getTimeNow() +  "\(nameNum)"
+                KFBLog(message: "照片名字" + imageName)
+                upfile.upLoadImage(data, imageName: imageName)
             }
         } else {
             //没有图片
@@ -149,11 +184,19 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         }
 
     }
+    
+    
+    func complete(_ filename: String!) {
+        KFBLog(message: "上传地址" + filename)
+        self.imageNameArr.append(filename)
+        if imageNameArr.count == self.imageArr.count {
+            self.subTxt(imageStr: "")
+        }
+    }
 
     func subTxt(imageStr : String)  {
          weak var weakSelf = self
 
-//        let arr = [imageStr]
         KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id_heart().couseid)
         KFBLog(message: self.couseId)
         dataVC.submitfenx_heart(content: txtStr, catalog_id: self.couseId, images: self.imageNameArr, completion: { (data) in

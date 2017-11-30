@@ -18,6 +18,8 @@
 		21066EE61FB40546001DA2F3 /* HGImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21066EE11FB40546001DA2F3 /* HGImageCollectionViewController.swift */; };
 		21066EE71FB40546001DA2F3 /* HGImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21066EE21FB40546001DA2F3 /* HGImageCollectionViewCell.swift */; };
 		21066EE91FB40551001DA2F3 /* HGImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21066EE81FB40551001DA2F3 /* HGImage.storyboard */; };
+		210801821FCF9F61008FF362 /* UpLoadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 210801811FCF9F61008FF362 /* UpLoadFile.m */; };
+		210801871FCFAFE9008FF362 /* GetststokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210801861FCFAFE9008FF362 /* GetststokenModel.swift */; };
 		210862541F7A24F2000936B9 /* PdfListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210862531F7A24F2000936B9 /* PdfListViewController.swift */; };
 		2112E91A1F6C434F0066CF5B /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E9191F6C434F0066CF5B /* CommonModel.swift */; };
 		2112E91C1F6C47360066CF5B /* GetregionlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */; };
@@ -138,6 +140,9 @@
 		21066EE11FB40546001DA2F3 /* HGImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCollectionViewController.swift; sourceTree = "<group>"; };
 		21066EE21FB40546001DA2F3 /* HGImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		21066EE81FB40551001DA2F3 /* HGImage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HGImage.storyboard; sourceTree = "<group>"; };
+		210801801FCF9F61008FF362 /* UpLoadFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpLoadFile.h; sourceTree = "<group>"; };
+		210801811FCF9F61008FF362 /* UpLoadFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpLoadFile.m; sourceTree = "<group>"; };
+		210801861FCFAFE9008FF362 /* GetststokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetststokenModel.swift; sourceTree = "<group>"; };
 		210862531F7A24F2000936B9 /* PdfListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfListViewController.swift; sourceTree = "<group>"; };
 		2112E9191F6C434F0066CF5B /* CommonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
 		2112E91B1F6C47360066CF5B /* GetregionlistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetregionlistModel.swift; sourceTree = "<group>"; };
@@ -453,6 +458,7 @@
 				21B084F81F6E9AA400D9F3A0 /* UploadimgModel.swift */,
 				2176597A1F74BBB600A54A1D /* LikeModel.swift */,
 				213015E01F768D060029EFD1 /* GetmyfeedlistModel.swift */,
+				210801861FCFAFE9008FF362 /* GetststokenModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -562,6 +568,8 @@
 				21FA05A01F6784DF0083EFD4 /* FZRequestViewController.swift */,
 				2158221F1F6C2012002BC6E6 /* MineDataManger.swift */,
 				2158222A1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift */,
+				210801801FCF9F61008FF362 /* UpLoadFile.h */,
+				210801811FCF9F61008FF362 /* UpLoadFile.m */,
 			);
 			path = DataManger;
 			sourceTree = "<group>";
@@ -908,6 +916,7 @@
 				21066EE31FB40546001DA2F3 /* HGImageCompleteButton.swift in Sources */,
 				21F1C5981F68E002002FC28A /* UserInfoModel.swift in Sources */,
 				2124A0651F983AAD008BC63F /* PayView.swift in Sources */,
+				210801821FCF9F61008FF362 /* UpLoadFile.m in Sources */,
 				21F7427F1F9D87190016E399 /* UMUntil.swift in Sources */,
 				2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */,
 				215C4EE81FB1895F00ABFEF0 /* SelectImageViewController.swift in Sources */,
@@ -989,6 +998,7 @@
 				213015E11F768D060029EFD1 /* GetmyfeedlistModel.swift in Sources */,
 				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,
 				215822271F6C3033002BC6E6 /* NoWifiView.swift in Sources */,
+				210801871FCFAFE9008FF362 /* GetststokenModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

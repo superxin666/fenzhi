@@ -29,7 +29,6 @@ OSSClient * client;
 }
 
 - (void)upLoadImage:(NSData *)imageData imageName:(NSString *) imageName{
-    NSLog(@"%lu",(unsigned long)imageData.length);
     OSSPutObjectRequest * put = [OSSPutObjectRequest new];
     put.bucketName = @"fenzhi-image";
     put.uploadingData = imageData;
@@ -46,5 +45,30 @@ OSSClient * client;
         }
         return nil;
     }];
+}
+
+- (void) upLoadFile : (NSData *) fileData fileName:(NSString *) fileName loadName : (NSString *) loadName{
+    
+    OSSPutObjectRequest * put = [OSSPutObjectRequest new];
+    put.bucketName = @"fenzhi-image";
+    put.uploadingData = fileData;
+    put.objectKey = [NSString stringWithFormat:@"share/1/%@",loadName];
+    put.contentDisposition = [NSString stringWithFormat:@"attachment;filename=%@",fileName];
+
+    
+    OSSTask * createTask = [client putObject:put];
+    
+    [createTask continueWithBlock:^id(OSSTask *task) {
+        if (!task.error) {
+            NSLog(@"create bucket success!");
+            NSString * name = [NSString stringWithFormat:@"http://fenzhi-image.oss-cn-beijing.aliyuncs.com/share/1/%@",loadName];
+            [self.delegatefile complete_fileName:fileName loadName:name];
+        } else {
+            NSLog(@"create bucket failed, error: %@", task.error);
+        }
+        return nil;
+    }];
+    
+    
 }
 @end

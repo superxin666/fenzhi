@@ -8,7 +8,8 @@
 
 import UIKit
 import QuickLook
-class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,sureDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
+class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,sureDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate,UpLoadFileDelegate_file {
+    
     let textField: UITextView = UITextView()
     let btnBackView :UIView = UIView()
     let imageBackView :UIView = UIView()
@@ -53,6 +54,10 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     var isLoading = false
     
+    var tokenModel : GetststokenModel = GetststokenModel()
+    let upfile = UpLoadFile()
+  
+    
     deinit {
         //记得移除通知监听
         NotificationCenter.default.removeObserver(self)
@@ -77,7 +82,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         }
         self.getFileData()
         self.creatUI()
-        
+        self.getToken()
 
     }
     func reloadTableView(){
@@ -105,7 +110,16 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
             KFBLog(message: "文件夹不存在")
         }
     }
-
+    
+    func getToken() {
+        loadVC.getststoken(completion: { (data) in
+            self.tokenModel = data as! GetststokenModel
+            KFBLog(message: self.tokenModel.data.credentials.AccessKeyId)
+        }) { (erro) in
+            
+        }
+    }
+    
     //MARK:发布
     override func navigationRightBtnClick() {
         KFBLog(message: "发布")
@@ -114,12 +128,12 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         if !nsetBtn.isSelected {
             self.nestBtnClik()
         }
-        if !(txtStr.characters.count > 0) {
+        if !(txtStr.count > 0) {
             self.SVshowErro(infoStr: "请输入文字")
             return
         }
-
-
+        
+        
         if fileArr.count>0 {
             if fileArr.count > 10 {
                 self.SVshowErro(infoStr: "最多上传10个文件")
@@ -128,36 +142,25 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
                 self.closeView()
             }
             //有文件
-            var num = 0
-        
+
+            upfile.initOSSClient(tokenModel.data.credentials.AccessKeyId, sec: tokenModel.data.credentials.AccessKeySecret, token: tokenModel.data.credentials.SecurityToken)
+            upfile.delegatefile = self
+            self.SVshow(infoStr: "正在努力上传中")
             for i in 0..<fileArr.count{
-                let file : String = fileArr[i]
-                self.SVshow(infoStr: "正在努力上传中")
-                self.loadVC.uploadfile(fileName: file, completion: { (data) in
-                    let model :UpFileDataModel = data as! UpFileDataModel
-                    if model.errno == 0 {
-                        KFBLog(message: model.data)
-                        num = num + 1
-                        let dict :Dictionary = [
-                            "name":model.data.name,
-                            "type":model.data.type,
-                            "file":model.data.file,
-                            ]
-                        self.fileNameArr.append(dict)
-                        if num == self.fileArr.count{
-                           self.subTxt(fileData: model.data)
-                        }
-                      
-                    } else {
-                        weakSelf?.SVdismiss()
-                        weakSelf?.openView()
-                        weakSelf?.SVshowErro(infoStr: model.errmsg)
-                    }
-                }, failure: { (erro) in
-                        weakSelf?.SVdismiss()
-                        weakSelf?.SVshowErro(infoStr: erro as! String)
-                        weakSelf?.openView()
-                })
+
+                //实际名字
+                let  fileName = fileArr[i]
+                let nameStr : String = RSA.encodeParameter(fileName)
+            
+                //data
+                let filePathStr : String = filePath + "/" + fileName
+                let url :URL = URL(fileURLWithPath: filePathStr) as URL!
+                let fileData:Data = try! Data(contentsOf: url)
+                //上传地址
+                let nameNum = arc4random()
+                let loadFileName = String.getTimeNow() +  "\(nameNum)"
+    
+                upfile.upLoadFile(fileData, fileName: nameStr, loadName: loadFileName)
                 
                 
             }
@@ -165,11 +168,91 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         } else {
             self.SVshowErro(infoStr: "请选择要发布的文件")
         }
-
-
+        
+        
     }
     
-    func subTxt(fileData : UpFileDataModel_data)  {
+    func completeName(_ filename: String!, loadName: String!) {
+        let nameStr = filename.removingPercentEncoding
+        let arr = nameStr?.components(separatedBy: ".")
+        let typeStr : String = arr!.last!
+        KFBLog(message: "上传地址" + loadName)
+        let dict :Dictionary = [
+            "name":filename,
+            "type":typeStr,
+            "file":loadName,
+            ]
+        self.fileNameArr.append(dict as! [String : String])
+        if fileNameArr.count == self.fileArr.count {
+            self.subTxt()
+        }
+    }
+
+
+//    //MARK:发布
+//    override func navigationRightBtnClick() {
+//        KFBLog(message: "发布")
+//        //weak
+//        weak var weakSelf = self
+//        if !nsetBtn.isSelected {
+//            self.nestBtnClik()
+//        }
+//        if !(txtStr.count > 0) {
+//            self.SVshowErro(infoStr: "请输入文字")
+//            return
+//        }
+//
+//
+//        if fileArr.count>0 {
+//            if fileArr.count > 10 {
+//                self.SVshowErro(infoStr: "最多上传10个文件")
+//            }
+//            DispatchQueue.main.async {
+//                self.closeView()
+//            }
+//            //有文件
+//            var num = 0
+//
+//            for i in 0..<fileArr.count{
+//                let file : String = fileArr[i]
+//                self.SVshow(infoStr: "正在努力上传中")
+//                self.loadVC.uploadfile(fileName: file, completion: { (data) in
+//                    let model :UpFileDataModel = data as! UpFileDataModel
+//                    if model.errno == 0 {
+//                        KFBLog(message: model.data)
+//                        num = num + 1
+//                        let dict :Dictionary = [
+//                            "name":model.data.name,
+//                            "type":model.data.type,
+//                            "file":model.data.file,
+//                            ]
+//                        self.fileNameArr.append(dict)
+//                        if num == self.fileArr.count{
+//                           self.subTxt(fileData: model.data)
+//                        }
+//
+//                    } else {
+//                        weakSelf?.SVdismiss()
+//                        weakSelf?.openView()
+//                        weakSelf?.SVshowErro(infoStr: model.errmsg)
+//                    }
+//                }, failure: { (erro) in
+//                        weakSelf?.SVdismiss()
+//                        weakSelf?.SVshowErro(infoStr: erro as! String)
+//                        weakSelf?.openView()
+//                })
+//
+//
+//            }
+//
+//        } else {
+//            self.SVshowErro(infoStr: "请选择要发布的文件")
+//        }
+//
+//
+//    }
+    
+    func subTxt()  {
         weak var weakSelf = self
         dataVC.submitfenx_teach(content: txtStr, catalog_id: self.couseId, file: self.fileNameArr, completion: { (data) in
             let model :SmsModel = data as! SmsModel

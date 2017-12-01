@@ -50,7 +50,7 @@ OSSClient * client;
 - (void) upLoadFile : (NSData *) fileData fileName:(NSString *) fileName loadName : (NSString *) loadName{
     
     OSSPutObjectRequest * put = [OSSPutObjectRequest new];
-    put.bucketName = @"fenzhi-image";
+    put.bucketName = @"fenzhi-file";
     put.uploadingData = fileData;
     put.objectKey = [NSString stringWithFormat:@"share/1/%@",loadName];
     put.contentDisposition = [NSString stringWithFormat:@"attachment;filename=%@",fileName];
@@ -70,5 +70,25 @@ OSSClient * client;
     }];
     
     
+}
+- (void)getFile : (NSString *)fileName{
+    
+    OSSGetObjectRequest * request = [OSSGetObjectRequest new];
+    // 必填字段
+    request.bucketName = @"fenzhi-file";
+    request.objectKey = [NSString stringWithFormat:@"share/1/%@",fileName];
+    
+    OSSTask * getTask = [client getObject:request];
+    [getTask continueWithBlock:^id(OSSTask *task) {
+        if (!task.error) {
+            NSLog(@"download object success!");
+            OSSGetObjectResult * getResult = task.result;
+            NSLog(@"download result: %@", getResult.downloadedData);
+            
+        } else {
+            NSLog(@"download object failed, error: %@" ,task.error);
+        }
+        return nil;
+    }];
 }
 @end

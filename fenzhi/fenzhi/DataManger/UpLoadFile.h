@@ -24,4 +24,5 @@
 - (void)initOSSClient: (NSString *) key sec :(NSString*)scr Token : (NSString *)token;
 - (void) upLoadImage : (NSData *) imageData imageName:(NSString *) imageName;
 - (void) upLoadFile : (NSData *) fileData fileName:(NSString *) fileName loadName : (NSString *) loadName;
+- (void)getFile : (NSString *)fileName;
 @end

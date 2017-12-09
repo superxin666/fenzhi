@@ -61,7 +61,7 @@ OSSClient * client;
     [createTask continueWithBlock:^id(OSSTask *task) {
         if (!task.error) {
             NSLog(@"create bucket success!");
-            NSString * name = [NSString stringWithFormat:@"http://fenzhi-image.oss-cn-beijing.aliyuncs.com/share/1/%@",loadName];
+            NSString * name = [NSString stringWithFormat:@"http://fenzhi-file.oss-cn-beijing.aliyuncs.com/share/1/%@",loadName];
             [self.delegatefile complete_fileName:fileName loadName:name];
         } else {
             NSLog(@"create bucket failed, error: %@", task.error);

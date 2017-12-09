@@ -415,6 +415,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             cell = mainTabelView.visibleCells[5] as! InfoTableViewCell
             //"\(bookNum)"
             dirShowStr = versionStr + bookNameStr
+            self.dataModel.data.book = bookNum!
         default:
             dirShowStr = ""
         }

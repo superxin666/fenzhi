@@ -36,7 +36,7 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
 
         // Do any additional setup after loading the view.
 //        self.edgesForExtendedLayout = UIRectEdge.bottom
-
+        self.view.backgroundColor = .white
         self.navigationBar_leftBtn()
         var titleStr = ""
         if self.isNet {

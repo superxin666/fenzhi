@@ -83,7 +83,8 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         plaNameArr.append(dataModel.data.schoolName)
         plaNameArr.append(dataModel.data.gradeName)
         plaNameArr.append(dataModel.data.subjectName)
-        plaNameArr.append(dataModel.data.versionName)
+
+        plaNameArr.append(dataModel.data.versionName+dataModel.data.bookName)
         provinceNum = self.dataModel.data.province
         cityNum = self.dataModel.data.city
         districtNum = self.dataModel.data.district
@@ -130,12 +131,14 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         
         var cell : InfoTableViewCell!
         cell = mainTabelView.visibleCells[0] as! InfoTableViewCell
-        let nameStr = cell.nameStr
-        KFBLog(message: nameStr)
+
+
         if cell._nameTextField.isFirstResponder {
             cell._nameTextField.resignFirstResponder()
         }
-        if nameStr.characters.count > 0 {
+        let nameStr = cell.nameStr
+        KFBLog(message: nameStr)
+        if nameStr.count > 0 {
             self.dataModel.data.name = nameStr
         }
         if isLoadIcon {

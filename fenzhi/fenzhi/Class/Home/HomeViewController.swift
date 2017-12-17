@@ -43,7 +43,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         self.navigation_title_fontsize(name: "首页", fontsize: 27)
         self.creatTopView()
         self.creatTableView()
-        self.getData()
+//        self.getData()
     }
     
     //MARK:数据请求

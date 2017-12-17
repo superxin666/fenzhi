@@ -162,23 +162,32 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             weakSelf?.showZanShang()
         }
         headView.imageBlock = {(num) in
-            let imageStr = weakSelf?.headData.data.images[num]
-            weakSelf?.showBigImageView = UIImageView()
-            weakSelf?.showBigImageView.kf.setImage(with: URL(string: imageStr!))
-            KFBLog(message: weakSelf?.showBigImageView.image?.size)
-            if weakSelf?.showBigImageView.image != nil {
-                let size = weakSelf?.showBigImageView.image?.size
-                let W = CGFloat((size?.width)!)/4
-                let H = CGFloat((size?.height)!)/4
-                KFBLog(message: "宽度---\(W)")
-                KFBLog(message: "高度---\(H)")
-                weakSelf?.showBigImageView.frame = CGRect(x: (KSCREEN_WIDTH - W)/2, y: (KSCREEN_HEIGHT - H)/2, width: W, height: H)
-                weakSelf?.maskView.addSubview((weakSelf?.showBigImageView)!)
-                weakSelf?.view.window?.addSubview(self.maskView)
+            //            let imageStr = weakSelf?.headData.data.images[num]
+            //            weakSelf?.showBigImageView = UIImageView()
+            //            weakSelf?.showBigImageView.kf.setImage(with: URL(string: imageStr!))
+            //            KFBLog(message: weakSelf?.showBigImageView.image?.size)
+            //            if weakSelf?.showBigImageView.image != nil {
+            //                let size = weakSelf?.showBigImageView.image?.size
+            //                let W = CGFloat((size?.width)!)/4
+            //                let H = CGFloat((size?.height)!)/4
+            //                KFBLog(message: "宽度---\(W)")
+            //                KFBLog(message: "高度---\(H)")
+            //                weakSelf?.showBigImageView.frame = CGRect(x: (KSCREEN_WIDTH - W)/2, y: (KSCREEN_HEIGHT - H)/2, width: W, height: H)
+            //                weakSelf?.maskView.addSubview((weakSelf?.showBigImageView)!)
+            //                weakSelf?.view.window?.addSubview(self.maskView)
+            //
+            //                let tap = UITapGestureRecognizer(target: self, action: #selector(weakSelf?.removeBigImageView))
+            //                weakSelf?.maskView.addGestureRecognizer(tap)
+            //            }
 
-                let tap = UITapGestureRecognizer(target: self, action: #selector(weakSelf?.removeBigImageView))
-                weakSelf?.maskView.addGestureRecognizer(tap)
-            }
+            let vc = ImageShowViewController()
+            vc.imageNameArr = weakSelf?.headData.data.images
+            vc.indexNum = num
+            vc.isNet = true
+            let na = UINavigationController(rootViewController: vc)
+            self.present(na, animated: true, completion: {
+
+            })
 
         }
         

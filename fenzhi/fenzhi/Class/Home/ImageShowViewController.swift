@@ -10,12 +10,15 @@ import UIKit
 typealias showImageViewBlock = (_ imageArr:Array<UIImage>)->()
 class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
     var imageArr :[UIImage]!
+    var imageNameArr :[String]!
     var indexNum :Int!
     let scrollView = UIScrollView()
-
     var removeIndex : Int!
+    var saveImage : UIImage!
 
     var showImageBlock : showImageViewBlock!
+
+    var isNet : Bool!//true网络 false 本地
 
 
 //    override func viewWillAppear(_ animated: Bool) {
@@ -33,9 +36,19 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
 
         // Do any additional setup after loading the view.
 //        self.edgesForExtendedLayout = UIRectEdge.bottom
-        let titleStr = "\(indexNum+1)/\(imageArr.count)"
+
         self.navigationBar_leftBtn()
-        self.navigationBar_rightBtn_title(name: "移除")
+        var titleStr = ""
+        if self.isNet {
+            self.navigationBar_rightBtn_title(name: "保存")
+            titleStr = "\(indexNum+1)/\(imageNameArr.count)"
+
+        } else {
+            self.navigationBar_rightBtn_title(name: "移除")
+            titleStr = "\(indexNum+1)/\(imageArr.count)"
+
+        }
+        self.removeIndex = indexNum
         self.navigation_title_fontsize(name: titleStr, fontsize: 27)
         self.creatUI()
 
@@ -43,26 +56,63 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
 
     override func navigationLeftBtnClick() {
         self.dismiss(animated: true) {
-            self.showImageBlock(self.imageArr)
+            if self.isNet {
+
+
+            } else {
+                self.showImageBlock(self.imageArr)
+            }
         }
     }
     override func navigationRightBtnClick() {
-        if removeIndex < imageArr.count {
-            imageArr.remove(at: removeIndex)
-            for view in scrollView.subviews{
-                view.removeFromSuperview()
+        if isNet {
+            //保存
+            SVshow(infoStr: "保存中")
+            let path = self.imageNameArr[self.removeIndex]
+            let url  = URL(string: path)
+            DispatchQueue.global().async {
+
+                let fileData = NSData(contentsOf: url!)
+
+                DispatchQueue.main.async{
+                    self.SVshowSucess(infoStr: "保存成功")
+                    let image = UIImage(data: fileData! as Data)
+                    if image != nil {
+                        UIImageWriteToSavedPhotosAlbum(image!, self, nil, nil)
+                    }
+                }
             }
-            scrollView.removeFromSuperview()
-            indexNum = 0
-            let titleStr = "\(indexNum+1)/\(imageArr.count)"
-            self.navigation_title_fontsize(name: titleStr, fontsize: 27)
-            self.creatUI()
+        } else {
+            //删除
+            if removeIndex < imageArr.count {
+                imageArr.remove(at: removeIndex)
+                for view in scrollView.subviews{
+                    view.removeFromSuperview()
+                }
+                scrollView.removeFromSuperview()
+                indexNum = 0
+                let titleStr = "\(indexNum+1)/\(imageArr.count)"
+                self.navigation_title_fontsize(name: titleStr, fontsize: 27)
+                self.creatUI()
+            }
         }
     }
 
+//    func image(_:completionSelector:contextInfo:)){
+//
+//    }
+
     func creatUI() {
+        var arrCount :Int!
+        if isNet {
+            arrCount = self.imageNameArr.count
+        } else {
+            arrCount = self.imageArr.count
+        }
+
+
         scrollView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
-        scrollView.contentSize = CGSize(width: CGFloat(self.imageArr.count) * KSCREEN_WIDTH, height: KSCREEN_HEIGHT + 64)
+        scrollView.contentSize = CGSize(width: CGFloat(arrCount) * KSCREEN_WIDTH, height: KSCREEN_HEIGHT + 64)
         scrollView.contentOffset = CGPoint(x: KSCREEN_WIDTH * CGFloat(indexNum), y: 0)
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
@@ -76,9 +126,17 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
 
         self.view.addSubview(scrollView)
 
-        for i in 0..<self.imageArr.count {
-            let image = self.imageArr[i]
-            let imageView = UIImageView(image: image)
+        for i in 0..<arrCount {
+
+            let imageView = UIImageView()
+            if isNet {
+                let imageStr :String = self.imageNameArr[i]
+                imageView.kf.setImage(with: URL(string: imageStr))
+            } else {
+                let image = self.imageArr[i]
+                imageView.image =  image
+            }
+     
 
             let size = imageView.image?.size
             var W = CGFloat((size?.width)!)/2
@@ -109,9 +167,13 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
         let index : Int = Int(scrollView.contentOffset.x / KSCREEN_WIDTH)
         KFBLog(message: index)
 
-        let titleStr = "\(index+1)/\(imageArr.count)"
+        var titleStr = ""
+        if self.isNet {
+            titleStr = "\(index+1)/\(imageNameArr.count)"
+        } else {
+            titleStr = "\(index+1)/\(imageArr.count)"
+        }
         self.navigation_title_fontsize(name: titleStr, fontsize: 27)
-
         removeIndex = index
 
     }

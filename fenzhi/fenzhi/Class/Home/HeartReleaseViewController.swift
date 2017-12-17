@@ -452,6 +452,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
             let vc = ImageShowViewController()
             vc.imageArr = self.imageArr
             vc.indexNum = indexPath.row
+            vc.isNet = false
             vc.showImageBlock = {(backImageArr) in
                 if backImageArr.count < self.imageArr.count {
                     self.imageArr = backImageArr

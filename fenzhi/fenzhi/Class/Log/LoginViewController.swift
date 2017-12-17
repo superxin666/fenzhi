@@ -215,7 +215,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
 
             if weakSelf?.dataModel.errno == 0 {
                 var ishaveInfo = "0"
-                if (weakSelf?.dataModel.data.name.characters.count)! > 0{
+                if (weakSelf?.dataModel.data.name.count)! > 0{
                     ishaveInfo = "1"
                 }
                 KFBLog(message:  (weakSelf?.dataModel.data.token)!)
@@ -231,6 +231,8 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
                 })
    
 
+            } else {
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
             }
             
         }) { (error) in

@@ -337,7 +337,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         dingweiLabel_btn.addGestureRecognizer(tap)
     
         let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id_heart().name
-        if nameStr.characters.count > 0  {
+        if nameStr.count > 0  {
             //有课时定位
             tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
         } else {
@@ -435,22 +435,37 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row < imageArr.count {
-            alertController  = UIAlertController(title: "提示", message: "是否要删除该图片", preferredStyle: .alert)
-            let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
-                //取消
-                self.alertController.dismiss(animated: true, completion: {
-                    
-                })
+//            alertController  = UIAlertController(title: "提示", message: "是否要删除该图片", preferredStyle: .alert)
+//            let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+//                //取消
+//                self.alertController.dismiss(animated: true, completion: {
+//
+//                })
+//            }
+//            let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
+//                self.imageArr.remove(at: indexPath.row)
+//                self.colletionView.reloadData()
+//            }
+//            alertController.addAction(cancleAction)
+//            alertController.addAction(sureAction)
+//            self.present((alertController)!, animated: true, completion: nil)
+            let vc = ImageShowViewController()
+            vc.imageArr = self.imageArr
+            vc.indexNum = indexPath.row
+            vc.showImageBlock = {(backImageArr) in
+                if backImageArr.count < self.imageArr.count {
+                    self.imageArr = backImageArr
+                    self.colletionView.reloadData()
+                }
             }
-            let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
-                self.imageArr.remove(at: indexPath.row)
-                self.colletionView.reloadData()
-            }
-            alertController.addAction(cancleAction)
-            alertController.addAction(sureAction)
-            self.present((alertController)!, animated: true, completion: nil)
+            let na = UINavigationController(rootViewController: vc)
+            self.present(na, animated: true, completion: {
+
+            })
+
         }
     }
+
 
     //MARK:退出键盘
     func nestBtnClik()  {

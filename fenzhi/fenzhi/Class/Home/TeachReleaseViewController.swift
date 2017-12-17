@@ -74,7 +74,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         self.view.backgroundColor = .white
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")
-        if LogDataMangerViewController.getSelectCouse_name_id_teach().name.characters.count > 0 {
+        if LogDataMangerViewController.getSelectCouse_name_id_teach().name.count > 0 {
             isHaveDingwei = true
             self.couseId = LogDataMangerViewController.getSelectCouse_name_id_teach().couseid
         } else {

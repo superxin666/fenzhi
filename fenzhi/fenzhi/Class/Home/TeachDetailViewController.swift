@@ -59,7 +59,6 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.edgesForExtendedLayout = UIRectEdge.bottom
         self.view.backgroundColor = backView_COLOUR
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        self.navigation_title_fontsize(name: "教学分享详情", fontsize: 27)
         self.navigationBar_leftBtn()
         self.getHeadData()
 //        self.getcommentlistData()
@@ -123,7 +122,18 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         headView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: headViewHeight)
         headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight,type:self.headData.data.type!)
         mainScrollow.addSubview(headView)
-         weak var weakSelf = self
+
+        //设置标题
+        if self.headData.data.type! == 0 {
+            //教学
+            self.navigation_title_fontsize(name: "教学分享详情", fontsize: 27)
+        } else {
+            //心得
+            self.navigation_title_fontsize(name: "心得分享详情", fontsize: 27)
+        }
+
+
+        weak var weakSelf = self
         headView.docBlock = {(model) in
             let urlStr : String = model.file
             let name : String = model.name.removingPercentEncoding!
@@ -131,7 +141,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             weakSelf?.dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
                 
                 weakSelf?.openFileUrl = data as! String
-                if  (self.openFileUrl.characters.count > 0) {
+                if  (self.openFileUrl.count > 0) {
                     KFBLog(message: "下载成功"+self.openFileUrl)
                     
                     weakSelf?.quickLookController.dataSource = self

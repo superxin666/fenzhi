@@ -28,7 +28,12 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     let quickLookController = QLPreviewController()
     var qucikModel = GetmyfeedlistModel_data_fenxList()
      var openFileUrl :String!
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.freshData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -90,13 +95,13 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
             }
             weakSelf?.mainTabelView.mj_footer.endRefreshing()
-            weakSelf?.mainTabelView.mj_header.endRefreshing()
-            
+//            weakSelf?.mainTabelView.mj_header.endRefreshing()
+
         }) { (erro) in
             weakSelf?.SVshowErro(infoStr: "网络请求失败")
-            weakSelf?.mainTabelView.mj_header.endRefreshing()
+//            weakSelf?.mainTabelView.mj_header.endRefreshing()
             weakSelf?.mainTabelView.mj_footer.endRefreshing()
-            
+
         }
     }
     
@@ -208,9 +213,9 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         footer.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.loadMoreData))
-        header.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.freshData))
+//        header.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.freshData))
         mainTabelView.mj_footer = footer
-        mainTabelView.mj_header = header
+//        mainTabelView.mj_header = header
         mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
         self.view.addSubview(mainTabelView)

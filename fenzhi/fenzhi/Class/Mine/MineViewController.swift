@@ -18,10 +18,10 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.getData()
     }
-    
+
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,31 +135,31 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         if indexPath.row == 0 {
             let vc : XiaoxiViewController = XiaoxiViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: false)
             
         } else if indexPath.row == 1 {
             //shoucang
             let vc : ShoucangViewController = ShoucangViewController()
             vc.hidesBottomBarWhenPushed = true
             vc.vctype = .shoucang_vc
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: false)
 
         } else if indexPath.row == 2{
             let vc : ShoucangViewController = ShoucangViewController()
             vc.hidesBottomBarWhenPushed = true
             vc.vctype = .zanshang_vc
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: false)
 
 
         } else if indexPath.row == 3{
             let vc : ShouruViewController = ShouruViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: false)
         
         } else {
             let vc : ShezhiViewController = ShezhiViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: false)
         }
     }
 

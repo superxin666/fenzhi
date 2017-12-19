@@ -45,7 +45,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         self.creatTopView()
         self.creatTableView()
         self.getData()
-        self.getData_comment()
+//        self.getData_comment()
     }
 
 
@@ -89,7 +89,8 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         isLeft = true
         leftView.isHidden = false
         rightView.isHidden  = true
-        self.mainTabelView.reloadData()
+        self.reFlishData()
+//        self.mainTabelView.reloadData()
     }
     
     func rightbtnClick() {
@@ -97,7 +98,8 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         isLeft = false
         rightView.isHidden = false
         leftView.isHidden = true
-        self.mainTabelView.reloadData()
+        self.reFlishData_Comment()
+//        self.mainTabelView.reloadData()
     }
     
     //MARK:tableview
@@ -121,6 +123,11 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         page = page + 1
         self.getData()
     }
+    func reFlishData()  {
+        self.dataArr.removeAll()
+        page = 1
+        self.getData()
+    }
     
     
     func getData()  {
@@ -133,12 +140,16 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                 //修改成功
                 if (weakSelf?.dataModel.data.messageList.count)! > 0{
                     KFBLog(message: "数组")
+                    self.noDataView.removeFromSuperview()
+                    
                     weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.messageList)!
                     weakSelf?.mainTabelView.reloadData()
                 } else {
                     if weakSelf?.dataArr.count == 0 {
-                        weakSelf?.mainTabelView.removeFromSuperview()
+//                        weakSelf?.mainTabelView.removeFromSuperview()
+                        weakSelf?.mainTabelView.reloadData()
                         weakSelf?.view.addSubview(self.showNoData())
+                        weakSelf?.view.bringSubview(toFront: self.noDataView)
                     } else {
                         weakSelf?.SVshowErro(infoStr: "没有数据了")
                     }
@@ -162,6 +173,12 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         page_com = page_com + 1
         self.getData_comment()
     }
+    func reFlishData_Comment()  {
+        self.dataArr_Comment.removeAll()
+        page_com = 1
+        self.getData_comment()
+    }
+
     func getData_comment() {
         weak var weakSelf = self
         self.SVshowLoad()
@@ -172,6 +189,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                 //修改成功
                 if (weakSelf?.dataModel_Comment.data.messageList.count)! > 0{
                     KFBLog(message: "数组")
+                    self.noDataView.removeFromSuperview()
                     for model in (weakSelf?.dataModel_Comment.data.messageList)!{
                         weakSelf?.getCellHeight(model: model)
                     }
@@ -179,8 +197,10 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                     weakSelf?.mainTabelView.reloadData()
                 } else {
                     if weakSelf?.dataArr_Comment.count == 0 {
-                        weakSelf?.mainTabelView.removeFromSuperview()
+//                        weakSelf?.mainTabelView.removeFromSuperview()
+                        weakSelf?.mainTabelView.reloadData()
                         weakSelf?.view.addSubview(self.showNoData())
+                        weakSelf?.view.bringSubview(toFront: self.noDataView)
                     } else {
                         weakSelf?.SVshowErro(infoStr: "没有数据了")
                     }
@@ -208,7 +228,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         let returnContentH :CGFloat = returnContentStr.getLabHeight(font: fzFont_Thin(ip7(18)), LabelWidth: labelW)
         var height = ip7(83) + returnContentH
         //被评论内容
-        if model.toCommentInfo.content.characters.count > 0 {
+        if model.toCommentInfo.content.count > 0 {
             height = height + ip7(15) + ip7(53)
         }
         //定位

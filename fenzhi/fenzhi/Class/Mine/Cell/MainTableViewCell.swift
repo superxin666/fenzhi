@@ -9,7 +9,9 @@
 import UIKit
 
 class MainTableViewCell: UITableViewCell {
-
+    let redView = UIView()
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,8 +30,14 @@ class MainTableViewCell: UITableViewCell {
         nameLabel.textColor  = FZColor(red: 102, green: 102, blue: 102, alpha: 1.0)
         nameLabel.textAlignment = .left
         self.addSubview(nameLabel)
-
-        //头像
+        //红点
+        redView.frame = CGRect(x: ip7(84), y: 0, width: ip7(10), height: ip7(10))
+        redView.backgroundColor = .red
+        redView.isHidden = true
+        redView.kfb_makeRound()
+        nameLabel.addSubview(redView)
+        
+        //箭头
         let arrowImageView : UIImageView = UIImageView(frame: CGRect(x:KSCREEN_WIDTH -  ip7(47), y: (height - ip7(20))/2, width: ip7(20), height: ip7(20)))
         arrowImageView.image = #imageLiteral(resourceName: "icon_jt")
         self.addSubview(arrowImageView)
@@ -47,6 +55,16 @@ class MainTableViewCell: UITableViewCell {
         }
         self.addSubview(lineView)
         
+    }
+    
+    func setRedView(isRed : Int) {
+        KFBLog(message: isRed)
+        if isRed == 1 {
+            self.redView.isHidden = false
+        } else {
+            self.redView.isHidden = true
+
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -8,7 +8,24 @@
 
 import UIKit
 import ObjectMapper
+class ProfileMineModel_data_notify: Mappable {
 
+    var like: Int = 0
+    var comment:Int = 0
+    var zan:Int = 0
+
+    init() {}
+    required init?(map: Map){
+        mapping(map: map)
+    }
+    // Mappable
+    func mapping(map: Map) {
+        like <- map["like"]
+        comment <- map["comment"]
+        zan <- map["zan"]
+        
+    }
+}
 
 class ProfileMineModel_data: Mappable {
     var avatar: String = ""
@@ -44,6 +61,8 @@ class ProfileMineModel_data: Mappable {
     var fansNum: Int!
     var likeNum: Int!
     var favoriteNum:Int!
+    
+    var notify:ProfileMineModel_data_notify = ProfileMineModel_data_notify()
     
     //看其他用户信息时 有以下数据
     var myfeedList:GetmyfeedlistModel_data = GetmyfeedlistModel_data()
@@ -84,6 +103,8 @@ class ProfileMineModel_data: Mappable {
         fansNum <- map["fansNum"]
         likeNum <- map["likeNum"]
         favoriteNum <- map["favoriteNum"]
+        notify <- map["notify"]
+
         
         myfeedList <- map["myfeedList"]
         isFollow <- map["isFollow"]

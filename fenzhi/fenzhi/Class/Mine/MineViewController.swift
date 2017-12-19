@@ -39,6 +39,7 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             weakSelf?.dataModel = data as! ProfileMineModel
             if weakSelf?.dataModel.errno == 0 {
                 weakSelf?.headViewSetData()
+                self.mainTabelView.reloadData()
             }
         }) { (erro) in
 
@@ -118,6 +119,19 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             cell = MainTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
         }
         cell.setUpUIWith(name: cellNameArr[indexPath.row], image: cellIconNameArr[indexPath.row], index : indexPath.row)
+//        KFBLog(message: self.dataModel.data.notify.like)
+        if indexPath.row == 0 {
+            //我的消息
+
+            if self.dataModel.data.notify.like == 1 ||  self.dataModel.data.notify.comment == 1  {
+                cell.setRedView(isRed: 1)
+            }
+
+        } else if indexPath.row == 3 {
+            //收入
+            cell.setRedView(isRed: self.dataModel.data.notify.zan)
+
+        }
         return cell;
 
 

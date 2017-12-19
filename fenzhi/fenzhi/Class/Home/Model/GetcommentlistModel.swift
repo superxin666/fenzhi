@@ -96,6 +96,8 @@ class GetcommentlistModel_data_list_commentList_userInfo: Mappable {
 }
 class GetcommentlistModel_data_list_commentList: Mappable {
     var id: Int!
+
+
     var toCommentId: Int!
     var userId: Int!
     var toUserId: Int!
@@ -117,7 +119,7 @@ class GetcommentlistModel_data_list_commentList: Mappable {
     var commentInfo : GetcommentlistModel_data_list_commentList_commentInfo = GetcommentlistModel_data_list_commentList_commentInfo()
     var fenxInfo:GetcommentlistModel_data_list_commentList_fenxInfo = GetcommentlistModel_data_list_commentList_fenxInfo()
     
-
+    var messageId: Int!
 
     init() {}
     required init?(map: Map){
@@ -126,6 +128,7 @@ class GetcommentlistModel_data_list_commentList: Mappable {
     // Mappable
     func mapping(map: Map) {
         id <- map["id"]
+        messageId <- map["messageId"]
         toCommentId <- map["toCommentId"]
         userId <- map["userId"]
         toUserId <- map["toUserId"]

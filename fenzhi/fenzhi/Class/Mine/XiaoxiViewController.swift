@@ -29,6 +29,8 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     var isLeft = true
     
     var netType : String = ""
+    var messageTypeStr = "like"
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,6 +88,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     //MARK:头部按钮点击
     func leftbtnClick() {
         KFBLog(message: "点赞")
+        messageTypeStr = "like"
         isLeft = true
         leftView.isHidden = false
         rightView.isHidden  = true
@@ -95,16 +98,30 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     
     func rightbtnClick() {
         KFBLog(message: "评论")
+        messageTypeStr = "comment"
         isLeft = false
         rightView.isHidden = false
         leftView.isHidden = true
         self.reFlishData_Comment()
 //        self.mainTabelView.reloadData()
     }
-    
+
+
+    func readMessageRequest(messageId : Int)  {
+        self.requestVC.readMessage(messageId: messageId, typeStr: messageTypeStr, completion: { (data) in
+            let model : SmsModel = data as! SmsModel
+            if model.errno == 0 {
+                KFBLog(message: "消息阅读成功")
+            }
+
+        }) { (erro) in
+
+        }
+    }
+
     //MARK:tableview
     func creatTableView() {
-        mainTabelView.frame = CGRect(x: 0, y: topBaclView.frame.maxY + ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15))
+        mainTabelView.frame = CGRect(x: 0, y: topBaclView.frame.maxY + ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15) - LNAVIGATION_HEIGHT)
         mainTabelView.backgroundColor = UIColor.white
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -306,16 +323,20 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         
         if isLeft {
             let model : GetmessagelistLikeModel_data_messageList = self.dataArr[indexPath.row]
-            let vc = TeachDetailViewController()
-            vc.fenxId = model.fenxInfo.fenxId
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.readMessageRequest(messageId: model.messageId)
+
+//            let vc = TeachDetailViewController()
+//            vc.fenxId = model.fenxInfo.fenxId
+//            vc.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(vc, animated: true)
         } else {
             let model : GetcommentlistModel_data_list_commentList = self.dataArr_Comment[indexPath.row]
-            let vc = TeachDetailViewController()
-            vc.fenxId = model.fenxInfo.fenxId
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.readMessageRequest(messageId: model.messageId)
+
+//            let vc = TeachDetailViewController()
+//            vc.fenxId = model.fenxInfo.fenxId
+//            vc.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(vc, animated: true)
         }
        
 

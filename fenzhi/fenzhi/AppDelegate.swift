@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
 
     var window: UIWindow?
     var fileManager = FileManager.default
+    let redView = UIView()
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -46,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             if info == "1" {
                 //显示主页
                 self.showMain()
+                self.showRed()
             } else {
                 
                 //显示提交信息页面
@@ -65,7 +68,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         self.window?.rootViewController = nv
     }
 
-
+    func showRed() {
+        
+        let viewX = UIScreen.main.bounds.size.width/3*2 + UIScreen.main.bounds.size.width/3/2 + ip7(10)
+        let viewY = UIScreen.main.bounds.size.height - ip7(10) - ip7(54)
+        redView.frame = CGRect(x: viewX, y: viewY, width: ip7(10), height: ip7(10))
+        redView.backgroundColor = .red
+        redView.kfb_makeRound()
+        self.window?.rootViewController?.view.addSubview(redView)
+        self.window?.rootViewController?.view.bringSubview(toFront: redView)
+    }
+    
     func showLogin()  {
         let loginVC = LoginViewController()
         let nv :UINavigationController = UINavigationController(rootViewController: loginVC)
@@ -91,6 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         let PersonalVC : MineViewController = MineViewController()
         let PersonaNv :UINavigationController = UINavigationController(rootViewController: PersonalVC)
         let item3:UITabBarItem = UITabBarItem(title:"我的", image:UIImage.init(named: "button_wd_n")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage.init(named: "button_wd_s")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        
         PersonaNv.tabBarItem = item3
 
         //大底部导航栏

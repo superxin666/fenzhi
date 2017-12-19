@@ -39,6 +39,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 
         // Do any additional setup after loading the view.
 //        self.title = "首页"
+        //设置红点
         self.view.backgroundColor = backView_COLOUR
         self.navigation_title_fontsize(name: "首页", fontsize: 27)
         self.creatTopView()

@@ -119,9 +119,11 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             cell = MainTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
         }
         cell.setUpUIWith(name: cellNameArr[indexPath.row], image: cellIconNameArr[indexPath.row], index : indexPath.row)
-//        KFBLog(message: self.dataModel.data.notify.like)
+        
         if indexPath.row == 0 {
             //我的消息
+            KFBLog(message: "like --\(self.dataModel.data.notify.like)")
+            KFBLog(message: "comment --\(self.dataModel.data.notify.comment)")
 
             if self.dataModel.data.notify.like == 1 ||  self.dataModel.data.notify.comment == 1  {
                 cell.setRedView(isRed: 1)
@@ -129,6 +131,8 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
         } else if indexPath.row == 3 {
             //收入
+            KFBLog(message: "zan --\(self.dataModel.data.notify.zan)")
+
             cell.setRedView(isRed: self.dataModel.data.notify.zan)
 
         }

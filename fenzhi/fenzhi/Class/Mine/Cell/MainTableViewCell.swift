@@ -58,7 +58,7 @@ class MainTableViewCell: UITableViewCell {
     }
     
     func setRedView(isRed : Int) {
-        KFBLog(message: isRed)
+//        KFBLog(message: isRed)
         if isRed == 1 {
             self.redView.isHidden = false
         } else {

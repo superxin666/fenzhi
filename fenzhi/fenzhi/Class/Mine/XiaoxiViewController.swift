@@ -107,15 +107,23 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
 
 
-    func readMessageRequest(messageId : Int)  {
+    func readMessageRequest(messageId : Int,fenxId:Int)  {
         self.requestVC.readMessage(messageId: messageId, typeStr: messageTypeStr, completion: { (data) in
             let model : SmsModel = data as! SmsModel
             if model.errno == 0 {
                 KFBLog(message: "消息阅读成功")
+                
+            } else {
+                KFBLog(message: "消息阅读失败")
             }
-
+            let vc = TeachDetailViewController()
+            vc.fenxId = fenxId
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+            
         }) { (erro) in
-
+            self.SVshowErro(infoStr: "请求失败")
         }
     }
 
@@ -249,7 +257,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             height = height + ip7(15) + ip7(53)
         }
         //定位
-        if model.fenxInfo.catalog.characters.count > 0 {
+        if model.fenxInfo.catalog.count > 0 {
             height = height + ip7(25) + ip7(21)
         }
         //时间
@@ -319,26 +327,14 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
         if isLeft {
             let model : GetmessagelistLikeModel_data_messageList = self.dataArr[indexPath.row]
-            self.readMessageRequest(messageId: model.messageId)
-
-//            let vc = TeachDetailViewController()
-//            vc.fenxId = model.fenxInfo.fenxId
-//            vc.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(vc, animated: true)
+            self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId)
         } else {
             let model : GetcommentlistModel_data_list_commentList = self.dataArr_Comment[indexPath.row]
-            self.readMessageRequest(messageId: model.messageId)
-
-//            let vc = TeachDetailViewController()
-//            vc.fenxId = model.fenxInfo.fenxId
-//            vc.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(vc, animated: true)
+            self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId)
+            
         }
-       
 
     }
     

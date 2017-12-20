@@ -52,6 +52,7 @@
 		214DC5131F7E8A46002CD41F /* DianzanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214DC5121F7E8A46002CD41F /* DianzanTableViewCell.swift */; };
 		214EEC8E1F76AFAA00B5F38A /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EEC8D1F76AFAA00B5F38A /* RecordTableViewCell.swift */; };
 		214F91141FEA054300D44165 /* ImageShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214F91131FEA054300D44165 /* ImageShowViewController.swift */; };
+		214F91161FEA13BD00D44165 /* UITabBar+redView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214F91151FEA13BD00D44165 /* UITabBar+redView.swift */; };
 		215043611F6AADBD009546D2 /* ForgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043601F6AADBD009546D2 /* ForgetViewController.swift */; };
 		215043651F6AD179009546D2 /* pdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043641F6AD179009546D2 /* pdfViewController.swift */; };
 		215043671F6AD550009546D2 /* ActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215043661F6AD550009546D2 /* ActionCollectionViewCell.swift */; };
@@ -182,6 +183,7 @@
 		214DC5121F7E8A46002CD41F /* DianzanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DianzanTableViewCell.swift; sourceTree = "<group>"; };
 		214EEC8D1F76AFAA00B5F38A /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		214F91131FEA054300D44165 /* ImageShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageShowViewController.swift; sourceTree = "<group>"; };
+		214F91151FEA13BD00D44165 /* UITabBar+redView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+redView.swift"; sourceTree = "<group>"; };
 		215043601F6AADBD009546D2 /* ForgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetViewController.swift; sourceTree = "<group>"; };
 		215043641F6AD179009546D2 /* pdfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pdfViewController.swift; sourceTree = "<group>"; };
 		215043661F6AD550009546D2 /* ActionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				215822281F6C3D7A002BC6E6 /* UIView+clipping.swift */,
+				214F91151FEA13BD00D44165 /* UITabBar+redView.swift */,
 				217882391F67E43D00365735 /* RSA.h */,
 				2178823A1F67E43D00365735 /* RSA.m */,
 				21062AE01F603EA90003C7C4 /* pch.swift */,
@@ -961,6 +964,7 @@
 				21B084F31F6D4BCA00D9F3A0 /* GetzanlistModel.swift in Sources */,
 				21FE2F0A1F949B6900DCB6A2 /* DingweiViewControlleroc.m in Sources */,
 				212D28501F7359BD004DD669 /* commentTableViewCell.swift in Sources */,
+				214F91161FEA13BD00D44165 /* UITabBar+redView.swift in Sources */,
 				2162A07F1F7DE3BB00915F4C /* UpFileDataModel.swift in Sources */,
 				21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */,
 				21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */,

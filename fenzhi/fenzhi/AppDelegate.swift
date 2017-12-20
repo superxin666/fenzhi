@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             if info == "1" {
                 //显示主页
                 self.showMain()
-                self.showRed()
+                self.makeRedView()
             } else {
                 
                 //显示提交信息页面
@@ -68,15 +68,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         self.window?.rootViewController = nv
     }
 
-    func showRed() {
+    func makeRedView() {
         
         let viewX = UIScreen.main.bounds.size.width/3*2 + UIScreen.main.bounds.size.width/3/2 + ip7(10)
         let viewY = UIScreen.main.bounds.size.height - ip7(10) - ip7(54)
         redView.frame = CGRect(x: viewX, y: viewY, width: ip7(10), height: ip7(10))
         redView.backgroundColor = .red
         redView.kfb_makeRound()
+//        redView.isHidden = true
+//        self.window?.rootViewController?.view.addSubview(redView)
+//        self.window?.rootViewController?.view.bringSubview(toFront: redView)
+    }
+    
+    func hideRed() {
+//        KFBLog(message: "dele取消展示")
+//        redView.isHidden  = true
+        redView.removeFromSuperview()
+    }
+    
+    func showRed() {
         self.window?.rootViewController?.view.addSubview(redView)
         self.window?.rootViewController?.view.bringSubview(toFront: redView)
+
+//        KFBLog(message: "dele展示")
+//        redView.isHidden  = false
     }
     
     func showLogin()  {

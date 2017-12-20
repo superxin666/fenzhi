@@ -39,6 +39,7 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             weakSelf?.dataModel = data as! ProfileMineModel
             if weakSelf?.dataModel.errno == 0 {
                 weakSelf?.headViewSetData()
+                self.getNoRedMessage()
                 self.mainTabelView.reloadData()
             }
         }) { (erro) in
@@ -50,8 +51,25 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         topBackView.setUpData(model: dataModel.data)
 
     }
-
     
+    func getNoRedMessage() {
+        //去除tab红点
+//        let appdel = AppDelegate()
+
+        if !(self.dataModel.data.notify.like == 1) && !(self.dataModel.data.notify.comment == 1) && !(self.dataModel.data.notify.zan == 1){
+            KFBLog(message: "不展示")
+
+//            appdel.hideRed()
+            self.tabBarController?.tabBar.hideBadgeOnItemIndex(index: 3)
+            
+        } else {
+            KFBLog(message: "展示")
+//            appdel.showRed()
+            self.tabBarController?.tabBar.showBadgeOnItemIndex(index: 3)
+
+        }
+    }
+
     func creatTopView() {
         topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(382))
         topBackView.creatHeadView(type: .main)

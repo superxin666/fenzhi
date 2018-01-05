@@ -10,9 +10,12 @@ import UIKit
 import QuickLook
 let HEARTCELLID = "HEARTCELL_ID"//
 let TEACHCELLID = "TEACHCELL_ID"//
-class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
+class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource,QLPreviewControllerDelegate,UISearchBarDelegate {
     let topBackView : UIView = UIView()//头部view背景图
     let mainTabelView : UITableView = UITableView()
+    
+    var searchBar : UISearchBar!
+    
 
     var contentOffsetY:CGFloat = 0.0
     var oldContentOffsetY:CGFloat = 0.0
@@ -27,7 +30,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     
     let quickLookController = QLPreviewController()
     var qucikModel = GetmyfeedlistModel_data_fenxList()
-     var openFileUrl :String!
+    var openFileUrl :String!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,11 +44,13 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 //        self.title = "首页"
         //设置红点
         self.view.backgroundColor = backView_COLOUR
-        self.navigation_title_fontsize(name: "首页", fontsize: 27)
+//        self.navigation_title_fontsize(name: "首页", fontsize: 27)
+        self.creatSearchBar()
         self.creatTopView()
         self.creatTableView()
 //        self.getData()
     }
+
     
     //MARK:数据请求
     func loadMoreData() {
@@ -132,13 +137,22 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
             }
         }
         
-        if model.catalog.characters.count > 0 {
+        if model.catalog.count > 0 {
             headViewHeight = headViewHeight + ip7(35) + ip7(21)
         }
         model.cellHeight = headViewHeight
     }
     
     //MARK:头部view
+    func creatSearchBar() {
+        searchBar = UISearchBar(frame: CGRect(x: ip7(20), y: 0, width: KSCREEN_WIDTH - ip7(40), height: 64))
+        searchBar.delegate = self
+        searchBar.showsCancelButton = false
+        searchBar.placeholder = "搜索 用户/文章/教材"
+        searchBar.barStyle = .default
+        self.navigationItem.titleView = searchBar
+    }
+    
     func creatTopView() {
         let viewHeight  = ip7(66)
         topBackView.frame = CGRect(x: 0, y: LNAVIGATION_HEIGHT, width: KSCREEN_WIDTH, height: viewHeight + ip7(20))
@@ -222,6 +236,34 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         self.view.addSubview(mainTabelView)
 
     }
+     // MARK: searchBarDelegate 代理
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        KFBLog(message: "开始所搜")
+        searchBar.resignFirstResponder()
+        searchBar.showsCancelButton = false
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        KFBLog(message: "结束输入文字")
+        KFBLog(message: searchBar.text)
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        KFBLog(message: "搜索取消")
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        KFBLog(message: "开始输入文字")
+        for view in searchBar.subviews {
+            if view .isKind(of: UIButton.self){
+                let btn : UIButton = view as! UIButton
+                btn.setTitle("取消", for: .normal)
+                btn.tintColor = .red
+            }
+        }
+        searchBar.showsCancelButton = true
+ 
+    }
+    
     // MARK: tableView 代理
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

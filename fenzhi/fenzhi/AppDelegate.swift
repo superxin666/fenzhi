@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 self.showMain()
                 self.makeRedView()
             } else {
-                
+
                 //显示提交信息页面
                 self.showInfo()
             }

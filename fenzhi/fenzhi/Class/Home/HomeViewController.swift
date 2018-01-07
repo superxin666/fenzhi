@@ -253,14 +253,16 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         KFBLog(message: "开始输入文字")
-        for view in searchBar.subviews {
-            if view .isKind(of: UIButton.self){
+        searchBar.showsCancelButton = true
+        for view in searchBar.subviews[0].subviews {
+            KFBLog(message: view.self)
+            KFBLog(message: "222")
+            if view is UIButton {
+                KFBLog(message: "1111")
                 let btn : UIButton = view as! UIButton
                 btn.setTitle("取消", for: .normal)
-                btn.tintColor = .red
             }
         }
-        searchBar.showsCancelButton = true
  
     }
     

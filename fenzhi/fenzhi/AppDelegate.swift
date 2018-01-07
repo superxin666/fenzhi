@@ -50,14 +50,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 self.showMain()
                 self.makeRedView()
             } else {
-
                 //显示提交信息页面
                 self.showInfo()
             }
             
         } else {
             //显示登录注册页面
-            self.showLogin()
+//            self.showLogin()
+            //游客模式
+            self.showMain()
         }
     }
     

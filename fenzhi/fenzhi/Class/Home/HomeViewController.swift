@@ -45,8 +45,9 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         //设置红点
         self.view.backgroundColor = backView_COLOUR
 //        self.navigation_title_fontsize(name: "首页", fontsize: 27)
-        self.creatSearchBar()
+
         self.creatTopView()
+        self.creatSearchBar()
         self.creatTableView()
 //        self.getData()
     }
@@ -145,17 +146,24 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     
     //MARK:头部view
     func creatSearchBar() {
-        searchBar = UISearchBar(frame: CGRect(x: ip7(20), y: 0, width: KSCREEN_WIDTH - ip7(40), height: 64))
-        searchBar.delegate = self
-        searchBar.showsCancelButton = false
-        searchBar.placeholder = "搜索 用户/文章/教材"
-        searchBar.barStyle = .default
-        self.navigationItem.titleView = searchBar
+//        searchBar = UISearchBar(frame: CGRect(x: ip7(20), y: 0, width: KSCREEN_WIDTH - ip7(40), height: ip7(44)))
+//        searchBar.delegate = self
+//        searchBar.showsCancelButton = false
+//        searchBar.placeholder = "搜索 用户/文章/教材"
+//        searchBar.barStyle = .default
+        let btn = UIButton(frame: CGRect(x: ip7(25), y: 12, width: KSCREEN_WIDTH - ip7(50), height: 20))
+        btn.setTitle("搜索内容、资料、用户", for: .normal)
+        btn.backgroundColor = .white
+        btn.kfb_makeRadius(radius: 4)
+        btn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
+        btn.titleLabel?.font = fzFont_Medium(ip7(21))
+        btn.addTarget(self, action: #selector(searchBtnClick), for: .touchUpInside)
+        self.navigationItem.titleView = btn
     }
     
     func creatTopView() {
         let viewHeight  = ip7(66)
-        topBackView.frame = CGRect(x: 0, y: LNAVIGATION_HEIGHT, width: KSCREEN_WIDTH, height: viewHeight + ip7(20))
+        topBackView.frame = CGRect(x: 0, y: LNAVIGATION_HEIGHT, width: KSCREEN_WIDTH, height: viewHeight)
         topBackView.backgroundColor = .white
         self.view.addSubview(topBackView)
 
@@ -214,6 +222,13 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         self.present(nv, animated: true) {
 
         }
+
+    }
+
+    func searchBtnClick() {
+        let vc = SearchViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
 
     }
 

@@ -56,9 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             
         } else {
             //显示登录注册页面
-//            self.showLogin()
+            self.showLogin()
             //游客模式
-            self.showMain()
+//            self.showMain()
         }
     }
     

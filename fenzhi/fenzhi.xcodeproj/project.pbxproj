@@ -28,6 +28,7 @@
 		2119946B1F7745EF00FB8016 /* RecordHeartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2119946A1F7745EF00FB8016 /* RecordHeartTableViewCell.swift */; };
 		212319581F9F45ED00014CB0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212319571F9F45ED00014CB0 /* AboutViewController.swift */; };
 		2124A0651F983AAD008BC63F /* PayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2124A0641F983AAD008BC63F /* PayView.swift */; };
+		2129B7162004D0800033FAE4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2129B7152004D0800033FAE4 /* SearchViewController.swift */; };
 		212D284E1F7359A1004DD669 /* GetcommentlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D284D1F7359A1004DD669 /* GetcommentlistModel.swift */; };
 		212D28501F7359BD004DD669 /* commentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D284F1F7359BC004DD669 /* commentTableViewCell.swift */; };
 		213015E11F768D060029EFD1 /* GetmyfeedlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213015E01F768D060029EFD1 /* GetmyfeedlistModel.swift */; };
@@ -153,6 +154,7 @@
 		2119946A1F7745EF00FB8016 /* RecordHeartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeartTableViewCell.swift; sourceTree = "<group>"; };
 		212319571F9F45ED00014CB0 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		2124A0641F983AAD008BC63F /* PayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayView.swift; sourceTree = "<group>"; };
+		2129B7152004D0800033FAE4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		212D284D1F7359A1004DD669 /* GetcommentlistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetcommentlistModel.swift; sourceTree = "<group>"; };
 		212D284F1F7359BC004DD669 /* commentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentTableViewCell.swift; sourceTree = "<group>"; };
 		213015E01F768D060029EFD1 /* GetmyfeedlistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetmyfeedlistModel.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				21570C901F653EAA003C7D38 /* Model */,
 				21F8421F1F6267DC00A54D68 /* Cells */,
 				21062AD91F6039570003C7C4 /* HomeViewController.swift */,
+				2129B7152004D0800033FAE4 /* SearchViewController.swift */,
 				214AF58D1F6187F400CA786A /* TeachReleaseViewController.swift */,
 				214AF58F1F61881900CA786A /* HeartReleaseViewController.swift */,
 				215C4EE71FB1895F00ABFEF0 /* SelectImageViewController.swift */,
@@ -922,6 +925,7 @@
 				21066EE31FB40546001DA2F3 /* HGImageCompleteButton.swift in Sources */,
 				21F1C5981F68E002002FC28A /* UserInfoModel.swift in Sources */,
 				2124A0651F983AAD008BC63F /* PayView.swift in Sources */,
+				2129B7162004D0800033FAE4 /* SearchViewController.swift in Sources */,
 				210801821FCF9F61008FF362 /* UpLoadFile.m in Sources */,
 				21F7427F1F9D87190016E399 /* UMUntil.swift in Sources */,
 				2112E91E1F6C4A3E0066CF5B /* GetschoollistModel.swift in Sources */,

@@ -86,6 +86,7 @@
 		21CB58C71F726D7500F41448 /* TeachDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */; };
 		21CB58C91F726DB100F41448 /* HomeDataMangerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58C81F726DB100F41448 /* HomeDataMangerController.swift */; };
 		21CB58CC1F726E7A00F41448 /* ShezhiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58CB1F726E7A00F41448 /* ShezhiViewController.swift */; };
+		21ECD8F2200B89AE007632D2 /* InfoVisitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ECD8F1200B89AE007632D2 /* InfoVisitorViewController.swift */; };
 		21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AD1F6A54DE00806B62 /* ResModel.swift */; };
 		21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */; };
 		21EE65B31F6A7C1900806B62 /* UpIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65B21F6A7C1900806B62 /* UpIconTableViewCell.swift */; };
@@ -220,6 +221,7 @@
 		21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachDetailViewController.swift; sourceTree = "<group>"; };
 		21CB58C81F726DB100F41448 /* HomeDataMangerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataMangerController.swift; sourceTree = "<group>"; };
 		21CB58CB1F726E7A00F41448 /* ShezhiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShezhiViewController.swift; sourceTree = "<group>"; };
+		21ECD8F1200B89AE007632D2 /* InfoVisitorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVisitorViewController.swift; sourceTree = "<group>"; };
 		21EE65AD1F6A54DE00806B62 /* ResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModel.swift; sourceTree = "<group>"; };
 		21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModelMaper.swift; sourceTree = "<group>"; };
 		21EE65B21F6A7C1900806B62 /* UpIconTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpIconTableViewCell.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				215592301F66D2800091A822 /* LoginViewController.swift */,
 				21F1C59B1F6906B8002FC28A /* RegisterViewController.swift */,
 				21F1C59F1F6924EB002FC28A /* InfoViewController.swift */,
+				21ECD8F1200B89AE007632D2 /* InfoVisitorViewController.swift */,
 				215043601F6AADBD009546D2 /* ForgetViewController.swift */,
 			);
 			path = Log;
@@ -1006,6 +1009,7 @@
 				215043651F6AD179009546D2 /* pdfViewController.swift in Sources */,
 				21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */,
 				214DC5131F7E8A46002CD41F /* DianzanTableViewCell.swift in Sources */,
+				21ECD8F2200B89AE007632D2 /* InfoVisitorViewController.swift in Sources */,
 				2158222B1F6C3E80002BC6E6 /* CommonDataMangerViewController.swift in Sources */,
 				213015E11F768D060029EFD1 /* GetmyfeedlistModel.swift in Sources */,
 				21062AE11F603EA90003C7C4 /* pch.swift in Sources */,

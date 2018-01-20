@@ -13,7 +13,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     var searchBar : UISearchBar!
     var iteamBarBackView : UIView = UIView()
     var lastBtn : UIButton!
-    var page = 1
+    var page = 0
     var queryStr = ""
     
     
@@ -23,7 +23,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     let dataVC = HomeDataMangerController()
     var dataModel : SearchModel = SearchModel()
     /// 动态 资料
-    var dataArr : [GetmyfeedlistModel_data_fenxList] = []
+    var dataArr : [Any] = []
     /// 用户 数据
     var userDataArr : [UserInfoModel] = []
     
@@ -39,7 +39,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         self.navigationItem.hidesBackButton = true
         self.creatSearchBar()
         self.iteamBar()
-        
+        self.creatTableView()
 
     }
 
@@ -86,7 +86,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             stBtn.setTitleColor(blue_COLOUR, for: .selected)
             stBtn.titleLabel?.font = fzFont_Medium(ip7(21))
             stBtn.backgroundColor = .clear
-            stBtn.addTarget(self, action:#selector(self.btnClick(sender:)), for: .touchUpInside)
+            stBtn.addTarget(self, action:#selector(SearchViewController.btnClick(sender:)), for: .touchUpInside)
         
             iteamBarBackView.addSubview(stBtn)
             
@@ -96,20 +96,106 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         lineView.backgroundColor = lineView_thin_COLOUR
         iteamBarBackView .addSubview(lineView);
     }
+    func creatTableView() {
+        mainTabelView.frame = CGRect(x: 0, y: iteamBarBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - iteamBarBackView.frame.maxY)
+        mainTabelView.backgroundColor = UIColor.clear
+        mainTabelView.delegate = self;
+        mainTabelView.dataSource = self;
+        mainTabelView.tableFooterView = UIView()
+        mainTabelView.separatorStyle = .none
+        mainTabelView.showsVerticalScrollIndicator = false
+        mainTabelView.showsHorizontalScrollIndicator = false
+        footer.setRefreshingTarget(self, refreshingAction: #selector(SearchViewController.loadMoreData))
+        //        header.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.freshData))
+        mainTabelView.mj_footer = footer
+        //        mainTabelView.mj_header = header
+        mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
+        mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
+        self.view.addSubview(mainTabelView)
+
+    }
+    func getSize(model : GetmyfeedlistModel_data_fenxList) {
+        var headViewHeight = ip7(245)
+        //文字
+        let str = model.content
+        let txtW = KSCREEN_WIDTH - ip7(50)
+        var txtH :CGFloat = str.getLabHeight(font: fzFont_Thin(ip7(21)), LabelWidth: txtW)
+        if txtH > ip7(21) * 4 {
+            txtH = ip7(21) * 4
+        }
+
+        headViewHeight = headViewHeight + txtH
+        if model.type == 0 {
+            //教学
+            if model.coursewares.count > 0 {
+                headViewHeight = headViewHeight +  (ip7(80) * CGFloat(model.coursewares.count))
+            }
+        } else {
+            //心得
+            if model.images.count > 0 {
+                let imageWidth = (KSCREEN_WIDTH - ip7(60) - ip7(20))/2
+                let imageHeight = imageWidth * 355/428
+                let num = CGFloat((model.images.count/2)) + CGFloat(model.images.count%2)
+                headViewHeight = headViewHeight +  ((imageHeight + ip7(20)) * num)
+            }
+        }
+
+        if model.catalog.count > 0 {
+            headViewHeight = headViewHeight + ip7(35) + ip7(21)
+        }
+        model.cellHeight = headViewHeight
+    }
     // MARK: net
     func loadMoreData() {
+        if !(queryStr.count>0) {
+
+            self.SVshowErro(infoStr: "请输入搜索内容")
+            return
+        }
         page = page + 1
         self.getData()
     }
     func getData() {
         weak var weakSelf = self
         self.SVshowLoad()
+        self.noDataView.removeFromSuperview()
+        self.mainTabelView.isHidden = false
         dataVC.searchlist(type: searchType, query: queryStr, pageNum: page, count: 10, completion: { (data) in
-            
+            self.SVdismiss()
+            weakSelf?.dataModel = data as! SearchModel
+            if weakSelf?.dataModel.errno == 0 {
+                if (weakSelf?.dataModel.data.fenx.list.count)! > 0{
+                    if (weakSelf?.searchType == 0) || (weakSelf?.searchType == 1){
+                        for model in (weakSelf?.dataModel.data.fenx.list)!{
+                            KFBLog(message: model.content)
+                            weakSelf?.getSize(model: model)
+                        }
+                        KFBLog(message: "数组")
+                        weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.fenx.list)!
+                    } else {
+                        weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.user.list)!
+                    }
+
+                    weakSelf?.mainTabelView.reloadData()
+                } else {
+                    if weakSelf?.dataArr.count == 0 {
+                        weakSelf?.mainTabelView.isHidden = true
+                        weakSelf?.view.addSubview(self.showNoData())
+                    } else {
+                        weakSelf?.SVshowErro(infoStr: "没有数据了")
+                    }
+                }
+            } else {
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
+            }
+            weakSelf?.mainTabelView.mj_footer.endRefreshing()
         }) { (erro) in
-            
+            weakSelf?.SVshowErro(infoStr: "网络请求失败")
+            //            weakSelf?.mainTabelView.mj_header.endRefreshing()
+            weakSelf?.mainTabelView.mj_footer.endRefreshing()
         }
     }
+
     // MARK: tableView 代理
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -123,7 +209,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         if searchType == 0 ||  searchType == 1{
             //动态
             if indexPath.row < self.dataArr.count {
-                let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
+                let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
                 
                 if model.type == 0 {
                     //教学
@@ -237,7 +323,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < self.dataArr.count {
-            let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
+            let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
             let vc = TeachDetailViewController()
             vc.fenxId = model.id
             vc.hidesBottomBarWhenPushed = true
@@ -249,7 +335,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        let model = self.dataArr[indexPath.row]
+        let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
         return model.cellHeight;
     }
     
@@ -258,6 +344,8 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         KFBLog(message: "开始所搜")
         searchBar.resignFirstResponder()
+        queryStr = searchBar.text!
+        self.loadMoreData()
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         KFBLog(message: "结束输入文字")
@@ -304,14 +392,60 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             //"内容"
             KFBLog(message: "内容")
             searchType = 0
+            page = 0
+            if self.dataArr.count > 0{
+                self.dataArr.removeAll()
+                self.mainTabelView.reloadData()
+            } else {
+
+            }
+            queryStr = searchBar.text!
+            if queryStr.count > 0{
+                self.loadMoreData()
+            } else {
+
+            }
+
+
+
         } else if sender.tag == 1{
             //"资料"
             KFBLog(message: "资料")
             searchType = 1
+            page = 0
+            if self.dataArr.count > 0{
+                self.dataArr.removeAll()
+                self.mainTabelView.reloadData()
+            } else {
+
+            }
+            queryStr = searchBar.text!
+
+            if queryStr.count > 0{
+                self.loadMoreData()
+            } else {
+
+            }
+
         } else {
             //"用户
-             KFBLog(message: "用户")
+            KFBLog(message: "用户")
             searchType = 2
+            page = 0
+            if self.dataArr.count > 0{
+                self.dataArr.removeAll()
+                self.mainTabelView.reloadData()
+            } else {
+
+            }
+
+            queryStr = searchBar.text!
+            if queryStr.count > 0{
+                self.loadMoreData()
+            } else {
+
+            }
+
         }
         lastBtn = sender
     }

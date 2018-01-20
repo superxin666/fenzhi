@@ -55,12 +55,12 @@ class HomeDataMangerController: FZRequestViewController {
     func searchlist(type:Int ,query:String ,pageNum : Int,count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
         let urlStr = BASER_API + search_api+"type=\(type)"+"&query="+query+"&pageNum=" + "\(pageNum)"+"&count="+"\(count)"+last_pra+token_pra
-        var model:GetmyfeedlistModel = GetmyfeedlistModel()
+        var model:SearchModel = SearchModel()
         KFBLog(message: urlStr)
         Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
             print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
             if let json = returnResult.result.value {
-                model = Mapper<GetmyfeedlistModel>().map(JSON: json as! [String : Any])!
+                model = Mapper<SearchModel>().map(JSON: json as! [String : Any])!
                 completion(model)
             } else {
                 failure("请求失败")

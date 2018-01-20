@@ -40,6 +40,7 @@ class NoWifiView: UIView {
     }
 
     func setUpNoDta() {
+        self.backgroundColor = .white
         let iconImageView:UIImageView = UIImageView(frame: CGRect(x: ip7(160), y: ip7(165), width: KSCREEN_WIDTH - ip7(320), height: KSCREEN_WIDTH - ip7(320)))
         iconImageView.image = #imageLiteral(resourceName: "icon_null")
         self.addSubview(iconImageView)

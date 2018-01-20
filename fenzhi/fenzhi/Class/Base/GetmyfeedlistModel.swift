@@ -87,7 +87,8 @@ class GetmyfeedlistModel_data: Mappable {
     var count: Int = 1
     var fenxList : [GetmyfeedlistModel_data_fenxList] = []
 
-
+    /// 搜索时候的模型
+    var list : [GetmyfeedlistModel_data_fenxList] = []
     init() {}
     required init?(map: Map){
         mapping(map: map)
@@ -99,7 +100,7 @@ class GetmyfeedlistModel_data: Mappable {
         pageNum <- map["pageNum"]
         count <- map["count"]
         fenxList <- map["fenxList"]
-
+        list <- map["list"]
     }
 }
 

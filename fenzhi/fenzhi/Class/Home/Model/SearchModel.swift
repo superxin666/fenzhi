@@ -53,7 +53,7 @@ class SearchModel_data_user: Mappable {
 
 
 class SearchModel_data: Mappable {
-    var fenx: [GetmyfeedlistModel_data] = []
+    var fenx: GetmyfeedlistModel_data = GetmyfeedlistModel_data()
     var user : SearchModel_data_user = SearchModel_data_user()
     
     

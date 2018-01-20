@@ -7,11 +7,29 @@
 //  搜索页面
 
 import UIKit
-
-class SearchViewController: BaseViewController,UISearchBarDelegate {
+import QuickLook
+class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
+    let mainTabelView : UITableView = UITableView()
     var searchBar : UISearchBar!
     var iteamBarBackView : UIView = UIView()
     var lastBtn : UIButton!
+    var page = 1
+    var queryStr = ""
+    
+    
+    /// 0 是内容 1是资料 2是用户
+    var searchType = 0
+    
+    let dataVC = HomeDataMangerController()
+    var dataModel : SearchModel = SearchModel()
+    /// 动态 资料
+    var dataArr : [GetmyfeedlistModel_data_fenxList] = []
+    /// 用户 数据
+    var userDataArr : [UserInfoModel] = []
+    
+    let quickLookController = QLPreviewController()
+    var qucikModel = GetmyfeedlistModel_data_fenxList()
+    var openFileUrl :String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +96,164 @@ class SearchViewController: BaseViewController,UISearchBarDelegate {
         lineView.backgroundColor = lineView_thin_COLOUR
         iteamBarBackView .addSubview(lineView);
     }
+    // MARK: net
+    func loadMoreData() {
+        page = page + 1
+        self.getData()
+    }
+    func getData() {
+        weak var weakSelf = self
+        self.SVshowLoad()
+        dataVC.searchlist(type: searchType, query: queryStr, pageNum: page, count: 10, completion: { (data) in
+            
+        }) { (erro) in
+            
+        }
+    }
+    // MARK: tableView 代理
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.dataArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if searchType == 0 ||  searchType == 1{
+            //动态
+            if indexPath.row < self.dataArr.count {
+                let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
+                
+                if model.type == 0 {
+                    //教学
+                    //                var cell : TeachTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID, for: indexPath) as! TeachTableViewCell
+                    //
+                    //                if (cell == nil)  {
+                    //                    cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
+                    //                }
+                    
+                    let cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
+                    cell.backgroundColor = .clear
+                    cell.selectionStyle = .none
+                    cell.setUpUIWithModelAndType(model: model)
+                    weak var weakSelf = self
+                    cell.iconImageViewBlock = {(click_model,indexFile) in
+                        let vc = UserInfoViewController()
+                        vc.userId  = click_model.userId
+                        vc.hidesBottomBarWhenPushed = true
+                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    cell.detailBlock = {(click_model,indexFile )in
+                        let vc = TeachDetailViewController()
+                        vc.fenxId = click_model.id
+                        vc.hidesBottomBarWhenPushed = true
+                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                        
+                    }
+                    cell.zanshangBlock = {(click_model,indexFile) in
+                        let vc = TeachDetailViewController()
+                        vc.fenxId = click_model.id
+                        vc.isshowzanshang = true
+                        vc.hidesBottomBarWhenPushed = true
+                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    cell.fileBlock = {click_model,indexFile in
+                        let urlStr : String = click_model.coursewares[indexFile].file
+                        let name : String = click_model.coursewares[indexFile].name.removingPercentEncoding!
+                        
+                        weakSelf?.dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
+                            
+                            weakSelf?.openFileUrl = data as! String
+                            if  (self.openFileUrl.count > 0) {
+                                KFBLog(message: "下载成功"+self.openFileUrl)
+                                
+                                weakSelf?.quickLookController.dataSource = self
+                                weakSelf?.quickLookController.delegate = self
+                                weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
+                                weakSelf?.quickLookController.reloadData()
+                                weakSelf?.quickLookController.navigationController?.navigationItem.leftBarButtonItem = self.getBarIteam()
+                                //                                weakSelf?.quickLookController.navigationItem.leftBarButtonItem = self.getBarIteam()
+                                weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
+                            } else {
+                                KFBLog(message: "加载失败")
+                                weakSelf?.SVshowErro(infoStr: "加载失败")
+                            }
+                        }, failure: { (erro) in
+                            
+                        })
+                        
+                    }
+                    return cell;
+                    
+                } else {
+                    //心得
+                    //                var cell : HeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID, for: indexPath) as! HeartTableViewCell
+                    //
+                    //                if (cell == nil)  {
+                    //                    cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
+                    //                }
+                    
+                    let cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
+                    cell.backgroundColor = .clear
+                    cell.selectionStyle = .none
+                    cell.setUpUIWithModel_cellType(model: model)
+                    weak var weakSelf = self
+                    cell.IconImageViewBlock = {click_model in
+                        let vc = UserInfoViewController()
+                        vc.userId  = click_model.userId
+                        vc.hidesBottomBarWhenPushed = true
+                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                        
+                    }
+                    cell.detailBlock = {click_model in
+                        let vc = TeachDetailViewController()
+                        vc.fenxId = click_model.id
+                        vc.hidesBottomBarWhenPushed = true
+                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                        
+                    }
+                    cell.zanshangBlock = {click_model in
+                        let vc = TeachDetailViewController()
+                        vc.fenxId = click_model.id
+                        vc.isshowzanshang = true
+                        vc.hidesBottomBarWhenPushed = true
+                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    return cell;
+                    
+                    
+                }
+            } else {
+                return UITableViewCell()
+            }
+        } else {
+            //用户
+            return UITableViewCell()
+        }
+       
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row < self.dataArr.count {
+            let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
+            let vc = TeachDetailViewController()
+            vc.fenxId = model.id
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
+        let model = self.dataArr[indexPath.row]
+        return model.cellHeight;
+    }
+    
+    
     // MARK: searchBarDelegate 代理
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         KFBLog(message: "开始所搜")
@@ -106,7 +282,15 @@ class SearchViewController: BaseViewController,UISearchBarDelegate {
 //        }
 
     }
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
     
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        let url : NSURL =  NSURL(fileURLWithPath: openFileUrl)
+        KFBLog(message: url)
+        return url
+    }
     // MARK: - event respoonse
     func btnClick(sender:UIButton) {
         if sender.isSelected {
@@ -119,12 +303,15 @@ class SearchViewController: BaseViewController,UISearchBarDelegate {
         if sender.tag == 0 {
             //"内容"
             KFBLog(message: "内容")
+            searchType = 0
         } else if sender.tag == 1{
             //"资料"
             KFBLog(message: "资料")
+            searchType = 1
         } else {
             //"用户
              KFBLog(message: "用户")
+            searchType = 2
         }
         lastBtn = sender
     }

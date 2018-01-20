@@ -152,7 +152,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 //        searchBar.placeholder = "搜索 用户/文章/教材"
 //        searchBar.barStyle = .default
         let btn = UIButton(frame: CGRect(x: ip7(25), y: 12, width: KSCREEN_WIDTH - ip7(50), height: 20))
-        btn.setTitle("搜索内容、资料、用户", for: .normal)
+        btn.setTitle("搜索 内容 资料 用户", for: .normal)
         btn.backgroundColor = .white
         btn.kfb_makeRadius(radius: 4)
         btn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)

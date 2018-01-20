@@ -11,6 +11,10 @@ import ObjectMapper
 
 class UserInfoModel: Mappable {
     var avatar: String = ""
+    
+    /// 0 是 老师 1 是游客 
+    var type :Int = 0
+    
     var book: Int = 0
     var city: Int = 0
     var createTime: String = ""
@@ -47,6 +51,7 @@ class UserInfoModel: Mappable {
     // Mappable
     func mapping(map: Map) {
         avatar <- map["avatar"]
+        type <- map["type"]
         book <- map["book"]
         city <- map["city"]
         createTime <- map["createTime"]

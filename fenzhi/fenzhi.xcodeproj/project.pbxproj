@@ -86,6 +86,7 @@
 		21CB58C71F726D7500F41448 /* TeachDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */; };
 		21CB58C91F726DB100F41448 /* HomeDataMangerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58C81F726DB100F41448 /* HomeDataMangerController.swift */; };
 		21CB58CC1F726E7A00F41448 /* ShezhiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CB58CB1F726E7A00F41448 /* ShezhiViewController.swift */; };
+		21EA504F2012F8780090CF98 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA504E2012F8780090CF98 /* SearchModel.swift */; };
 		21ECD8F2200B89AE007632D2 /* InfoVisitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ECD8F1200B89AE007632D2 /* InfoVisitorViewController.swift */; };
 		21EE65AE1F6A54DE00806B62 /* ResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AD1F6A54DE00806B62 /* ResModel.swift */; };
 		21EE65B01F6A5B5800806B62 /* ResModelMaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */; };
@@ -221,6 +222,7 @@
 		21CB58C61F726D7500F41448 /* TeachDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachDetailViewController.swift; sourceTree = "<group>"; };
 		21CB58C81F726DB100F41448 /* HomeDataMangerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataMangerController.swift; sourceTree = "<group>"; };
 		21CB58CB1F726E7A00F41448 /* ShezhiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShezhiViewController.swift; sourceTree = "<group>"; };
+		21EA504E2012F8780090CF98 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		21ECD8F1200B89AE007632D2 /* InfoVisitorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVisitorViewController.swift; sourceTree = "<group>"; };
 		21EE65AD1F6A54DE00806B62 /* ResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModel.swift; sourceTree = "<group>"; };
 		21EE65AF1F6A5B5800806B62 /* ResModelMaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResModelMaper.swift; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 				212D284D1F7359A1004DD669 /* GetcommentlistModel.swift */,
 				21F5563A1F72726B0017C701 /* TeachDetailModel.swift */,
 				21066EBE1FB3FA2D001DA2F3 /* ImageModel.swift */,
+				21EA504E2012F8780090CF98 /* SearchModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -971,6 +974,7 @@
 				21B084F31F6D4BCA00D9F3A0 /* GetzanlistModel.swift in Sources */,
 				21FE2F0A1F949B6900DCB6A2 /* DingweiViewControlleroc.m in Sources */,
 				212D28501F7359BD004DD669 /* commentTableViewCell.swift in Sources */,
+				21EA504F2012F8780090CF98 /* SearchModel.swift in Sources */,
 				214F91161FEA13BD00D44165 /* UITabBar+redView.swift in Sources */,
 				2162A07F1F7DE3BB00915F4C /* UpFileDataModel.swift in Sources */,
 				21062ADA1F6039570003C7C4 /* HomeViewController.swift in Sources */,

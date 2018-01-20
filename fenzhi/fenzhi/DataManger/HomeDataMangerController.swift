@@ -43,7 +43,31 @@ class HomeDataMangerController: FZRequestViewController {
     }
     
     
-    
+    /// 搜索
+    ///
+    /// - Parameters:
+    ///   - type:     0-搜索分享内容 1-搜索课时内容 2-搜索用户
+    ///   - query: 搜索词
+    ///   - pageNum: <#pageNum description#>
+    ///   - count: <#count description#>
+    ///   - completion: <#completion description#>
+    ///   - failure: <#failure description#>
+    func searchlist(type:Int ,query:String ,pageNum : Int,count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+        //
+        let urlStr = BASER_API + search_api+"type=\(type)"+"&query="+query+"&pageNum=" + "\(pageNum)"+"&count="+"\(count)"+last_pra+token_pra
+        var model:GetmyfeedlistModel = GetmyfeedlistModel()
+        KFBLog(message: urlStr)
+        Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in
+            print("secondMethod --> get 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<GetmyfeedlistModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+            
+        }
+    }
     
 
     /// 分享详情接口

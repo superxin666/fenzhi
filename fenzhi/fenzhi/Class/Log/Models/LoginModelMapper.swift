@@ -12,6 +12,7 @@ let TOKENUDSTR = "LOGININTOKEN"
 let LOGINUDSTR = "LOGININLOGINID"
 let ISLOGINSTR = "ISHAVELOGIN"
 let ISHAVEINFOSTR = "ISHAVEINFO"
+let USERTYPE = "USERTYPE"
 class LoginModelMapper: Mappable {
     var errno: Int = 100
     var errmsg : String = ""
@@ -29,11 +30,12 @@ class LoginModelMapper: Mappable {
     }
     
     
-    class func setLoginIdAndTokenInUD(loginUserId : String , token : String, ishaveinfo : String, complate:(_ data : Any) ->() ){
+    class func setLoginIdAndTokenInUD(loginUserId : String , token : String, ishaveinfo : String, userType : String, complate:(_ data : Any) ->() ){
         UserDefaults.standard.set("1", forKey: ISLOGINSTR)
         UserDefaults.standard.set(token, forKey: TOKENUDSTR)
         UserDefaults.standard.set(loginUserId, forKey: LOGINUDSTR)
         UserDefaults.standard.set(ishaveinfo, forKey: ISHAVEINFOSTR)
+         UserDefaults.standard.set(userType, forKey: USERTYPE)
         let ok = UserDefaults.standard.synchronize()
         if ok {
             print("存储成功")
@@ -49,7 +51,7 @@ class LoginModelMapper: Mappable {
     /// 返回当前登录用户的 loginid tokenid
     ///
     /// - returns: 返回元组loginid
-    class func getLoginIdAndTokenInUD() -> (loginId : String, tokenStr:String,isHaveLogin : String,isHaveInfo : String) {
+    class func getLoginIdAndTokenInUD() -> (loginId : String, tokenStr:String,isHaveLogin : String,isHaveInfo : String,userType : String) {
         var isloginStr :String? = UserDefaults.standard.value(forKey: ISLOGINSTR) as! String?
         if isloginStr == nil {
             isloginStr = "0"
@@ -66,7 +68,11 @@ class LoginModelMapper: Mappable {
         if ishaveinfoStr == nil {
             ishaveinfoStr = ""
         }
-        return (loginStr!,tokenStr!,isloginStr!,ishaveinfoStr!)
+        var userType :String? = UserDefaults.standard.value(forKey: USERTYPE) as! String?
+        if userType == nil {
+            userType = ""
+        }
+        return (loginStr!,tokenStr!,isloginStr!,ishaveinfoStr!,userType!)
     }
 
 
@@ -97,8 +103,9 @@ class LoginModelMapper: Mappable {
     }
     
     
-    class func setIsHaveInfo( complate:(_ data : Any) ->() ){
+    class func setIsHaveInfo(type:String, complate:(_ data : Any) ->() ){
         UserDefaults.standard.set("1", forKey: ISHAVEINFOSTR)
+        UserDefaults.standard.set(type, forKey: USERTYPE)
         let ok = UserDefaults.standard.synchronize()
         if ok {
             print("存储成功")
@@ -109,6 +116,5 @@ class LoginModelMapper: Mappable {
             complate("0")
         }
     }
-    
-    
+
 }

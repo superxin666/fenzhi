@@ -219,7 +219,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
                     ishaveInfo = "1"
                 }
                 KFBLog(message:  (weakSelf?.dataModel.data.token)!)
-                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: "\((weakSelf?.dataModel.data.id)!)", token:  (weakSelf?.dataModel.data.token)!, ishaveinfo: ishaveInfo, complate: { (data) in
+                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: "\((weakSelf?.dataModel.data.id)!)", token:  (weakSelf?.dataModel.data.token)!, ishaveinfo: ishaveInfo, userType: "\((weakSelf?.dataModel.data.type)!)", complate: { (data) in
                     let str:String = data as! String
                     if str == "1" {
                         //登陆成功

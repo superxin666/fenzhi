@@ -31,6 +31,8 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     let quickLookController = QLPreviewController()
     var qucikModel = GetmyfeedlistModel_data_fenxList()
     var openFileUrl :String!
+    var userType:String!
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -44,11 +46,17 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 //        self.title = "首页"
         //设置红点
         self.view.backgroundColor = backView_COLOUR
-//        self.navigation_title_fontsize(name: "首页", fontsize: 27)
 
-        self.creatTopView()
         self.creatSearchBar()
-        self.creatTableView()
+        userType = LoginModelMapper.getLoginIdAndTokenInUD().userType
+//        userType = "1"
+        if userType == "0" {
+            self.creatTopView()
+            self.creatTableView()
+        } else {
+            self.creatTableView()
+        }
+
 //        self.getData()
     }
 
@@ -419,33 +427,42 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
     // MARK: scrollView 代理
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        newContentOffsetY = scrollView.contentOffset.y
-        if (newContentOffsetY > oldContentOffsetY && oldContentOffsetY>contentOffsetY) {
-            //up
+        if userType == "0" {
+            newContentOffsetY = scrollView.contentOffset.y
+            if (newContentOffsetY > oldContentOffsetY && oldContentOffsetY>contentOffsetY) {
+                //up
 
-        } else if (newContentOffsetY < oldContentOffsetY && oldContentOffsetY < contentOffsetY){
-            //down
+            } else if (newContentOffsetY < oldContentOffsetY && oldContentOffsetY < contentOffsetY){
+                //down
 
-        } else {
-            //拖拽
-            if scrollView.contentOffset.y - contentOffsetY > 5.0 {
-                //上
-                self.hidTop()
-            } else if contentOffsetY - scrollView.contentOffset.y > 5.0 {
-                //下
-                self.showTop()
+            } else {
+                //拖拽
+                if scrollView.contentOffset.y - contentOffsetY > 5.0 {
+                    //上
+                    self.hidTop()
+                } else if contentOffsetY - scrollView.contentOffset.y > 5.0 {
+                    //下
+                    self.showTop()
+                }
+
             }
-
         }
+
     }
 
 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        contentOffsetY = scrollView.contentOffset.y
+        if userType == "0" {
+            contentOffsetY = scrollView.contentOffset.y
+        }
+
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        oldContentOffsetY = scrollView.contentOffset.y
+        if userType == "0" {
+            oldContentOffsetY = scrollView.contentOffset.y
+        }
+
     }
 
     func showTop() {

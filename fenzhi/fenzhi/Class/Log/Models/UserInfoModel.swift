@@ -42,7 +42,7 @@ class UserInfoModel: Mappable {
     var bookName: String = ""
     var versionName: String = ""
 
-
+   var isFollow:Int = 0
 
     init() {}
     required init?(map: Map){
@@ -74,7 +74,7 @@ class UserInfoModel: Mappable {
         schoolName <- map["schoolName"]
         bookName <- map["bookName"]
         versionName <- map["versionName"]
-
+        isFollow <- map["isFollow"]
     }
 
 }

@@ -361,7 +361,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         if self.searchType == 2 {
-            return ip7(188/2)
+            return SearchTableViewCellH
         } else {
             let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
             return model.cellHeight;
@@ -411,10 +411,10 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     }
     // MARK: - event respoonse
     func btnClick(sender:UIButton) {
-        if sender.isSelected {
-            return
-        }
-        
+//        if sender.isSelected {
+//            return
+//        }
+
         lastBtn.isSelected = false
         sender.isSelected = !sender.isSelected
         

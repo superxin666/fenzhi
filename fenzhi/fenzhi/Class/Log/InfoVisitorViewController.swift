@@ -445,7 +445,7 @@ class InfoVisitorViewController: BaseViewController,UITableViewDelegate,UITableV
             districtNum = currectDisModel.id
         }
         
-        lodginDataVC.supplyinfo(name: nameStr, province: provinceNum!, city: cityNum!, district: districtNum!, school: schoolNum!, grade: gradeNum!, subject: Int(subjectNum)!, book: bookNum!, avatar: avatarStr, completion: { (data) in
+        lodginDataVC.supplyinfo_other(name: nameStr, province: provinceNum!, city: cityNum!, district: districtNum!, avatar: avatarStr, completion: { (data) in
             
             
             weakSelf?.smsdataModel = data as! SmsModel

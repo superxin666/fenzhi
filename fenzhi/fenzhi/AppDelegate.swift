@@ -69,6 +69,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         self.window?.rootViewController = nv
     }
 
+    func showInfo_Visitor() {
+        let vc = InfoVisitorViewController()
+        vc.type = .other
+        let nv :UINavigationController = UINavigationController(rootViewController: vc)
+        self.window?.rootViewController = nv
+    }
+
     func makeRedView() {
         
         let viewX = UIScreen.main.bounds.size.width/3*2 + UIScreen.main.bounds.size.width/3/2 + ip7(10)

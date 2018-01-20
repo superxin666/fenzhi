@@ -82,8 +82,12 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
             weakSelf?.headDataModel = data as! ProfileMineModel
             if weakSelf?.headDataModel.errno == 0 {
                 weakSelf?.headViewSetData()
-                weakSelf?.creatTableView()
-                weakSelf?.getData()
+//weakSelf?.headDataModel.data.type = 1
+                if weakSelf?.headDataModel.data.type == 0 {
+                    weakSelf?.creatTableView()
+                     weakSelf?.getData()
+                }
+
             }
         }) { (erro) in
             

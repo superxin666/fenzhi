@@ -61,7 +61,7 @@ class ProfileMineModel_data: Mappable {
     var fansNum: Int!
     var likeNum: Int!
     var favoriteNum:Int!
-    
+    var type:Int!
     var notify:ProfileMineModel_data_notify = ProfileMineModel_data_notify()
     
     //看其他用户信息时 有以下数据
@@ -108,7 +108,7 @@ class ProfileMineModel_data: Mappable {
         
         myfeedList <- map["myfeedList"]
         isFollow <- map["isFollow"]
-
+        type <- map["type"]
 
     }
 }

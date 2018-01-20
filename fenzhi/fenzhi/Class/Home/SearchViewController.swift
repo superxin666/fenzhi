@@ -8,6 +8,8 @@
 
 import UIKit
 import QuickLook
+let SEARCHUSERCELLID = "SEARCHUSERCELLID_ID"
+
 class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
     let mainTabelView : UITableView = UITableView()
     var searchBar : UISearchBar!
@@ -111,6 +113,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         //        mainTabelView.mj_header = header
         mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
+        mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: SEARCHUSERCELLID)
         self.view.addSubview(mainTabelView)
 
     }
@@ -164,7 +167,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             self.SVdismiss()
             weakSelf?.dataModel = data as! SearchModel
             if weakSelf?.dataModel.errno == 0 {
-                if (weakSelf?.dataModel.data.fenx.list.count)! > 0{
+                if (weakSelf?.dataModel.data.fenx.list.count)! > 0 || (weakSelf?.dataModel.data.user.list.count)! > 0{
                     if (weakSelf?.searchType == 0) || (weakSelf?.searchType == 1){
                         for model in (weakSelf?.dataModel.data.fenx.list)!{
                             KFBLog(message: model.content)
@@ -315,28 +318,55 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             }
         } else {
             //用户
-            return UITableViewCell()
+            if indexPath.row < self.dataArr.count {
+                let model : UserInfoModel = self.dataArr[indexPath.row] as! UserInfoModel
+
+                let cell = SearchTableViewCell(style: .default, reuseIdentifier: SEARCHUSERCELLID)
+                cell.backgroundColor = .clear
+                cell.selectionStyle = .none
+                cell.setUpUIWithModel_cellType(model: model)
+                weak var weakSelf = self
+                cell.iconImageViewBlock = {(click_model) in
+                    let vc = UserInfoViewController()
+                    vc.userId  = click_model.id
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                }
+                return cell
+
+            } else {
+                return UITableViewCell()
+            }
+
         }
        
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < self.dataArr.count {
-            let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
-            let vc = TeachDetailViewController()
-            vc.fenxId = model.id
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
-            
+        if self.searchType == 2 {
+
+        } else {
+            if indexPath.row < self.dataArr.count {
+                let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                let vc = TeachDetailViewController()
+                vc.fenxId = model.id
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
+
+            }
         }
-        
-        
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
-        return model.cellHeight;
+        if self.searchType == 2 {
+            return ip7(188/2)
+        } else {
+            let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+            return model.cellHeight;
+        }
+
     }
     
     

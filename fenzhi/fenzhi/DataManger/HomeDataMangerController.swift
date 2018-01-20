@@ -54,7 +54,9 @@ class HomeDataMangerController: FZRequestViewController {
     ///   - failure: <#failure description#>
     func searchlist(type:Int ,query:String ,pageNum : Int,count : Int, completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
         //
-        let urlStr = BASER_API + search_api+"type=\(type)"+"&query="+query+"&pageNum=" + "\(pageNum)"+"&count="+"\(count)"+last_pra+token_pra
+              let contentStr : String  = RSA.encodeParameter(query)
+
+        let urlStr = BASER_API + search_api+"type=\(type)"+"&query="+contentStr+"&pageNum=" + "\(pageNum)"+"&count="+"\(count)"+last_pra+token_pra
         var model:SearchModel = SearchModel()
         KFBLog(message: urlStr)
         Alamofire.request(urlStr, method: .get).responseJSON { (returnResult) in

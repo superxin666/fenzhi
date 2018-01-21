@@ -62,7 +62,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     let upfile = UpLoadFile()
     var tokenModel : GetststokenModel = GetststokenModel()
-    
+    var userType:String!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -78,13 +78,19 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         self.navigation_title_fontsize(name: "个人信息", fontsize: 27)
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "保存",textColour: .white)
-        plaNameArr.append(dataModel.data.name)
-        plaNameArr.append(dataModel.data.districtName)
-        plaNameArr.append(dataModel.data.schoolName)
-        plaNameArr.append(dataModel.data.gradeName)
-        plaNameArr.append(dataModel.data.subjectName)
+        userType = LoginModelMapper.getLoginIdAndTokenInUD().userType
+        if userType == "0"{
+            plaNameArr.append(dataModel.data.name)
+            plaNameArr.append(dataModel.data.districtName)
+            plaNameArr.append(dataModel.data.schoolName)
+            plaNameArr.append(dataModel.data.gradeName)
+            plaNameArr.append(dataModel.data.subjectName)
+            plaNameArr.append(dataModel.data.versionName+dataModel.data.bookName)
+        } else {
+            plaNameArr.append(dataModel.data.name)
+            plaNameArr.append(dataModel.data.districtName)
+        }
 
-        plaNameArr.append(dataModel.data.versionName+dataModel.data.bookName)
         provinceNum = self.dataModel.data.province
         cityNum = self.dataModel.data.city
         districtNum = self.dataModel.data.district
@@ -94,7 +100,12 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     }
     
     override func navigationRightBtnClick() {
-        self.getSupplyinfoData()
+        if userType == "0"{
+            self.getSupplyinfoData()
+        } else {
+            self.getSupplyinfoData_vis()
+        }
+
     }
     //MARK:获取阿里云token
     func getToken() {
@@ -168,7 +179,53 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         })
         
     }
+    func getSupplyinfoData_vis(){
+        self.SVshowLoad()
+        weak var weakSelf = self
 
+        //        if currectDisModel.type == 3 {
+        //            cityNum = provinceNum
+        //            districtNum = currectDisModel.id
+        //        }
+
+        var cell : InfoTableViewCell!
+        cell = mainTabelView.visibleCells[0] as! InfoTableViewCell
+
+
+        if cell._nameTextField.isFirstResponder {
+            cell._nameTextField.resignFirstResponder()
+        }
+        let nameStr = cell.nameStr
+        KFBLog(message: nameStr)
+        if nameStr.count > 0 {
+            self.dataModel.data.name = nameStr
+        }
+        if isLoadIcon {
+            self.SVshowErro(infoStr: "稍等，正在上传头像")
+            return
+        }
+        KFBLog(message: self.dataModel.data.name)
+        if currectDisModel.type == 3 {
+            cityNum = provinceNum
+            districtNum = currectDisModel.id
+        }
+
+        lodginDataVC.supplyinfo_vis(name: self.dataModel.data.name, province: provinceNum!, city: cityNum!, district: districtNum!,avatar: self.dataModel.data.avatar, completion: { (data) in
+            self.SVdismiss()
+
+            let smsdataModel = data as! SmsModel
+            if  smsdataModel.errno == 0 {
+                //                提交信息成功
+                KFBLog(message: "提交成功")
+                weakSelf?.navigationLeftBtnClick()
+            } else {
+                //
+                weakSelf?.SVshowErro(infoStr: (smsdataModel.errmsg))
+            }
+        }, failure: { (erro) in
+
+        })
+    }
     //MARK:获取公共数据
     func getData() {
         weak var weakSelf = self
@@ -594,7 +651,12 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        if userType == "0" {
+            return 6
+        } else {
+            return 2
+        }
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

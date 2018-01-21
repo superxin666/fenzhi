@@ -158,6 +158,30 @@ class LogDataMangerViewController: FZRequestViewController {
         
     }
 
+    func supplyinfo_vis(name : String, province : Int, city : Int,district : Int,avatar : String,completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
+
+
+        let iconStr : String =  RSA.encodeParameter(avatar)
+        let nameStr : String =  RSA.encodeParameter(name)
+        let url = BASER_API + supplyinfo_api + "name="+nameStr+"&avatar="+iconStr+"&province="+"\(province)"+"&city="+"\(city)"+"&district="+"\(district)"+"&type=\(1)"+token_pra
+
+        KFBLog(message: url)
+
+        var model:SmsModel = SmsModel()
+        Alamofire.request(url, method: .post).responseJSON { (returnResult) in
+
+            print("secondMethod --> post 请求 --> returnResult = \(returnResult)")
+            if let json = returnResult.result.value {
+                model = Mapper<SmsModel>().map(JSON: json as! [String : Any])!
+                completion(model)
+            } else {
+                failure("请求失败")
+            }
+        }
+
+    }
+
+
     func supplyinfo_other(name : String, province : Int, city : Int,district : Int,avatar : String,completion : @escaping (_ data : Any) ->(), failure : @escaping (_ error : Any)->()) {
 
 

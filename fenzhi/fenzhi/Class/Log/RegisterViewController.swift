@@ -240,81 +240,88 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
     //MARK:下一步
     func nest_click()  {
         weak var weakSelf = self
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let cancelAction = UIAlertAction(title: "老师", style: .default, handler: {
-            (action: UIAlertAction) -> Void in
-            //成功
-            let vc : InfoViewController = InfoViewController()
-            vc.type = .res_first
-            weakSelf?.navigationController?.pushViewController(vc, animated: true)
-
-        })
-        let AlbumAction = UIAlertAction(title: "游客", style: .default, handler: {
-            (action: UIAlertAction) -> Void in
-            let vc : InfoVisitorViewController = InfoVisitorViewController()
-            vc.type = .res_first
-            weakSelf?.navigationController?.pushViewController(vc, animated: true)
-
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(AlbumAction)
-        self.present(alertController, animated: true, completion: nil)
-
-
-
-
-//        if _phoneTextField.isFirstResponder {
-//            _phoneTextField.resignFirstResponder()
-//        } else if codeTextField.isFirstResponder {
-//            codeTextField.resignFirstResponder()
-//        } else {
-//            _keyTextField.resignFirstResponder()
-//        }
+//        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+//        let cancelAction = UIAlertAction(title: "老师", style: .default, handler: {
+//            (action: UIAlertAction) -> Void in
+//            //成功
+//            let vc : InfoViewController = InfoViewController()
+//            vc.type = .res_first
+//            weakSelf?.navigationController?.pushViewController(vc, animated: true)
 //
-//        if !(String.isStr(str: phoneStr)) {
-//            KFBLog(message: "请填写手机号")
-//            self.SVshowErro(infoStr: "请填写手机号")
-//            return
-//        }
-//        if !(String.isMobileNumber(phoneNum: phoneStr)) {
-//            KFBLog(message: "请填写正确手机号")
-//            self.SVshowErro(infoStr: "请填写正确手机号")
-//            return
-//        }
-//        if !(String.isStr(str: codeStr)) {
-//            KFBLog(message: "请填写验证码")
-//            self.SVshowErro(infoStr: "请填写验证码")
-//            return
-//        }
-//        if !(String.isStr(str: keyStr)) {
-//            KFBLog(message: "请填写密码")
-//            self.SVshowErro(infoStr: "请填写密码")
-//            return
-//        }
-//        if keyStr.characters.count < 6 {
-//            KFBLog(message: "密码至少六位")
-//            self.SVshowErro(infoStr: "密码至少六位")
-//            return
+//        })
+//        let AlbumAction = UIAlertAction(title: "游客", style: .default, handler: {
+//            (action: UIAlertAction) -> Void in
+//            let vc : InfoVisitorViewController = InfoVisitorViewController()
+//            vc.type = .res_first
+//            weakSelf?.navigationController?.pushViewController(vc, animated: true)
 //
-//        }
-//
-//        if keyStr.characters.count > 20 {
-//            KFBLog(message: "密码不能超过20位")
-//            self.SVshowErro(infoStr: "密码不能超过20位")
-//            return
-//
-//        }
-//
-//        //注册请求
+//        })
+//        alertController.addAction(cancelAction)
+//        alertController.addAction(AlbumAction)
+//        self.present(alertController, animated: true, completion: nil)
+
+
+
+
+        if _phoneTextField.isFirstResponder {
+            _phoneTextField.resignFirstResponder()
+        } else if codeTextField.isFirstResponder {
+            codeTextField.resignFirstResponder()
+        } else {
+            _keyTextField.resignFirstResponder()
+        }
+
+        if !(String.isStr(str: phoneStr)) {
+            KFBLog(message: "请填写手机号")
+            self.SVshowErro(infoStr: "请填写手机号")
+            return
+        }
+        if !(String.isMobileNumber(phoneNum: phoneStr)) {
+            KFBLog(message: "请填写正确手机号")
+            self.SVshowErro(infoStr: "请填写正确手机号")
+            return
+        }
+        if !(String.isStr(str: codeStr)) {
+            KFBLog(message: "请填写验证码")
+            self.SVshowErro(infoStr: "请填写验证码")
+            return
+        }
+        if !(String.isStr(str: keyStr)) {
+            KFBLog(message: "请填写密码")
+            self.SVshowErro(infoStr: "请填写密码")
+            return
+        }
+        if keyStr.count < 6 {
+            KFBLog(message: "密码至少六位")
+            self.SVshowErro(infoStr: "密码至少六位")
+            return
+
+        }
+
+        if keyStr.count > 20 {
+            KFBLog(message: "密码不能超过20位")
+            self.SVshowErro(infoStr: "密码不能超过20位")
+            return
+
+        }
+
+        //注册请求
 //         weak var weakSelf = self
-//        self.SVshowLoad()
-//        dataVC.register(phoneNum: phoneStr, paseWord: keyStr, verification: codeStr, completion: { (data) in
-//              weakSelf?.resdataModel = data as! ResModelMaper
-//            weakSelf?.SVdismiss()
-//            if weakSelf?.resdataModel.errno == 0 {
-//                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: String(describing: weakSelf?.resdataModel.data.id), token: String(describing: weakSelf?.resdataModel.data.token), ishaveinfo: "1", complate: { (data) in
-//                    let str:String = data as! String
-//                    if str == "1" {
+        self.SVshowLoad()
+        dataVC.register(phoneNum: phoneStr, paseWord: keyStr, verification: codeStr, completion: { (data) in
+              weakSelf?.resdataModel = data as! ResModelMaper
+            weakSelf?.SVdismiss()
+            if weakSelf?.resdataModel.errno == 0 {
+                LoginModelMapper.setLoginIdAndTokenInUD(loginUserId: "\((weakSelf?.resdataModel.data.id)!)", token: "\((weakSelf?.resdataModel.data.token)!)", ishaveinfo: "0", userType: "0", complate: { (data) in
+                    let str:String = data as! String
+                    if str == "1" {
+
+                        //成功
+                        let vc : InfoViewController = InfoViewController()
+                        vc.type = .res_first
+                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
+
+
 //                        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
 //                        let cancelAction = UIAlertAction(title: "老师", style: .default, handler: {
 //                            (action: UIAlertAction) -> Void in
@@ -334,28 +341,28 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
 //                        alertController.addAction(cancelAction)
 //                        alertController.addAction(AlbumAction)
 //                        self.present(alertController, animated: true, completion: nil)
-//
-//
-//                    } else {
-//                        //存储信息失败
-//
-//                    }
-//
-//                })
-//
-//
-//            } else {
-//                weakSelf?.SVshowErro(infoStr: (weakSelf?.resdataModel.errmsg)!)
-//
-//            }
-//
-//
-//
-//        }) { (erro) in
-//            weakSelf?.SVdismiss()
-//            weakSelf?.SVshowErro(infoStr: "请求失败")
-//
-//        }
+
+
+                    } else {
+                        //存储信息失败
+
+                    }
+
+                })
+
+
+            } else {
+                weakSelf?.SVshowErro(infoStr: (weakSelf?.resdataModel.errmsg)!)
+
+            }
+
+
+
+        }) { (erro) in
+            weakSelf?.SVdismiss()
+            weakSelf?.SVshowErro(infoStr: "请求失败")
+
+        }
 //
 
     }

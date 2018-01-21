@@ -728,13 +728,14 @@ class InfoVisitorViewController: BaseViewController,UITableViewDelegate,UITableV
     
     override func navigationLeftBtnClick() {
         self.SVdismiss()
-        if type == .res_first {
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            let dele: AppDelegate =  UIApplication.shared.delegate as! AppDelegate
-            dele.showLogin()
-        }
-        
+        self.navigationController?.popViewController(animated: true)
+//        if type == .res_first {
+//            self.navigationController?.popViewController(animated: true)
+//        } else {
+//            let dele: AppDelegate =  UIApplication.shared.delegate as! AppDelegate
+//            dele.showLogin()
+//        }
+
     }
 
     override func didReceiveMemoryWarning() {

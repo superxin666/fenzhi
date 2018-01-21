@@ -84,6 +84,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         self.view.backgroundColor = backView_COLOUR
         self.navigationBar_leftBtn()
+        self.navigationBar_rightBtn_title(name: "游客模式")
         self.navigation_title_fontsize(name: "完善资料", fontsize: 27)
         self.edgesForExtendedLayout = UIRectEdge.bottom
         self.creatUI()
@@ -92,6 +93,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         self.getData()
         
     }
+
     //MARK:PickerView
     func cgreatPickerView()  {
         
@@ -453,7 +455,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
              weakSelf?.smsdataModel = data as! SmsModel
             if  weakSelf?.smsdataModel.errno == 0 {
 //                提交信息成功
-                LoginModelMapper.setIsHaveInfo(type: "0", complate: { (data2) in
+                LoginModelMapper.setIsHaveInfo(type: "1", complate: { (data2) in
                     let str:String = data2 as! String
                     if str == "1" {
                         //存储信息成功
@@ -736,6 +738,11 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             let dele: AppDelegate =  UIApplication.shared.delegate as! AppDelegate
             dele.showLogin()
         }
+
+    }
+    override func navigationRightBtnClick() {
+        let vc = InfoVisitorViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
 
     }
 

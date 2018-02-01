@@ -60,6 +60,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             if view is UIButton {
                 let btn : UIButton = view as! UIButton
                 btn.setTitle("取消", for: .normal)
+                btn.setTitleColor(blue_COLOUR, for: .normal)
             }
         }
         searchBar.placeholder = "搜索 内容 资料 用户"
@@ -183,7 +184,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                 } else {
                     if weakSelf?.dataArr.count == 0 {
                         weakSelf?.mainTabelView.isHidden = true
-                        weakSelf?.view.addSubview(self.showNoData())
+                        weakSelf?.view.addSubview(self.showNoData(fream: CGRect(x: 0, y: self.iteamBarBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - self.iteamBarBackView.frame.maxY)))
                     } else {
                         weakSelf?.SVshowErro(infoStr: "没有数据了")
                     }

@@ -109,13 +109,13 @@ class BaseViewController: UIViewController {
 
     }
     
-    func showNoData() -> NoWifiView {
-        noDataView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(15))
+    func showNoData(fream :CGRect = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)) -> NoWifiView {
+        noDataView.frame = fream
         noDataView.setUpNoDta()
         return noDataView;
     }
     func showNoWifi() -> NoWifiView {
-        noDataView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(15))
+        noDataView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
         noDataView.setUpNoWifiView()
         return noDataView;
     }

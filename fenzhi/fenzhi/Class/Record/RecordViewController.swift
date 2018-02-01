@@ -174,7 +174,7 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                     weakSelf?.homedataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
                         
                         weakSelf?.openFileUrl = data as! String
-                        if  (self.openFileUrl.characters.count > 0) {
+                        if  (self.openFileUrl.count > 0) {
                             KFBLog(message: "下载成功"+self.openFileUrl)
                             
                             weakSelf?.quickLookController.dataSource = self
@@ -203,6 +203,13 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                     KFBLog(message: "删除block")
                     weakSelf?.del(delmodel: delmodel)
                 }
+                cell.detailBlock = {(delmodel,indexNum)in
+                    let vc = TeachDetailViewController()
+                    vc.fenxId = delmodel.id
+                    vc.isshowpinglun = true
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                }
                 return cell
             } else {
                 //心得
@@ -217,6 +224,13 @@ class RecordViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                 cell.delViewBlock = {(model) in
                     KFBLog(message: "删除block")
                     weakSelf?.del(delmodel: model)
+                }
+                cell.detailBlock = {(delmodel)in
+                    let vc = TeachDetailViewController()
+                    vc.fenxId = delmodel.id
+                    vc.isshowpinglun = true
+                    vc.hidesBottomBarWhenPushed = true
+                    weakSelf?.navigationController?.pushViewController(vc, animated: true)
                 }
                 return cell
             }

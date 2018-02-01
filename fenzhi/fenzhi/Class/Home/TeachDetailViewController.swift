@@ -12,7 +12,7 @@ let COMMONTELLID = "COMMONTELL_ID"//
 class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
     var fenxId :Int!
     var isshowzanshang : Bool = false
-
+    var isshowpinglun : Bool = false
 
     let mainScrollow : UIScrollView = UIScrollView()
     let mainTabelView : UITableView = UITableView()
@@ -38,6 +38,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     
     let txtTextView : UITextView = UITextView()
+    var txtTextViewBack : UIView!
     let returnLabel : UILabel = UILabel()//回复人
     
     var keybodHeight : CGFloat = 0.0
@@ -388,6 +389,11 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             //展示赞赏列表
             self.showZanShang()
         }
+        if isshowpinglun {
+            isshowpinglun = false
+            //展示赞赏列表
+            self.liuyan_click()
+        }
     }
 
     func getTabelViewSectionNum() {
@@ -459,6 +465,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     }
     
     func dismissTxtView() {
+        self.txtTextViewBack.removeFromSuperview()
         txtTextView.resignFirstResponder()
         self.maskView.removeFromSuperview()
 
@@ -468,16 +475,16 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     //MARK:留言页面
     func creatTxtUI() {
         KFBLog(message: "键盘高度---\(headViewHeight)")
-        let backView : UIView  = UIView(frame: CGRect(x: 0, y:  LNAVIGATION_HEIGHT + ip7(100), width: KSCREEN_WIDTH, height: ip7(260)))
-        backView.backgroundColor = .white
-        self.maskView.addSubview(backView)
+        self.txtTextViewBack  = UIView(frame: CGRect(x: 0, y:  LNAVIGATION_HEIGHT + ip7(100), width: KSCREEN_WIDTH, height: ip7(260)))
+        self.txtTextViewBack.backgroundColor = .white
+        self.maskView.addSubview(self.txtTextViewBack)
         txtTextView.delegate = self
         txtTextView.frame = CGRect(x: ip7(20), y: ip7(20), width: KSCREEN_WIDTH - ip7(40), height: ip7(327/2))
         txtTextView.font = fzFont_Thin(ip7(18))
         txtTextView.textColor = dark_3_COLOUR
         txtTextView.kfb_makeBorderWithBorderWidth(width: 1, color: lineView_thin_COLOUR)
         txtTextView.kfb_makeRadius(radius: 7)
-        backView.addSubview(txtTextView)
+        self.txtTextViewBack.addSubview(txtTextView)
         
         if ispinglun == "0" {
 //            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged) name:UITextViewTextDidChangeNotification object:nil];
@@ -500,7 +507,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         cancleBtn.titleLabel?.font = fzFont_Thin(ip7(21))
         cancleBtn.kfb_makeRadius(radius: 7)
         cancleBtn.addTarget(self, action:#selector(TeachDetailViewController.cancle_submitcomment), for: .touchUpInside)
-        backView.addSubview(cancleBtn)
+        self.txtTextViewBack.addSubview(cancleBtn)
         //确定按钮
 
         let sureBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(20) - ip7(289/2),y: txtTextView.frame.maxY + ip7(14), width: ip7(289/2),height: ip7(50)))
@@ -510,12 +517,12 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         sureBtn.titleLabel?.font = fzFont_Medium(ip7(21))
         sureBtn.kfb_makeRadius(radius: 7)
         sureBtn.addTarget(self, action:#selector(TeachDetailViewController.sure_submitcomment), for: .touchUpInside)
-        backView.addSubview(sureBtn)
+        self.txtTextViewBack.addSubview(sureBtn)
 
     }
 
     func textChanged() {
-        if txtTextView.text.characters.count == 0 {
+        if txtTextView.text.count == 0 {
             returnLabel.isHidden = false
         } else {
             returnLabel.isHidden = true

@@ -19,6 +19,7 @@ class RecordHeartTableViewCell: UITableViewCell {
     var baseVC : BaseViewController = BaseViewController()
     var docBlock : TeachDetailHeadViewBlock!
     var delViewBlock : RecordHeartTableViewCellBlock!
+    var detailBlock : RecordHeartTableViewCellBlock!//评论点击
     
     let iconImageView:UIImageView = UIImageView()
     let moreImageView:UIButton = UIButton()
@@ -125,7 +126,7 @@ class RecordHeartTableViewCell: UITableViewCell {
         }
         //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 + // ip(35)+ip(21)//课时定位 +
 
-        if model.catalog.characters.count > 0 {
+        if model.catalog.count > 0 {
             //课时定位
             dingweiImageView.image = #imageLiteral(resourceName: "icon_dingwei")
             dingweiImageView.frame = CGRect(x: appadWidth, y: lastFream.maxY + ip7(35), width: ip7(20), height: ip7(20))
@@ -200,7 +201,7 @@ class RecordHeartTableViewCell: UITableViewCell {
         if sender.tag == 0 {
             if dataModel.isLike == 1 {
                 //已经点过赞
-                
+         
             } else {
                 //没有点过赞
                 weak var weakSelf = self
@@ -225,7 +226,10 @@ class RecordHeartTableViewCell: UITableViewCell {
             }
             
         } else if sender.tag == 1 {
-            
+            //评论
+            if (self.detailBlock != nil) {
+                self.detailBlock(self.dataModel)
+            }
         } else {
             //赞赏
             

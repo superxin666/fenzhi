@@ -18,7 +18,8 @@ class RecordTableViewCell: UITableViewCell {
     var fenxinagBtn : UIButton = UIButton()
     var baseVC : BaseViewController = BaseViewController()
     var docBlock : TeachDetailHeadViewBlock!
-
+   var detailBlock : RecordTableViewCellBlock!//评论点击
+    
     let iconImageView:UIImageView = UIImageView()
     let moreImageView:UIButton = UIButton()
     let timeLabel : UILabel = UILabel()
@@ -250,7 +251,11 @@ class RecordTableViewCell: UITableViewCell {
             }
 
         } else if sender.tag == 1 {
-
+            //评论
+            //评论
+            if (self.detailBlock != nil) {
+                self.detailBlock(self.dataModel,0)
+            }
         } else {
             //赞赏
             if let _ =  zanshangBlock {

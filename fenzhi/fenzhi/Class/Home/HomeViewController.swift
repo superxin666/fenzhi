@@ -43,11 +43,12 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        self.title = "首页"
+        self.title = "首页"
+        self.navigationBar_rightBtn_image(image: #imageLiteral(resourceName: "home_search"))
         //设置红点
         self.view.backgroundColor = backView_COLOUR
 
-        self.creatSearchBar()
+//        self.creatSearchBar()
         userType = LoginModelMapper.getLoginIdAndTokenInUD().userType
 //        userType = "1"
         if userType == "0" {
@@ -239,6 +240,10 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
+    override func navigationRightBtnClick() {
+        self.searchBtnClick()
+    }
+    
 
     //MARK:tableView
     func creatTableView() {

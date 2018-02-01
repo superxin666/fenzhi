@@ -84,6 +84,16 @@ class BaseViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = item
     }
     
+    func navigationBar_rightBtn_image(image:UIImage){
+        let btn:UIButton = UIButton(type: UIButtonType.custom)
+        btn.frame = CGRect(x: 0, y: 0, width: 60, height: 44)
+        btn.setImage(image, for:.normal)
+        btn.imageEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0)
+        btn.addTarget(self, action:#selector(BaseViewController.navigationRightBtnClick), for: .touchUpInside)
+        let item:UIBarButtonItem = UIBarButtonItem(customView:btn)
+        self.navigationItem.rightBarButtonItem = item
+    }
+    
     func navigation_title_fontsize(name:String, fontsize:Int) {
         self.title = name
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: fzFont_Thin(ip7(fontsize))]

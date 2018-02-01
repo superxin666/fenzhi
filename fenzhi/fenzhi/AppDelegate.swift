@@ -135,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         let tab : UITabBarController = UITabBarController()
         tab.tabBar.barTintColor = blue_COLOUR
         tab.delegate = self
-        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object: FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), forKey:NSForegroundColorAttributeName as NSCopying) as? [String : AnyObject], for:UIControlState.normal)
+        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object: UIColor.white, forKey:NSForegroundColorAttributeName as NSCopying) as? [String : AnyObject], for:UIControlState.normal)
         UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object:UIColor.white, forKey:NSForegroundColorAttributeName as NSCopying) as? [String : AnyObject], for:UIControlState.selected)
         tab.viewControllers = vcArr
         self.window?.rootViewController = tab

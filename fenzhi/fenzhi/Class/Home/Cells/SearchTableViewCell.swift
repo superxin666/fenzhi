@@ -56,12 +56,12 @@ class SearchTableViewCell: UITableViewCell {
         self.addSubview(infoLabel)
 
         //关注按钮
-        guanzhuBtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(75), y: (SearchTableViewCellH - ip7(20))/2, width: ip7(60), height: ip7(20))
+        guanzhuBtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(135), y: (SearchTableViewCellH - ip7(40))/2, width: ip7(125), height: ip7(40))
         guanzhuBtn.setTitle("关注", for: .normal)
         guanzhuBtn.setTitle("已关注", for: .selected)
         guanzhuBtn.backgroundColor = blue_COLOUR
         guanzhuBtn.setTitleColor( .white, for: .normal)
-        guanzhuBtn.titleLabel?.font = fzFont_Medium(ip7(12))
+        guanzhuBtn.titleLabel?.font = fzFont_Medium(ip7(21))
         guanzhuBtn.kfb_makeRadius(radius: 4)
         guanzhuBtn.addTarget(self, action:#selector(SearchTableViewCell.gunzhuClick(sender:)), for: .touchUpInside)
         if (model.isFollow) == 1 {

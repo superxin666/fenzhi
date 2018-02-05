@@ -111,7 +111,7 @@ class commentTableViewCell: UITableViewCell {
         let viewW = KSCREEN_WIDTH
         iconImageView.kf.setImage(with: URL(string: model.userInfo.avatar))//头像
         nameLabel.text = model.userInfo.name//名字
-        timeLabel.text = String.getDate_detail_cell(dateStr: model.createTime)//时间
+        timeLabel.text = String.getDate_detail(dateStr: model.createTime)//时间
         zanNumLabel.text = "\(model.likeNum)"//赞数目
         if model.isLike == 1 {
             //已经赞过
@@ -129,7 +129,7 @@ class commentTableViewCell: UITableViewCell {
         contentLabel.frame = CGRect(x: iconImageView.frame.maxX + ip7(25), y: timeLabel.frame.maxY + ip7(31), width: txtW, height: txtH)
         contentLabel.text = str
         //是否有回复内容
-        if model.toCommentInfo.content.characters.count>0 {
+        if model.toCommentInfo.content.count>0 {
 
             backView.frame = CGRect(x: iconImageView.frame.maxX + ip7(25), y: contentLabel.frame.maxY + ip7(29), width: KSCREEN_WIDTH - iconImageView.frame.maxX - ip7(50), height: ip7(53))
             backView.backgroundColor = FZColorFromRGB(rgbValue: 0xf7f7f7)
@@ -153,11 +153,11 @@ class commentTableViewCell: UITableViewCell {
             //名字
             let str : String  = model.toUserInfo.name+"："
             let attributeStr = NSMutableAttributedString(string: str)
-            let range : NSRange = NSRange.init(location: 0, length: str.characters.count)
+            let range : NSRange = NSRange.init(location: 0, length: str.count)
             attributeStr.addAttribute(NSForegroundColorAttributeName, value: blue_COLOUR, range: range)
             let str2 : String  = model.toCommentInfo.content
             let attributeStr2 = NSMutableAttributedString(string: str2)
-            let range2 : NSRange = NSRange.init(location: 0, length: str2.characters.count)
+            let range2 : NSRange = NSRange.init(location: 0, length: str2.count)
             attributeStr2.addAttribute(NSForegroundColorAttributeName, value: dark_6_COLOUR, range: range2)
             attributeStr.append(attributeStr2)
 

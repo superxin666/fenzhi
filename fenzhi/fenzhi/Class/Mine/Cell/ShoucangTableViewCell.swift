@@ -42,7 +42,8 @@ class ShoucangTableViewCell: UITableViewCell {
         self.addSubview(nameLabel)
 
         let timeLabel : UILabel = UILabel(frame: CGRect(x: KSCREEN_WIDTH - ip7(31) - ip7(120), y: ip7(25), width: ip7(120), height: ip7(20)))
-        timeLabel.text = model.createTime
+        timeLabel.text = String.getDate_detail(dateStr: model.createTime)
+//        timeLabel.text = model.createTime
         timeLabel.font = fzFont_Thin(ip7(15))
         timeLabel.textColor  = dark_a_COLOUR
         timeLabel.textAlignment = .right

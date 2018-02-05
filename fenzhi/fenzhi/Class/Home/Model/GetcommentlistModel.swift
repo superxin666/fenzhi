@@ -48,7 +48,7 @@ class GetcommentlistModel_data_list_commentList_commentInfo: Mappable {
     }
 }
 class GetcommentlistModel_data_list_commentList_toCommentInfo: Mappable {
-    var id: Int!
+    var id: Int = 0
     var toCommentId : Int!
     var userId : Int!
     var toUserId: Int!

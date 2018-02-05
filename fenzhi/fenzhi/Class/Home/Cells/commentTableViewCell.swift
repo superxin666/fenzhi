@@ -123,16 +123,18 @@ class commentTableViewCell: UITableViewCell {
         }
         //内容
         let str = model.content
-        let txtW = viewW - iconImageView.frame.maxX - ip7(25)  - ip7(50)
+        let txtW = viewW - iconImageView.frame.maxX - ip7(25)  - ip7(80)
         let txtH :CGFloat = str.getLabHeight(font: fzFont_Thin(ip7(21)), LabelWidth: txtW)
 
         contentLabel.frame = CGRect(x: iconImageView.frame.maxX + ip7(25), y: timeLabel.frame.maxY + ip7(31), width: txtW, height: txtH)
         contentLabel.text = str
+ 
         //是否有回复内容
         if model.toCommentInfo.content.count>0 {
 
             backView.frame = CGRect(x: iconImageView.frame.maxX + ip7(25), y: contentLabel.frame.maxY + ip7(29), width: KSCREEN_WIDTH - iconImageView.frame.maxX - ip7(50), height: ip7(53))
             backView.backgroundColor = FZColorFromRGB(rgbValue: 0xf7f7f7)
+            backView.isUserInteractionEnabled = true
             self.addSubview(backView)
             //删除按钮
             delbtn.frame = CGRect(x: backView.frame.size.width - ip7(60), y: 0, width: ip7(60), height: ip7(53))
@@ -161,7 +163,7 @@ class commentTableViewCell: UITableViewCell {
             attributeStr2.addAttribute(NSForegroundColorAttributeName, value: dark_6_COLOUR, range: range2)
             attributeStr.append(attributeStr2)
 
-            toUserName.frame = CGRect(x:0, y:  ip7(16), width: backView.frame.size.width, height: ip7(21))
+            toUserName.frame = CGRect(x:0, y:  ip7(16), width: backView.frame.size.width - ip7(60), height: ip7(21))
             toUserName.attributedText = attributeStr
             toUserName.isUserInteractionEnabled = true
 //            toUserName.textColor = dark_6_COLOUR
@@ -172,7 +174,7 @@ class commentTableViewCell: UITableViewCell {
         } else {
             //判断有没有删除按钮
             //删除按钮
-            delbtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(60) - ip7(25), y: contentLabel.frame.maxY + ip7(10), width: ip7(60), height: ip7(21))
+            delbtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(60) - ip7(25), y: contentLabel.frame.maxY + ip7(10), width: ip7(60), height: ip7(40))
             delbtn.setTitle("删除", for: .normal)
             delbtn.backgroundColor = .clear
             delbtn.setTitleColor(blue_COLOUR, for: .normal)

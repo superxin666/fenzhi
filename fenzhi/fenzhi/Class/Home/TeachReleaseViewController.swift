@@ -262,6 +262,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
                 weakSelf?.SVdismiss()
                 weakSelf?.SVshowSucess(infoStr: "发布成功")
                 weakSelf?.openView()
+                weakSelf?.reflishBlock()
                 weakSelf?.navigationLeftBtnClick()
             } else {
                 weakSelf?.openView()

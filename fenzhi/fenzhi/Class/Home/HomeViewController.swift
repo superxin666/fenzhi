@@ -233,6 +233,10 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     func heartBtnClick() {
         let vc : HeartReleaseViewController = HeartReleaseViewController()
         let nv :UINavigationController = UINavigationController(rootViewController: vc)
+        weak var weakSelf = self
+        vc.reflishBlock = {
+            weakSelf?.freshData()
+        }
         self.present(nv, animated: true) {
 
         }
@@ -242,6 +246,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     func searchBtnClick() {
         let vc = SearchViewController()
         vc.hidesBottomBarWhenPushed = true
+ 
         self.navigationController?.pushViewController(vc, animated: true)
 
     }

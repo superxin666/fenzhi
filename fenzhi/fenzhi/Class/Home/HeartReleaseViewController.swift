@@ -18,7 +18,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     let imageBackView :UIView = UIView()
     var imageArr :[UIImage]  = Array()
     var imageNameArr : [String] = Array()
-    
+    var reflishBlock : HeartReleaseViewControllerBlock!
 
 
     let nsetBtn : UIButton = UIButton()
@@ -205,6 +205,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
                 weakSelf?.openView()
                 weakSelf?.SVdismiss()
                 weakSelf?.SVshowSucess(infoStr: "发布成功")
+                weakSelf?.reflishBlock()
                 weakSelf?.navigationLeftBtnClick()
             } else {
                 weakSelf?.SVshowErro(infoStr: model.errmsg)

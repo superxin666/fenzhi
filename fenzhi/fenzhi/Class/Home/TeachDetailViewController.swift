@@ -39,6 +39,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     
     let txtTextView : UITextView = UITextView()
     var txtTextViewBack : UIView!
+    var isShowTxtTextViewBack = false
     let returnLabel : UILabel = UILabel()//回复人
     
     var keybodHeight : CGFloat = 0.0
@@ -69,7 +70,13 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         let nsValue = userinfo.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRec = nsValue.cgRectValue
         let height = keyboardRec.size.height
-        keybodHeight = height
+//        keybodHeight = height
+        if !isShowTxtTextViewBack {
+            self.showTxt_click()
+        }
+        var frame = self.txtTextViewBack.frame
+        frame.origin.y = KSCREEN_HEIGHT - height - ip7(260)
+        self.txtTextViewBack.frame = frame
         print("keybordShow:\(height)")
     }
     func loadMoreData() {
@@ -417,7 +424,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         let txtW = KSCREEN_WIDTH - ip7(25) - ip7(60) - ip7(25) - ip7(50)
         let txtH :CGFloat = str.getLabHeight(font: fzFont_Thin(ip7(21)), LabelWidth: txtW)
         var heiht = ip7(140) + txtH
-        if model.toCommentInfo.content.characters.count > 0 {
+        if model.toCommentInfo.content.count > 0 {
             heiht = heiht + ip7(78)
         }
         heiht = heiht  + ip7(44)
@@ -426,6 +433,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     //MARK:底部留言
     func creatTxtView() {
+        
         let veiwHeight = ip7(80)
         let backView : UIView = UIView(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(80) - LNAVIGATION_HEIGHT, width: KSCREEN_HEIGHT, height: veiwHeight))
         backView.backgroundColor = .white
@@ -474,8 +482,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     //MARK:留言页面
     func creatTxtUI() {
-        KFBLog(message: "键盘高度---\(headViewHeight)")
-        self.txtTextViewBack  = UIView(frame: CGRect(x: 0, y:  LNAVIGATION_HEIGHT + ip7(100), width: KSCREEN_WIDTH, height: ip7(260)))
+        self.isShowTxtTextViewBack = true
+        self.txtTextViewBack  = UIView(frame: CGRect(x: 0, y:  0, width: KSCREEN_WIDTH, height: ip7(260)))
         self.txtTextViewBack.backgroundColor = .white
         self.maskView.addSubview(self.txtTextViewBack)
         txtTextView.delegate = self

@@ -11,7 +11,7 @@ import Photos
 import AliyunOSSiOS
 let itemWidth :CGFloat = ip7(240)
 let itemHeight :CGFloat = ip7(180)
-
+typealias HeartReleaseViewControllerBlock = ()->()
 class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,sureDelegate,UpLoadFileDelegate  {
     let textField: UITextView = UITextView()
     let btnBackView :UIView = UIView()

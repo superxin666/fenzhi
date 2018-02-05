@@ -36,13 +36,14 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.freshData()
+    
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.freshData()
         self.title = "首页"
         self.navigationBar_rightBtn_image(image: #imageLiteral(resourceName: "home_search"))
         //设置红点
@@ -220,6 +221,10 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     func teachBtnClik() {
         let vc : TeachReleaseViewController = TeachReleaseViewController()
         let nv :UINavigationController = UINavigationController(rootViewController: vc)
+        weak var weakSelf = self
+        vc.reflishBlock = {
+            weakSelf?.freshData()
+        }
         self.present(nv, animated: true) {
 
         }
@@ -247,7 +252,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 
     //MARK:tableView
     func creatTableView() {
-        mainTabelView.frame = CGRect(x: 0, y: topBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY)
+        mainTabelView.frame = CGRect(x: 0, y: topBackView.frame.maxY + ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY - ip7(20))
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -349,15 +354,16 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                         weakSelf?.dataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
 
                             weakSelf?.openFileUrl = data as! String
-                            if  (self.openFileUrl.characters.count > 0) {
+                            if  (self.openFileUrl.count > 0) {
                                 KFBLog(message: "下载成功"+self.openFileUrl)
                                 
                                 weakSelf?.quickLookController.dataSource = self
                                 weakSelf?.quickLookController.delegate = self
                                 weakSelf?.quickLookController.hidesBottomBarWhenPushed =  true
                                 weakSelf?.quickLookController.reloadData()
-                                weakSelf?.quickLookController.navigationController?.navigationItem.leftBarButtonItem = self.getBarIteam()
+//                                weakSelf?.quickLookController.navigationController?.navigationItem.leftBarButtonItem = self.getBarIteam()
 //                                weakSelf?.quickLookController.navigationItem.leftBarButtonItem = self.getBarIteam()
+                                weakSelf?.quickLookController.navigationController?.navigationBar.tintColor = .black
                                 weakSelf?.navigationController?.pushViewController((weakSelf?.quickLookController)!, animated: true)
                             } else {
                                 KFBLog(message: "加载失败")
@@ -474,7 +480,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 
     func showTop() {
         topBackView.alpha = 1.0
-        mainTabelView.frame = CGRect(x: 0, y: topBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY)
+        mainTabelView.frame = CGRect(x: 0, y: topBackView.frame.maxY + ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY - ip7(20))
 //        self.view.frame.origin.y = topBackView.frame.maxY,
     }
     func hidTop() {

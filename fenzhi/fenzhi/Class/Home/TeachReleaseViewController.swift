@@ -8,7 +8,9 @@
 
 import UIKit
 import QuickLook
+typealias TeachReleaseViewControllerBlock = ()->()
 class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,sureDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate,UpLoadFileDelegate_file {
+    var reflishBlock : TeachReleaseViewControllerBlock!
     
     let textField: UITextView = UITextView()
     let btnBackView :UIView = UIView()

@@ -13,7 +13,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     let topBackImageView : UIImageView = UIImageView()
     let iconImageView : UIImageView = UIImageView()
     let mainTabelView : UITableView = UITableView()
-    let nameArr = ["姓名","地区","学校","年级","学科","教材版本",]
+    let nameArr = ["姓名","地区","手机号","学校","年级","学科","教材版本",]
 //    let plaNameArr = ["输入您的名字","请选择您所在的地区","请选择您所在学校","请选择您所在学校年级","请选择您所教学科","请选择您所用教材版本",]
     var plaNameArr = Array<String>()
     var pickerView:UIPickerView = UIPickerView()
@@ -82,6 +82,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         if userType == "0"{
             plaNameArr.append(dataModel.data.name)
             plaNameArr.append(dataModel.data.districtName)
+            plaNameArr.append(dataModel.data.phone)
             plaNameArr.append(dataModel.data.schoolName)
             plaNameArr.append(dataModel.data.gradeName)
             plaNameArr.append(dataModel.data.subjectName)
@@ -89,6 +90,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         } else {
             plaNameArr.append(dataModel.data.name)
             plaNameArr.append(dataModel.data.districtName)
+            plaNameArr.append(dataModel.data.phone)
         }
 
         provinceNum = self.dataModel.data.province
@@ -652,9 +654,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if userType == "0" {
-            return 6
+            return 7
         } else {
-            return 2
+            return 3
         }
 
     }

@@ -46,6 +46,8 @@ class ProfileMineModel_data: Mappable {
     var updateTime: String = ""
     var token: String = ""
 
+    
+
 
     var subjectName: String = ""
     var gradeName: String = ""
@@ -76,6 +78,7 @@ class ProfileMineModel_data: Mappable {
     func mapping(map: Map) {
         avatar <- map["avatar"]
         book <- map["book"]
+    
         city <- map["city"]
         createTime <- map["createTime"]
         district <- map["district"]

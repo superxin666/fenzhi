@@ -726,6 +726,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         let view : UIView = UIView()
+        view.backgroundColor = backView_COLOUR
         let nameLabel : UILabel = UILabel(frame: CGRect(x: ip7(30), y: (ip7(136/2) - ip7(21))/2, width: KSCREEN_WIDTH - ip7(30), height: ip7(21)))
         nameLabel.font = fzFont_Thin(ip7(21))
         nameLabel.textColor = dark_3_COLOUR

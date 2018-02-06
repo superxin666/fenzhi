@@ -74,7 +74,7 @@ class PdfListViewController: BaseViewController {
         let str4 = NSAttributedString(string: "\n4、发布成功。")
         mutableStr.append(str4)
 
-        let str5 = NSAttributedString(string: "\n温馨提示：上官网发布带文件的分享更便捷，官网：www.fenzhi-edu.com")
+        let str5 = NSAttributedString(string: "\n温馨提示：上官网发布带文件的分享更便捷，还支持发布视频。官网：www.fenzhi-edu.com")
         mutableStr.append(str5)
         textView.attributedText = mutableStr
     

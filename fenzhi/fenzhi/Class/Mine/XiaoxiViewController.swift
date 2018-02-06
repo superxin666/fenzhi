@@ -107,7 +107,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
 
 
-    func readMessageRequest(messageId : Int,fenxId:Int)  {
+    func readMessageRequest(messageId : Int,fenxId:Int, ishow:Bool)  {
         self.requestVC.readMessage(messageId: messageId, typeStr: messageTypeStr, completion: { (data) in
             let model : SmsModel = data as! SmsModel
             if model.errno == 0 {
@@ -118,6 +118,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             }
             let vc = TeachDetailViewController()
             vc.fenxId = fenxId
+            vc.isshowpinglun = ishow
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
             
@@ -318,6 +319,11 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             }
             cell.returnClickBlock =  {(click_model) in
                 KFBLog(message: "回复")
+                let vc = TeachDetailViewController()
+                vc.fenxId = click_model.id
+                vc.isshowpinglun = true
+                vc.hidesBottomBarWhenPushed = true
+                weakSelf?.navigationController?.pushViewController(vc, animated: true)
             }
             return cell;
             
@@ -329,10 +335,10 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isLeft {
             let model : GetmessagelistLikeModel_data_messageList = self.dataArr[indexPath.row]
-            self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId)
+            self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId,ishow: false)
         } else {
             let model : GetcommentlistModel_data_list_commentList = self.dataArr_Comment[indexPath.row]
-            self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId)
+            self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId,ishow: true)
             
         }
 

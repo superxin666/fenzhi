@@ -31,6 +31,10 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
     }
 
     func creatUI()  {
+        self.view.isUserInteractionEnabled = true
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(endEdit))
+        self.view.addGestureRecognizer(tap)
+        
         let topImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH , height: ip7(375)))
         topImageView.image = #imageLiteral(resourceName: "bg03")
         self.view.addSubview(topImageView)
@@ -164,7 +168,9 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
 
 
     }
-
+    func endEdit() {
+        self.view.endEditing(true)
+    }
     func forget_clik()   {
         let vc = ForgetViewController()
         self.navigationController?.pushViewController(vc, animated: true)

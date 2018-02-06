@@ -34,7 +34,7 @@ class AboutViewController: BaseViewController {
         let textView = UITextView(frame: CGRect(x: ip7(31), y: iconImageView.frame.maxY + ip7(36), width: KSCREEN_WIDTH - ip7(62), height: ip7(300)))
         textView.font = fzFont_Thin(ip7(21))
         textView.textColor = dark_3_COLOUR
-        textView.text = "纷知是由汇智星辰（北京）教育科技有限公司于2017年创立，致力于将老师们缤纷的教学知识和教学心得传递给国内更多其他的老师。公司核心团队来自百度，360，美团等国内一线互联网科技公司。创始人对于教育行业有深厚的情结，希望为国内教育信息、教育公平化做出一些自己的贡献。"
+        textView.text = "纷知是由汇智星辰（北京）教育科技有限公司于2017年创立，致力于将老师们缤纷的教学知识和教学心得传递给国内更多其他的老师。公司核心团队来自百度，360，美团等国内一线互联网科技公司。创始人对于教育行业有深厚的情结，希望为国内教育信息、教育公平化做出一些自己的贡献。\n温馨提示：上官网发布带文件的分享更便捷，还支持发布视频，官网：www.fenzhi-edu.com"
         backView.addSubview(textView)
         
     }

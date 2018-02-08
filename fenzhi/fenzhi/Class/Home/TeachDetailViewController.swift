@@ -63,6 +63,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         self.navigationBar_leftBtn()
         self.getHeadData()
+        self.creatTableView()
 //        self.getcommentlistData()
     }
     func keyboardWillShow(notification: NSNotification) {
@@ -122,14 +123,14 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     func cgreatHeadView() {
         
-        mainScrollow.frame = CGRect(x: 0, y: ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20) - ip7(80))
-        mainScrollow.backgroundColor = .clear
-        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight  + KSCREEN_HEIGHT - ip7(20) - ip7(80))
-        self.view.addSubview(mainScrollow)
+//        mainScrollow.frame = CGRect(x: 0, y: ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20) - ip7(80))
+//        mainScrollow.backgroundColor = .clear
+//        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight  + KSCREEN_HEIGHT - ip7(20) - ip7(80))
+//        self.view.addSubview(mainScrollow)
         
         headView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: headViewHeight)
         headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight,type:self.headData.data.type!)
-        mainScrollow.addSubview(headView)
+//        mainScrollow.addSubview(headView)
 
         //设置标题
         if self.headData.data.type! == 0 {
@@ -266,7 +267,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
 
 
-        if self.headData.data.catalog.characters.count > 0 {
+        if self.headData.data.catalog.count > 0 {
             headViewHeight = headViewHeight + ip7(35) + ip7(21)
         }
 
@@ -353,16 +354,17 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                     }
 
                     if (weakSelf?.page == 1) && (weakSelf?.isFresh == false) {
-                         weakSelf?.creatTableView()
+//                         weakSelf?.creatTableView()
+                        
                     } else {
-                        if weakSelf?.isNoData == true {
-                            weakSelf?.nodataImageViewBackView.removeFromSuperview()
-                            weakSelf?.mainScrollow.contentSize = CGSize(width: 0, height: (weakSelf?.headViewHeight)!  + KSCREEN_HEIGHT - ip7(20) - ip7(80))
-                            weakSelf?.creatTableView()
-                        } else {
+//                        if weakSelf?.isNoData == true {
+////                            weakSelf?.nodataImageViewBackView.removeFromSuperview()
+////                            weakSelf?.mainScrollow.contentSize = CGSize(width: 0, height: (weakSelf?.headViewHeight)!  + KSCREEN_HEIGHT - ip7(20) - ip7(80))
+////                            weakSelf?.creatTableView()
+//                        } else {
                             weakSelf?.mainTabelView.reloadData()
                             weakSelf?.mainTabelView.mj_footer.endRefreshing()
-                        }
+//                        }
 
                     }
                     
@@ -371,8 +373,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                     //没有评论
                     if (weakSelf?.hotArr.count)! == 0 && (weakSelf?.newArr.count)! == 0 {
                         KFBLog(message: "没有评论")
-                        weakSelf?.mainTabelView.removeFromSuperview()
-                        weakSelf?.noCommendData()
+//                        weakSelf?.mainTabelView.removeFromSuperview()
+//                        weakSelf?.noCommendData()
+                          weakSelf?.mainTabelView.mj_footer.endRefreshing()
                     } else {
                         weakSelf?.mainTabelView.mj_footer.endRefreshing()
 
@@ -387,6 +390,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             } else {
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.headData.errmsg)!)
             }
+            self.mainTabelView.reloadData()
 
         }) { (erro) in
                weakSelf?.SVshowErro(infoStr: "请求失败")
@@ -634,7 +638,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     //MARK:tableView
     func creatTableView() {
         isNoData = false
-        mainTabelView.frame = CGRect(x: 0, y:headView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20)  - ip7(80) - LNAVIGATION_HEIGHT)
+        mainTabelView.frame = CGRect(x: 0, y:ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20)  - ip7(80) - LNAVIGATION_HEIGHT)
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -644,15 +648,16 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainTabelView.showsHorizontalScrollIndicator = false
         mainTabelView.register(commentTableViewCell.self, forCellReuseIdentifier: COMMONTELLID)
         mainTabelView.mj_footer = footer
+        mainTabelView.tableHeaderView = headView
         footer.setRefreshingTarget(self, refreshingAction: #selector(TeachDetailViewController.loadMoreData))
-        mainScrollow.addSubview(mainTabelView)
+        self.view.addSubview(mainTabelView)
 
 //        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight + mainTabelView.contentSize.height)
     }
     //MARK:没有数据
-    func noCommendData()  {
+    func noCommendData() -> UIView {
         isNoData = true
-        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight  + ip7(190))
+//        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight  + ip7(190))
 
         nodataImageViewBackView.frame =  CGRect(x: 0, y: headView.frame.maxY + ip7(11/2), width: KSCREEN_WIDTH, height: ip7(190))
         nodataImageViewBackView.backgroundColor = .white
@@ -661,7 +666,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         nodataImageView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(230/2))/2, y: ip7(78/2), width: ip7(230/2), height: ip7(158/2))
         nodataImageView.image = #imageLiteral(resourceName: "icon_zwpl")
         nodataImageViewBackView.addSubview(nodataImageView)
-        mainScrollow.addSubview(nodataImageViewBackView)
+//        mainScrollow.addSubview(nodataImageViewBackView)
+        return nodataImageViewBackView
         
     }
 
@@ -725,6 +731,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
+        
         let view : UIView = UIView()
         view.backgroundColor = backView_COLOUR
         let nameLabel : UILabel = UILabel(frame: CGRect(x: ip7(30), y: (ip7(136/2) - ip7(21))/2, width: KSCREEN_WIDTH - ip7(30), height: ip7(21)))
@@ -739,16 +746,33 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             } else {
                 nameLabel.text = otherTitle
             }
+            return view
 
         } else {
             //一组
-            nameLabel.text = "最新评论"
+            if self.newArr.count == 0 {
+                return self.noCommendData()
+            } else {
+                nameLabel.text = "最新评论"
+                return view
+            }
+   
         }
-        return view
+        
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return ip7(136/2)
+        
+        
+        if sectionNum == 2 {
+           return ip7(136/2)
+        } else {
+            if self.newArr.count == 0 {
+                return  ip7(190)
+            } else {
+                return ip7(136/2)
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{

@@ -124,6 +124,8 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: SEARCHUSERCELLID)
+        mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: "loaclcell")
+
         self.view.addSubview(mainTabelView)
 
     }
@@ -387,35 +389,45 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                 
             }
         } else {
-            return UITableViewCell()
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "loaclcell")
+            if indexPath.row < self.localDataArr.count{
+                let str = self.localDataArr[indexPath.row]
+                cell.textLabel?.text = str
+            }
+            return cell
         }
        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.searchType == 2 {
-
-        } else {
-            if indexPath.row < self.dataArr.count {
-                let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
-                let vc = TeachDetailViewController()
-                vc.fenxId = model.id
-                vc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
-
+        if isSearch {
+            if self.searchType == 2 {
+                
+            } else {
+                if indexPath.row < self.dataArr.count {
+                    let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                    let vc = TeachDetailViewController()
+                    vc.fenxId = model.id
+                    vc.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
             }
         }
-
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        if self.searchType == 2 {
-            return SearchTableViewCellH
+        
+        if isSearch {
+            if self.searchType == 2 {
+                return SearchTableViewCellH
+            } else {
+                let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                return model.cellHeight;
+            }
         } else {
-            let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
-            return model.cellHeight;
+            return ip7(44)
         }
-
     }
     
     

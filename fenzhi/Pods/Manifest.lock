@@ -1,11 +1,21 @@
 PODS:
   - Alamofire (4.5.1)
   - AliyunOSSiOS (2.7.1)
+  - BMPlayer (0.9.1):
+    - BMPlayer/Full (= 0.9.1)
+  - BMPlayer/Core (0.9.1)
+  - BMPlayer/Full (0.9.1):
+    - BMPlayer/Core
+    - NVActivityIndicatorView (~> 3.5)
+    - SnapKit (~> 3.2)
   - GTSDK (2.0.0.0)
   - Kingfisher (4.3.1)
   - MJRefresh (3.1.15.1)
+  - NVActivityIndicatorView (3.7.0):
+    - NVActivityIndicatorView/Presenter (= 3.7.0)
+  - NVActivityIndicatorView/Presenter (3.7.0)
   - ObjectMapper (2.2.9)
-  - SnapKit (3.0.2)
+  - SnapKit (3.2.0)
   - Spring (1.0.3)
   - SVProgressHUD (2.2.2)
   - SwiftyJSON (4.0.0)
@@ -23,11 +33,11 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.5)
   - AliyunOSSiOS
+  - BMPlayer (~> 0.9.1)
   - GTSDK
   - Kingfisher
   - MJRefresh
   - ObjectMapper (~> 2.1)
-  - SnapKit (~> 3.0.2)
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - SVProgressHUD
   - SwiftyJSON
@@ -49,17 +59,19 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AliyunOSSiOS: bc161047b15b04eb69ffd2481b73ab4a2275322c
+  BMPlayer: e68ba160d9c05ea5fffc31d37448aa02433418ab
   GTSDK: 10882452fbd63e738334ea9463a7d59cbb172622
   Kingfisher: 75541c4b62f02e1fde6f9772303de3d9ebe8f5b3
   MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
+  NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   ObjectMapper: 63cfe41bc6f8e7c8f44344c49901b8ae7de14c52
-  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   UMengUShare: fdbbf86353976727af26a66e9a84314ecb59c816
   WechatOpenSDK: 0ee07a8d492299d3e47372a33da5af26524a7576
 
-PODFILE CHECKSUM: a524336494ac9e263282cb52e31d8b5c2965ccd9
+PODFILE CHECKSUM: 156190d6a6c518e7349bc478044899359de8a9e5
 
 COCOAPODS: 1.3.1

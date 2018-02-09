@@ -7,7 +7,6 @@ target 'fenzhi' do
 
   # Pods for fenzhi
 	pod 'SVProgressHUD'
-	pod 'SnapKit', '~> 3.0.2'
 	pod 'SwiftyJSON'
 	pod 'Kingfisher'
 	pod 'MJRefresh'
@@ -19,6 +18,7 @@ target 'fenzhi' do
     pod 'UMengUShare/Social/ReducedQQ'
     pod 'WechatOpenSDK'
     pod 'AliyunOSSiOS'
+	pod 'BMPlayer', '~> 0.9.1'
 	pod 'GTSDK'
 
   target 'fenzhiTests' do

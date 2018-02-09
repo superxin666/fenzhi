@@ -210,6 +210,20 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         }
     }
     
+    func setNULLToLocal() {
+        localDataArr.removeAll()
+        if searchType == 0 {
+            UserDefaults.standard.set(localDataArr, forKey: localData_conent)
+        } else if searchType == 1 {
+            UserDefaults.standard.set(localDataArr, forKey: localData_book)
+        } else {
+            UserDefaults.standard.set(localDataArr, forKey: localData_user)
+        }
+        self.mainTabelView.reloadData()
+        mainTabelView.isHidden = true
+        self.view.addSubview(self.showNoData(fream: CGRect(x: 0, y: self.iteamBarBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - self.iteamBarBackView.frame.maxY)))
+    }
+    
     func loadMoreData() {
 
         page = page + 1
@@ -218,6 +232,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     func getData() {
         weak var weakSelf = self
         self.SVshowLoad()
+        isSearch = true
         self.noDataView.removeFromSuperview()
         self.mainTabelView.isHidden = false
         dataVC.searchlist(type: searchType, query: queryStr, pageNum: page, count: 10, completion: { (data) in
@@ -436,7 +451,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             if indexPath.row == self.localDataArr.count{
                 //历史记录
                 KFBLog(message: "清除记录")
-                
+                self.setNULLToLocal()
             } else {
                 //清除记录
                 KFBLog(message: "历史记录")
@@ -493,7 +508,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         }
         //本地记录
         self.setDataToLoacl()
-        isSearch = true
+
         self.loadMoreData()
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {

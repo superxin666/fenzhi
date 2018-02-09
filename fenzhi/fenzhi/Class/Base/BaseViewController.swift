@@ -149,6 +149,13 @@ class BaseViewController: UIViewController {
         SVProgressHUD.dismiss()
     }
     
+    func creactFoot()->MJRefreshAutoNormalFooter {
+        let footer = MJRefreshAutoNormalFooter() // 底部刷新
+//        footer.isRefreshingTitleHidden = true
+        footer.setTitle("", for: .idle)
+        return footer
+    }
+    
     func KfbShowWithInfo(titleString:String) {
         
 //        if self.isShowing {

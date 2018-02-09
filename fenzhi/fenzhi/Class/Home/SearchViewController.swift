@@ -51,6 +51,8 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         self.creatSearchBar()
         self.iteamBar()
         self.creatTableView()
+        searchType = 0
+        self.getDataFromLoacl()
 
     }
 
@@ -119,7 +121,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         mainTabelView.showsHorizontalScrollIndicator = false
         footer.setRefreshingTarget(self, refreshingAction: #selector(SearchViewController.loadMoreData))
         //        header.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.freshData))
-        mainTabelView.mj_footer = footer
+        mainTabelView.mj_footer = self.creactFoot()
         //        mainTabelView.mj_header = header
         mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
@@ -165,19 +167,19 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     
     
     /// 获取本地历史记录
-    ///
-    /// - Parameter type:  0 是内容 1是资料 2是用户
-    func getDataFromLoacl(type:String) {
+    func getDataFromLoacl() {
+        self.noDataView.removeFromSuperview()
+        self.mainTabelView.isHidden = false
         if localDataArr.count > 0 {
             localDataArr.removeAll()
         }
         
-        if type == "0" {
+        if searchType == 0 {
             let arr =  UserDefaults.standard.object(forKey: localData_conent)
             if arr != nil {
                 localDataArr = arr as! [String]
             }
-        } else if type == "1" {
+        } else if searchType == 1 {
             let arr =  UserDefaults.standard.object(forKey: localData_book)
             if arr != nil {
                 localDataArr = arr as! [String]
@@ -188,14 +190,28 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                 localDataArr = arr as! [String]
             }
         }
+        KFBLog(message: "历史数据数组---\(localDataArr.count)")
+        if localDataArr.count == 0 {
+            mainTabelView.isHidden = true
+            self.view.addSubview(self.showNoData(fream: CGRect(x: 0, y: self.iteamBarBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - self.iteamBarBackView.frame.maxY)))
+        }
+        UserDefaults.standard.synchronize()
+        
+        self.mainTabelView.reloadData()
+    }
+    func setDataToLoacl()  {
+        localDataArr.append(queryStr)
+        if searchType == 0 {
+            UserDefaults.standard.set(localDataArr, forKey: localData_conent)
+        } else if searchType == 1 {
+            UserDefaults.standard.set(localDataArr, forKey: localData_book)
+        } else {
+             UserDefaults.standard.set(localDataArr, forKey: localData_user)
+        }
     }
     
     func loadMoreData() {
-        if !(queryStr.count>0) {
 
-            self.SVshowErro(infoStr: "请输入搜索内容")
-            return
-        }
         page = page + 1
         self.getData()
     }
@@ -235,7 +251,6 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             weakSelf?.mainTabelView.mj_footer.endRefreshing()
         }) { (erro) in
             weakSelf?.SVshowErro(infoStr: "网络请求失败")
-            //            weakSelf?.mainTabelView.mj_header.endRefreshing()
             weakSelf?.mainTabelView.mj_footer.endRefreshing()
         }
     }
@@ -249,7 +264,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         if isSearch {
             return self.dataArr.count
         } else {
-            return self.localDataArr.count
+            return self.localDataArr.count + 1
         }
         
     }
@@ -265,12 +280,6 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                     
                     if model.type == 0 {
                         //教学
-                        //                var cell : TeachTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID, for: indexPath) as! TeachTableViewCell
-                        //
-                        //                if (cell == nil)  {
-                        //                    cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
-                        //                }
-                        
                         let cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
                         cell.backgroundColor = .clear
                         cell.selectionStyle = .none
@@ -326,11 +335,6 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                         
                     } else {
                         //心得
-                        //                var cell : HeartTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: HEARTCELLID, for: indexPath) as! HeartTableViewCell
-                        //
-                        //                if (cell == nil)  {
-                        //                    cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
-                        //                }
                         
                         let cell = HeartTableViewCell(style: .default, reuseIdentifier: HEARTCELLID)
                         cell.backgroundColor = .clear
@@ -389,12 +393,27 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                 
             }
         } else {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "loaclcell")
-            if indexPath.row < self.localDataArr.count{
+            if indexPath.row == self.localDataArr.count{
+                //清除记录
+                let cell = UITableViewCell(style: .default, reuseIdentifier: "loaclcell_del")
+                cell.selectionStyle = .none
+                let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(44)))
+                nameLabel.text = "清除历史记录"
+                nameLabel.textColor = dark_3_COLOUR
+                nameLabel.textAlignment = .center
+                cell.addSubview(nameLabel)
+                return cell
+            } else {
+                //历史记录
+                let cell = UITableViewCell(style: .default, reuseIdentifier: "loaclcell")
+                cell.selectionStyle = .none
                 let str = self.localDataArr[indexPath.row]
                 cell.textLabel?.text = str
+                cell.textLabel?.textColor = dark_6_COLOUR
+                return cell
+                
             }
-            return cell
+           
         }
        
     }
@@ -413,6 +432,16 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                     
                 }
             }
+        } else {
+            if indexPath.row == self.localDataArr.count{
+                //历史记录
+                KFBLog(message: "清除记录")
+                
+            } else {
+                //清除记录
+                KFBLog(message: "历史记录")
+            }
+            
         }
     }
     
@@ -430,12 +459,41 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         }
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if !isSearch {
+            let headView = UIView(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(44)))
+            let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(44)))
+            nameLabel.text = "搜索历史"
+            nameLabel.textColor = dark_3_COLOUR
+            nameLabel.textAlignment = .left
+            headView.addSubview(nameLabel)
+            return headView
+        } else {
+            return UIView()
+        }
+    }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if isSearch {
+            return 0
+        } else {
+            return ip7(44)
+        }
+    }
+    
+
     // MARK: searchBarDelegate 代理
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         KFBLog(message: "开始所搜")
         searchBar.resignFirstResponder()
         queryStr = searchBar.text!
+        if !(queryStr.count>0) {
+            self.SVshowErro(infoStr: "请输入搜索内容")
+            return
+        }
+        //本地记录
+        self.setDataToLoacl()
+        isSearch = true
         self.loadMoreData()
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -449,17 +507,6 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         KFBLog(message: "开始输入文字")
-//        searchBar.showsCancelButton = true
-//        for view in searchBar.subviews[0].subviews {
-//            KFBLog(message: view.self)
-//            KFBLog(message: "222")
-//            if view is UIButton {
-//                KFBLog(message: "1111")
-//                let btn : UIButton = view as! UIButton
-//                btn.setTitle("取消", for: .normal)
-//            }
-//        }
-
     }
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         return 1
@@ -472,12 +519,9 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     }
     // MARK: - event respoonse
     func btnClick(sender:UIButton) {
-//        if sender.isSelected {
-//            return
-//        }
-
         lastBtn.isSelected = false
         sender.isSelected = !sender.isSelected
+        isSearch = false
         
         if sender.tag == 0 {
             //"内容"
@@ -486,19 +530,8 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             page = 0
             if self.dataArr.count > 0{
                 self.dataArr.removeAll()
-                self.mainTabelView.reloadData()
-            } else {
-
             }
             queryStr = searchBar.text!
-            if queryStr.count > 0{
-                self.loadMoreData()
-            } else {
-
-            }
-
-
-
         } else if sender.tag == 1{
             //"资料"
             KFBLog(message: "资料")
@@ -506,18 +539,8 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             page = 0
             if self.dataArr.count > 0{
                 self.dataArr.removeAll()
-                self.mainTabelView.reloadData()
-            } else {
-
             }
             queryStr = searchBar.text!
-
-            if queryStr.count > 0{
-                self.loadMoreData()
-            } else {
-
-            }
-
         } else {
             //"用户
             KFBLog(message: "用户")
@@ -525,19 +548,10 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             page = 0
             if self.dataArr.count > 0{
                 self.dataArr.removeAll()
-                self.mainTabelView.reloadData()
-            } else {
-
             }
-
             queryStr = searchBar.text!
-            if queryStr.count > 0{
-                self.loadMoreData()
-            } else {
-
-            }
-
         }
+        self.getDataFromLoacl()
         lastBtn = sender
     }
 

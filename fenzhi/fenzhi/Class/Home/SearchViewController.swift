@@ -14,11 +14,11 @@ let localData_user = "localData_user"
 let localData_book = "localData_book"
 
 class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
-    let mainTabelView : UITableView = UITableView()
+    var mainTabelView : UITableView!
     var searchBar : UISearchBar!
     var iteamBarBackView : UIView = UIView()
     var lastBtn : UIButton!
-    var page = 0
+    var page = 1
     var queryStr = ""
     
     
@@ -111,7 +111,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         iteamBarBackView .addSubview(lineView);
     }
     func creatTableView() {
-        mainTabelView.frame = CGRect(x: 0, y: iteamBarBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - iteamBarBackView.frame.maxY)
+        mainTabelView = UITableView(frame: CGRect(x: 0, y: iteamBarBackView.frame.maxY, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - iteamBarBackView.frame.maxY), style: .plain)
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -120,9 +120,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         footer.setRefreshingTarget(self, refreshingAction: #selector(SearchViewController.loadMoreData))
-        //        header.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.freshData))
         mainTabelView.mj_footer = self.creactFoot()
-        //        mainTabelView.mj_header = header
         mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: SEARCHUSERCELLID)
@@ -168,6 +166,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     
     /// 获取本地历史记录
     func getDataFromLoacl() {
+        self.mainTabelView.mj_footer.isHidden = true
         self.noDataView.removeFromSuperview()
         self.mainTabelView.isHidden = false
         if localDataArr.count > 0 {
@@ -200,7 +199,10 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         self.mainTabelView.reloadData()
     }
     func setDataToLoacl()  {
-        localDataArr.append(queryStr)
+
+        if !localDataArr.contains(queryStr) {
+            localDataArr.append(queryStr)
+        }
         if searchType == 0 {
             UserDefaults.standard.set(localDataArr, forKey: localData_conent)
         } else if searchType == 1 {
@@ -225,14 +227,22 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     }
     
     func loadMoreData() {
-
+//        if !isSearch {
+//            self.mainTabelView.mj_footer.endRefreshing()
+//            return
+//        }
         page = page + 1
+        KFBLog(message: "当前页数\(page)")
         self.getData()
     }
     func getData() {
+        if self.searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+        }
         weak var weakSelf = self
         self.SVshowLoad()
         isSearch = true
+        self.mainTabelView.mj_footer.isHidden = false
         self.noDataView.removeFromSuperview()
         self.mainTabelView.isHidden = false
         dataVC.searchlist(type: searchType, query: queryStr, pageNum: page, count: 10, completion: { (data) in
@@ -420,11 +430,11 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                 return cell
             } else {
                 //历史记录
-                let cell = UITableViewCell(style: .default, reuseIdentifier: "loaclcell")
-                cell.selectionStyle = .none
-                let str = self.localDataArr[indexPath.row]
-                cell.textLabel?.text = str
-                cell.textLabel?.textColor = dark_6_COLOUR
+                let cell = SearchLocalTableViewCell(style: .default, reuseIdentifier: "loaclcell")
+                if indexPath.row < self.localDataArr.count{
+                    let str = self.localDataArr[indexPath.row]
+                    cell.setData(title: str)
+                }
                 return cell
                 
             }
@@ -449,12 +459,20 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             }
         } else {
             if indexPath.row == self.localDataArr.count{
-                //历史记录
+                //清除记录
                 KFBLog(message: "清除记录")
                 self.setNULLToLocal()
             } else {
-                //清除记录
+                //历史记录
                 KFBLog(message: "历史记录")
+                if indexPath.row < self.localDataArr.count{
+                    let str = self.localDataArr[indexPath.row];
+                    KFBLog(message: "点击的历史记录\(str)")
+                    queryStr = str
+                    self.searchBar.text = queryStr
+                    self.getData()
+                }
+                
             }
             
         }
@@ -470,7 +488,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                 return model.cellHeight;
             }
         } else {
-            return ip7(44)
+            return SearchLocalTableViewCellH
         }
     }
     
@@ -508,8 +526,10 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         }
         //本地记录
         self.setDataToLoacl()
-
-        self.loadMoreData()
+        if self.dataArr.count > 0 {
+            self.dataArr.removeAll()
+        }
+        self.getData()
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         KFBLog(message: "结束输入文字")
@@ -542,7 +562,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             //"内容"
             KFBLog(message: "内容")
             searchType = 0
-            page = 0
+            page = 1
             if self.dataArr.count > 0{
                 self.dataArr.removeAll()
             }
@@ -551,7 +571,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             //"资料"
             KFBLog(message: "资料")
             searchType = 1
-            page = 0
+            page = 1
             if self.dataArr.count > 0{
                 self.dataArr.removeAll()
             }
@@ -560,7 +580,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             //"用户
             KFBLog(message: "用户")
             searchType = 2
-            page = 0
+            page = 1
             if self.dataArr.count > 0{
                 self.dataArr.removeAll()
             }

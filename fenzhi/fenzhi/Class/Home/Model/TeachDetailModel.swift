@@ -68,6 +68,7 @@ class TeachDetailModel_data: Mappable {
 
     var zanUsers : [TeachDetailModel_data_zanUsers] = []
     var userInfo : UserInfoModel = UserInfoModel()
+    var videoInfo : GetmyfeedlistModel_data_videoInfo = GetmyfeedlistModel_data_videoInfo()
 
     init() {}
     required init?(map: Map){
@@ -97,6 +98,7 @@ class TeachDetailModel_data: Mappable {
         shareNum <- map["shareNum"]
         zanUsers <- map["zanUsers"]
         userInfo <- map["userInfo"]
+        videoInfo <- map["videoInfo"]
 
     }
 

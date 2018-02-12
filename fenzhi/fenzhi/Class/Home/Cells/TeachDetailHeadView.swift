@@ -7,6 +7,8 @@
 //  教学分享头部
 
 import UIKit
+import BMPlayer
+
 typealias TeachDetailHeadViewBlock = (_ model:TeachDetailModel_data_coursewares)->()
 typealias TeachDetailHeadViewZANSHANGBlock = (_ model:TeachDetailModel)->()
 typealias TeachDetailHeadViewImageViewBlock = (_ imageNum:Int)->()
@@ -27,6 +29,8 @@ class TeachDetailHeadView: UIView {
     var fenxiangBlock : TeachDetailHeadViewZANSHANGBlock!
     var iconImageBlock : TeachDetailHeadViewZANSHANGBlock!
     var imageBlock : TeachDetailHeadViewImageViewBlock!
+    var player:BMPlayer!
+    
 
     func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat,type : Int) {
         self.dataModel = model
@@ -101,11 +105,29 @@ class TeachDetailHeadView: UIView {
 
 //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 +
         if type == 0 {
+            
+            //是否视频
+            if model.data.videoInfo.videoUrl.count > 0 {
+                let playW = ip7(model.data.videoInfo.videoWidth/2)
+                let playH = ip7(model.data.videoInfo.videoHeight/2)
+                let playX = (KSCREEN_WIDTH - playW)/2
+                player = BMPlayer()
+                player.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
+                BMPlayerConf.shouldAutoPlay = false
+                BMPlayerConf.topBarShowInCase = .none
+                backView.addSubview(player)
+                lastFream = player.frame
+                let asset = BMPlayerResource(url: URL(string: model.data.videoInfo.videoUrl)!,
+                                             name: model.data.videoInfo.title)
+                player.setVideo(resource: asset)
+                
+            }
+            
             //教学
             if model.data.coursewares.count > 0 {
                 //文件
                 let imageX = ip7(30)
-                let imageY = ip7(28) + txtLabel.frame.maxY
+                let imageY = ip7(28) + lastFream.maxY
 
                 let imageWidth = viewW - ip7(60)
                 let imageHeight = ip7(65)

@@ -256,6 +256,12 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             if self.headData.data.coursewares.count > 0 {
                 headViewHeight = headViewHeight +  (ip7(80) * CGFloat(self.headData.data.coursewares.count))
             }
+            
+            if self.headData.data.videoInfo.videoUrl.count > 0 {
+                //有视频
+                headViewHeight = headViewHeight + ip7(self.headData.data.videoInfo.videoHeight/2) + ip7(10)
+                
+            }
         } else {
             //心得
             if self.headData.data.images.count > 0 {

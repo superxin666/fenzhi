@@ -8,7 +8,36 @@
 
 import UIKit
 import ObjectMapper
-
+class GetmyfeedlistModel_data_videoInfo: Mappable {
+    var title : String = ""
+    var videoCover : String = ""
+    var videoDuration : Int = 0
+    var videoHeight : Int = 0
+    var videoWidth : Int = 0
+    
+    var videoFormat : String = ""
+    var videoId : String = ""
+    var videoSize : String = ""
+    var videoUrl : String = ""
+    
+    init() {}
+    required init?(map: Map){
+        mapping(map: map)
+    }
+    // Mappable
+    func mapping(map: Map) {
+        
+        title <- map["title"]
+        videoCover <- map["videoCover"]
+        videoDuration <- map["videoDuration"]
+        videoHeight <- map["videoHeight"]
+        videoWidth <- map["videoWidth"]
+        videoFormat <- map["videoFormat"]
+        videoId <- map["videoId"]
+        videoSize <- map["videoSize"]
+        videoUrl <- map["videoUrl"]
+    }
+}
 class GetmyfeedlistModel_data_fenxList_coursewares: Mappable {
     var name : String = ""
     var type : String = ""
@@ -40,7 +69,10 @@ class GetmyfeedlistModel_data_fenxList: Mappable {
     var createTime : String = ""
     var updateTime : String = ""
     var userInfo : UserInfoModel = UserInfoModel()
-
+    
+    var videoId : String = ""
+    var videoInfo : GetmyfeedlistModel_data_videoInfo = GetmyfeedlistModel_data_videoInfo()
+    
     var likeNum: Int!
     var zanNum: Int!
     var commentNum: Int!
@@ -78,6 +110,9 @@ class GetmyfeedlistModel_data_fenxList: Mappable {
         commentNum <- map["commentNum"]
         commentNum <- map["commentNum"]
         userInfo <- map["userInfo"]
+        
+        videoId <- map["videoId"]
+        videoInfo <- map["videoInfo"]
 
     }
 }

@@ -138,6 +138,11 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
             if model.coursewares.count > 0 {
                 headViewHeight = headViewHeight +  (ip7(80) * CGFloat(model.coursewares.count))
             }
+            if model.videoInfo.videoUrl.count > 0 {
+                //有视频
+                headViewHeight = headViewHeight + ip7(model.videoInfo.videoHeight/2) + ip7(10)
+                
+            }
         } else {
             //心得
             if model.images.count > 0 {

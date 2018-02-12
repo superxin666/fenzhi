@@ -32,6 +32,7 @@ class TeachTableViewCell: UITableViewCell {
     
     let iconImageView:UIImageView = UIImageView()
     let moreImageView:UIImageView = UIImageView()
+    let videoImageView:UIImageView = UIImageView()
     let timeLabel : UILabel = UILabel()
     let nameLabel : UILabel = UILabel()
     let infoLabel : UILabel = UILabel()
@@ -114,11 +115,23 @@ class TeachTableViewCell: UITableViewCell {
         var lastFream = txtLabel.frame;
         let appadWidth = ip7(30)
         
+        
+        //视频
+        if model.videoInfo.videoUrl.count > 0 {
+            let videoImageViewW = ip7(model.videoInfo.videoWidth/2)
+            let videoImageViewX = (viewW - videoImageViewW)/2
+            self.videoImageView.frame = CGRect(x: videoImageViewX, y: lastFream.maxY + ip7(10), width: videoImageViewW, height: ip7(model.videoInfo.videoHeight/2))
+            self.videoImageView.kf.setImage(with: URL(string: model.videoInfo.videoCover))
+            backView.addSubview(self.videoImageView)
+            lastFream = self.videoImageView.frame;
+            
+        }
+        
         //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 +
         if model.coursewares.count > 0 {
             //文件
             let imageX = ip7(30)
-            let imageY = ip7(28) + txtLabel.frame.maxY
+            let imageY = ip7(28) + lastFream.maxY
             
             let imageWidth = viewW - ip7(60)
             let imageHeight = ip7(65)
@@ -163,7 +176,7 @@ class TeachTableViewCell: UITableViewCell {
             }
         }
         
-   if model.catalog.characters.count > 0 {
+   if model.catalog.count > 0 {
             //课时定位
             let dingweiImageView : UIImageView = UIImageView(image: #imageLiteral(resourceName: "icon_dingwei"))
             dingweiImageView.frame = CGRect(x: appadWidth, y: lastFream.maxY + ip7(35), width: ip7(20), height: ip7(20))

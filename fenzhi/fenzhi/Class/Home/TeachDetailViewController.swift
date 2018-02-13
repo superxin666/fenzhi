@@ -81,9 +81,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         print("keybordShow:\(height)")
     }
     func loadMoreData() {
-        if isFresh {
-            return
-        }
+//        if isFresh {
+//            return
+//        }
         page = page + 1
         self.getcommentlistData()
     }

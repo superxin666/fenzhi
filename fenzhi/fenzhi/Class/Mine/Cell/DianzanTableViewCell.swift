@@ -27,6 +27,19 @@ class DianzanTableViewCell: UITableViewCell {
         let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DianzanTableViewCell.iconImageClick))
         iconImageView.addGestureRecognizer(iconImageViewTap)
 
+        let redImageView = UIView(frame: CGRect(x: ip7(27), y:  (viewH - ip7(50))/2, width: ip7(10), height: ip7(10)))
+        redImageView.backgroundColor = .red
+        redImageView.kfb_makeRound()
+        self.addSubview(redImageView)
+        if model.status == 1 {
+            //
+            redImageView.isHidden = true
+        } else {
+            //
+            redImageView.isHidden = false
+        }
+        
+        
         let nameWidth = KSCREEN_WIDTH - ip7(19) - iconImageView.frame.maxX - ip7(31) - ip7(120)
         let nameLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(19), y:  ip7(25), width: nameWidth, height: ip7(24)))
         if conentModel.type == 0 {

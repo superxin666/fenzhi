@@ -42,15 +42,26 @@ class PinglunTableViewCell: UITableViewCell {
         let iconImageViewTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PinglunTableViewCell.image_Click))
         icoinImageView.addGestureRecognizer(iconImageViewTap)
         
+        let redImageView = UIView(frame: CGRect(x: ip7(25), y: ip7(23), width: ip7(10), height: ip7(10)))
+        redImageView.backgroundColor = .red
+        redImageView.kfb_makeRound()
+        self.addSubview(redImageView)
+        if model.status == 1 {
+            //
+            redImageView.isHidden = true
+        } else {
+            //
+            redImageView.isHidden = false
+        }
         //名字
         let nameWidth = viewW  - icoinImageView.frame.maxX - ip7(25) - ip7(56) - ip7(27)
         nameLabel.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  ip7(23), width: nameWidth, height: ip7(24))
         nameLabel.isUserInteractionEnabled = true
         nameLabel.textColor = dark_3_COLOUR
         if model.fenxInfo.type == 0 {
-            nameLabel.text = model.userInfo.name + "   点赞了您的教学分享"
+            nameLabel.text = model.userInfo.name + "   评论了您的教学分享"
         } else {
-            nameLabel.text = model.userInfo.name + "   点赞了您的心得分享"
+            nameLabel.text = model.userInfo.name + "   评论了您的心得分享"
         }
         nameLabel.font = fzFont_Medium(ip7(24))
         nameLabel.adjustsFontSizeToFitWidth = true

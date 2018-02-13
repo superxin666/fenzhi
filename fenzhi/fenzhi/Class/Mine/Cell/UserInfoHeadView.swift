@@ -111,7 +111,7 @@ class UserInfoHeadView: UIView {
             
             let lable : UILabel = UILabel(frame: CGRect(x: 0, y:  ip7(19), width: viewWidth, height: ip7(21)))
             lable.font = fzFont_Thin(ip7(21))
-            lable.text = "--"
+            lable.text = ""
             lable.textColor = dark_6_COLOUR
             lable.textAlignment = .center
             lable.adjustsFontSizeToFitWidth = true
@@ -142,25 +142,26 @@ class UserInfoHeadView: UIView {
     }
 
     func setUpData(model : ProfileMineModel_data) {
-        dataModel = model
-        
-        iconImageView.kf.setImage(with: URL(string: model.avatar))
-        nameLabel.text = model.name
-        dressLabel.text = model.cityName+" "+model.districtName+" "+model.schoolName+" "+model.gradeName
-        infoLabel.text = model.subjectName+" "+model.versionName
-        guanzhuLabel.text = "\(model.followNum!)"
-        fensiLabel.text = "\(model.fansNum!)"
-        zanLabel.text = "\(model.likeNum!)"
-        shoucangLabel.text = "\(model.favoriteNum!)"
-        
-        
-        if (model.isFollow) == 1 {
-            //已关注
-            self.guanzhuBtn.isSelected = true
-        } else {
-            self.guanzhuBtn.isSelected = false
+        if model.avatar.count > 0 {
+            dataModel = model
+            iconImageView.kf.setImage(with: URL(string: model.avatar))
+            nameLabel.text = model.name
+            dressLabel.text = model.cityName+" "+model.districtName+" "+model.schoolName+" "+model.gradeName
+            infoLabel.text = model.subjectName+" "+model.versionName
+            guanzhuLabel.text = "\(model.followNum!)"
+            fensiLabel.text = "\(model.fansNum!)"
+            zanLabel.text = "\(model.likeNum!)"
+            shoucangLabel.text = "\(model.favoriteNum!)"
+            
+            
+            if (model.isFollow) == 1 {
+                //已关注
+                self.guanzhuBtn.isSelected = true
+            } else {
+                self.guanzhuBtn.isSelected = false
+            }
+            
         }
-
     }
     
     

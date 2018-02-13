@@ -11,11 +11,13 @@ import QuickLook
 
 let HEARTCELLID_USERINFO = "HEARTCELL_USERINFO_ID"//
 let TEACHCELLID_USERINFO = "TEACHCELL__USERINFO_ID"//
+let HEADVIEWHEIGHT = ip7(382+60)
+
 class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
     
     var userId:Int!
     
-    let mainTabelView : UITableView = UITableView()
+    var mainTabelView : UITableView!
     let topBackView : UserInfoHeadView = UserInfoHeadView()
     
     let dataVC : MineDataManger = MineDataManger()
@@ -48,8 +50,7 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
         self.view.backgroundColor = backView_COLOUR
         self.navigation_title_fontsize(name: "用户详情", fontsize: 27)
         self.navigationBar_leftBtn()
-//        self.creatTableView()
-        self.creatTopView()
+        self.creatTableView()
         self.getHeadData()
     }
     
@@ -58,7 +59,8 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     
     func creatTableView() {
-        mainTabelView.frame = CGRect(x: 0, y: topBackView.frame.maxY + ip7(10), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - topBackView.frame.maxY - ip7(10))
+        mainTabelView = UITableView(frame: CGRect(x: 0, y: -LNAVIGATION_HEIGHT, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT + LNAVIGATION_HEIGHT), style: .grouped)
+
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -81,10 +83,7 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
         dataVC.other_user_profile(userId: userId!,completion: { (data) in
             weakSelf?.headDataModel = data as! ProfileMineModel
             if weakSelf?.headDataModel.errno == 0 {
-                weakSelf?.headViewSetData()
-//weakSelf?.headDataModel.data.type = 1
                 if weakSelf?.headDataModel.data.type == 0 {
-                    weakSelf?.creatTableView()
                      weakSelf?.getData()
                 }
 
@@ -98,8 +97,8 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
         topBackView.setUpData(model: headDataModel.data)
     }
     
-    func creatTopView() {
-        topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(382+60))
+    func creatTopView(){
+        topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: HEADVIEWHEIGHT)
         topBackView.creatHeadView(type: .other)
 
         topBackView.guanzhuViewBlock = { () in
@@ -119,8 +118,6 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
             self.navigationController?.pushViewController(vc, animated: true)
             
         }
-        self.view.addSubview(topBackView)
-        
     }
     //MARK:数据请求
     func loadMoreData() {
@@ -282,9 +279,16 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
         }
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return topBackView;
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        self.creatTopView();
+        self.headViewSetData()
+        return topBackView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return HEADVIEWHEIGHT
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < self.dataArr.count {

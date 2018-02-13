@@ -58,7 +58,7 @@ class UserInfoHeartTableViewCell: UITableViewCell {
         
         //文字底部 时间
         timeLabel.frame = CGRect(x: viewW - ip7(31) - ip7(300), y: lastFream.maxY + ip7(17), width: ip7(300), height: ip7(20))
-        timeLabel.text = "分享时间：" + String.getDate_userinfo_cell(dateStr: model.createTime)
+        timeLabel.text = "分享时间：" + String.getDate_detail(dateStr: model.createTime)
         timeLabel.font = fzFont_Thin(ip7(15))
         timeLabel.textColor  = dark_6_COLOUR
         timeLabel.textAlignment = .right

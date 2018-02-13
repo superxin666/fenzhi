@@ -193,6 +193,11 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
             if model.coursewares.count > 0 {
                 headViewHeight = headViewHeight +  (ip7(80) * CGFloat(model.coursewares.count))
             }
+            if model.videoInfo.videoUrl.count > 0 {
+                //有视频
+                headViewHeight = headViewHeight + ip7(model.videoInfo.videoHeight/2) + ip7(10)
+                
+            }
         } else {
             //心得
             if model.images.count > 0 {
@@ -203,7 +208,7 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
             }
         }
         
-        if model.catalog.characters.count > 0 {
+        if model.catalog.count > 0 {
             headViewHeight = headViewHeight + ip7(35) + ip7(21)
         }
         model.cellHeight = headViewHeight
@@ -241,7 +246,7 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
                     weakSelf?.homedataVC.downLoadFile(path: urlStr,name:name, completion: { (data) in
                         
                         weakSelf?.openFileUrl = data as! String
-                        if  (self.openFileUrl.characters.count > 0) {
+                        if  (self.openFileUrl.count > 0) {
                             KFBLog(message: "下载成功"+self.openFileUrl)
                             
                             weakSelf?.quickLookController.dataSource = self

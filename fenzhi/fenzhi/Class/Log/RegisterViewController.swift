@@ -316,31 +316,30 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
                     let str:String = data as! String
                     if str == "1" {
 
-                        //成功
+//                        成功
                         let vc : InfoViewController = InfoViewController()
                         vc.type = .res_first
                         weakSelf?.navigationController?.pushViewController(vc, animated: true)
 
 
-//                        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-//                        let cancelAction = UIAlertAction(title: "老师", style: .default, handler: {
-//                            (action: UIAlertAction) -> Void in
-//                            //成功
-//                            let vc : InfoViewController = InfoViewController()
-//                            vc.type = .res_first
-//                            weakSelf?.navigationController?.pushViewController(vc, animated: true)
-//
-//                        })
-//                        let AlbumAction = UIAlertAction(title: "游客", style: .default, handler: {
-//                            (action: UIAlertAction) -> Void in
-//                            let vc : InfoVisitorViewController = InfoVisitorViewController()
-//
-//                            weakSelf?.navigationController?.pushViewController(vc, animated: true)
-//
-//                        })
-//                        alertController.addAction(cancelAction)
-//                        alertController.addAction(AlbumAction)
-//                        self.present(alertController, animated: true, completion: nil)
+                        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+                        let cancelAction = UIAlertAction(title: "老师", style: .default, handler: {
+                            (action: UIAlertAction) -> Void in
+                            //成功
+                            let vc : InfoViewController = InfoViewController()
+                            vc.type = .res_first
+                            weakSelf?.navigationController?.pushViewController(vc, animated: true)
+
+                        })
+                        let AlbumAction = UIAlertAction(title: "游客", style: .default, handler: {
+                            (action: UIAlertAction) -> Void in
+                            let vc : InfoVisitorViewController = InfoVisitorViewController()
+                            weakSelf?.navigationController?.pushViewController(vc, animated: true)
+
+                        })
+                        alertController.addAction(cancelAction)
+                        alertController.addAction(AlbumAction)
+                        self.present(alertController, animated: true, completion: nil)
 
 
                     } else {

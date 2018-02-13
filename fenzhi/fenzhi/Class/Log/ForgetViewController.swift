@@ -211,14 +211,14 @@ class ForgetViewController: BaseViewController,UITextFieldDelegate {
              self.SVshowErro(infoStr: "请填写密码")
             return
         }
-        if keyStr.characters.count < 6 {
+        if keyStr.count < 6 {
             KFBLog(message: "密码至少六位")
             self.SVshowErro(infoStr: "密码至少六位")
             return
 
         }
 
-        if keyStr.characters.count > 20 {
+        if keyStr.count > 20 {
             KFBLog(message: "密码不能超过20位")
             self.SVshowErro(infoStr: "密码不能超过20位")
             return
@@ -392,7 +392,7 @@ class ForgetViewController: BaseViewController,UITextFieldDelegate {
 
     override func navigationLeftBtnClick() {
          self.SVdismiss()
-        self.navigationController?.popViewController(animated: true)
+         self.navigationController?.popViewController(animated: true)
     }
 
     override func didReceiveMemoryWarning() {

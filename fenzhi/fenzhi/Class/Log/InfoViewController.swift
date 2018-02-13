@@ -84,7 +84,10 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         self.view.backgroundColor = backView_COLOUR
         self.navigationBar_leftBtn()
-        self.navigationBar_rightBtn_title(name: "游客模式")
+        if self.type == .other {
+            self.navigationBar_rightBtn_title(name: "游客模式")
+        }
+
         self.navigation_title_fontsize(name: "完善资料", fontsize: 27)
         self.edgesForExtendedLayout = UIRectEdge.bottom
         self.creatUI()
@@ -506,7 +509,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     func login_click() {
         KFBLog(message: "开启纷知")
         //头像
-        if avatarStr.characters.count == 0 {
+        if avatarStr.count == 0 {
             self.SVshowErro(infoStr: "请选择头像")
             return
         }
@@ -514,7 +517,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         var cell : InfoTableViewCell!
         cell = mainTabelView.visibleCells[1] as! InfoTableViewCell
         nameStr = cell.nameStr
-        if cell.nameStr.characters.count == 0 {
+        if cell.nameStr.count == 0 {
             self.SVshowErro(infoStr: "请填写姓名")
             return
         }
@@ -529,7 +532,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             return
         }
         //书本
-        if bookNameStr.characters.count == 0 {
+        if bookNameStr.count == 0 {
             self.SVshowErro(infoStr: "请选择教材版本")
             return
         }
@@ -546,7 +549,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         }
 
         //学校
-        if schoolNameStr.characters.count == 0 {
+        if schoolNameStr.count == 0 {
             self.SVshowErro(infoStr: "请选择学校")
             return
         }
@@ -624,7 +627,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                 return
             }
 
-            if gradeNameStr.characters.count == 0 {
+            if gradeNameStr.count == 0 {
                 self.SVshowErro(infoStr: "请选择年级")
                 return
             }

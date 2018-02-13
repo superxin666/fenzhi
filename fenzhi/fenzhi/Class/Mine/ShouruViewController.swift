@@ -112,12 +112,13 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        var cell : ShouruTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: SHOURUELLID, for: indexPath) as! ShouruTableViewCell
+//        var cell : ShouruTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: SHOURUELLID, for: indexPath) as! ShouruTableViewCell
+
+//        if (cell == nil)  {
+        let cell = ShouruTableViewCell(style: .default, reuseIdentifier: SHOURUELLID)
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
-        if (cell == nil)  {
-            cell = ShouruTableViewCell(style: .default, reuseIdentifier: SHOURUELLID)
-        }
+//        }
         if indexPath.row < self.dataArr.count {
             cell.setUpUIWithModel_cellType(model: self.dataArr[indexPath.row])
         }

@@ -137,20 +137,20 @@ class commentTableViewCell: UITableViewCell {
             backView.isUserInteractionEnabled = true
             self.addSubview(backView)
             //删除按钮
-            delbtn.frame = CGRect(x: backView.frame.size.width - ip7(60), y: 0, width: ip7(60), height: ip7(53))
-            delbtn.setTitle("删除", for: .normal)
-            delbtn.backgroundColor = .white
-            delbtn.setTitleColor(blue_COLOUR, for: .normal)
-            delbtn.titleLabel?.font = fzFont_Medium(ip7(21))
-            delbtn.addTarget(self, action:#selector(commentTableViewCell.del_click), for: .touchUpInside)
-            backView.addSubview(delbtn)
-//            KFBLog(message: "\(model.userId)")
-//            KFBLog(message: LoginModelMapper.getLoginIdAndTokenInUD().loginId)
-            if "\(model.userId!)" == LoginModelMapper.getLoginIdAndTokenInUD().loginId{
-                delbtn.isHidden = false
-            } else {
-                delbtn.isHidden = true
-            }
+//            delbtn.frame = CGRect(x: backView.frame.size.width - ip7(60), y: 0, width: ip7(60), height: ip7(53))
+//            delbtn.setTitle("删除", for: .normal)
+//            delbtn.backgroundColor = .white
+//            delbtn.setTitleColor(blue_COLOUR, for: .normal)
+//            delbtn.titleLabel?.font = fzFont_Medium(ip7(21))
+//            delbtn.addTarget(self, action:#selector(commentTableViewCell.del_click), for: .touchUpInside)
+//            backView.addSubview(delbtn)
+////            KFBLog(message: "\(model.userId)")
+////            KFBLog(message: LoginModelMapper.getLoginIdAndTokenInUD().loginId)
+//            if "\(model.userId!)" == LoginModelMapper.getLoginIdAndTokenInUD().loginId{
+//                delbtn.isHidden = false
+//            } else {
+//                delbtn.isHidden = true
+//            }
 
             //名字
             
@@ -180,23 +180,38 @@ class commentTableViewCell: UITableViewCell {
 
         } else {
             //判断有没有删除按钮
-            //删除按钮
-            delbtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(60) - ip7(25), y: contentLabel.frame.maxY + ip7(10), width: ip7(60), height: ip7(40))
-            delbtn.setTitle("删除", for: .normal)
-            delbtn.backgroundColor = .clear
-            delbtn.setTitleColor(blue_COLOUR, for: .normal)
-            delbtn.titleLabel?.font = fzFont_Medium(ip7(21))
-            delbtn.addTarget(self, action:#selector(commentTableViewCell.del_click), for: .touchUpInside)
-            self.addSubview(delbtn)
-            //            KFBLog(message: "\(model.userId)")
-            //            KFBLog(message: LoginModelMapper.getLoginIdAndTokenInUD().loginId)
-            if "\(model.userId!)" == LoginModelMapper.getLoginIdAndTokenInUD().loginId{
-                delbtn.isHidden = false
-            } else {
-                delbtn.isHidden = true
-            }
+//            //删除按钮
+//            delbtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(60) - ip7(25), y: contentLabel.frame.maxY + ip7(10), width: ip7(60), height: ip7(40))
+//            delbtn.setTitle("删除", for: .normal)
+//            delbtn.backgroundColor = .clear
+//            delbtn.setTitleColor(blue_COLOUR, for: .normal)
+//            delbtn.titleLabel?.font = fzFont_Medium(ip7(21))
+//            delbtn.addTarget(self, action:#selector(commentTableViewCell.del_click), for: .touchUpInside)
+//            self.addSubview(delbtn)
+//            //            KFBLog(message: "\(model.userId)")
+//            //            KFBLog(message: LoginModelMapper.getLoginIdAndTokenInUD().loginId)
+//            if "\(model.userId!)" == LoginModelMapper.getLoginIdAndTokenInUD().loginId{
+//                delbtn.isHidden = false
+//            } else {
+//                delbtn.isHidden = true
+//            }
 
             backView.removeFromSuperview()
+        }
+        //删除按钮
+        delbtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(60) - ip7(25), y: model.cellHeight - ip7(40), width: ip7(60), height: ip7(40))
+        delbtn.setTitle("删除", for: .normal)
+        delbtn.backgroundColor = .clear
+        delbtn.setTitleColor(blue_COLOUR, for: .normal)
+        delbtn.titleLabel?.font = fzFont_Medium(ip7(21))
+        delbtn.addTarget(self, action:#selector(commentTableViewCell.del_click), for: .touchUpInside)
+        self.addSubview(delbtn)
+        //            KFBLog(message: "\(model.userId)")
+        //            KFBLog(message: LoginModelMapper.getLoginIdAndTokenInUD().loginId)
+        if "\(model.userId!)" == LoginModelMapper.getLoginIdAndTokenInUD().loginId{
+            delbtn.isHidden = false
+        } else {
+            delbtn.isHidden = true
         }
         //横线
         lineView.frame = CGRect(x: 0, y: model.cellHeight - 0.5, width: KSCREEN_WIDTH, height: 0.5)

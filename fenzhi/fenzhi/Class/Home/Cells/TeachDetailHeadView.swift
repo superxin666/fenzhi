@@ -87,10 +87,10 @@ class TeachDetailHeadView: UIView {
         //文字
         let str = model.data.content
         let txtW = viewW - ip7(50)
-        var txtH :CGFloat = str.getLabHeight(font: fzFont_Thin(ip7(21)), LabelWidth: txtW)
-        if txtH > ip7(21) * 4 {
-            txtH = ip7(21) * 4
-        }
+        let txtH :CGFloat = str.getLabHeight(font: fzFont_Thin(ip7(21)), LabelWidth: txtW)
+//        if txtH > ip7(21) * 4 {
+//            txtH = ip7(21) * 4
+//        }
         let txtLabel : UILabel = UILabel(frame: CGRect(x: ip7(25), y: infoLabel.frame.maxY + ip7(17), width: txtW, height: txtH))
         txtLabel.text = str
         txtLabel.font = fzFont_Thin(ip7(21))

@@ -81,6 +81,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         print("keybordShow:\(height)")
     }
     func loadMoreData() {
+        if isFresh {
+            return
+        }
         page = page + 1
         self.getcommentlistData()
     }
@@ -245,10 +248,10 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         //文字
         let str = self.headData.data.content
         let txtW = KSCREEN_WIDTH - ip7(50)
-        var txtH :CGFloat = str.getLabHeight(font: fzFont_Thin(ip7(21)), LabelWidth: txtW)
-        if txtH > ip7(21) * 4 {
-            txtH = ip7(21) * 4
-        }
+        let txtH :CGFloat = str.getLabHeight(font: fzFont_Thin(ip7(21)), LabelWidth: txtW)
+//        if txtH > ip7(21) * 4 {
+//            txtH = ip7(21) * 4
+//        }
 
         headViewHeight = headViewHeight + txtH
         if self.headData.data.type == 0 {
@@ -303,6 +306,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     //MARK:获取评论列表数据
     func getcommentlistData() {
+        KFBLog(message: "评论列表请求")
         weak var weakSelf = self
         dataVC.getcommentlist(fenxId: fenxId!, pageNum: page, count: count, completion: { (data) in
             weakSelf?.commentlistData = data as! GetcommentlistModel
@@ -328,65 +332,60 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                         } else {
                             //上拉加载
                             let newArr = (weakSelf?.commentlistData.data.list[0].commentList)!
-//                            if weakSelf?.page == 1 {
-//                                weakSelf?.newTitle  = self.commentlistData.data.list[0].title
-//                            }
                             if newArr.count > 0 {
                                 weakSelf?.otherArr =  (weakSelf?.otherArr)! + newArr
                                 for model in (weakSelf?.otherArr)! {
                                     weakSelf?.getCommentCellHeight(model: model)
                                 }
                             } else {
-                                 weakSelf?.SVshowErro(infoStr: "没有数据了")
-                                 weakSelf?.mainTabelView.mj_footer.endRefreshing()
-
+                                weakSelf?.SVshowErro(infoStr: "没有数据了")
+                                if (weakSelf?.mainTabelView.mj_footer.isRefreshing)! {
+                                   weakSelf?.mainTabelView.mj_footer.endRefreshing()
+                                }
+                                
                             }
                         }
-
+                        
                     } else  {
                         //1 最新评论
+                        if weakSelf?.page  == 1 {
+    
+                        } else {
+                            //上拉加载
+                        }
+                        
                         let subarr = (weakSelf?.commentlistData.data.list[0].commentList)!
                         if subarr.count > 0 {
                             weakSelf?.newArr = (weakSelf?.newArr)! + (weakSelf?.commentlistData.data.list[0].commentList)!
                             for model in (weakSelf?.newArr)! {
                                 weakSelf?.getCommentCellHeight(model: model)
                             }
+                            if (weakSelf?.mainTabelView.mj_footer.isRefreshing)! {
+                                weakSelf?.mainTabelView.mj_footer.endRefreshing()
+                            }
                         } else {
                             weakSelf?.SVshowErro(infoStr: "没有更多数据了")
-                            weakSelf?.mainTabelView.mj_footer.endRefreshing()
-
+                            if (weakSelf?.mainTabelView.mj_footer.isRefreshing)! {
+                                weakSelf?.mainTabelView.mj_footer.endRefreshing()
+                            }
+                            
                         }
-
-                    }
-
-                    if (weakSelf?.page == 1) && (weakSelf?.isFresh == false) {
-//                         weakSelf?.creatTableView()
                         
-                    } else {
-//                        if weakSelf?.isNoData == true {
-////                            weakSelf?.nodataImageViewBackView.removeFromSuperview()
-////                            weakSelf?.mainScrollow.contentSize = CGSize(width: 0, height: (weakSelf?.headViewHeight)!  + KSCREEN_HEIGHT - ip7(20) - ip7(80))
-////                            weakSelf?.creatTableView()
-//                        } else {
-                            weakSelf?.mainTabelView.reloadData()
-                            weakSelf?.mainTabelView.mj_footer.endRefreshing()
-//                        }
-
                     }
+//                    weakSelf?.mainTabelView.reloadData()
+                    weakSelf?.mainTabelView.mj_footer.endRefreshing()
                     
-           
+                    
                 } else {
                     //没有评论
                     if (weakSelf?.hotArr.count)! == 0 && (weakSelf?.newArr.count)! == 0 {
                         KFBLog(message: "没有评论")
-//                        weakSelf?.mainTabelView.removeFromSuperview()
-//                        weakSelf?.noCommendData()
-                          weakSelf?.mainTabelView.mj_footer.endRefreshing()
+                        weakSelf?.mainTabelView.mj_footer.endRefreshing()
                     } else {
                         weakSelf?.mainTabelView.mj_footer.endRefreshing()
-
+                        
                     }
-
+                    
                 }
                 
                 KFBLog(message: self.newArr.count)
@@ -401,6 +400,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }) { (erro) in
                weakSelf?.SVshowErro(infoStr: "请求失败")
         }
+        
+        
         if isshowzanshang {
             isshowzanshang = false
             //展示赞赏列表
@@ -574,22 +575,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             let model :SubmitcommentModel = data as! SubmitcommentModel
             if model.errno == 0 {
                 weakSelf?.SVshowSucess(infoStr: "评论成功")
-//                //刷新列表
-//                if weakSelf?.sectionNum == 2 {
-//                    //最新列表里
-//                    weakSelf?.otherArr.append(model.data)
-//
-//                } else {
-//                    //其他列表里加入
-//                    weakSelf?.newArr.append(model.data)
-//                }
-                KFBLog(message: self.newArr.count)
-                KFBLog(message: self.hotArr.count)
-                KFBLog(message: self.otherArr.count)
-                
-//                weakSelf?.mainTabelView.reloadData()
-                  weakSelf?.reflishData()
-
+                weakSelf?.reflishData()
 
             } else {
                 weakSelf?.SVshowErro(infoStr: model.errmsg)
@@ -654,8 +640,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainTabelView.showsHorizontalScrollIndicator = false
         mainTabelView.register(commentTableViewCell.self, forCellReuseIdentifier: COMMONTELLID)
         mainTabelView.mj_footer = footer
-        mainTabelView.tableHeaderView = headView
         footer.setRefreshingTarget(self, refreshingAction: #selector(TeachDetailViewController.loadMoreData))
+        mainTabelView.tableHeaderView = headView
         self.view.addSubview(mainTabelView)
 
 //        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight + mainTabelView.contentSize.height)
@@ -716,15 +702,19 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
         cell.setUpUIWithModel_cellType(model: model)
        weak var weakSelf = self
+    
         cell.pinglunViewBlock = {(data) in
+            KFBLog(message: "评论")
             weakSelf?.ispinglun = "0"
             weakSelf?.pinglunUserModel = data
             weakSelf?.showTxt_click()
         }
         cell.delViewBlock = {(data) in
+            KFBLog(message: "删除")
             weakSelf?.delcomment(delModel: data)
         }
         cell.iconViewBlock = {(data) in
+
             let vc = UserInfoViewController()
             vc.userId  = data.userId
             vc.hidesBottomBarWhenPushed = true

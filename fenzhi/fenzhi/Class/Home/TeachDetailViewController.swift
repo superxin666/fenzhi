@@ -100,6 +100,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
         page = 1
         self.isFresh = true
+        self.mainTabelView.mj_footer.resetNoMoreData()
         self.getcommentlistData()
     }
 
@@ -364,9 +365,10 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                                 weakSelf?.mainTabelView.mj_footer.endRefreshing()
                             }
                         } else {
-                            weakSelf?.SVshowErro(infoStr: "没有更多数据了")
+                         
                             if (weakSelf?.mainTabelView.mj_footer.isRefreshing)! {
-                                weakSelf?.mainTabelView.mj_footer.endRefreshing()
+                                weakSelf?.SVshowErro(infoStr: "没有更多数据了")
+                                weakSelf?.mainTabelView.mj_footer.endRefreshingWithNoMoreData()
                             }
                             
                         }

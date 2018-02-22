@@ -112,8 +112,8 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
         scrollViewBack.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
         scrollViewBack.contentSize = CGSize(width: CGFloat(arrCount) * KSCREEN_WIDTH, height: KSCREEN_HEIGHT + 64)
         scrollViewBack.contentOffset = CGPoint(x: KSCREEN_WIDTH * CGFloat(indexNum), y: 0)
-        scrollViewBack.showsVerticalScrollIndicator = false
-        scrollViewBack.showsHorizontalScrollIndicator = false
+//        scrollViewBack.showsVerticalScrollIndicator = false
+//        scrollViewBack.showsHorizontalScrollIndicator = false
 
         scrollViewBack.alwaysBounceHorizontal = true
         scrollViewBack.alwaysBounceVertical = false
@@ -137,17 +137,18 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
      
 
             let size = imageView.image?.size
-            var W = CGFloat((size?.width)!)/2
-            var H = CGFloat((size?.height)!)/2
+            var W = CGFloat((size?.width)!)/3
+            let H = CGFloat((size?.height)!)/3
+            var Y = (KSCREEN_HEIGHT - H)/2
             KFBLog(message: "宽度\(W)")
             KFBLog(message: "高度\(H)")
             if W > KSCREEN_WIDTH {
                 W = KSCREEN_WIDTH
             }
-            if H > KSCREEN_HEIGHT {
-               H = KSCREEN_HEIGHT
+            if H >= KSCREEN_HEIGHT {
+               Y = 0
             }
-            imageView.frame = CGRect(x:CGFloat(i) * KSCREEN_WIDTH + (KSCREEN_WIDTH - W)/2, y: (KSCREEN_HEIGHT - H)/2, width: W, height: H)
+            imageView.frame = CGRect(x:CGFloat(i) * KSCREEN_WIDTH + (KSCREEN_WIDTH - W)/2, y: Y, width: W, height: H)
             scrollViewBack.addSubview(imageView)
 
         }
@@ -170,14 +171,11 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
         self.navigation_title_fontsize(name: titleStr, fontsize: 27)
         removeIndex = index
         //
-//        var arrCount :Int!
-//        if isNet {
-//            arrCount = self.imageNameArr.count
-//        } else {
-//            arrCount = self.imageArr.count
-//        }
-//        scrollViewBack.contentSize = CGSize(width: CGFloat(arrCount) * KSCREEN_WIDTH, height: KSCREEN_HEIGHT + 64)
-        
+        let size = imageView.image?.size
+        let H = CGFloat((size?.height)!)/3
+        if H > KSCREEN_HEIGHT {
+            scrollViewBack.contentSize.height = H
+        }
         
     }
 

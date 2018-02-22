@@ -278,7 +278,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             type = 1
         }
         
-        dataVC.getschoollist(regionId: districtNum!, type: type, pageNum: 1, count: 20, completion: { (data) in
+        dataVC.getschoollist(regionId: dataModel.data.district, type: type, pageNum: 1, count: 20, completion: { (data) in
             let model : GetschoollistModel = data as! GetschoollistModel
             weakSelf?.schoolArr = model.data.schoolList
             self.pickerView.reloadComponent(0)
@@ -428,7 +428,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             pickerView.selectRow(0, inComponent: 0, animated: true)
             pickerView.selectRow(0, inComponent: 1, animated: true)
             pickerView.selectRow(0, inComponent: 2, animated: true)
-        } else if currectNum == 5{
+        } else if currectNum == 6{
             pickerView.selectRow(0, inComponent: 0, animated: true)
             pickerView.selectRow(0, inComponent: 1, animated: true)
         } else {
@@ -462,18 +462,21 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             self.dataModel.data.city = cityNum!
             self.dataModel.data.district = districtNum!
         case 2:
+            KFBLog(message: "手机号")
+
+        case 3:
             cell = mainTabelView.visibleCells[2] as! InfoTableViewCell
             dirShowStr = schoolNameStr
             self.dataModel.data.school = schoolNum!
-        case 3:
+        case 4:
             cell = mainTabelView.visibleCells[3] as! InfoTableViewCell
             dirShowStr = gradeNameStr
             self.dataModel.data.grade = gradeNum!
-        case 4:
+        case 5:
             cell = mainTabelView.visibleCells[4] as! InfoTableViewCell
             dirShowStr = subjectNameStr
             self.dataModel.data.subject = Int(subjectNum)!
-        case 5:
+        case 6:
             cell = mainTabelView.visibleCells[5] as! InfoTableViewCell
             //"\(bookNum)"
             dirShowStr = versionStr + bookNameStr
@@ -523,14 +526,15 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             } else {
                 return districtArr.count//区
             }
-            
         case 2:
-            return schoolArr.count
+           return 0
         case 3:
-            return gradeArr.count
+            return schoolArr.count
         case 4:
-            return subjectArr.count
+            return gradeArr.count
         case 5:
+            return subjectArr.count
+        case 6:
             if component == 0 {
                 return versionArr.count//版本
             } else {
@@ -546,7 +550,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if currectNum == 1 {
             return 3
-        } else if currectNum == 5 {
+        } else if currectNum == 6 {
             return 2
         } else {
             return 1
@@ -582,25 +586,24 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                 nameStr = model.name//city
 //                currectDisModel = model
             }
-            
-        case 2:
+        case 3://学校
             let model : GetschoollistModel_schoolList = schoolArr[row]
             nameStr = model.name
             schoolNum = model.id
             schoolNameStr = model.name
             nameStr = model.name
-        case 3://年纪
+        case 4://年纪
             let model : CommonModel_data_grade = gradeArr[row]
             nameStr = model.name
             gradeNum = Int(model.id)!
             gradeType = Int(model.type)!
             gradeNameStr = model.name
-        case 4://学科
+        case 5://学科
             let model : CommonModel_data_subject = subjectArr[row]
             nameStr = model.name
             subjectNum = model.id
             subjectNameStr = model.name
-        case 5://教材版本
+        case 6://教材版本
             
             if component == 0 {
                 let model : CommonModel_data_version = versionArr[row]
@@ -694,17 +697,23 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                 self.getRegsionData(type: 0, parentId: provinceNum!)
                 self.cgreatPickerView()
             }
-        } else if indexPath.row == 2 {
+        }
+        else if indexPath.row == 2 {
+            KFBLog(message: "手机号")
+ 
+        }
+        
+        else if indexPath.row == 3 {
             KFBLog(message: "学校")
             self.getSchoolData()
             self.cgreatPickerView()
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 4 {
             //年级
             self.cgreatPickerView()
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 5 {
             //学科
             self.cgreatPickerView()
-        } else if indexPath.row == 5{
+        } else if indexPath.row == 6{
             //教材版本
             versionStr = ""
             versionNum = 0

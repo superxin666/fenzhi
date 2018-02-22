@@ -12,15 +12,15 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
     var imageArr :[UIImage]!
     var imageNameArr :[String]!
     var indexNum :Int!
-    let scrollView = UIScrollView()
+    let scrollViewBack = UIScrollView()
     var removeIndex : Int!
     var saveImage : UIImage!
 
     var showImageBlock : showImageViewBlock!
 
     var isNet : Bool!//true网络 false 本地
-
-
+    var imageView : UIImageView!
+    var arrCount :Int!
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        self.navigationbar_transparency()
@@ -86,10 +86,10 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
             //删除
             if removeIndex < imageArr.count {
                 imageArr.remove(at: removeIndex)
-                for view in scrollView.subviews{
+                for view in scrollViewBack.subviews{
                     view.removeFromSuperview()
                 }
-                scrollView.removeFromSuperview()
+                scrollViewBack.removeFromSuperview()
                 indexNum = 0
                 let titleStr = "\(indexNum+1)/\(imageArr.count)"
                 self.navigation_title_fontsize(name: titleStr, fontsize: 27)
@@ -103,32 +103,30 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
 //    }
 
     func creatUI() {
-        var arrCount :Int!
         if isNet {
             arrCount = self.imageNameArr.count
         } else {
             arrCount = self.imageArr.count
         }
 
+        scrollViewBack.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
+        scrollViewBack.contentSize = CGSize(width: CGFloat(arrCount) * KSCREEN_WIDTH, height: KSCREEN_HEIGHT + 64)
+        scrollViewBack.contentOffset = CGPoint(x: KSCREEN_WIDTH * CGFloat(indexNum), y: 0)
+        scrollViewBack.showsVerticalScrollIndicator = false
+        scrollViewBack.showsHorizontalScrollIndicator = false
 
-        scrollView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
-        scrollView.contentSize = CGSize(width: CGFloat(arrCount) * KSCREEN_WIDTH, height: KSCREEN_HEIGHT + 64)
-        scrollView.contentOffset = CGPoint(x: KSCREEN_WIDTH * CGFloat(indexNum), y: 0)
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.showsHorizontalScrollIndicator = false
+        scrollViewBack.alwaysBounceHorizontal = true
+        scrollViewBack.alwaysBounceVertical = false
 
-        scrollView.alwaysBounceHorizontal = true
-        scrollView.alwaysBounceVertical = false
+        scrollViewBack.isPagingEnabled = true
 
-        scrollView.isPagingEnabled = true
+        scrollViewBack.delegate = self
 
-        scrollView.delegate = self
-
-        self.view.addSubview(scrollView)
+        self.view.addSubview(scrollViewBack)
 
         for i in 0..<arrCount {
 
-            let imageView = UIImageView()
+            imageView = UIImageView()
             if isNet {
                 let imageStr :String = self.imageNameArr[i]
                 imageView.kf.setImage(with: URL(string: imageStr))
@@ -150,17 +148,13 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
                H = KSCREEN_HEIGHT
             }
             imageView.frame = CGRect(x:CGFloat(i) * KSCREEN_WIDTH + (KSCREEN_WIDTH - W)/2, y: (KSCREEN_HEIGHT - H)/2, width: W, height: H)
-            scrollView.addSubview(imageView)
+            scrollViewBack.addSubview(imageView)
 
         }
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        KFBLog(message: scrollView.contentOffset)
-//        let index = scrollView.contentOffset.x / KSCREEN_HEIGHT
-//        KFBLog(message: index)
-//        let titleStr = "\(index)/\(imageArr.count)"
-//        self.navigation_title_fontsize(name: titleStr, fontsize: 27)
+
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         KFBLog(message: scrollView.contentOffset)
@@ -175,10 +169,17 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
         }
         self.navigation_title_fontsize(name: titleStr, fontsize: 27)
         removeIndex = index
-
+        //
+//        var arrCount :Int!
+//        if isNet {
+//            arrCount = self.imageNameArr.count
+//        } else {
+//            arrCount = self.imageArr.count
+//        }
+//        scrollViewBack.contentSize = CGSize(width: CGFloat(arrCount) * KSCREEN_WIDTH, height: KSCREEN_HEIGHT + 64)
+        
+        
     }
-
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

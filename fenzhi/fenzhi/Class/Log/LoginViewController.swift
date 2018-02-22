@@ -158,7 +158,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
         let attributeStr = NSMutableAttributedString(string: str)
         let str2 : String  = "   马上注册"
         let attributeStr2 = NSMutableAttributedString(string: str2)
-        let range : NSRange = NSRange.init(location: 0, length: str2.characters.count)
+        let range : NSRange = NSRange.init(location: 0, length: str2.count)
         attributeStr2.addAttribute(NSForegroundColorAttributeName, value: FZColor(red: 253, green: 122, blue: 207, alpha: 1.0), range: range)
         attributeStr.append(attributeStr2)
         regNameLabel.setAttributedTitle(attributeStr, for: .normal)
@@ -169,7 +169,9 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
 
     }
     func endEdit() {
+        KFBLog(message: "结束编辑")
         self.view.endEditing(true)
+        
     }
     func forget_clik()   {
         let vc = ForgetViewController()
@@ -204,7 +206,7 @@ class LoginViewController: BaseViewController,UITextFieldDelegate {
 
             return
         }
-        if keyStr.characters.count < 6 {
+        if keyStr.count < 6 {
             self.SVshowErro(infoStr: "密码至少六位")
             print("密码至少六位")
             return

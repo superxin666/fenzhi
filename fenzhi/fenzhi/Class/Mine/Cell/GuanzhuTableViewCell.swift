@@ -27,7 +27,7 @@ class GuanzhuTableViewCell: UITableViewCell {
         self.addSubview(iconImageView)
         
     
-        let nameWidth = KSCREEN_WIDTH - ip7(19) - iconImageView.frame.maxX - ip7(31) - ip7(90)
+        let nameWidth = KSCREEN_WIDTH - ip7(19) - iconImageView.frame.maxX - ip7(31) - ip7(100)
         let nameLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(19), y:  ip7(25), width: nameWidth, height: ip7(24)))
         nameLabel.text = model.name
         nameLabel.isUserInteractionEnabled = true
@@ -36,12 +36,12 @@ class GuanzhuTableViewCell: UITableViewCell {
         nameLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(nameLabel)
         
-        let timeLabel : UILabel = UILabel(frame: CGRect(x: KSCREEN_WIDTH - ip7(31) - ip7(90), y: ip7(25), width: ip7(90), height: ip7(20)))
-        timeLabel.text = model.createTime
+        let timeLabel : UILabel = UILabel(frame: CGRect(x: KSCREEN_WIDTH - ip7(31) - ip7(100), y: ip7(25), width: ip7(100), height: ip7(20)))
+        timeLabel.text = String.getDate_detail(dateStr: model.createTime)
         timeLabel.font = fzFont_Thin(ip7(15))
         timeLabel.textColor  = dark_6_COLOUR
         timeLabel.textAlignment = .right
-        timeLabel.adjustsFontSizeToFitWidth = true
+//        timeLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(timeLabel)
         
         

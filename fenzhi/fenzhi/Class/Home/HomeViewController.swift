@@ -31,6 +31,8 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     let quickLookController = QLPreviewController()
     var qucikModel = GetmyfeedlistModel_data_fenxList()
     var openFileUrl :String!
+    
+    /// 0是教师 1是游客
     var userType:String!
 
 
@@ -43,23 +45,18 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.freshData()
+        self.getData()
         self.title = "首页"
         self.navigationBar_rightBtn_image(image: #imageLiteral(resourceName: "home_search"))
         //设置红点
         self.view.backgroundColor = backView_COLOUR
-
-//        self.creatSearchBar()
         userType = LoginModelMapper.getLoginIdAndTokenInUD().userType
-//        userType = "1"
         if userType == "0" {
             self.creatTopView()
             self.creatTableView()
         } else {
             self.creatTableView()
         }
-
-//        self.getData()
     }
 
     
@@ -72,6 +69,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     func freshData() {
         page = 1
         self.dataArr.removeAll()
+        self.mainTabelView.mj_footer.resetNoMoreData()
         self.getData()
     }
     
@@ -91,12 +89,6 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                     weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.fenxList)!
                     weakSelf?.mainTabelView.reloadData()
                     NotificationCenter.default.addObserver(self, selector: #selector(self.teachBtnClik), name: NSNotification.Name(rawValue: "gorelease"), object: nil)
-//                    let ishaveFile :String? = UserDefaults.standard.value(forKey: "gorelease") as! String?
-//                    if ishaveFile != nil && ishaveFile == "1" {
-//                        KFBLog(message: "进去文件发布")
-//                        UserDefaults.standard.set("0", forKey: "gorelease")
-//                        weakSelf?.teachBtnClik()
-//                    }
                 } else {
                     if weakSelf?.dataArr.count == 0 {
                         weakSelf?.mainTabelView.removeFromSuperview()
@@ -112,13 +104,12 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.dataModel.errmsg)!)
             }
             weakSelf?.mainTabelView.mj_footer.endRefreshing()
-//            weakSelf?.mainTabelView.mj_header.endRefreshing()
+            weakSelf?.mainTabelView.mj_header.endRefreshing()
 
         }) { (erro) in
             weakSelf?.SVshowErro(infoStr: "网络请求失败")
-//            weakSelf?.mainTabelView.mj_header.endRefreshing()
+            weakSelf?.mainTabelView.mj_header.endRefreshing()
             weakSelf?.mainTabelView.mj_footer.endRefreshing()
-
         }
     }
     
@@ -271,9 +262,9 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
         footer.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.loadMoreData))
-//        header.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.freshData))
+        header.setRefreshingTarget(self, refreshingAction: #selector(HomeViewController.freshData))
         mainTabelView.mj_footer = footer
-//        mainTabelView.mj_header = header
+        mainTabelView.mj_header = header
         mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
         self.view.addSubview(mainTabelView)
@@ -450,6 +441,9 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
     // MARK: scrollView 代理
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        
+        
         if userType == "0" {
             newContentOffsetY = scrollView.contentOffset.y
             if (newContentOffsetY > oldContentOffsetY && oldContentOffsetY>contentOffsetY) {

@@ -55,9 +55,9 @@ class ShouruTableViewCell: UITableViewCell {
 
 
         let infoLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(24), y: nameLabel.frame.maxY + ip7(22), width: KSCREEN_WIDTH  -  iconImageView.frame.maxX - ip7(24), height: ip7(21)))
-        infoLabel.text = model.catalog
+        infoLabel.text = model.content
         infoLabel.font = fzFont_Thin(ip7(21))
-        infoLabel.textColor  = blue_COLOUR
+        infoLabel.textColor  = dark_6_COLOUR
         infoLabel.textAlignment = .left
         infoLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(infoLabel)

@@ -63,9 +63,9 @@ class ShoucangTableViewCell: UITableViewCell {
 
 
         let infoLabel : UILabel = UILabel(frame: CGRect(x: typeLabel.frame.maxX, y: nameLabel.frame.maxY + ip7(14), width: KSCREEN_WIDTH  - typeLabel.frame.maxX, height: ip7(21)))
-        infoLabel.text = model.catalog
+        infoLabel.text = model.content
         infoLabel.font = fzFont_Thin(ip7(21))
-        infoLabel.textColor  = blue_COLOUR
+        infoLabel.textColor  = dark_6_COLOUR
         infoLabel.textAlignment = .left
         infoLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(infoLabel)

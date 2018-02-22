@@ -15,6 +15,7 @@ class GetzanlistModel_data_list: Mappable {
     var fenxId : Int = 0
     var type : Int = 0
     var catalog : String = ""
+    var content : String = ""
     var catalogId : String = ""
     var fenxStatus : Int = 0
     var price : Int = 0
@@ -38,7 +39,8 @@ class GetzanlistModel_data_list: Mappable {
         fenxStatus <- map["fenxStatus"]
         createTime <- map["createTime"]
         updateTime <- map["updateTime"]
-        
+        content <- map["content"]
+
     }
 }
 

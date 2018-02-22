@@ -65,9 +65,9 @@ class DianzanTableViewCell: UITableViewCell {
 
 
         let infoLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(19), y: nameLabel.frame.maxY + ip7(10), width: KSCREEN_WIDTH  - iconImageView.frame.maxX - ip7(19), height: ip7(21)))
-        infoLabel.text = conentModel.catalog
+        infoLabel.text = conentModel.content
         infoLabel.font = fzFont_Thin(ip7(21))
-        infoLabel.textColor  = blue_COLOUR
+        infoLabel.textColor  = dark_6_COLOUR
         infoLabel.textAlignment = .left
         infoLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(infoLabel)

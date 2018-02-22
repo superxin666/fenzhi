@@ -13,7 +13,7 @@ class GetmessagelistLikeModel_data_messageList_fenxInfo: Mappable {
     var fenxId : Int = 0
     var type : Int = 0
     var catalog : String = ""
-
+    var content : String = ""
     init() {}
     required init?(map: Map){
         mapping(map: map)
@@ -24,6 +24,7 @@ class GetmessagelistLikeModel_data_messageList_fenxInfo: Mappable {
         fenxId <- map["fenxId"]
         type <- map["type"]
         catalog <- map["catalog"]
+        content <- map["content"]
     }
 
 }

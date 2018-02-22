@@ -18,6 +18,7 @@ class GetincomelistModl_data_incomeList: Mappable {
     var type: Int = 0
     var price: Int = 0
     var catalog : String = ""
+    var content : String = ""
     var catalogId : String = ""
     var createTime : String = ""
     init() {}
@@ -35,6 +36,7 @@ class GetincomelistModl_data_incomeList: Mappable {
         price <- map["price"]
         catalog <- map["catalog"]
         catalogId <- map["catalogId"]
+        content <- map["content"]
         createTime <- map["createTime"]
 
     }

@@ -21,6 +21,10 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
     var isNet : Bool!//true网络 false 本地
     var imageView : UIImageView!
     var arrCount :Int!
+    var lastPageNum = 0
+    var imageSizeArr : [UIImageView] = []
+    
+    
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        self.navigationbar_transparency()
@@ -86,6 +90,7 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
             //删除
             if removeIndex < imageArr.count {
                 imageArr.remove(at: removeIndex)
+
                 for view in scrollViewBack.subviews{
                     view.removeFromSuperview()
                 }
@@ -110,23 +115,23 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
         }
 
         scrollViewBack.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
-        scrollViewBack.contentSize = CGSize(width: CGFloat(arrCount) * KSCREEN_WIDTH, height: KSCREEN_HEIGHT + 64)
+        scrollViewBack.contentSize = CGSize(width: CGFloat(arrCount) * KSCREEN_WIDTH, height: KSCREEN_HEIGHT )
         scrollViewBack.contentOffset = CGPoint(x: KSCREEN_WIDTH * CGFloat(indexNum), y: 0)
 //        scrollViewBack.showsVerticalScrollIndicator = false
 //        scrollViewBack.showsHorizontalScrollIndicator = false
 
         scrollViewBack.alwaysBounceHorizontal = true
         scrollViewBack.alwaysBounceVertical = false
-
         scrollViewBack.isPagingEnabled = true
-
         scrollViewBack.delegate = self
-
         self.view.addSubview(scrollViewBack)
-
+        
+        var firstImageViewH : CGFloat = 0.0
+        
         for i in 0..<arrCount {
 
             imageView = UIImageView()
+            imageView.tag = 0
             if isNet {
                 let imageStr :String = self.imageNameArr[i]
                 imageView.kf.setImage(with: URL(string: imageStr))
@@ -134,14 +139,17 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
                 let image = self.imageArr[i]
                 imageView.image =  image
             }
-     
-
+    
             let size = imageView.image?.size
             var W = CGFloat((size?.width)!)/3
             let H = CGFloat((size?.height)!)/3
             var Y = (KSCREEN_HEIGHT - H)/2
+            if i == 0 {
+                firstImageViewH = H
+            }
             KFBLog(message: "宽度\(W)")
             KFBLog(message: "高度\(H)")
+            imageSizeArr.append(imageView)
             if W > KSCREEN_WIDTH {
                 W = KSCREEN_WIDTH
             }
@@ -150,32 +158,47 @@ class ImageShowViewController: BaseViewController,UIScrollViewDelegate {
             }
             imageView.frame = CGRect(x:CGFloat(i) * KSCREEN_WIDTH + (KSCREEN_WIDTH - W)/2, y: Y, width: W, height: H)
             scrollViewBack.addSubview(imageView)
-
         }
+        if firstImageViewH > KSCREEN_HEIGHT {
+         
+           scrollViewBack.contentSize = CGSize(width: CGFloat(arrCount) * KSCREEN_WIDTH, height: firstImageViewH)
+               KFBLog(message: "asdf \( scrollViewBack.contentSize.height)")
+        }
+       
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+  
         KFBLog(message: scrollView.contentOffset)
         let index : Int = Int(scrollView.contentOffset.x / KSCREEN_WIDTH)
-        KFBLog(message: index)
-
-        var titleStr = ""
-        if self.isNet {
-            titleStr = "\(index+1)/\(imageNameArr.count)"
-        } else {
-            titleStr = "\(index+1)/\(imageArr.count)"
-        }
-        self.navigation_title_fontsize(name: titleStr, fontsize: 27)
         removeIndex = index
-        //
-        let size = imageView.image?.size
-        let H = CGFloat((size?.height)!)/3
-        if H > KSCREEN_HEIGHT {
-            scrollViewBack.contentSize.height = H
+        KFBLog(message: index)
+        if lastPageNum == index {
+            KFBLog(message: "相同")
+            
+        } else {
+            KFBLog(message: "不同")
+            lastPageNum = index
+            var titleStr = ""
+            if self.isNet {
+                titleStr = "\(index+1)/\(imageNameArr.count)"
+            } else {
+                titleStr = "\(index+1)/\(imageArr.count)"
+            }
+            self.navigation_title_fontsize(name: titleStr, fontsize: 27)
+            //
+            let imageView : UIImageView = imageSizeArr[index]
+            
+            let size = imageView.image?.size
+            let H = CGFloat((size?.height)!)/3
+            if H > KSCREEN_HEIGHT {
+                scrollViewBack.contentSize.height = H
+            }
         }
+
         
     }
 

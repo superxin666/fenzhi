@@ -97,7 +97,7 @@ class PinglunTableViewCell: UITableViewCell {
         var lastFream = returnContent.frame
         
         //如果有被评论内容 则是回复我的评论 没有则是评论的分享
-        if model.toCommentInfo.content.characters.count > 0 {
+        if model.toCommentInfo.content.count > 0 {
             content.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  returnContent.frame.maxY + ip7(15), width: labelW, height: ip7(53))
             content.isUserInteractionEnabled = true
             content.text =  model.toCommentInfo.content
@@ -113,7 +113,7 @@ class PinglunTableViewCell: UITableViewCell {
 
         
         //定位 有定位显示定位 没有定位显示 内容
-        if model.fenxInfo.catalog.characters.count > 0 {
+        if model.fenxInfo.catalog.count > 0 {
             dingweiLabel.frame = CGRect(x: icoinImageView.frame.maxX + ip7(25), y:  lastFream.maxY + ip7(25), width: labelW, height: ip7(21))
             dingweiLabel.isUserInteractionEnabled = true
             dingweiLabel.textColor = blue_COLOUR

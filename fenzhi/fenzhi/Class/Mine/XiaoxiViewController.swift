@@ -108,7 +108,15 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
 
 
     func readMessageRequest(messageId : Int,fenxId:Int, ishow:Bool)  {
-        self.requestVC.readMessage(messageId: messageId, typeStr: messageTypeStr, completion: { (data) in
+        var subType : Int
+        if isLeft {
+            //全部清除
+            subType = 0
+        } else {
+            //单个清除
+            subType = 1
+        }
+        self.requestVC.readMessage(messageId: messageId, typeStr: messageTypeStr,subType: subType, completion: { (data) in
             let model : SmsModel = data as! SmsModel
             if model.errno == 0 {
                 KFBLog(message: "消息阅读成功")
@@ -125,6 +133,28 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             
         }) { (erro) in
             self.SVshowErro(infoStr: "请求失败")
+        }
+    }
+    
+
+    /// 返回 标记数据已读
+    ///
+    /// - Parameters:
+    ///   - messageId: <#messageId description#>
+    ///   - fenxId: <#fenxId description#>
+    ///   - ishow: <#ishow description#>
+    func readMessageReq(messageId : Int,fenxId:Int, ishow:Bool) {
+        self.requestVC.readMessage(messageId: messageId, typeStr: messageTypeStr,subType: 0, completion: { (data) in
+            let model : SmsModel = data as! SmsModel
+            if model.errno == 0 {
+                KFBLog(message: "消息阅读成功")
+                
+            } else {
+                KFBLog(message: "消息阅读失败")
+            }
+            self.navigationController?.popViewController(animated: true)
+        }) { (erro) in
+            self.navigationController?.popViewController(animated: true)
         }
     }
 
@@ -319,11 +349,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             }
             cell.returnClickBlock =  {(click_model) in
                 KFBLog(message: "回复")
-                let vc = TeachDetailViewController()
-                vc.fenxId = click_model.id
-                vc.isshowpinglun = true
-                vc.hidesBottomBarWhenPushed = true
-                weakSelf?.navigationController?.pushViewController(vc, animated: true)
+                weakSelf?.readMessageRequest(messageId: click_model.messageId,fenxId:click_model.fenxInfo.fenxId,ishow: true)
             }
             return cell;
             
@@ -355,7 +381,17 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
 
     override func navigationLeftBtnClick() {
-        self.navigationController?.popViewController(animated: true)
+        if isLeft {
+            if self.dataArr.count > 0 {
+                let model : GetmessagelistLikeModel_data_messageList = self.dataArr[0]
+                self.readMessageReq(messageId: model.messageId,fenxId:model.fenxInfo.fenxId,ishow: false)
+            }  else {
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {

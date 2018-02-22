@@ -76,7 +76,8 @@ class TeachDetailHeadView: UIView {
 
         //用户信息
         let infoLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(19), y: nameLabel.frame.maxY + ip7(14), width: viewW - ip7(19) - iconImageView.frame.maxX, height: ip7(21)))
-        infoLabel.text = model.data.userInfo.cityName + " " + model.data.userInfo.gradeName+model.data.userInfo.gradeName+"老师"
+        //" " + model.data.userInfo.gradeName
+        infoLabel.text = model.data.userInfo.cityName + " " + model.data.userInfo.gradeName + model.data.userInfo.subjectName+"老师"
         infoLabel.font = fzFont_Thin(ip7(21))
         infoLabel.textColor  = dark_6_COLOUR
         infoLabel.textAlignment = .left
@@ -203,7 +204,7 @@ class TeachDetailHeadView: UIView {
 
 //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 + // ip(35)+ip(21)//课时定位 +
 
-        if model.data.catalog.characters.count > 0 {
+        if model.data.catalog.count > 0 {
             //课时定位
             let dingweiImageView : UIImageView = UIImageView(image: #imageLiteral(resourceName: "icon_dingwei"))
             dingweiImageView.frame = CGRect(x: appadWidth, y: lastFream.maxY + ip7(35), width: ip7(20), height: ip7(20))

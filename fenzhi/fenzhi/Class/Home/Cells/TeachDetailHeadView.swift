@@ -112,10 +112,11 @@ class TeachDetailHeadView: UIView {
                 let playW = ip7(model.data.videoInfo.videoWidth/2)
                 let playH = ip7(model.data.videoInfo.videoHeight/2)
                 let playX = (KSCREEN_WIDTH - playW)/2
-                player = BMPlayer()
-                player.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
                 BMPlayerConf.shouldAutoPlay = false
                 BMPlayerConf.topBarShowInCase = .none
+                player = BMPlayer()
+                player.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
+            
                 backView.addSubview(player)
                 lastFream = player.frame
                 let asset = BMPlayerResource(url: URL(string: model.data.videoInfo.videoUrl)!,

@@ -135,9 +135,9 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>是否允许纷知访问您的相机？</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>是否允许纷知访问您的相册？</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>是否允许纷知访问您的相册？</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>是否允许纷知访问您的相册？</string>
 	<key>UIAppFonts</key>
 	<array>

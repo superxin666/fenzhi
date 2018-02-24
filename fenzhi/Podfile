@@ -20,7 +20,7 @@ target 'fenzhi' do
     pod 'AliyunOSSiOS'
 	pod 'BMPlayer', '~> 0.9.1'
 	pod 'GTSDK'
-
+    pod 'SnapKit'
   target 'fenzhiTests' do
     inherit! :search_paths
     # Pods for testing

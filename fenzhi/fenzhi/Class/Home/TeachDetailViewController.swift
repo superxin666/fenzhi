@@ -8,6 +8,7 @@
 
 import UIKit
 import QuickLook
+import BMPlayer
 let COMMONTELLID = "COMMONTELL_ID"//
 class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
     var fenxId :Int!
@@ -24,6 +25,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     let headView : TeachDetailHeadView =  TeachDetailHeadView()
 
     var headViewHeight : CGFloat = 0.0
+    var videY : CGFloat = 0.0
     var sectionNum = 1
     var hotArr : [GetcommentlistModel_data_list_commentList] = []
     var otherArr : [GetcommentlistModel_data_list_commentList] = []
@@ -56,17 +58,27 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     var qucikModel = GetmyfeedlistModel_data_fenxList()
     var openFileUrl :String!
     
+    var player:BMPlayer!
+    
+    override var shouldAutorotate: Bool{
+        return true
+    }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        return [.all]
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.edgesForExtendedLayout = UIRectEdge.bottom
         self.view.backgroundColor = backView_COLOUR
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+
         self.navigationBar_leftBtn()
         self.getHeadData()
         self.creatTableView()
-//        self.getcommentlistData()
+        self.getcommentlistData()
+        
+        
     }
     func keyboardWillShow(notification: NSNotification) {
         let userinfo: NSDictionary = notification.userInfo! as NSDictionary
@@ -81,6 +93,24 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         frame.origin.y = KSCREEN_HEIGHT - height - ip7(260)
         self.txtTextViewBack.frame = frame
         print("keybordShow:\(height)")
+    }
+    func creatPlayerView() {
+        player = BMPlayer()
+        self.view.addSubview(player)
+        //        player.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
+        //                player.playerLayer?.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
+        player.snp.makeConstraints({ (make) in
+            //            make.top.equalTo(self.view).offset(20)
+            //            make.left.right.equalTo(self.view).offset(0)
+            make.top.equalTo(self.view).offset(videY)
+            make.width.equalTo(KSCREEN_WIDTH)
+            make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(KSCREEN_WIDTH)
+        })
+        
+        let asset = BMPlayerResource(url: URL(string: self.headData.data.videoInfo.videoUrl)!,
+                                     name: self.headData.data.videoInfo.title)
+        player.setVideo(resource: asset)
+
     }
     func loadMoreData() {
 //        if isFresh {
@@ -257,6 +287,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 //        }
 
         headViewHeight = headViewHeight + txtH
+
         if self.headData.data.type == 0 {
             //资料
             if self.headData.data.coursewares.count > 0 {
@@ -265,8 +296,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             
             if self.headData.data.videoInfo.videoUrl.count > 0 {
                 //有视频
-                headViewHeight = headViewHeight + ip7(self.headData.data.videoInfo.videoHeight/2) + ip7(10)
-                
+                headViewHeight = headViewHeight + KSCREEN_WIDTH * 9.0/16.0
             }
         } else {
             //心得
@@ -348,7 +378,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                                 
                             }
                         }
-                        
+//                        self.mainTabelView.reloadData()
                     } else  {
                         //1 最新评论
                         if weakSelf?.page  == 1 {
@@ -376,7 +406,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                         }
                         
                     }
-//                    weakSelf?.mainTabelView.reloadData()
+                    weakSelf?.mainTabelView.reloadData()
                     weakSelf?.mainTabelView.mj_footer.endRefreshing()
                     
                     
@@ -384,8 +414,14 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                     //没有评论
                     if (weakSelf?.hotArr.count)! == 0 && (weakSelf?.newArr.count)! == 0 {
                         KFBLog(message: "没有评论")
+                        if self.page > 1  {
+                           
+                        } else {
+                          self.mainTabelView.reloadData()
+                        }
                         weakSelf?.mainTabelView.mj_footer.endRefreshing()
                     } else {
+                        
                         weakSelf?.mainTabelView.mj_footer.endRefreshing()
                         
                     }
@@ -399,7 +435,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
             } else {
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.headData.errmsg)!)
             }
-            self.mainTabelView.reloadData()
+//            self.mainTabelView.reloadData()
+//            self.creatPlayerView()
 
         }) { (erro) in
                weakSelf?.SVshowErro(infoStr: "请求失败")
@@ -450,7 +487,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     func creatTxtView() {
         
         let veiwHeight = ip7(80)
-        let backView : UIView = UIView(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(80) - LNAVIGATION_HEIGHT, width: KSCREEN_HEIGHT, height: veiwHeight))
+        let backView : UIView = UIView(frame: CGRect(x: 0, y: KSCREEN_HEIGHT - ip7(80), width: KSCREEN_HEIGHT, height: veiwHeight))
         backView.backgroundColor = .white
         self.view.addSubview(backView)
         
@@ -638,7 +675,14 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     //MARK:tableView
     func creatTableView() {
         isNoData = false
-        mainTabelView.frame = CGRect(x: 0, y:ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20)  - ip7(80) - LNAVIGATION_HEIGHT)
+          self.view.addSubview(mainTabelView)
+//        mainTabelView.frame = CGRect(x: 0, y:ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20)  - ip7(80) - LNAVIGATION_HEIGHT)
+        mainTabelView.snp.makeConstraints { (make) in
+            make.top.equalTo(LNAVIGATION_HEIGHT + ip7(20))
+            make.left.right.equalTo(self.view)
+            make.bottom.equalTo(0)
+            
+        }
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;
         mainTabelView.dataSource = self;
@@ -650,7 +694,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         mainTabelView.mj_footer = footer
         footer.setRefreshingTarget(self, refreshingAction: #selector(TeachDetailViewController.loadMoreData))
         mainTabelView.tableHeaderView = headView
-        self.view.addSubview(mainTabelView)
+      
 
 //        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight + mainTabelView.contentSize.height)
     }

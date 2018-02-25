@@ -291,6 +291,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         application.applicationIconBadgeNumber = 0        // 标签
         KFBLog(message: "\n>>>[Receive RemoteNotification]:\(userInfo)\n\n")
+        let ID : Int = userInfo["fenxId"] as! Int
+//        if ID != nil {
+            self.showMain()
+            self.makeRedView()
+            let vc = TeachDetailViewController()
+            vc.fenxId = ID
+            vc.hidesBottomBarWhenPushed = true
+            self.window?.rootViewController?.navigationController?.pushViewController(vc, animated: true)
+            
+//        }
+    
 
     }
     

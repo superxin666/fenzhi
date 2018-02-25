@@ -30,6 +30,8 @@ class TeachDetailHeadView: UIView {
     var iconImageBlock : TeachDetailHeadViewZANSHANGBlock!
     var imageBlock : TeachDetailHeadViewImageViewBlock!
     var player:BMPlayer!
+    var bigBtn : UIButton!
+    var videoFream : CGRect!
     
 
     func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat,type : Int) {
@@ -109,19 +111,34 @@ class TeachDetailHeadView: UIView {
             
             //是否视频
             if model.data.videoInfo.videoUrl.count > 0 {
-                let playW = ip7(model.data.videoInfo.videoWidth/2)
-                let playH = ip7(model.data.videoInfo.videoHeight/2)
-                let playX = (KSCREEN_WIDTH - playW)/2
+   
+
+                let playW = KSCREEN_WIDTH
+                let playH = KSCREEN_WIDTH * 9.0/16.0
+//                let playX = (KSCREEN_WIDTH - playW)/2
                 BMPlayerConf.shouldAutoPlay = false
-                BMPlayerConf.topBarShowInCase = .none
+                BMPlayerConf.topBarShowInCase = .horizantalOnly
+                BMPlayerConf.enableVolumeGestures = false
+                BMPlayerConf.enableBrightnessGestures = false
                 player = BMPlayer()
-                player.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
-            
-                backView.addSubview(player)
-                lastFream = player.frame
+                 backView.addSubview(player)
+//                self.window?.addSubview(player)
+                
+//                player.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
+//                player.playerLayer?.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
+                player.snp.makeConstraints({ (make) in
+                    make.top.equalTo(self).offset(lastFream.maxY + ip7(10))
+                    make.left.right.equalTo(self.window!)
+                    make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(KSCREEN_WIDTH)
+                })
+
+//                lastFream = player.frame
                 let asset = BMPlayerResource(url: URL(string: model.data.videoInfo.videoUrl)!,
                                              name: model.data.videoInfo.title)
                 player.setVideo(resource: asset)
+//                let playW = KSCREEN_WIDTH
+//                let playH = KSCREEN_WIDTH * 9/16
+                lastFream = CGRect(x: 0, y: lastFream.maxY + ip7(10), width: playW, height: playH)
                 
             }
             
@@ -424,7 +441,7 @@ class TeachDetailHeadView: UIView {
         let tagNum = tap.view!.tag
         let model = self.dataModel.data.coursewares[tagNum]
 
-        if model.file.characters.count > 0 {
+        if model.file.count > 0 {
             if let _ = docBlock {
                 docBlock(model)
             }
@@ -449,6 +466,24 @@ class TeachDetailHeadView: UIView {
         if let _ = imageBlock  {
             imageBlock(tagNum!)
         }
+    }
+    func bigClick(sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            //大
+            KFBLog(message: "大")
+            player.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT)
+        } else {
+            //小
+            KFBLog(message: "小")
+            player.frame = videoFream
+        }
+    }
+    func top() {
+        KFBLog(message: "上")
+    }
+    func bottom() {
+        KFBLog(message: "下")
     }
 
 }

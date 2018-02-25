@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     var window: UIWindow?
     var fileManager = FileManager.default
     let redView = UIView()
-    
+    var tab : UITabBarController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -132,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
 
         //大底部导航栏
         let vcArr = [homeNv,RecordNV,PersonaNv]
-        let tab : UITabBarController = UITabBarController()
+        tab = UITabBarController()
         tab.tabBar.barTintColor = blue_COLOUR
         tab.delegate = self
         UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object: UIColor.white, forKey:NSForegroundColorAttributeName as NSCopying) as? [String : AnyObject], for:UIControlState.normal)
@@ -292,17 +292,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         application.applicationIconBadgeNumber = 0        // 标签
         KFBLog(message: "\n>>>[Receive RemoteNotification]:\(userInfo)\n\n")
         let ID : Int = userInfo["fenxId"] as! Int
-//        if ID != nil {
-            self.showMain()
-            self.makeRedView()
-            let vc = TeachDetailViewController()
-            vc.fenxId = ID
-            vc.hidesBottomBarWhenPushed = true
-            self.window?.rootViewController?.navigationController?.pushViewController(vc, animated: true)
-            
-//        }
+        //        if ID != nil {
+        self.showMain()
+        self.makeRedView()
+        let vc = TeachDetailViewController()
+        vc.fenxId = ID
+        vc.hidesBottomBarWhenPushed = true
+        self.tab.childViewControllers[0].navigationController?.pushViewController(vc, animated: true)
     
-
+        //        }
+        
+        
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

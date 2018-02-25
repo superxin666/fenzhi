@@ -13,6 +13,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     var fenxId :Int!
     var isshowzanshang : Bool = false
     var isshowpinglun : Bool = false
+    var isshowpinglun_other : Bool = false
+    
 
     let mainScrollow : UIScrollView = UIScrollView()
     let mainTabelView : UITableView = UITableView()
@@ -411,7 +413,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
         if isshowpinglun {
             isshowpinglun = false
-            //展示赞赏列表
+            //展示评论
             self.liuyan_click()
         }
     }
@@ -479,6 +481,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     //MARK:显示打字窗口
     func showTxt_click() {
+        returnLabel.removeFromSuperview()
         self.view.window?.addSubview(self.maskView)
         self.creatTxtUI()
         txtTextView.becomeFirstResponder()
@@ -486,6 +489,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     }
     
     func dismissTxtView() {
+        returnLabel.removeFromSuperview()
         self.txtTextViewBack.removeFromSuperview()
         txtTextView.resignFirstResponder()
         self.maskView.removeFromSuperview()
@@ -500,6 +504,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.txtTextViewBack.backgroundColor = .white
         self.maskView.addSubview(self.txtTextViewBack)
         txtTextView.delegate = self
+        txtTextView.text = ""
         txtTextView.frame = CGRect(x: ip7(20), y: ip7(20), width: KSCREEN_WIDTH - ip7(40), height: ip7(327/2))
         txtTextView.font = fzFont_Thin(ip7(18))
         txtTextView.textColor = dark_3_COLOUR
@@ -507,8 +512,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         txtTextView.kfb_makeRadius(radius: 7)
         self.txtTextViewBack.addSubview(txtTextView)
         
-        if ispinglun == "0" {
-//            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged) name:UITextViewTextDidChangeNotification object:nil];
+        if ispinglun == "0" || isshowpinglun_other{
+            KFBLog(message: "显示回复人")
+            isshowpinglun_other = false
             NotificationCenter.default.addObserver(self, selector: #selector(self.textChanged), name: NSNotification.Name.UITextViewTextDidChange, object: nil)
             
             //评论用户 需要添加用户名字

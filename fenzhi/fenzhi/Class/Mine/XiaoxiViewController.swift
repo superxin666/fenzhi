@@ -30,6 +30,11 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     
     var netType : String = ""
     var messageTypeStr = "like"
+    
+    
+    /// 回复人的数据模型
+    var selectedUserModel : GetcommentlistModel_data_list_commentList!
+    
 
 
     override func viewWillAppear(_ animated: Bool) {
@@ -125,6 +130,14 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                 KFBLog(message: "消息阅读失败")
             }
             let vc = TeachDetailViewController()
+            if ishow {
+                //显示评论
+                vc.isshowpinglun_other = true
+                vc.pinglunUserModel = self.selectedUserModel
+            } else {
+                //不显示评论
+                
+            }
             vc.fenxId = fenxId
             vc.isshowpinglun = ishow
             vc.hidesBottomBarWhenPushed = true
@@ -349,6 +362,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             }
             cell.returnClickBlock =  {(click_model) in
                 KFBLog(message: "回复")
+                self.selectedUserModel = click_model
                 weakSelf?.readMessageRequest(messageId: click_model.messageId,fenxId:click_model.fenxInfo.fenxId,ishow: true)
             }
             return cell;
@@ -364,6 +378,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId,ishow: false)
         } else {
             let model : GetcommentlistModel_data_list_commentList = self.dataArr_Comment[indexPath.row]
+            selectedUserModel = model;
             self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId,ishow: true)
             
         }

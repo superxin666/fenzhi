@@ -83,7 +83,7 @@
                     //心得
                     [LogDataMangerViewController setSelectCouse_name_id_heartWithName:name couseid:catid ishaveinfo:@"1"];
                 } else {
-                    //教学
+                    //资料
                     [LogDataMangerViewController setSelectCouse_name_id_teachWithName:name couseid:catid ishaveinfo:@"1"];
                 }
                 [weakself.delegate sure_click];

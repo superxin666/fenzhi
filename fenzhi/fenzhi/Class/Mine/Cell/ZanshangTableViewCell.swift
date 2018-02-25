@@ -50,7 +50,7 @@ class ZanshangTableViewCell: UITableViewCell {
 
         let typeLabel : UILabel = UILabel(frame: CGRect(x: ip7(27), y: nameLabel.frame.maxY + ip7(22), width: ip7(110), height: ip7(21)))
         if model.type == 0 {
-            typeLabel.text = "教学分享："
+            typeLabel.text = "资料分享："
         } else {
             typeLabel.text = "心得分享："
 

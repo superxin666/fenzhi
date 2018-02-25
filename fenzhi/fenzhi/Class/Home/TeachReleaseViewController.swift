@@ -72,7 +72,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView), name: NSNotification.Name(rawValue: "reloadFile"), object: nil)
-        self.navigation_title_fontsize(name: "教学分享", fontsize: 27)
+        self.navigation_title_fontsize(name: "资料分享", fontsize: 27)
         self.view.backgroundColor = .white
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "发布")

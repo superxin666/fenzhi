@@ -43,7 +43,7 @@ class DianzanTableViewCell: UITableViewCell {
         let nameWidth = KSCREEN_WIDTH - ip7(19) - iconImageView.frame.maxX - ip7(31) - ip7(120)
         let nameLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(19), y:  ip7(25), width: nameWidth, height: ip7(24)))
         if conentModel.type == 0 {
-            nameLabel.text = userModel.name + "   点赞了您的教学分享"
+            nameLabel.text = userModel.name + "   点赞了您的资料分享"
         } else {
             nameLabel.text = userModel.name + "   点赞了您的心得分享"
         }

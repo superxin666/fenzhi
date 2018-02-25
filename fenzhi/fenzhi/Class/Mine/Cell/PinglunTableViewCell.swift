@@ -59,7 +59,7 @@ class PinglunTableViewCell: UITableViewCell {
         nameLabel.isUserInteractionEnabled = true
         nameLabel.textColor = dark_3_COLOUR
         if model.fenxInfo.type == 0 {
-            nameLabel.text = model.userInfo.name + "   评论了您的教学分享"
+            nameLabel.text = model.userInfo.name + "   评论了您的资料分享"
         } else {
             nameLabel.text = model.userInfo.name + "   评论了您的心得分享"
         }

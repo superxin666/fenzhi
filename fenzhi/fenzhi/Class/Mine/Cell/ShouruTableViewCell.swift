@@ -32,7 +32,7 @@ class ShouruTableViewCell: UITableViewCell {
         let nameWidth = KSCREEN_WIDTH - iconImageView.frame.maxX - ip7(24) - ip7(40) - ip7(120)
         let nameLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(24), y:  ip7(25), width: nameWidth, height: ip7(21)))
         if model.type == 0 {
-            nameLabel.text = model.name+"赞赏了您的教学分享"
+            nameLabel.text = model.name+"赞赏了您的资料分享"
 
         } else {
             nameLabel.text = model.name+"赞赏了您的心得分享"

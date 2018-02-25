@@ -51,7 +51,7 @@ class ShoucangTableViewCell: UITableViewCell {
 
         let typeLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(19), y: nameLabel.frame.maxY + ip7(14), width: ip7(125), height: ip7(24)))
         if model.type == 0 {
-            typeLabel.text = "教学分享："
+            typeLabel.text = "资料分享："
         } else {
             typeLabel.text = "心得分享："
 

@@ -141,7 +141,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
 
         headViewHeight = headViewHeight + txtH
         if model.type == 0 {
-            //教学
+            //资料
             if model.coursewares.count > 0 {
                 headViewHeight = headViewHeight +  (ip7(80) * CGFloat(model.coursewares.count))
             }
@@ -304,7 +304,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                     let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
                     
                     if model.type == 0 {
-                        //教学
+                        //资料
                         let cell = TeachTableViewCell(style: .default, reuseIdentifier: TEACHCELLID)
                         cell.backgroundColor = .clear
                         cell.selectionStyle = .none

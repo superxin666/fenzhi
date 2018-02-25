@@ -4,7 +4,7 @@
 //
 //  Created by lvxin on 2017/9/19.
 //  Copyright © 2017年 Xunqiu. All rights reserved.
-//  教学分享头部
+//  资料分享头部
 
 import UIKit
 import BMPlayer
@@ -125,7 +125,7 @@ class TeachDetailHeadView: UIView {
                 
             }
             
-            //教学
+            //资料
             if model.data.coursewares.count > 0 {
                 //文件
                 let imageX = ip7(30)
@@ -231,7 +231,7 @@ class TeachDetailHeadView: UIView {
  //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 + // ip(35)+ip(21)//课时定位 + ip(30) + IP(21) + ip(15) + 1p(50) + // (ip(29) + imageWidth * CGFloat(backViewNum)) + 105
         //赞赏
         let zanshangLabel : UILabel = UILabel(frame: CGRect(x: 0, y: lineView.frame.maxY + ip7(30), width: KSCREEN_WIDTH, height: ip7(21)))
-        zanshangLabel.text = "如果教学分享对您有帮助，请记得赞赏呦！"
+        zanshangLabel.text = "如果资料分享对您有帮助，请记得赞赏呦！"
         zanshangLabel.font = fzFont_Thin(ip7(21))
         zanshangLabel.textColor  = dark_3_COLOUR
         zanshangLabel.textAlignment = .center

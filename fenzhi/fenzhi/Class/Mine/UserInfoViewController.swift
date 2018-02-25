@@ -186,7 +186,7 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
         
         headViewHeight = headViewHeight + txtH
         if model.type == 0 {
-            //教学
+            //资料
             if model.coursewares.count > 0 {
                 headViewHeight = headViewHeight +  (ip7(80) * CGFloat(model.coursewares.count))
             }
@@ -225,7 +225,7 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
             let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
             model.indexRow = indexPath.row
             if model.type == 0 {
-                //教学
+                //资料
 //                var cell : UserInfoShareTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID_USERINFO, for: indexPath) as! UserInfoShareTableViewCell
 //
 //                if (cell == nil)  {

@@ -13,5 +13,5 @@
 @interface DingweiViewControlleroc : UIViewController
 @property (nonatomic,copy) NSString *mainUrl;
 @property (nonatomic,assign) id<sureDelegate> delegate;
-@property (nonatomic,assign) BOOL isHeart;//教学 心得
+@property (nonatomic,assign) BOOL isHeart;//资料 心得
 @end

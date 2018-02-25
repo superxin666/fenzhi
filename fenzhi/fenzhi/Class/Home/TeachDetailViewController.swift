@@ -138,8 +138,8 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
         //设置标题
         if self.headData.data.type! == 0 {
-            //教学
-            self.navigation_title_fontsize(name: "教学分享详情", fontsize: 27)
+            //资料
+            self.navigation_title_fontsize(name: "资料分享详情", fontsize: 27)
         } else {
             //心得
             self.navigation_title_fontsize(name: "心得分享详情", fontsize: 27)
@@ -213,7 +213,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                 titleStr = "心得分享"
                 
             } else {
-                titleStr = "教学分享"
+                titleStr = "资料分享"
             }
 
             let desStr = model.data.content
@@ -256,7 +256,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
         headViewHeight = headViewHeight + txtH
         if self.headData.data.type == 0 {
-            //教学
+            //资料
             if self.headData.data.coursewares.count > 0 {
                 headViewHeight = headViewHeight +  (ip7(80) * CGFloat(self.headData.data.coursewares.count))
             }

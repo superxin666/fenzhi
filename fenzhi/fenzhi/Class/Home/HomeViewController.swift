@@ -125,7 +125,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         
         headViewHeight = headViewHeight + txtH
         if model.type == 0 {
-            //教学
+            //资料
             if model.coursewares.count > 0 {
                 headViewHeight = headViewHeight +  (ip7(80) * CGFloat(model.coursewares.count))
             }
@@ -173,11 +173,11 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         topBackView.backgroundColor = .white
         self.view.addSubview(topBackView)
 
-        //教学分享  
+        //资料分享
         let height = ip7(21)
         let btnY = (viewHeight - height)/2
         let stBtn : UIButton = UIButton(frame: CGRect(x: 0, y: btnY, width: KSCREEN_WIDTH/2, height: height))
-        stBtn.setTitle("教学分享", for: .normal)
+        stBtn.setTitle("资料分享", for: .normal)
         stBtn.setImage(#imageLiteral(resourceName: "icon_jxfx"), for: .normal)
         stBtn.setTitleColor(FZColor(red: 102, green: 102, blue: 102, alpha: 1.0), for: .normal)
         stBtn.titleLabel?.font = fzFont_Medium(ip7(21))
@@ -315,7 +315,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
             let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row]
             
             if model.type == 0 {
-                //教学
+                //资料
 //                var cell : TeachTableViewCell!  = tableView.dequeueReusableCell(withIdentifier: TEACHCELLID, for: indexPath) as! TeachTableViewCell
 //
 //                if (cell == nil)  {

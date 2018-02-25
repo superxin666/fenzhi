@@ -410,7 +410,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         
         
         let nameStr : String = LogDataMangerViewController.getSelectCouse_name_id_teach().name
-        if nameStr.characters.count > 0  {
+        if nameStr.count > 0  {
             //有课时定位
             tdBtn.frame = CGRect(x: nsetBtn.frame.maxX + ip7 (10), y: 0, width: ip7(55), height: ip7(55))
         } else {
@@ -420,7 +420,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         }
         //图片按钮
         let picBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55)))
-        picBtn.setImage(#imageLiteral(resourceName: "button_fj"), for: .normal)
+        picBtn.setImage(#imageLiteral(resourceName: "dingweinew"), for: .normal)
         picBtn.backgroundColor = .clear
         picBtn.addTarget(self, action:#selector(self.pdf_click), for: .touchUpInside)
         btnBackView.addSubview(picBtn)

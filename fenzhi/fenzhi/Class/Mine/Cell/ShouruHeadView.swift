@@ -13,7 +13,7 @@ class ShouruHeadView: UIView {
 
 
 
-    func setUpUIWithModel_cellType() {
+    func setUpUIWithModel_cellType(model : GetincomelistModl_data) {
         let viewH = ip7(120)
 
         let backView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: viewH))
@@ -33,7 +33,7 @@ class ShouruHeadView: UIView {
         backView.addSubview(label)
 
         let monyLabel : UILabel = UILabel(frame: CGRect(x: label.frame.maxX + ip7(10), y:  (viewH - ip7(65))/2, width: ip7(120), height:ip7(25) ))
-        monyLabel.text = "\(90)元"
+        monyLabel.text = "\(model.totalMoney)元"
         monyLabel.isUserInteractionEnabled = true
         monyLabel.textColor = blue_COLOUR
         monyLabel.font = fzFont_Medium(ip7(27))

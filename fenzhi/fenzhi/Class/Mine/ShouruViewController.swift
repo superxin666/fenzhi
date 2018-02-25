@@ -129,7 +129,7 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let  view = ShouruHeadView(frame: CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(140)))
         view.backgroundColor = backView_COLOUR
-        view.setUpUIWithModel_cellType()
+        view.setUpUIWithModel_cellType(model:self.dataModel.data)
         return view
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

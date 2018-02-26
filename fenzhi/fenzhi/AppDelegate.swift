@@ -291,16 +291,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         application.applicationIconBadgeNumber = 0        // 标签
         KFBLog(message: "\n>>>[Receive RemoteNotification]:\(userInfo)\n\n")
-        let ID : Int = userInfo["fenxId"] as! Int
-        //        if ID != nil {
-        self.showMain()
-        self.makeRedView()
+                let payloadStr : String = userInfo["payload"] as! String
+        KFBLog(message: "payloadStr " + payloadStr)
+        let data :Data = payloadStr.data(using: .utf8)!
+        let dict : [String : Any] = try! JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String : Any]
+        let ID : Int =  dict["fenxId"] as! Int
+        KFBLog(message: "详情\(ID)")
         let vc = TeachDetailViewController()
         vc.fenxId = ID
         vc.hidesBottomBarWhenPushed = true
-        self.tab.childViewControllers[0].navigationController?.pushViewController(vc, animated: true)
-    
-        //        }
+        let tab : UITabBarController = self.window?.rootViewController as! UITabBarController
+        let nav : UINavigationController = tab.childViewControllers[0] as! UINavigationController
+        nav.pushViewController(vc, animated: true)
         
         
     }
@@ -326,6 +328,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         print("didReceiveNotificationResponse: %@",response.notification.request.content.userInfo);
+        let payloadStr : String = response.notification.request.content.userInfo["payload"] as! String
+        KFBLog(message: "payloadStr " + payloadStr)
+        let data :Data = payloadStr.data(using: .utf8)!
+        let dict : [String : Any] = try! JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String : Any]
+        let ID : Int =  dict["fenxId"] as! Int
+        KFBLog(message: "详情\(ID)")
+        let vc = TeachDetailViewController()
+        vc.fenxId = ID
+        vc.hidesBottomBarWhenPushed = true
+        let tab : UITabBarController = self.window?.rootViewController as! UITabBarController
+        let nav : UINavigationController = tab.childViewControllers[0] as! UINavigationController
+        nav.pushViewController(vc, animated: true)
         
         // [ GTSdk ]：将收到的APNs信息传给个推统计
         GeTuiSdk.handleRemoteNotification(response.notification.request.content.userInfo);

@@ -349,6 +349,11 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                 //区
 
             }
+        } else if currectNum == 6 {
+            if component == 0 {
+                //版本
+                self.getbookData()
+            }
         }
 
     }

@@ -464,23 +464,24 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         case 2:
             KFBLog(message: "手机号")
 
-        case 3:
-            cell = mainTabelView.visibleCells[2] as! InfoTableViewCell
+        case 3://学校
+            cell = mainTabelView.visibleCells[3] as! InfoTableViewCell
             dirShowStr = schoolNameStr
             self.dataModel.data.school = schoolNum!
-        case 4:
-            cell = mainTabelView.visibleCells[3] as! InfoTableViewCell
+        case 4://年级
+            cell = mainTabelView.visibleCells[4] as! InfoTableViewCell
             dirShowStr = gradeNameStr
             self.dataModel.data.grade = gradeNum!
-        case 5:
-            cell = mainTabelView.visibleCells[4] as! InfoTableViewCell
+        case 5://学科
+            cell = mainTabelView.visibleCells[5] as! InfoTableViewCell
             dirShowStr = subjectNameStr
             self.dataModel.data.subject = Int(subjectNum)!
-        case 6:
-            cell = mainTabelView.visibleCells[5] as! InfoTableViewCell
+        case 6://教材
+            cell = mainTabelView.visibleCells[6] as! InfoTableViewCell
             //"\(bookNum)"
             dirShowStr = versionStr + bookNameStr
             self.dataModel.data.book = bookNum!
+            KFBLog(message: dirShowStr)
         default:
             dirShowStr = ""
         }
@@ -610,6 +611,8 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                 nameStr = model.name
                 versionStr = model.name
                 versionNum = model.id
+                KFBLog(message: "\(model.id)")
+                KFBLog(message:"教材版本号" + versionStr + "\(String(describing: versionNum!))")
             } else {
                 let model : GetbooklistModel_data_bookList = bookArr[row]
                 nameStr = model.name
@@ -646,6 +649,11 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             } else {
                 //区
                 
+            }
+        } else if currectNum == 6 {
+            if component == 0 {
+                //版本
+                self.getbookData()
             }
         }
         
@@ -715,10 +723,8 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             self.cgreatPickerView()
         } else if indexPath.row == 6{
             //教材版本
-            versionStr = ""
-            versionNum = 0
-            bookNameStr = ""
-            bookNum = 0
+            let model : CommonModel_data_version = versionArr[0]
+            versionNum = model.id
             self.getbookData()
             self.cgreatPickerView()
         }

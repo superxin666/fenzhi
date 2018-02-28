@@ -832,6 +832,9 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         return url
     }
     override func navigationLeftBtnClick() {
+        if headView.player.isPlaying {
+            headView.player = nil
+        }
         self.SVdismiss()
         self.navigationController?.popViewController(animated: true)
     }

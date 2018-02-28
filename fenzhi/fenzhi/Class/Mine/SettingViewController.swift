@@ -13,7 +13,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     let topBackImageView : UIImageView = UIImageView()
     let iconImageView : UIImageView = UIImageView()
     let mainTabelView : UITableView = UITableView()
-    let nameArr = ["姓名","地区","手机号","学校","年级","学科","教材版本",]
+    let nameArr = ["姓名","地区","手机号","年级","学校","学科","教材版本",]
 //    let plaNameArr = ["输入您的名字","请选择您所在的地区","请选择您所在学校","请选择您所在学校年级","请选择您所教学科","请选择您所用教材版本",]
     var plaNameArr = Array<String>()
     var pickerView:UIPickerView = UIPickerView()
@@ -83,8 +83,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             plaNameArr.append(dataModel.data.name)
             plaNameArr.append(dataModel.data.districtName)
             plaNameArr.append(dataModel.data.phone)
-            plaNameArr.append(dataModel.data.schoolName)
+            
             plaNameArr.append(dataModel.data.gradeName)
+            plaNameArr.append(dataModel.data.schoolName)
             plaNameArr.append(dataModel.data.subjectName)
             plaNameArr.append(dataModel.data.versionName+dataModel.data.bookName)
         } else {
@@ -463,15 +464,14 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             self.dataModel.data.district = districtNum!
         case 2:
             KFBLog(message: "手机号")
-
-        case 3://学校
+        case 3://年级
             cell = mainTabelView.visibleCells[3] as! InfoTableViewCell
-            dirShowStr = schoolNameStr
-            self.dataModel.data.school = schoolNum!
-        case 4://年级
-            cell = mainTabelView.visibleCells[4] as! InfoTableViewCell
             dirShowStr = gradeNameStr
             self.dataModel.data.grade = gradeNum!
+        case 4://学校
+            cell = mainTabelView.visibleCells[4] as! InfoTableViewCell
+            dirShowStr = schoolNameStr
+            self.dataModel.data.school = schoolNum!
         case 5://学科
             cell = mainTabelView.visibleCells[5] as! InfoTableViewCell
             dirShowStr = subjectNameStr
@@ -527,15 +527,15 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             } else {
                 return districtArr.count//区
             }
-        case 2:
+        case 2://手机号
            return 0
-        case 3:
-            return schoolArr.count
-        case 4:
+        case 3://年级
             return gradeArr.count
-        case 5:
+        case 4://学校
+            return schoolArr.count
+        case 5://学科
             return subjectArr.count
-        case 6:
+        case 6://版本
             if component == 0 {
                 return versionArr.count//版本
             } else {
@@ -587,18 +587,18 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                 nameStr = model.name//city
 //                currectDisModel = model
             }
-        case 3://学校
-            let model : GetschoollistModel_schoolList = schoolArr[row]
-            nameStr = model.name
-            schoolNum = model.id
-            schoolNameStr = model.name
-            nameStr = model.name
-        case 4://年纪
+        case 3://年纪
             let model : CommonModel_data_grade = gradeArr[row]
             nameStr = model.name
             gradeNum = Int(model.id)!
             gradeType = Int(model.type)!
             gradeNameStr = model.name
+        case 4://学校
+            let model : GetschoollistModel_schoolList = schoolArr[row]
+            nameStr = model.name
+            schoolNum = model.id
+            schoolNameStr = model.name
+            nameStr = model.name
         case 5://学科
             let model : CommonModel_data_subject = subjectArr[row]
             nameStr = model.name
@@ -712,12 +712,13 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
         
         else if indexPath.row == 3 {
-            KFBLog(message: "学校")
-            self.getSchoolData()
-            self.cgreatPickerView()
-        } else if indexPath.row == 4 {
             //年级
             self.cgreatPickerView()
+        } else if indexPath.row == 4 {
+            //学校
+            self.getSchoolData()
+            self.cgreatPickerView()
+
         } else if indexPath.row == 5 {
             //学科
             self.cgreatPickerView()

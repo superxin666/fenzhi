@@ -26,8 +26,8 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     
     let mainTabelView : UITableView = UITableView()
 
-    let nameArr = ["","姓名","地区","学校","年级","学科","教材版本",]
-    let plaNameArr = ["","输入您的名字","请选择您所在的地区","请选择您所在学校","请选择您所在学校年级","请选择您所教学科","请选择您所用教材版本",]
+    let nameArr = ["","姓名","地区","年级","学校","学科","教材版本",]
+    let plaNameArr = ["","输入您的名字","请选择您所在的地区","请选择您所在学校年级","请选择您所在学校","请选择您所教学科","请选择您所用教材版本",]
     var schoolArr:[GetschoollistModel_schoolList] = Array()//学校
     var versionArr:[CommonModel_data_version] = Array()//教材版本
     var bookArr:[GetbooklistModel_data_bookList] = Array()//书本
@@ -166,12 +166,12 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         case 2:
             cell = mainTabelView.visibleCells[2] as! InfoTableViewCell
             dirShowStr = provinceNameStr + cityNameStr + districtNameStr
-        case 3:
+        case 3://年级
             cell = mainTabelView.visibleCells[3] as! InfoTableViewCell
-            dirShowStr = schoolNameStr
-        case 4:
-            cell = mainTabelView.visibleCells[4] as! InfoTableViewCell
             dirShowStr = gradeNameStr
+        case 4://学校
+            cell = mainTabelView.visibleCells[4] as! InfoTableViewCell
+            dirShowStr = schoolNameStr
         case 5:
             cell = mainTabelView.visibleCells[5] as! InfoTableViewCell
             dirShowStr = subjectNameStr
@@ -228,9 +228,9 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             }
 
         case 3:
-            return schoolArr.count
+             return gradeArr.count
         case 4:
-            return gradeArr.count
+            return schoolArr.count
         case 5:
             return subjectArr.count
         case 6:
@@ -284,18 +284,18 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                 currectDisModel = model
             }
 
-        case 3:
-            let model : GetschoollistModel_schoolList = schoolArr[row]
-            nameStr = model.name
-            schoolNum = model.id
-            schoolNameStr = model.name
-            nameStr = model.name
-        case 4://年纪
+        case 3://年纪
             let model : CommonModel_data_grade = gradeArr[row]
             nameStr = model.name
             gradeNum = Int(model.id)!
             gradeType = Int(model.type)!
             gradeNameStr = model.name
+        case 4://学校
+            let model : GetschoollistModel_schoolList = schoolArr[row]
+            nameStr = model.name
+            schoolNum = model.id
+            schoolNameStr = model.name
+            nameStr = model.name
         case 5://学科
             let model : CommonModel_data_subject = subjectArr[row]
             nameStr = model.name
@@ -625,24 +625,21 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
             }
 
         }else if indexPath.row == 3 {
-            KFBLog(message: "学校")
+            KFBLog(message: "年级")
             currectNum = 3
+            self.cgreatPickerView()
+    
+        }else if indexPath.row == 4 {//学校
+            currectNum = 4
             if !(currectDisModel.type == 3) {
-                 self.SVshowErro(infoStr: "请选择城市具体到区")
+                self.SVshowErro(infoStr: "请选择城市具体到区")
                 return
             }
-
             if gradeNameStr.count == 0 {
                 self.SVshowErro(infoStr: "请选择年级")
                 return
             }
             self.getSchoolData()
-            self.cgreatPickerView()
-
-
-        }else if indexPath.row == 4 {
-            KFBLog(message: "年级")
-            currectNum = 4
             self.cgreatPickerView()
         }else if indexPath.row == 5 {
             KFBLog(message: "学科")

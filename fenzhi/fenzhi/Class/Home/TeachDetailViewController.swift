@@ -94,24 +94,6 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.txtTextViewBack.frame = frame
         print("keybordShow:\(height)")
     }
-    func creatPlayerView() {
-        player = BMPlayer()
-        self.view.addSubview(player)
-        //        player.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
-        //                player.playerLayer?.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
-        player.snp.makeConstraints({ (make) in
-            //            make.top.equalTo(self.view).offset(20)
-            //            make.left.right.equalTo(self.view).offset(0)
-            make.top.equalTo(self.view).offset(videY)
-            make.width.equalTo(KSCREEN_WIDTH)
-            make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(KSCREEN_WIDTH)
-        })
-        
-        let asset = BMPlayerResource(url: URL(string: self.headData.data.videoInfo.videoUrl)!,
-                                     name: self.headData.data.videoInfo.title)
-        player.setVideo(resource: asset)
-
-    }
     func loadMoreData() {
 //        if isFresh {
 //            return
@@ -159,14 +141,17 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
     func cgreatHeadView() {
         
-//        mainScrollow.frame = CGRect(x: 0, y: ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(20) - ip7(80))
-//        mainScrollow.backgroundColor = .clear
-//        mainScrollow.contentSize = CGSize(width: 0, height: headViewHeight  + KSCREEN_HEIGHT - ip7(20) - ip7(80))
-//        self.view.addSubview(mainScrollow)
+
         
         headView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: headViewHeight)
+//        headView.snp.makeConstraints { (make) in
+//            make.left.right.equalTo(mainTabelView).offset(0)
+//            make.top.equalTo(mainTabelView).offset(0)
+//            make.height.equalTo(headViewHeight)
+//        }
+        headView.vc = self
         headView.setUpUIWithModelAndType(model: self.headData, height: self.headViewHeight,type:self.headData.data.type!)
-//        mainScrollow.addSubview(headView)
+
 
         //设置标题
         if self.headData.data.type! == 0 {
@@ -676,12 +661,12 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
     func creatTableView() {
         isNoData = false
           self.view.addSubview(mainTabelView)
-//        mainTabelView.frame = CGRect(x: 0, y:ip7(20), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT -  ip7(20)  - ip7(80) - LNAVIGATION_HEIGHT)
+//        mainTabelView.frame = CGRect(x: 0, y:0 , width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(80))
         mainTabelView.snp.makeConstraints { (make) in
-            make.top.equalTo(LNAVIGATION_HEIGHT + ip7(20))
+            make.top.equalTo(0)
             make.left.right.equalTo(self.view)
             make.bottom.equalTo(0)
-            
+
         }
         mainTabelView.backgroundColor = UIColor.clear
         mainTabelView.delegate = self;

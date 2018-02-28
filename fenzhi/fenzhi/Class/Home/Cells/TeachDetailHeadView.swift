@@ -33,16 +33,29 @@ class TeachDetailHeadView: UIView {
     var bigBtn : UIButton!
     var videoFream : CGRect!
     
+    var lastFream:CGRect!
+    var vc : TeachDetailViewController!
+    var backView : UIView!
+    
 
     func setUpUIWithModelAndType(model : TeachDetailModel,height : CGFloat,type : Int) {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(receiverNotification), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
         self.dataModel = model
         let viewW = KSCREEN_WIDTH
         let viewH = height
-
-        let backView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH - ip7(10)))
+        //frame:  CGRect(x: 0, y: 0, width: viewW, height: viewH - ip7(10))
+        backView = UIView()
+        self.addSubview(backView)
+        backView.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(0)
+            make.left.right.equalTo(self).offset(0)
+            make.height.equalTo(viewH )
+        }
         backView.backgroundColor = .white
         backView.isUserInteractionEnabled = true
-        self.addSubview(backView)
+  
         //头像
         let iconImageView:UIImageView = UIImageView(frame: CGRect(x: ip7(25), y: ip7(25), width: ip7(60), height: ip7(60)))
         iconImageView.kf.setImage(with: URL(string: model.data.userInfo.avatar))
@@ -103,7 +116,8 @@ class TeachDetailHeadView: UIView {
         backView.addSubview(txtLabel)
 
 
-        var lastFream = txtLabel.frame;
+        lastFream = txtLabel.frame
+        videoFream = lastFream
         let appadWidth = ip7(30)
 
 //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 +
@@ -122,22 +136,16 @@ class TeachDetailHeadView: UIView {
                 BMPlayerConf.enableBrightnessGestures = false
                 player = BMPlayer()
                  backView.addSubview(player)
-//                self.window?.addSubview(player)
-                
-//                player.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
-//                player.playerLayer?.frame = CGRect(x: playX, y: lastFream.maxY + ip7(10), width: playW, height: playH)
+
                 player.snp.makeConstraints({ (make) in
+                    KFBLog(message: "\(lastFream.maxY)")
                     make.top.equalTo(self).offset(lastFream.maxY + ip7(10))
-                    make.left.right.equalTo(self.window!)
+                    make.left.right.equalTo(self).offset(0)
                     make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(KSCREEN_WIDTH)
                 })
-
-//                lastFream = player.frame
                 let asset = BMPlayerResource(url: URL(string: model.data.videoInfo.videoUrl)!,
                                              name: model.data.videoInfo.title)
                 player.setVideo(resource: asset)
-//                let playW = KSCREEN_WIDTH
-//                let playH = KSCREEN_WIDTH * 9/16
                 lastFream = CGRect(x: 0, y: lastFream.maxY + ip7(10), width: playW, height: playH)
                 
             }
@@ -350,6 +358,7 @@ class TeachDetailHeadView: UIView {
             btn.setImage(image_selectedArr[i], for: .selected)
             backView.addSubview(btn)
         }
+        backView.bringSubview(toFront: player)
 
     }
 
@@ -485,5 +494,49 @@ class TeachDetailHeadView: UIView {
     func bottom() {
         KFBLog(message: "下")
     }
+    func receiverNotification() {
 
+        let orient = UIDevice.current.orientation
+        
+        switch orient {
+        case .portrait :
+            print("屏幕正常竖向")
+    
+            vc?.navigationController?.navigationBar.isHidden = false
+            KFBLog(message: "高度\(videoFream.maxY)")
+            player.snp.removeConstraints()
+            player.snp.makeConstraints({ (make) in
+                make.top.equalTo(self).offset(videoFream.maxY + ip7(10))
+                make.left.right.equalTo(self).offset(0)
+                make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(KSCREEN_WIDTH)
+            })
+            player.layoutIfNeeded()
+            player.setNeedsLayout()
+            break
+        case .portraitUpsideDown:
+            print("屏幕倒立")
+            break
+        case .landscapeLeft:
+            print("屏幕左旋转")
+
+                  vc?.navigationController?.navigationBar.isHidden = true
+            player.snp.removeConstraints()
+            player.snp.makeConstraints({ (make) in
+                make.top.equalTo(self).offset(0)
+                make.left.right.equalTo(self).offset(0)
+                make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(KSCREEN_WIDTH)
+//                make.bottom.equalTo(0)
+            })
+            player.layoutIfNeeded()
+            player.setNeedsLayout()
+            break
+        case .landscapeRight:
+            print("屏幕右旋转")
+            break
+        default:
+            break
+        }
+        backView.layoutIfNeeded()
+        backView.setNeedsLayout()
+    }
 }

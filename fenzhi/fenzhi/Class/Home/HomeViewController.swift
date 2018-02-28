@@ -74,6 +74,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
     
     func getData() {
+//          LoginModelMapper.setIsHaveBook(bookType: (weakSelf?.dataModel.data.bookType)!)
         weak var weakSelf = self
         self.SVshowLoad()
         dataVC.getfeedlist(pageNum: page, count: count, completion: { (data) in
@@ -216,6 +217,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
     //MARK:topView clik
     func teachBtnClik() {
         let vc : TeachReleaseViewController = TeachReleaseViewController()
+        vc.bookType = self.dataModel.userInfo.bookType!
         let nv :UINavigationController = UINavigationController(rootViewController: vc)
         weak var weakSelf = self
         vc.reflishBlock = {
@@ -228,6 +230,8 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
 
     func heartBtnClick() {
         let vc : HeartReleaseViewController = HeartReleaseViewController()
+        vc.bookType = self.dataModel.userInfo.bookType!
+        KFBLog(message: "\(vc.bookType)")
         let nv :UINavigationController = UINavigationController(rootViewController: vc)
         weak var weakSelf = self
         vc.reflishBlock = {

@@ -13,6 +13,7 @@ let LOGINUDSTR = "LOGININLOGINID"
 let ISLOGINSTR = "ISHAVELOGIN"
 let ISHAVEINFOSTR = "ISHAVEINFO"
 let USERTYPE = "USERTYPE"
+let BOOKTYPR = "bookType"
 class LoginModelMapper: Mappable {
     var errno: Int = 100
     var errmsg : String = ""
@@ -47,6 +48,14 @@ class LoginModelMapper: Mappable {
         }
     }
     
+    class func setIsHaveBook(bookType : Int) {
+        UserDefaults.standard.set("\(bookType)", forKey: BOOKTYPR)
+    }
+    
+    class func getIsHaveBook()->String {
+        let isloginStr :String? = UserDefaults.standard.value(forKey: BOOKTYPR) as! String?
+        return isloginStr!
+    }
     
     /// 返回当前登录用户的 loginid tokenid
     ///

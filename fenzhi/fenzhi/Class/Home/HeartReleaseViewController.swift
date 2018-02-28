@@ -53,9 +53,12 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     
     var tokenModel : GetststokenModel = GetststokenModel()
     let upfile = UpLoadFile()
-//    deinit {
-//        NotificationCenter.removeObserver(NSNotification.Name.UIKeyboardWillShow)
-//    }
+
+    
+    /// 0 有书籍 1 没有书籍
+    var bookType : Int!
+    
+    
     deinit {
         //记得移除通知监听
         NotificationCenter.default.removeObserver(self)
@@ -517,18 +520,34 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
     }
     
     func dingwei_click() {
-        KfbShowWithInfo(titleString: "定位")
-        if !nsetBtn.isSelected {
-            self.nestBtnClik()
+        KfbShowWithInfo(titleString: "定位\(bookType)")
+        if bookType == 0 {
+            if !nsetBtn.isSelected {
+                self.nestBtnClik()
+            }
+            let vc = DingweiViewControlleroc()
+            let urlStr = BASER_API + selectCouse_api + "token=" + "".getToken_RSA()
+            vc.mainUrl =  urlStr
+            vc.delegate = self
+            vc.isHeart = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            KFBLog(message: "么有书籍")
+            alertController  = UIAlertController(title: "温馨提示", message: "暂未收录该教材数据，欢迎您的提供和反馈，客服QQ号：814038418", preferredStyle: .alert)
+            let cancleAction = UIAlertAction(title: "确定", style: .cancel) { (action) in
+                //取消
+                self.alertController.dismiss(animated: true, completion: {
+                    
+                })
+            }
+            alertController.addAction(cancleAction)
+            self.present((alertController)!, animated: true, completion: nil)
+            
         }
-        let vc = DingweiViewControlleroc()
-        let urlStr = BASER_API + selectCouse_api + "token=" + "".getToken_RSA()
-        vc.mainUrl =  urlStr
-        vc.delegate = self
-        vc.isHeart = true
-        self.navigationController?.pushViewController(vc, animated: true)
-    
+        
     }
+    
+    
        //MARK:定位代理
     func sure_click() {
         KFBLog(message: LogDataMangerViewController.getSelectCouse_name_id_heart().name)

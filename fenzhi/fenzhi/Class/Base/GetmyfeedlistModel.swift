@@ -144,6 +144,7 @@ class GetmyfeedlistModel: Mappable {
         var errmsg : String = ""
         var logId : String = ""
         var data : GetmyfeedlistModel_data = GetmyfeedlistModel_data()
+        var userInfo : UserInfoModel = UserInfoModel()
 
 
         init() {}
@@ -157,6 +158,7 @@ class GetmyfeedlistModel: Mappable {
             errmsg <- map["errmsg"]
             logId <- map["logId"]
             data <- map["data"]
+            userInfo <- map["userInfo"]
 
         }
 }

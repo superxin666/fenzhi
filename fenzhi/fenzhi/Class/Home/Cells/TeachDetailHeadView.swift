@@ -505,10 +505,12 @@ class TeachDetailHeadView: UIView {
         case .portrait :
             print("屏幕正常竖向")
     
-            vc?.navigationController?.navigationBar.isHidden = false
+//            vc?.navigationController?.navigationBar.isHidden = false
+               vc.navigationController?.navigationBar.alpha = 1
             KFBLog(message: "高度\(videoFream.maxY)")
-            player.snp.removeConstraints()
-            player.snp.makeConstraints({ (make) in
+//            player.snp.removeConstraints()
+
+            player.snp.remakeConstraints({ (make) in
                 make.top.equalTo(self).offset(videoFream.maxY + ip7(10))
                 make.left.right.equalTo(self).offset(0)
                 make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(KSCREEN_WIDTH)
@@ -522,10 +524,11 @@ class TeachDetailHeadView: UIView {
         case .landscapeLeft:
             print("屏幕左旋转")
 
-                  vc?.navigationController?.navigationBar.isHidden = true
-            player.snp.removeConstraints()
-            player.snp.makeConstraints({ (make) in
-                make.top.equalTo(self).offset(0)
+//            vc?.navigationController?.navigationBar.isHidden = true
+            vc.navigationController?.navigationBar.alpha = 0
+//            player.snp.removeConstraints()
+            player.snp.remakeConstraints({ (make) in
+                make.top.equalTo(self).offset(-ip7(44))
                 make.left.right.equalTo(self).offset(0)
                 make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(KSCREEN_WIDTH)
 //                make.bottom.equalTo(0)

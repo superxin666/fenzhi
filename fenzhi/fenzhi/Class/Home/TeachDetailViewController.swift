@@ -832,10 +832,13 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         return url
     }
     override func navigationLeftBtnClick() {
-        if headView.player.isPlaying {
-            KFBLog(message: "停止播放")
-            headView.player.playerLayer?.pause()
+        if !(headView.player == nil) {
+            if headView.player.isPlaying {
+                KFBLog(message: "停止播放")
+                headView.player.playerLayer?.pause()
+            }
         }
+        
         self.SVdismiss()
         self.navigationController?.popViewController(animated: true)
     }

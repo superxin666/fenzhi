@@ -358,7 +358,10 @@ class TeachDetailHeadView: UIView {
             btn.setImage(image_selectedArr[i], for: .selected)
             backView.addSubview(btn)
         }
-        backView.bringSubview(toFront: player)
+        if !(player == nil) {
+            backView.bringSubview(toFront: player)
+        }
+  
 
     }
 

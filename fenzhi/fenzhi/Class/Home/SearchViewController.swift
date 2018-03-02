@@ -21,14 +21,23 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     var page = 1
     var queryStr = ""
     
-    
+    let dataVC = HomeDataMangerController()
     /// 0 是内容 1是资料 2是用户
     var searchType = 0
-    
-    let dataVC = HomeDataMangerController()
+    /// 搜索模型
     var dataModel : SearchModel = SearchModel()
-    /// 动态 资料
     var dataArr : [Any] = []
+
+    /// 内容
+    var searchLastModel_conent : [Any] = []
+    /// 资料
+    var searchLastModel_book : [Any] = []
+    /// 用户
+    var searchLastModel_user : [Any] = []
+    
+    /// 当前上次搜索历史
+    var currectSearchLastModel : [Any] = []
+    
     /// 用户 数据
     var userDataArr : [UserInfoModel] = []
     
@@ -119,8 +128,9 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         mainTabelView.separatorStyle = .none
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
-        footer.setRefreshingTarget(self, refreshingAction: #selector(SearchViewController.loadMoreData))
+//        footer.setRefreshingTarget(self, refreshingAction: #selector(SearchViewController.loadMoreData))
         mainTabelView.mj_footer = self.creactFoot()
+        mainTabelView.mj_footer.setRefreshingTarget(self, refreshingAction: #selector(SearchViewController.loadMoreData))
         mainTabelView.register(HeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: TEACHCELLID)
         mainTabelView.register(TeachTableViewCell.self, forCellReuseIdentifier: SEARCHUSERCELLID)
@@ -166,7 +176,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     
     /// 获取本地历史记录
     func getDataFromLoacl() {
-        self.mainTabelView.mj_footer.isHidden = true
+//        self.mainTabelView.mj_footer.isHidden = true
         self.noDataView.removeFromSuperview()
         self.mainTabelView.isHidden = false
         if localDataArr.count > 0 {
@@ -227,10 +237,6 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     }
     
     func loadMoreData() {
-//        if !isSearch {
-//            self.mainTabelView.mj_footer.endRefreshing()
-//            return
-//        }
         page = page + 1
         KFBLog(message: "当前页数\(page)")
         self.getData()
@@ -242,7 +248,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
         weak var weakSelf = self
         self.SVshowLoad()
         isSearch = true
-        self.mainTabelView.mj_footer.isHidden = false
+//        self.mainTabelView.mj_footer.isHidden = false
         self.noDataView.removeFromSuperview()
         self.mainTabelView.isHidden = false
         dataVC.searchlist(type: searchType, query: queryStr, pageNum: page, count: 10, completion: { (data) in
@@ -257,10 +263,17 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                         }
                         KFBLog(message: "数组")
                         weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.fenx.list)!
+                        //搜索内容 是内容 1是资料 2是用户
+                        if weakSelf?.searchType == 0 {
+                            weakSelf?.searchLastModel_conent = (weakSelf?.searchLastModel_conent)! + (weakSelf?.dataModel.data.fenx.list)!
+                        } else if weakSelf?.searchType == 1 {
+                            weakSelf?.searchLastModel_book = (weakSelf?.searchLastModel_book)! + (weakSelf?.dataModel.data.fenx.list)!
+                        }
                     } else {
                         weakSelf?.dataArr = (weakSelf?.dataArr)! + (weakSelf?.dataModel.data.user.list)!
+                         weakSelf?.searchLastModel_user = (weakSelf?.searchLastModel_user)! + (weakSelf?.dataModel.data.user.list)!
                     }
-
+       
                     weakSelf?.mainTabelView.reloadData()
                 } else {
                     if weakSelf?.dataArr.count == 0 {
@@ -286,12 +299,17 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        KFBLog(message: isSearch)
         if isSearch {
-            return self.dataArr.count
+            if currectSearchLastModel.count > 0 {
+                        KFBLog(message: "\( currectSearchLastModel.count)")
+                return currectSearchLastModel.count
+            } else {
+                 return self.dataArr.count
+            }
         } else {
             return self.localDataArr.count + 1
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -300,8 +318,13 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             
             if searchType == 0 ||  searchType == 1{
                 //动态
-                if indexPath.row < self.dataArr.count {
-                    let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                if indexPath.row < self.dataArr.count || indexPath.row < currectSearchLastModel.count{
+                    let model : GetmyfeedlistModel_data_fenxList!
+                    if currectSearchLastModel.count > 0 {
+                         model = self.currectSearchLastModel[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                    } else {
+                        model = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                    }
                     
                     if model.type == 0 {
                         //资料
@@ -396,8 +419,13 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                 }
             } else {
                 //用户
-                if indexPath.row < self.dataArr.count {
-                    let model : UserInfoModel = self.dataArr[indexPath.row] as! UserInfoModel
+                if indexPath.row < self.dataArr.count || indexPath.row < currectSearchLastModel.count {
+                    let model : UserInfoModel!
+                    if currectSearchLastModel.count > 0 {
+                        model = self.currectSearchLastModel[indexPath.row] as! UserInfoModel
+                    } else {
+                        model = self.dataArr[indexPath.row] as! UserInfoModel
+                    }
                     
                     let cell = SearchTableViewCell(style: .default, reuseIdentifier: SEARCHUSERCELLID)
                     cell.backgroundColor = .clear
@@ -448,8 +476,15 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             if self.searchType == 2 {
                 
             } else {
-                if indexPath.row < self.dataArr.count {
-                    let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                
+                
+                if indexPath.row < self.dataArr.count || indexPath.row < self.currectSearchLastModel.count {
+                    let model : GetmyfeedlistModel_data_fenxList!
+                    if self.currectSearchLastModel.count > 0 {
+                        model = self.currectSearchLastModel[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                    } else {
+                        model = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                    }
                     let vc = TeachDetailViewController()
                     vc.fenxId = model.id
                     vc.hidesBottomBarWhenPushed = true
@@ -484,7 +519,13 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             if self.searchType == 2 {
                 return SearchTableViewCellH
             } else {
-                let model : GetmyfeedlistModel_data_fenxList = self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                let model : GetmyfeedlistModel_data_fenxList!
+                if currectSearchLastModel.count > 0 {
+                    model =  self.currectSearchLastModel[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                } else {
+                    model =  self.dataArr[indexPath.row] as! GetmyfeedlistModel_data_fenxList
+                }
+
                 return model.cellHeight;
             }
         } else {
@@ -524,11 +565,26 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
             self.SVshowErro(infoStr: "请输入搜索内容")
             return
         }
+//        self.mainTabelView.mj_footer.isHidden = false
         //本地记录
         self.setDataToLoacl()
         if self.dataArr.count > 0 {
             self.dataArr.removeAll()
         }
+//        if searchType == 0 {
+//            if searchLastModel_conent.count > 0 {
+//                searchLastModel_conent.removeAll()
+//            }
+//        } else if searchType == 1 {
+//            if searchLastModel_book.count > 0 {
+//                searchLastModel_book.removeAll()
+//            }
+//        } else {
+//            if searchLastModel_user.count > 0 {
+//                searchLastModel_user.removeAll()
+//            }
+//        }
+        
         self.getData()
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -556,8 +612,9 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
     func btnClick(sender:UIButton) {
         lastBtn.isSelected = false
         sender.isSelected = !sender.isSelected
-        isSearch = false
-        
+        if currectSearchLastModel.count > 0 {
+            currectSearchLastModel.removeAll()
+        }
         if sender.tag == 0 {
             //"内容"
             KFBLog(message: "内容")
@@ -567,6 +624,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                 self.dataArr.removeAll()
             }
             queryStr = searchBar.text!
+            currectSearchLastModel = searchLastModel_conent
         } else if sender.tag == 1{
             //"资料"
             KFBLog(message: "资料")
@@ -576,6 +634,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                 self.dataArr.removeAll()
             }
             queryStr = searchBar.text!
+            currectSearchLastModel = searchLastModel_book
         } else {
             //"用户
             KFBLog(message: "用户")
@@ -585,8 +644,20 @@ class SearchViewController: BaseViewController,UISearchBarDelegate,UITableViewDe
                 self.dataArr.removeAll()
             }
             queryStr = searchBar.text!
+            currectSearchLastModel = searchLastModel_user
         }
-        self.getDataFromLoacl()
+        
+        KFBLog(message: "上次搜索个数\(currectSearchLastModel.count)")
+        if currectSearchLastModel.count > 0 {
+            isSearch = true
+//            self.mainTabelView.mj_footer.isHidden = true
+            self.noDataView.removeFromSuperview()
+            self.mainTabelView.isHidden = false
+            self.mainTabelView.reloadData()
+        } else {
+            isSearch = false
+            self.getDataFromLoacl()
+        }
         lastBtn = sender
     }
 

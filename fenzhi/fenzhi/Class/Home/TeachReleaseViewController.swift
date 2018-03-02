@@ -40,6 +40,8 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     let tdBtn : UIButton = UIButton()//定位按钮
     let dingweiLabel_btn : UILabel = UILabel()//定位标题
+    let fileBtn : UIButton = UIButton()//文件按钮
+    
     
     var txtStr : String = ""
     var couseId : String = ""
@@ -58,7 +60,8 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     var tokenModel : GetststokenModel = GetststokenModel()
     let upfile = UpLoadFile()
-  
+    var fileNum : Int = 0
+    
     /// 0 有书籍 1 没有书籍
     var bookType : Int!
     deinit {
@@ -102,15 +105,25 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     
     func getFileData() {
         
+//        for i in 0...3 {
+//            let str = "asdfdf.pdf"
+//            self.fileArr.append(str)
+//            fileNum = self.fileArr.count
+//            self.isHaveFiles = true
+//
+//        }
         if fileManager.fileExists(atPath: filePath) {
             let contentsOfPath = try? fileManager.contentsOfDirectory(atPath: filePath)
             self.fileArr = contentsOfPath!
             if self.fileArr.count > 0 {
                 self.isHaveFiles = true
+                fileNum = self.fileArr.count
             }
             KFBLog(message: contentsOfPath!)
         } else {
             KFBLog(message: "文件夹不存在")
+            fileNum = 0
+            self.isHaveFiles = false
         }
     }
     
@@ -420,13 +433,16 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
             tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))
         }
         //图片按钮
-        let picBtn : UIButton = UIButton(frame: CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55)))
-        picBtn.setImage(#imageLiteral(resourceName: "dingweinew"), for: .normal)
-        picBtn.backgroundColor = .clear
-        picBtn.addTarget(self, action:#selector(self.pdf_click), for: .touchUpInside)
-        btnBackView.addSubview(picBtn)
+        fileBtn.frame = CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25), y: 0, width: ip7(55), height: ip7(55))
+        fileBtn.setImage(#imageLiteral(resourceName: "dingweinew"), for: .normal)
+        fileBtn.backgroundColor = .clear
+        fileBtn.addTarget(self, action:#selector(self.pdf_click), for: .touchUpInside)
+        if fileNum > 0 {
+            fileBtn.setTitle("\(fileNum)", for: .normal)
+        }
+        btnBackView.addSubview(fileBtn)
         
-        let lineView = UIView(frame: CGRect(x: picBtn.frame.origin.x - ip7(12), y: (ip7(55) - ip7(35))/2, width: 0.5, height: ip7(35)))
+        let lineView = UIView(frame: CGRect(x: fileBtn.frame.origin.x - ip7(12), y: (ip7(55) - ip7(35))/2, width: 0.5, height: ip7(35)))
         lineView.backgroundColor = .white
         btnBackView.addSubview(lineView)
         
@@ -560,12 +576,13 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
     }
     
     func delfile_click(tap : UITapGestureRecognizer) {
-        
+
+
         alertController  = UIAlertController(title: "提示", message: "是否要删除该文件", preferredStyle: .alert)
         let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
             //取消
             self.alertController.dismiss(animated: true, completion: {
-                
+
             })
         }
         let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
@@ -577,6 +594,12 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
                     try self.fileManager.removeItem(at: URL(fileURLWithPath: filePathStr))
                     self.fileArr.remove(at: tagNum!)
                     self.tableView.reloadData()
+                    self.fileNum = self.fileNum - 1
+                    if self.fileNum > 0 {
+                        self.fileBtn.setTitle("\(self.fileNum)", for: .normal)
+                    } else {
+                        self.fileBtn.setTitle("", for: .normal)
+                    }
                     KFBLog(message: "文件删除成功")
                 } catch _ {
                     KFBLog(message: "文件删除失败")
@@ -586,7 +609,7 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
         alertController.addAction(cancleAction)
         alertController.addAction(sureAction)
         self.present((alertController)!, animated: true, completion: nil)
-        
+//
     }
     
     func delAllFiles() {

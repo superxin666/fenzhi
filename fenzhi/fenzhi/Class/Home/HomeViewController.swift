@@ -40,7 +40,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         super.viewWillAppear(animated)
     
     }
-
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -44,10 +44,12 @@ class UserInfoHeadView: UIView {
     func creatHeadView(type : viewType) {
         self.backgroundColor = .white
         //背景图
-        var height = ip7(300)
+        var height = ip7(300+24)
         if type == .other {
-            height = ip7(350)
+            height = ip7(350+24)
         }
+        height = iPhoneX ? height + ip7(24) :height
+
         let backImageView : UIImageView = UIImageView(image: #imageLiteral(resourceName: "bg1"))
         backImageView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: height)
         self.addSubview(backImageView)

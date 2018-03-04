@@ -11,7 +11,7 @@ import QuickLook
 
 let HEARTCELLID_USERINFO = "HEARTCELL_USERINFO_ID"//
 let TEACHCELLID_USERINFO = "TEACHCELL__USERINFO_ID"//
-let HEADVIEWHEIGHT = ip7(382+60)
+let HEADVIEWHEIGHT = iPhoneX ? ip7(382+60+24):ip7(382+60)
 
 class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
     

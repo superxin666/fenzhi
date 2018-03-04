@@ -71,7 +71,9 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     }
 
     func creatTopView() {
-        topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: ip7(382))
+
+        let height = iPhoneX ? ip7(382+24):ip7(382)
+        topBackView.frame = CGRect(x: 0, y: 0, width: KSCREEN_WIDTH, height: height)
         topBackView.creatHeadView(type: .main)
         topBackView.isUserInteractionEnabled = true
         

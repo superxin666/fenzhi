@@ -10,7 +10,9 @@ import UIKit
 import Kingfisher
 let KSCREEN_WIDTH = UIScreen.main.bounds.size.width
 let KSCREEN_HEIGHT = UIScreen.main.bounds.size.height
-let LNAVIGATION_HEIGHT = CGFloat(44+20)
+let iPhoneX = __CGSizeEqualToSize((UIScreen.main.currentMode?.size)!, CGSize(width: 1125, height: 2436)) ? true : false
+
+let LNAVIGATION_HEIGHT = iPhoneX ? CGFloat(44+20+24):CGFloat(44+20)
 
 
 var fzFont_Thin = { (num : CGFloat) ->  UIFont in

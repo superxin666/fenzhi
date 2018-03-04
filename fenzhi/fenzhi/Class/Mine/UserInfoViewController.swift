@@ -68,10 +68,13 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
         mainTabelView.separatorStyle = .none
         mainTabelView.showsVerticalScrollIndicator = false
         mainTabelView.showsHorizontalScrollIndicator = false
-        footer.setRefreshingTarget(self, refreshingAction: #selector(RecordViewController.loadMoreData))
+
         header.setRefreshingTarget(self, refreshingAction: #selector(RecordViewController.freshData))
-        mainTabelView.mj_footer = footer
         mainTabelView.mj_header = header
+
+        mainTabelView.mj_footer = self.creactFoot()
+        mainTabelView.mj_footer.setRefreshingTarget(self, refreshingAction: #selector(SearchViewController.loadMoreData))
+
         mainTabelView.register(UserInfoHeartTableViewCell.self, forCellReuseIdentifier: HEARTCELLID_USERINFO)
         mainTabelView.register(UserInfoShareTableViewCell.self, forCellReuseIdentifier: TEACHCELLID_USERINFO)
         self.view.addSubview(mainTabelView)
@@ -80,11 +83,14 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
     
     func getHeadData() {
         weak var weakSelf = self
+
         dataVC.other_user_profile(userId: userId!,completion: { (data) in
             weakSelf?.headDataModel = data as! ProfileMineModel
             if weakSelf?.headDataModel.errno == 0 {
                 if weakSelf?.headDataModel.data.type == 0 {
-                     weakSelf?.getData()
+                    weakSelf?.getData()
+                } else {
+                    weakSelf?.mainTabelView.reloadData()
                 }
 
             }
@@ -149,8 +155,8 @@ class UserInfoViewController: BaseViewController,UITableViewDelegate,UITableView
                     weakSelf?.mainTabelView.reloadData()
                 } else {
                     if weakSelf?.dataArr.count == 0 {
-                        weakSelf?.mainTabelView.removeFromSuperview()
-                        weakSelf?.view.addSubview(self.showNoData())
+//                        weakSelf?.mainTabelView.removeFromSuperview()
+//                        weakSelf?.view.addSubview(self.showNoData(fream: CGRect(x: 0, y: HEADVIEWHEIGHT, width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - HEADVIEWHEIGHT)))
                     } else {
                         weakSelf?.SVshowErro(infoStr: "没有数据了")
                     }

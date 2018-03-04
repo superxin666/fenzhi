@@ -148,7 +148,7 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return ip7(140)
+        return iPhoneX ? ip7(140+24):ip7(140)
     }
     
     override func navigationLeftBtnClick() {

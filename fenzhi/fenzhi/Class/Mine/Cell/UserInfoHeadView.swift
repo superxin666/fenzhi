@@ -44,9 +44,9 @@ class UserInfoHeadView: UIView {
     func creatHeadView(type : viewType) {
         self.backgroundColor = .white
         //背景图
-        var height = ip7(300+24)
+        var height = ip7(290+24)
         if type == .other {
-            height = ip7(350+24)
+            height = ip7(340+24)
         }
         height = iPhoneX ? height + ip7(24) :height
 

@@ -500,7 +500,7 @@ class TeachDetailHeadView: UIView {
     func receiverNotification() {
 
         let orient = UIDevice.current.orientation
-        
+        let pro = iPhoneX ? 9.0/18.0 : 9.0/16.0
         switch orient {
         case .portrait :
             print("屏幕正常竖向")
@@ -513,7 +513,7 @@ class TeachDetailHeadView: UIView {
             player.snp.remakeConstraints({ (make) in
                 make.top.equalTo(self).offset(videoFream.maxY + ip7(10))
                 make.left.right.equalTo(self).offset(0)
-                make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(KSCREEN_WIDTH)
+                make.height.equalTo(player.snp.width).multipliedBy(pro).priority(KSCREEN_WIDTH)
             })
             player.layoutIfNeeded()
             player.setNeedsLayout()
@@ -523,14 +523,14 @@ class TeachDetailHeadView: UIView {
             break
         case .landscapeLeft:
             print("屏幕左旋转")
-
-//            vc?.navigationController?.navigationBar.isHidden = true
             vc.navigationController?.navigationBar.alpha = 0
-//            player.snp.removeConstraints()
+            let top = iPhoneX ? ip7(44+24) : ip7(44)
+
+
             player.snp.remakeConstraints({ (make) in
-                make.top.equalTo(self).offset(-ip7(44))
+                make.top.equalTo(self).offset(-top)
                 make.left.right.equalTo(self).offset(0)
-                make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(KSCREEN_WIDTH)
+                make.height.equalTo(player.snp.width).multipliedBy(pro).priority(KSCREEN_WIDTH)
 //                make.bottom.equalTo(0)
             })
             player.layoutIfNeeded()

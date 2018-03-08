@@ -79,7 +79,8 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         self.navigationBar_leftBtn()
         self.navigationBar_rightBtn_title(name: "保存",textColour: .white)
         userType = LoginModelMapper.getLoginIdAndTokenInUD().userType
-        if userType == "0"{
+        KFBLog(message: "账户类型\(userType)")
+        if userType! == "0"{
             plaNameArr.append(dataModel.data.name)
             plaNameArr.append(dataModel.data.districtName)
             plaNameArr.append(dataModel.data.phone)

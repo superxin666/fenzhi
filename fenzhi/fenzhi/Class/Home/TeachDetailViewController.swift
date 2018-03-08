@@ -85,10 +85,10 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         let nsValue = userinfo.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRec = nsValue.cgRectValue
         let height = keyboardRec.size.height
-//        keybodHeight = height
-        if !isShowTxtTextViewBack {
-            self.showTxt_click()
-        }
+        keybodHeight = height
+//        if !isShowTxtTextViewBack {
+//            self.showTxt_click()
+//        }
         var frame = self.txtTextViewBack.frame
         frame.origin.y = KSCREEN_HEIGHT - height - ip7(260)
         self.txtTextViewBack.frame = frame
@@ -416,6 +416,19 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
                 KFBLog(message: self.newArr.count)
                 KFBLog(message: self.hotArr.count)
                 KFBLog(message: self.otherArr.count)
+                if (weakSelf?.isshowzanshang)! {
+                    weakSelf?.isshowzanshang = false
+                    //展示赞赏列表
+                    weakSelf?.showZanShang()
+                }
+                if (weakSelf?.isshowpinglun)! {
+                    weakSelf?.isshowpinglun = false
+                    //展示评论
+                    KFBLog(message: "展示评论")
+                    weakSelf?.liuyan_click()
+//                    weakSelf?.ispinglun = "0"
+//                    weakSelf?.showTxt_click()
+                }
 
             } else {
                 weakSelf?.SVshowErro(infoStr: (weakSelf?.headData.errmsg)!)
@@ -428,16 +441,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         }
         
         
-        if isshowzanshang {
-            isshowzanshang = false
-            //展示赞赏列表
-            self.showZanShang()
-        }
-        if isshowpinglun {
-            isshowpinglun = false
-            //展示评论
-            self.liuyan_click()
-        }
+
     }
 
     func getTabelViewSectionNum() {
@@ -525,6 +529,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.txtTextViewBack  = UIView(frame: CGRect(x: 0, y:  0, width: KSCREEN_WIDTH, height: ip7(260)))
         self.txtTextViewBack.backgroundColor = .white
         self.maskView.addSubview(self.txtTextViewBack)
+        
         txtTextView.delegate = self
         txtTextView.text = ""
         txtTextView.frame = CGRect(x: ip7(20), y: ip7(20), width: KSCREEN_WIDTH - ip7(40), height: ip7(327/2))
@@ -535,7 +540,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.txtTextViewBack.addSubview(txtTextView)
         
         if ispinglun == "0" || isshowpinglun_other{
-            KFBLog(message: "显示回复人")
+            KFBLog(message: "显示回复人"+self.pinglunUserModel.userInfo.name)
             isshowpinglun_other = false
             NotificationCenter.default.addObserver(self, selector: #selector(self.textChanged), name: NSNotification.Name.UITextViewTextDidChange, object: nil)
             

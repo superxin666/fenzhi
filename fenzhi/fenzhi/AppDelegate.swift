@@ -291,7 +291,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         application.applicationIconBadgeNumber = 0        // 标签
         KFBLog(message: "\n>>>[Receive RemoteNotification]:\(userInfo)\n\n")
-                let payloadStr : String = userInfo["payload"] as! String
+        
+  
+        guard  let payloadStr : String = userInfo["payload"] as? String else {
+            return
+        }
         KFBLog(message: "payloadStr " + payloadStr)
         let data :Data = payloadStr.data(using: .utf8)!
         let dict : [String : Any] = try! JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String : Any]

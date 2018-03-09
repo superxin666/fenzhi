@@ -88,6 +88,7 @@ class LoginModelMapper: Mappable {
     class func setLogout(complate:(_ data : Any) ->()) {
         UserDefaults.standard.set("0", forKey: ISLOGINSTR)
         UserDefaults.standard.set("", forKey: TOKENUDSTR)
+        UserDefaults.standard.set("", forKey: USERTYPE)
         UserDefaults.standard.set("", forKey: LOGINUDSTR)
         UserDefaults.standard.set("0", forKey: ISHAVEINFOSTR)
         let ok = UserDefaults.standard.synchronize()

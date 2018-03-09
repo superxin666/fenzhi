@@ -51,7 +51,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         //设置红点
         self.view.backgroundColor = backView_COLOUR
         userType = LoginModelMapper.getLoginIdAndTokenInUD().userType
-        if userType == "0" {
+        if userType == "0" && userType.count > 0{
             self.creatTopView()
             self.creatTableView()
         } else {

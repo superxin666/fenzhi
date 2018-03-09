@@ -217,7 +217,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                     if weakSelf?.dataArr.count == 0 {
 //                        weakSelf?.mainTabelView.removeFromSuperview()
                         weakSelf?.mainTabelView.reloadData()
-                        weakSelf?.view.addSubview(self.showNoData())
+                        weakSelf?.view.addSubview(self.showNoData(fream: CGRect(x: 0, y: self.topBaclView.frame.maxY + ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15) - LNAVIGATION_HEIGHT)))
                         weakSelf?.view.bringSubview(toFront: self.noDataView)
                     } else {
                         weakSelf?.SVshowErro(infoStr: "没有数据了")
@@ -268,7 +268,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                     if weakSelf?.dataArr_Comment.count == 0 {
 //                        weakSelf?.mainTabelView.removeFromSuperview()
                         weakSelf?.mainTabelView.reloadData()
-                        weakSelf?.view.addSubview(self.showNoData())
+                        weakSelf?.view.addSubview(self.showNoData(fream: CGRect(x: 0, y: self.topBaclView.frame.maxY + ip7(15), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(15) - LNAVIGATION_HEIGHT)))
                         weakSelf?.view.bringSubview(toFront: self.noDataView)
                     } else {
                         weakSelf?.SVshowErro(infoStr: "没有数据了")

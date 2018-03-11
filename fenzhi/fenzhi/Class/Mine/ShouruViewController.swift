@@ -75,6 +75,28 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         }
 
     }
+    
+    /// 清除消息
+    ///
+    /// - Parameters:
+    ///   - messageId: <#messageId description#>
+    ///   - fenxId: <#fenxId description#>
+    ///   - ishow: <#ishow description#>
+    func readMessageReq(messageId : Int,fenxId:Int, ishow:Bool) {
+        self.requestVC.readMessage(messageId: messageId, typeStr: "zan",subType: 0, completion: { (data) in
+            let model : SmsModel = data as! SmsModel
+            if model.errno == 0 {
+                KFBLog(message: "消息阅读成功")
+                
+            } else {
+                KFBLog(message: "消息阅读失败")
+            }
+            self.navigationController?.popViewController(animated: true)
+        }) { (erro) in
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+
 
     //MARK:tableView
     func creatTableView() {
@@ -152,8 +174,13 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
     
     override func navigationLeftBtnClick() {
-        self.SVdismiss()
-        self.navigationController?.popViewController(animated: true)
+           self.SVdismiss()
+        if self.dataArr.count > 0 {
+            let model : GetincomelistModl_data_incomeList = self.dataArr[0]
+            self.readMessageReq(messageId: model.message.id,fenxId:0,ishow: false)
+        }
+     
+  
     }
     
     override func didReceiveMemoryWarning() {

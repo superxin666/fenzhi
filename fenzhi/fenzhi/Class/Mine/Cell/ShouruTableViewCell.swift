@@ -28,6 +28,17 @@ class ShouruTableViewCell: UITableViewCell {
         iconImageView.isUserInteractionEnabled = true
         iconImageView.kfb_makeRound()
         self.addSubview(iconImageView)
+        let redImageView = UIView(frame: CGRect(x: ip7(25), y: ip7(23), width: ip7(10), height: ip7(10)))
+        redImageView.backgroundColor = .red
+        redImageView.kfb_makeRound()
+        self.addSubview(redImageView)
+        if model.message.status == 1 {
+            //
+            redImageView.isHidden = true
+        } else {
+            //
+            redImageView.isHidden = false
+        }
 
         let nameWidth = KSCREEN_WIDTH - iconImageView.frame.maxX - ip7(24) - ip7(40) - ip7(120)
         let nameLabel : UILabel = UILabel(frame: CGRect(x: iconImageView.frame.maxX + ip7(24), y:  ip7(25), width: nameWidth, height: ip7(21)))

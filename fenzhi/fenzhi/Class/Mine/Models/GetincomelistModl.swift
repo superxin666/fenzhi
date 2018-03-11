@@ -8,7 +8,21 @@
 
 import UIKit
 import ObjectMapper
+class GetincomelistModl_data_incomeList_message: Mappable {
+    var id: Int = 0
+    var status : Int = 0
 
+    init() {}
+    required init?(map: Map){
+        mapping(map: map)
+    }
+    // Mappable
+    func mapping(map: Map) {
+        
+        status <- map["status"]
+        id <- map["id"]
+    }
+}
 
 class GetincomelistModl_data_incomeList: Mappable {
     var userId: Int = 0
@@ -21,6 +35,7 @@ class GetincomelistModl_data_incomeList: Mappable {
     var content : String = ""
     var catalogId : String = ""
     var createTime : String = ""
+    var message: GetincomelistModl_data_incomeList_message = GetincomelistModl_data_incomeList_message()
     init() {}
     required init?(map: Map){
         mapping(map: map)
@@ -38,6 +53,7 @@ class GetincomelistModl_data_incomeList: Mappable {
         catalogId <- map["catalogId"]
         content <- map["content"]
         createTime <- map["createTime"]
+        message <- map["message"]
 
     }
 }

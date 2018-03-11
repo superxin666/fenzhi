@@ -509,14 +509,16 @@ class TeachDetailHeadView: UIView {
                vc.navigationController?.navigationBar.alpha = 1
             KFBLog(message: "高度\(videoFream.maxY)")
 //            player.snp.removeConstraints()
-
-            player.snp.remakeConstraints({ (make) in
-                make.top.equalTo(self).offset(videoFream.maxY + ip7(10))
-                make.left.right.equalTo(self).offset(0)
-                make.height.equalTo(player.snp.width).multipliedBy(pro).priority(KSCREEN_WIDTH)
-            })
-            player.layoutIfNeeded()
-            player.setNeedsLayout()
+            if !(player == nil) {
+                player.snp.remakeConstraints({ (make) in
+                    make.top.equalTo(self).offset(videoFream.maxY + ip7(10))
+                    make.left.right.equalTo(self).offset(0)
+                    make.height.equalTo(player.snp.width).multipliedBy(pro).priority(KSCREEN_WIDTH)
+                })
+                player.layoutIfNeeded()
+                player.setNeedsLayout()
+            }
+ 
             break
         case .portraitUpsideDown:
             print("屏幕倒立")
@@ -526,15 +528,17 @@ class TeachDetailHeadView: UIView {
             vc.navigationController?.navigationBar.alpha = 0
             let top = iPhoneX ? ip7(44+24) : ip7(44)
 
-
-            player.snp.remakeConstraints({ (make) in
-                make.top.equalTo(self).offset(-top)
-                make.left.right.equalTo(self).offset(0)
-                make.height.equalTo(player.snp.width).multipliedBy(pro).priority(KSCREEN_WIDTH)
-//                make.bottom.equalTo(0)
-            })
-            player.layoutIfNeeded()
-            player.setNeedsLayout()
+            if !(player == nil) {
+                player.snp.remakeConstraints({ (make) in
+                    make.top.equalTo(self).offset(-top)
+                    make.left.right.equalTo(self).offset(0)
+                    make.height.equalTo(player.snp.width).multipliedBy(pro).priority(KSCREEN_WIDTH)
+                    //                make.bottom.equalTo(0)
+                })
+                player.layoutIfNeeded()
+                player.setNeedsLayout()
+            }
+ 
             break
         case .landscapeRight:
             print("屏幕右旋转")

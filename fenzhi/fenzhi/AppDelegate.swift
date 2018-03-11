@@ -22,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         self.setupUM()
         self.setUpGeTui()
         self.mainMenu()
+//        [GeTuiSdk resetBadge]; //重置角标计数
+//
+//        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0]; // APP 清空角标
+        GeTuiSdk.resetBadge()
+        UIApplication.shared.applicationIconBadgeNumber = 0
 
         //微信支付
         WXApi.registerApp("wx62e8de46fa3ca72c", enableMTA: true)
@@ -305,6 +310,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         vc.fenxId = ID
         vc.hidesBottomBarWhenPushed = true
         let tab : UITabBarController = self.window?.rootViewController as! UITabBarController
+        tab.selectedIndex = 0
         let nav : UINavigationController = tab.childViewControllers[0] as! UINavigationController
         nav.pushViewController(vc, animated: true)
         
@@ -342,6 +348,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         vc.fenxId = ID
         vc.hidesBottomBarWhenPushed = true
         let tab : UITabBarController = self.window?.rootViewController as! UITabBarController
+        tab.selectedIndex = 0
         let nav : UINavigationController = tab.childViewControllers[0] as! UINavigationController
         nav.pushViewController(vc, animated: true)
         

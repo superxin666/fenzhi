@@ -89,10 +89,13 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 //        if !isShowTxtTextViewBack {
 //            self.showTxt_click()
 //        }
-        var frame = self.txtTextViewBack.frame
-        frame.origin.y = KSCREEN_HEIGHT - height - ip7(260)
-        self.txtTextViewBack.frame = frame
-        print("keybordShow:\(height)")
+        if !(txtTextViewBack == nil) {
+            var frame = self.txtTextViewBack.frame
+            frame.origin.y = KSCREEN_HEIGHT - height - ip7(260)
+            self.txtTextViewBack.frame = frame
+            print("keybordShow:\(height)")
+        }
+ 
     }
     func loadMoreData() {
 //        if isFresh {

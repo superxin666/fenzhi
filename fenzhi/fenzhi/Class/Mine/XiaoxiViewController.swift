@@ -379,7 +379,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         } else {
             let model : GetcommentlistModel_data_list_commentList = self.dataArr_Comment[indexPath.row]
             selectedUserModel = model;
-            self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId,ishow: true)
+            self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId,ishow: false)
             
         }
 

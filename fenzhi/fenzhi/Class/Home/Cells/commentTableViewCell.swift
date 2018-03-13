@@ -206,9 +206,8 @@ class commentTableViewCell: UITableViewCell {
         delbtn.titleLabel?.font = fzFont_Medium(ip7(21))
         delbtn.addTarget(self, action:#selector(commentTableViewCell.del_click), for: .touchUpInside)
         self.addSubview(delbtn)
-        //            KFBLog(message: "\(model.userId)")
-        //            KFBLog(message: LoginModelMapper.getLoginIdAndTokenInUD().loginId)
-        if "\(model.userId!)" == LoginModelMapper.getLoginIdAndTokenInUD().loginId{
+  
+        if "\(model.userId)" == LoginModelMapper.getLoginIdAndTokenInUD().loginId{
             delbtn.isHidden = false
         } else {
             delbtn.isHidden = true

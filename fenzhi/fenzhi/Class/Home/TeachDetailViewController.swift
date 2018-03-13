@@ -541,16 +541,24 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         txtTextView.kfb_makeBorderWithBorderWidth(width: 1, color: lineView_thin_COLOUR)
         txtTextView.kfb_makeRadius(radius: 7)
         self.txtTextViewBack.addSubview(txtTextView)
-        
+        KFBLog(message: "666666")
+        KFBLog(message: ispinglun)
+        KFBLog(message: isshowpinglun_other)
         if ispinglun == "0" || isshowpinglun_other{
-            KFBLog(message: "显示回复人"+self.pinglunUserModel.userInfo.name)
-            isshowpinglun_other = false
+            if isshowpinglun_other {
+                KFBLog(message: "显示回复人"+self.pinglunUserModel.userInfo.name)
+                KFBLog(message: "显示回复人"+"\(self.pinglunUserModel.userInfo.userId)")
+                KFBLog(message: "显示回复人"+"\(self.pinglunUserModel.commentInfo.commentId)")
+            }
+         
+            
             NotificationCenter.default.addObserver(self, selector: #selector(self.textChanged), name: NSNotification.Name.UITextViewTextDidChange, object: nil)
             
             //评论用户 需要添加用户名字
             returnLabel.frame = CGRect(x: ip7(5), y: ip7(5), width: KSCREEN_WIDTH - ip7(45), height: ip7(18))
             returnLabel.font = fzFont_Thin(ip7(18))
             returnLabel.textColor = dark_6_COLOUR
+            returnLabel.isHidden = false
             returnLabel.text = "回复：" + self.pinglunUserModel.userInfo.name
             txtTextView.addSubview(returnLabel)
             
@@ -592,6 +600,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         self.submitcomment()
     }
     func cancle_submitcomment() {
+        isshowpinglun_other = false
         self.dismissTxtView()
     }
 
@@ -602,9 +611,16 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
 
         var toUserId = 0
         var toCommentId = 0
-        if ispinglun == "0" {
+        if (ispinglun == "0" ){
+            
             toUserId = self.pinglunUserModel.userId
             toCommentId = self.pinglunUserModel.id
+        }
+        if isshowpinglun_other {
+            isshowpinglun_other = false
+            KFBLog(message: "回复别人请求")
+            toUserId = self.pinglunUserModel.userInfo.userId
+            toCommentId = self.pinglunUserModel.commentInfo.commentId
         }
         KFBLog(message: "\(toUserId)==\((toCommentId))")
 

@@ -111,7 +111,12 @@ extension String {
 
         let dfmatter2 = DateFormatter()
         dfmatter2.dateFormat="MM.dd HH:mm"
-        return dfmatter2.string(from: date!)
+        if let date = date {
+            return dfmatter2.string(from: date)
+
+        } else {
+            return ""
+        }
     }
 
     static func getDate_detail_cell(dateStr : String) -> String {

@@ -99,7 +99,7 @@ class GetcommentlistModel_data_list_commentList: Mappable {
 
 
     var toCommentId: Int!
-    var userId: Int!
+    var userId: Int = 0
     var toUserId: Int!
     var content : String = ""
     var fenxId : Int!

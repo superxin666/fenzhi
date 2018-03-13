@@ -157,6 +157,8 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < self.dataArr.count {
             let model : GetincomelistModl_data_incomeList = self.dataArr[indexPath.row]
+            model.message.status = 1
+            self.mainTabelView.reloadData()
             let vc = TeachDetailViewController()
             vc.fenxId = model.fenxId
             vc.hidesBottomBarWhenPushed = true

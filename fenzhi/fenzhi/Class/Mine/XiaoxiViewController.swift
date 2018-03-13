@@ -138,6 +138,7 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                 //不显示评论
                 
             }
+            self.mainTabelView.reloadData()
             vc.fenxId = fenxId
             vc.isshowpinglun = ishow
             vc.hidesBottomBarWhenPushed = true
@@ -375,12 +376,13 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isLeft {
             let model : GetmessagelistLikeModel_data_messageList = self.dataArr[indexPath.row]
+            model.status = 1
             self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId,ishow: false)
         } else {
             let model : GetcommentlistModel_data_list_commentList = self.dataArr_Comment[indexPath.row]
             selectedUserModel = model;
+            model.status = 1
             self.readMessageRequest(messageId: model.messageId,fenxId:model.fenxInfo.fenxId,ishow: false)
-            
         }
 
     }

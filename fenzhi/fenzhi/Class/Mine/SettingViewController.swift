@@ -258,6 +258,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                     //city
                     weakSelf?.cityArr = model.data.regionList
                     self.pickerView.reloadComponent(1)
+                    self.pickerView.reloadComponent(2)
                 } else if type == 1 {
                     //district
                     weakSelf?.districtArr = model.data.regionList
@@ -453,7 +454,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         if bookArr.count>0 {
             bookArr.removeAll()
         }
-        
+       
         
         var cell : InfoTableViewCell!
         switch currectNum {
@@ -489,6 +490,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         
         KFBLog(message: dirShowStr)
         cell.setUpName(name: dirShowStr)
+        districtNameStr = ""
         self.removeMask()
     }
     
@@ -505,11 +507,10 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         if bookArr.count>0 {
             bookArr.removeAll()
         }
-        
-        
         provinceNum = 0
         cityNum = 0
         districtNum = 0
+        districtNameStr = ""
         self.removeMask()
     }
     

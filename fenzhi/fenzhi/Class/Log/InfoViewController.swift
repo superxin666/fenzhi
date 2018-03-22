@@ -185,6 +185,8 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
 
         KFBLog(message: dirShowStr)
         cell.setUpName(name: dirShowStr)
+        districtNameStr = ""
+
         self.removeMask()
     }
 
@@ -206,6 +208,8 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
         provinceNum = 0
         cityNum = 0
         districtNum = 0
+        districtNameStr = ""
+
         self.removeMask()
     }
 
@@ -409,6 +413,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
                     //city
                     weakSelf?.cityArr = model.data.regionList
                     self.pickerView.reloadComponent(1)
+                    self.pickerView.reloadComponent(2)
                 } else if type == 1 {
                     //district
                     weakSelf?.districtArr = model.data.regionList

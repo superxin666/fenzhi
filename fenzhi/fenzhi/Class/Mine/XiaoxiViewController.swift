@@ -190,10 +190,18 @@ class XiaoxiViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
     // MARK: 点赞加载更多
     func loadMoreData() {
-        page = page + 1
-        self.getData()
+        if  isLeft {
+            //点赞
+            KFBLog(message: "加载更多")
+            page = page + 1
+            self.getData()
+
+        } else {
+            self.loadMoreData_comment()
+        }
     }
     func reFlishData()  {
+        KFBLog(message: "刷新")
         self.dataArr.removeAll()
         page = 1
         self.getData()

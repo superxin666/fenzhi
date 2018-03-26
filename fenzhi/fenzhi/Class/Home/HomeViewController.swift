@@ -81,6 +81,9 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
             self.SVdismiss()
             weakSelf?.dataModel = data as! GetmyfeedlistModel
             if weakSelf?.dataModel.errno == 0 {
+                //存贮 是否隐藏状态
+                
+                //
                 if (weakSelf?.dataModel.data.fenxList.count)! > 0{
                     for model in (weakSelf?.dataModel.data.fenxList)!{
                         KFBLog(message: model.content)

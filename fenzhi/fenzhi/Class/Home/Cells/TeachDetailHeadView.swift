@@ -263,6 +263,7 @@ class TeachDetailHeadView: UIView {
         backView.addSubview(zanshangLabel)
 
 
+        
         let zanBtn : UIButton = UIButton(frame: CGRect(x: (KSCREEN_WIDTH - ip7(145))/2, y: zanshangLabel.frame.maxY + ip7(15), width: ip7(145), height: ip7(50)))
         zanBtn.setTitle("赞赏支持", for: .normal)
         zanBtn.backgroundColor = FZColorFromRGB(rgbValue: 0xfd7acf)
@@ -270,6 +271,17 @@ class TeachDetailHeadView: UIView {
         zanBtn.titleLabel?.font = fzFont_Medium(ip7(21))
         zanBtn.addTarget(self, action:#selector(TeachDetailHeadView.zanshang_click), for: .touchUpInside)
         backView.addSubview(zanBtn)
+        KFBLog(message: "支付隐藏\(model.userInfo.payHide)")
+        if let payHide =  model.userInfo.payHide {
+            if payHide == 1 {
+                zanBtn.isHidden = true
+                zanshangLabel.isHidden  = true
+            } else {
+                zanBtn.isHidden = false
+                zanshangLabel.isHidden  = false
+            }
+
+        }
 
 
         //赞赏人view

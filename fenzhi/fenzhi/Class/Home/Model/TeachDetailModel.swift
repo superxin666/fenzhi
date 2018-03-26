@@ -109,7 +109,7 @@ class TeachDetailModel: Mappable {
     var errmsg : String = ""
     var logId : String = ""
     var data : TeachDetailModel_data = TeachDetailModel_data()
-
+    var userInfo : UserInfoModel = UserInfoModel()
 
     init() {}
     required init?(map: Map){
@@ -122,6 +122,7 @@ class TeachDetailModel: Mappable {
         errmsg <- map["errmsg"]
         logId <- map["logId"]
         data <- map["data"]
+        userInfo <- map["userInfo"]
         
     }
 }

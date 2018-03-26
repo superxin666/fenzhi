@@ -122,6 +122,7 @@ class ProfileMineModel: Mappable {
     var errmsg : String = ""
     var logId : String = ""
     var data : ProfileMineModel_data = ProfileMineModel_data()
+    var userInfo : UserInfoModel = UserInfoModel()
 
 
     init() {}
@@ -135,6 +136,7 @@ class ProfileMineModel: Mappable {
         errmsg <- map["errmsg"]
         logId <- map["logId"]
         data <- map["data"]
+        userInfo <- map["userInfo"]
 
     }
 }

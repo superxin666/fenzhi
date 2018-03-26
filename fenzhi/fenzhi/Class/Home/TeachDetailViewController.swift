@@ -128,6 +128,7 @@ class TeachDetailViewController: BaseViewController,UITableViewDelegate,UITableV
         dataVC.profile(fenxId: fenxId!, completion: { (data) in
             weakSelf?.SVdismiss()
             weakSelf?.headData = data as! TeachDetailModel
+            
             if weakSelf?.headData.errno == 0 {
                 weakSelf?.getSize()
                 weakSelf?.cgreatHeadView()

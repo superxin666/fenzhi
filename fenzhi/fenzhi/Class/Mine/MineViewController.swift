@@ -128,7 +128,16 @@ class MineViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        self.dataModel.userInfo.payHide = 0
+        if let payHide =  self.dataModel.userInfo.payHide {
+            if payHide == 1 {
+                return 2
+            } else {
+                return 5
+            }
+        } else {
             return 5
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

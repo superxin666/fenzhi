@@ -44,6 +44,7 @@ class UserInfoModel: Mappable {
     
     /// 0 正常书籍 1是虚拟书籍
     var bookType : Int!
+    var payHide :Int!
     
 
    var isFollow:Int = 0
@@ -80,6 +81,7 @@ class UserInfoModel: Mappable {
         versionName <- map["versionName"]
         isFollow <- map["isFollow"]
         bookType <- map["bookType"]
+        payHide <- map["payHide"]
     }
 
 }

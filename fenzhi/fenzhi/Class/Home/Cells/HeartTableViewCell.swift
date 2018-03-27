@@ -157,7 +157,20 @@ class HeartTableViewCell: UITableViewCell {
         lineView.backgroundColor = lineView_thin_COLOUR
         backView.addSubview(lineView)
         
+        
+      
+        let payHide : String =  UserDefaults.standard.object(forKey: "payHide") as! String
+          KFBLog(message: "adf8888\(payHide)")
+        if payHide == "1"{
+             KFBLog(message: "隐藏")
+
+            //隐藏“
+            return
+        } else {
+        }
+
         //三个按钮
+        
         let btnW = (viewW - appadWidth * 2)/3
         let nameArray : Array = ["\(model.likeNum!)点赞","\(model.commentNum!)评论","\(model.zanNum!)赞赏"]
         let imageArr : Array = [#imageLiteral(resourceName: "icon_dz1"),#imageLiteral(resourceName: "icon_pl1"),#imageLiteral(resourceName: "icon_zs")]
@@ -194,6 +207,8 @@ class HeartTableViewCell: UITableViewCell {
             btn.setImage(image_selectedArr[i], for: .selected)
             backView.addSubview(btn)
         }
+        
+
 
 
     }

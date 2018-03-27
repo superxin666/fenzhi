@@ -82,6 +82,10 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
             weakSelf?.dataModel = data as! GetmyfeedlistModel
             if weakSelf?.dataModel.errno == 0 {
                 //存贮 是否隐藏状态
+                let a : Int = (weakSelf?.dataModel.userInfo.payHide)!
+                KFBLog(message: "asdfadfasdf\(a)")
+//                a = 0
+                UserDefaults.standard.set("\(a)", forKey: "payHide")
                 
                 //
                 if (weakSelf?.dataModel.data.fenxList.count)! > 0{

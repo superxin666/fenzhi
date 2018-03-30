@@ -156,6 +156,16 @@ class UserInfoShareTableViewCell: UITableViewCell {
         let lineView : UIView = UIView(frame: CGRect(x: appadWidth, y: lastFream.maxY + ip7(27), width: viewW - appadWidth * 2, height: 0.5))
         lineView.backgroundColor = FZColor(red: 102, green: 102, blue: 102, alpha: 1.0)
         backView.addSubview(lineView)
+        let payHide : String =  UserDefaults.standard.object(forKey: "payHide") as! String
+        KFBLog(message: "adf8888\(payHide)")
+        if payHide == "1"{
+            KFBLog(message: "隐藏")
+            
+            //隐藏“
+            return
+        } else {
+        }
+
         
         //三个按钮
         let btnW = (viewW - appadWidth * 2)/3

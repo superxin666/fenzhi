@@ -123,7 +123,7 @@ class UserInfoHeartTableViewCell: UITableViewCell {
         let imageArr : Array = [#imageLiteral(resourceName: "icon_dz1"),#imageLiteral(resourceName: "icon_pl1"),#imageLiteral(resourceName: "icon_zs")]
         let image_selectedArr : Array = [#imageLiteral(resourceName: "icon_dz1_s"),#imageLiteral(resourceName: "shape"),#imageLiteral(resourceName: "fx3_s")]
         let count = shoNum - 1
-        for i in 0...count - 1 {
+        for i in 0...count {
             let btn : UIButton = UIButton(type: .custom)
             btn.tag = i
 //            if i == 0 {

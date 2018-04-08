@@ -125,7 +125,8 @@ class HeartTableViewCell: UITableViewCell {
         for i in 0..<model.images.count  {
             let imageStr :String = model.images[i]
             let imageView = UIImageView()
-            imageView.kf.setImage(with: URL(string: imageStr))
+//            imageView.kf.setImage(with: URL(string: imageStr))
+            imageView.setImage_kf(imageName: imageStr, placeholderImage: #imageLiteral(resourceName: "loding"))
             imageView.tag = i
             let Y = CGFloat((i/2)) * (imageHeight + ip7(20))
             let X = ((appad + imageWidth) * CGFloat(i%2))

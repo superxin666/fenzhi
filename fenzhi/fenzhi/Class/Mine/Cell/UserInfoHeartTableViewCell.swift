@@ -77,7 +77,8 @@ class UserInfoHeartTableViewCell: UITableViewCell {
         for i in 0..<model.images.count  {
             let imageStr :String = model.images[i]
             let imageView = UIImageView()
-            imageView.kf.setImage(with: URL(string: imageStr))
+//            imageView.kf.setImage(with: URL(string: imageStr))
+            imageView.setImage_kf(imageName: imageStr, placeholderImage: #imageLiteral(resourceName: "loding"))
             imageView.tag = i
             let Y = CGFloat((i/2)) * (imageHeight + ip7(20))
             let X = ((appad + imageWidth) * CGFloat(i%2))
@@ -87,7 +88,7 @@ class UserInfoHeartTableViewCell: UITableViewCell {
         }
         //102 + 文字 +28 + CGFloat(i) * (ip7(65) + ip7(15)）//文件 + // ip(35)+ip(21)//课时定位 +
         
-        if model.catalog.characters.count > 0 {
+        if model.catalog.count > 0 {
             //课时定位
             let dingweiImageView : UIImageView = UIImageView(image: #imageLiteral(resourceName: "icon_dingwei"))
             dingweiImageView.frame = CGRect(x: appadWidth, y: lastFream.maxY + ip7(35), width: ip7(20), height: ip7(20))

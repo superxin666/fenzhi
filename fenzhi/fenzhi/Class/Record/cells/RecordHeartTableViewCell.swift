@@ -155,22 +155,21 @@ class RecordHeartTableViewCell: UITableViewCell {
         lineView.backgroundColor = lineView_thin_COLOUR
         backView.addSubview(lineView)
         let payHide : String =  UserDefaults.standard.object(forKey: "payHide") as! String
-        KFBLog(message: "adf8888\(payHide)")
+        var shoNum :Int = 3
         if payHide == "1"{
             KFBLog(message: "隐藏")
-            
-            //隐藏“
-            return
+            shoNum = 2
+         
         } else {
         }
 
         //三个按钮
-        let btnW = (viewW - appadWidth * 2)/3
+        let btnW = (viewW - appadWidth * 2)/CGFloat(shoNum)
         let nameArray : Array = ["\(model.likeNum!)点赞","\(model.commentNum!)评论","\(model.zanNum!)赞赏"]
         let imageArr : Array = [#imageLiteral(resourceName: "icon_dz1"),#imageLiteral(resourceName: "icon_pl1"),#imageLiteral(resourceName: "icon_zs")]
         let image_selectedArr : Array = [#imageLiteral(resourceName: "icon_dz1_s"),#imageLiteral(resourceName: "shape"),#imageLiteral(resourceName: "fx3_s")]
-
-        for i in 0...2 {
+        let count = shoNum - 1
+        for i in 0...count - 1 {
             let btn : UIButton = UIButton(type: .custom)
             btn.tag = i
             if i == 0 {

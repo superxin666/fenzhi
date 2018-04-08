@@ -41,7 +41,10 @@ class RecordHeartTableViewCell: UITableViewCell {
         self.addSubview(backView)
         //头像
         iconImageView.frame = CGRect(x: ip7(25), y: ip7(25), width: ip7(60), height: ip7(60))
-        iconImageView.kf.setImage(with: URL(string: model.userInfo.avatar))
+//        iconImageView.kf.setImage(with: URL(string: model.userInfo.avatar))
+          iconImageView.setImage_kf(imageName:  model.userInfo.avatar, placeholderImage: #imageLiteral(resourceName: "tx_m"))
+        iconImageView.kfb_makeRound()
+
         iconImageView.isUserInteractionEnabled = true
         backView.addSubview(iconImageView)
 

@@ -24,7 +24,8 @@ class ShouruTableViewCell: UITableViewCell {
         let viewH = ip7(155)
 
         let iconImageView:UIImageView = UIImageView(frame: CGRect(x: ip7(27), y:  (viewH - ip7(50))/2, width: ip7(50), height: ip7(50) ))
-        iconImageView.kf.setImage(with: URL(string: model.avatar))
+//        iconImageView.kf.setImage(with: URL(string: model.avatar))
+        iconImageView.setImage_kf(imageName:  model.avatar, placeholderImage: #imageLiteral(resourceName: "tx_m"))
         iconImageView.isUserInteractionEnabled = true
         iconImageView.kfb_makeRound()
         self.addSubview(iconImageView)

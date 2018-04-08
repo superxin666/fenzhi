@@ -310,7 +310,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         self.view.addSubview(topBackImageView)
         
         iconImageView.frame = CGRect(x: (KSCREEN_WIDTH - ip7(63))/2, y: LNAVIGATION_HEIGHT, width: ip7(63), height: ip7(63))
-        iconImageView.kf.setImage(with: URL(string: dataModel.data.avatar))
+//        iconImageView.kf.setImage(with: URL(string: dataModel.data.avatar))
+         iconImageView.setImage_kf(imageName:  dataModel.data.avatar, placeholderImage: #imageLiteral(resourceName: "tx_m"))
+        
         iconImageView.kfb_makeRound()
         iconImageView.isUserInteractionEnabled = true
         topBackImageView.addSubview(iconImageView)

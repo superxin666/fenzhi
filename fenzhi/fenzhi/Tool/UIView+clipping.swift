@@ -47,3 +47,12 @@ extension UIView {
     }
 
 }
+
+extension UIImageView {
+    
+    func setImage_kf(imageName : String,placeholderImage:UIImage)  {
+//        let imageUrl = base_imageOrFile_api + imageName
+        KFBLog(message: "图片\(imageName)")
+        self.kf.setImage(with:  URL(string: imageName), placeholder: placeholderImage, options: [.transition(.fade((1)))], progressBlock: nil, completionHandler: nil)
+    }
+}

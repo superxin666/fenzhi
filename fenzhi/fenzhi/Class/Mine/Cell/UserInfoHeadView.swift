@@ -146,7 +146,8 @@ class UserInfoHeadView: UIView {
     func setUpData(model : ProfileMineModel_data) {
         if model.avatar.count > 0 {
             dataModel = model
-            iconImageView.kf.setImage(with: URL(string: model.avatar))
+//            iconImageView.kf.setImage(with: URL(string: model.avatar))
+            iconImageView.setImage_kf(imageName:  model.avatar, placeholderImage: #imageLiteral(resourceName: "tx_m"))
             nameLabel.text = model.name
             dressLabel.text = model.cityName+" "+model.districtName+" "+model.schoolName+" "+model.gradeName
             infoLabel.text = model.subjectName+" "+model.versionName

@@ -58,7 +58,8 @@ class TeachDetailHeadView: UIView {
   
         //头像
         let iconImageView:UIImageView = UIImageView(frame: CGRect(x: ip7(25), y: ip7(25), width: ip7(60), height: ip7(60)))
-        iconImageView.kf.setImage(with: URL(string: model.data.userInfo.avatar))
+//        iconImageView.kf.setImage(with: URL(string: model.data.userInfo.avatar))
+         iconImageView.setImage_kf(imageName:  model.data.userInfo.avatar, placeholderImage: #imageLiteral(resourceName: "tx_m"))
         iconImageView.isUserInteractionEnabled = true
         iconImageView.kfb_makeRound()
         backView.addSubview(iconImageView)

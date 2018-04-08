@@ -109,7 +109,8 @@ class commentTableViewCell: UITableViewCell {
     func setUpUIWithModel_cellType(model : GetcommentlistModel_data_list_commentList) {
         dataModel = model;
         let viewW = KSCREEN_WIDTH
-        iconImageView.kf.setImage(with: URL(string: model.userInfo.avatar))//头像
+//        iconImageView.kf.setImage(with: URL(string: model.userInfo.avatar))//头像
+        iconImageView.setImage_kf(imageName:  model.userInfo.avatar, placeholderImage: #imageLiteral(resourceName: "tx_m"))
         nameLabel.text = model.userInfo.name//名字
         timeLabel.text = String.getDate_detail(dateStr: model.createTime)//时间
         zanNumLabel.text = "\(model.likeNum)"//赞数目

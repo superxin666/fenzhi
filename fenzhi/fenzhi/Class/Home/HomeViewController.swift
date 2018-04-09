@@ -51,6 +51,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
         //设置红点
         self.view.backgroundColor = backView_COLOUR
         userType = LoginModelMapper.getLoginIdAndTokenInUD().userType
+        KFBLog(message: "类型"+"\(userType)")
         if userType == "0" && userType.count > 0{
             self.creatTopView()
             self.creatTableView()
@@ -100,7 +101,7 @@ class HomeViewController: BaseViewController,UITableViewDelegate,UITableViewData
                 } else {
                     if weakSelf?.dataArr.count == 0 {
                         weakSelf?.mainTabelView.removeFromSuperview()
-                        weakSelf?.view.addSubview(self.showNoData())
+                        weakSelf?.view.addSubview(self.showNoData(fream: CGRect(x: 0, y:LNAVIGATION_HEIGHT + ip7(66), width: KSCREEN_WIDTH, height: KSCREEN_HEIGHT - ip7(66) - LNAVIGATION_HEIGHT)))
                     } else {
                         weakSelf?.SVshowErro(infoStr: "没有数据了")
                     }

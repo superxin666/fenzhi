@@ -468,7 +468,7 @@ class InfoViewController: BaseViewController ,UITableViewDelegate,UITableViewDat
              weakSelf?.smsdataModel = data as! SmsModel
             if  weakSelf?.smsdataModel.errno == 0 {
 //                提交信息成功
-                LoginModelMapper.setIsHaveInfo(type: "1", complate: { (data2) in
+                LoginModelMapper.setIsHaveInfo(type: "0", complate: { (data2) in
                     let str:String = data2 as! String
                     if str == "1" {
                         //存储信息成功

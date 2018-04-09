@@ -317,9 +317,9 @@ class RegisterViewController: BaseViewController ,UITextFieldDelegate{
                     if str == "1" {
 
 //                        成功
-                        let vc : InfoViewController = InfoViewController()
-                        vc.type = .res_first
-                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
+//                        let vc : InfoViewController = InfoViewController()
+//                        vc.type = .res_first
+//                        weakSelf?.navigationController?.pushViewController(vc, animated: true)
 
 
                         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)

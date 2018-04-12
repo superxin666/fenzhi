@@ -60,7 +60,6 @@ class commentTableViewCell: UITableViewCell {
         nameLabel.isUserInteractionEnabled = true
         nameLabel.textColor = dark_3_COLOUR
         nameLabel.font = fzFont_Medium(ip7(24))
-        nameLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(nameLabel)
         
         let nameTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(commentTableViewCell.image_Click))
@@ -162,7 +161,7 @@ class commentTableViewCell: UITableViewCell {
             toUserName.isUserInteractionEnabled = true
 //            toUserName.textColor = dark_6_COLOUR
             toUserName.font = fzFont_Thin(ip7(21))
-            toUserName.adjustsFontSizeToFitWidth = true
+
 //            if model.toCommentInfo.content.count > 0{
                 let str : String  = model.toUserInfo.name+"："
                 let attributeStr = NSMutableAttributedString(string: str)

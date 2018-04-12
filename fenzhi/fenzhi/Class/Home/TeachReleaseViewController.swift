@@ -166,11 +166,11 @@ class TeachReleaseViewController: BaseViewController,UITextViewDelegate,UITableV
 
                 //实际名字
                 let  fileName = fileArr[i]
-                let nameStr : String = RSA.encodeParameter(fileName)
+                let nameStr : String = fileName
             
                 //data
                 let filePathStr : String = filePath + "/" + fileName
-                let url :URL = URL(fileURLWithPath: filePathStr) as URL!
+                let url :URL = (URL(fileURLWithPath: filePathStr) as URL?)!
                 let fileData:Data = try! Data(contentsOf: url)
                 //上传地址
                 let nameNum = arc4random()

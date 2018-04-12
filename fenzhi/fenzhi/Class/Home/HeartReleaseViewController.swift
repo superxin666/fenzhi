@@ -509,6 +509,7 @@ class HeartReleaseViewController: BaseViewController,UITextViewDelegate,UIImageP
         }
         let sureAction = UIAlertAction(title: "删除", style: .default) { (action) in
             LogDataMangerViewController.setSelectCouse_name_id_heart(name: "", couseid: "", ishaveinfo: "0")
+            self.couseId = ""
             self.dingweiBackView.isHidden = true
             self.dingweiLabel_btn.isHidden = true
             self.tdBtn.frame =  CGRect(x: KSCREEN_WIDTH - ip7(55) - ip7(25) - ip7(60), y: (ip7(55) - ip7(35))/2, width: ip7(35), height: ip7(35))

@@ -180,6 +180,8 @@ class ShouruViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         if self.dataArr.count > 0 {
             let model : GetincomelistModl_data_incomeList = self.dataArr[0]
             self.readMessageReq(messageId: model.message.id,fenxId:0,ishow: false)
+        } else {
+            self.navigationController?.popViewController(animated: true)
         }
      
   
